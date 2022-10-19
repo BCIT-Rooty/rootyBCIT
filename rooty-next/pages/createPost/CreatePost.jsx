@@ -19,6 +19,7 @@ export default function CreatePost(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isBarter, setIsBarter] = useState("");
+  const [price, setPrice] = useState(0);
   const [postKeywords, setPostKeywords] = useState([]);
   const [listOfCategories, setListOfCategories] = useState([
     "Broadcast & Media",
@@ -38,7 +39,7 @@ export default function CreatePost(props) {
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [photoInput, setPhotoInput] = useState("");
-  const [barterValues, setBarterValues] = useState(["Barter", "Cash"]);
+  // const [barterValues, setBarterValues] = useState(["Barter", "Cash"]);
   async function handleSubmit(e) {
     e.preventDefault();
     const theCategoryValue = getCheckedRadioValue("categories");
@@ -58,13 +59,11 @@ export default function CreatePost(props) {
     });
   }
 
-  function handlePreventDefault(e) {
-    e.preventDefault();
-  }
+  // function handlePreventDefault(e) {
+  //   e.preventDefault();
+  // }
 
-  function handleAddTagsToThePost(e, inputValue) {
-    e.preventDefault();
-    // console.log(inputValue)
+  function handleAddTagsToThePost(inputValue) {
     if (!postKeywords.includes(inputValue)) {
       setPostKeywords([...postKeywords, inputValue]);
     } else {
@@ -101,11 +100,8 @@ export default function CreatePost(props) {
     return theUrlToReturn;
   }
 
-
-  //this is handling the button clicking
-  function handleButtonClick(input) {
-    // e.preventDefault();
-    console.log(input)
+  function seeIfShitWorks() {
+    console.log(title, description, price, isBarter, postKeywords)
   }
 
   async function handleS3Url(e) {
@@ -147,6 +143,7 @@ export default function CreatePost(props) {
           <FlexBox flexWrap="wrap">
             {listOfCategories.map((m) => (
               <Button
+                key={m}
                 txt= {m}
                 value = {m}
                 border="solid 2px #545454"
@@ -154,7 +151,7 @@ export default function CreatePost(props) {
                 color="#545454"
                 width="fit-content"
                 padding="15px"
-                onClick={handleButtonClick}
+                onClick={handleAddTagsToThePost}
               />
             ))}
           </FlexBox>
@@ -199,6 +196,7 @@ export default function CreatePost(props) {
             type="search"
             border="solid 1px #545454"
             margin="0px 0px 0px 20px"
+            onChangingTheText={setTitle}
           ></Input>
         </FlexBox>
         <FlexBox
@@ -220,6 +218,7 @@ export default function CreatePost(props) {
             type="textarea"
             border="solid 1px #545454"
             margin="0px 0px 0px 20px"
+            onChangingTheText={setDescription}
           ></TextInput>
         </FlexBox>
         <FlexBox
@@ -241,6 +240,7 @@ export default function CreatePost(props) {
             border="solid 1px #545454"
             margin="0px 0px 0px 20px"
             placeholder="Describe your barter service needs, if applicable"
+            onChangingTheText={setIsBarter}
           ></TextInput>
         </FlexBox>
         <FlexBox
@@ -255,6 +255,7 @@ export default function CreatePost(props) {
             size="16px"
             weight="bold"
             padding="15px 0px 20px 20px"
+            onChangingTheText={setPrice}
           ></Text>
           <Input
             type="text"
@@ -274,6 +275,7 @@ export default function CreatePost(props) {
             color="white"
             border="solid 1px #545454"
             margin="10px 0px 0px 20px"
+            onClickSeeIfTheLogicWOrks={seeIfShitWorks}
           ></Button>
         </FlexBox>
         <AnimatePresence exitBeforeEnter>
@@ -296,58 +298,6 @@ export default function CreatePost(props) {
             </FlexBox>
           )}
         </AnimatePresence>
-
-        {/* <TextInput
-            inputTitle={"Describe your service"}
-            valueOfTheInput={description}
-            onChangingTheText={setDescription}
-          /> */}
-
-        {/* <main>
-        <form>
-          <div>
-            <h1>Create your post</h1>
-            <SubmitButton
-              onSubmitButtonClicked={handleSubmit}
-              textInsideTheButton={"Done"}
-            />
-          </div> */}
-        {/* <ImageInputS3 onInsertPhotoInsideS3={handleS3Url} /> */}
-        {/* change this please Sohrab so it makes a ImageInputS3 tag */}
-
-        {/* <button onClick={(e) => handlePreventDefault(e)}>+</button> */}
-
-        {/* thisButton should make the radio button disappear and reappear */}
-
-        {/* <button onClick={(e) => handlePreventDefault(e)}>
-            Choose a category
-          </button> */}
-        {/* <RadioInputComponent
-            radioInputTopicArray={listOfCategories}
-            radioInputTopic={"categories"}
-            radioFunctionInput={setWhatIsTheCategoryOfThisPost}
-          /> */}
-        {/* <KeywordButton
-            keyWords={potentialPostKeywords}
-            onAddTagsToThePost={handleAddTagsToThePost}
-          />
-          <TextInput
-            inputTitle={"Write your title"}
-            valueOfTheInput={title}
-            onChangingTheText={setTitle}
-          />
-          <TextInput
-            inputTitle={"Describe your service"}
-            valueOfTheInput={description}
-            onChangingTheText={setDescription}
-          />
-          <RadioInputComponent
-            radioInputTopicArray={barterValues}
-            radioInputTopic={"BarterOrCash"}
-            radioFunctionInput={setIsBarter}
-          />
-        </form>
-      </main> */}
       </Wrapper>
     </>
   );

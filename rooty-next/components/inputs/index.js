@@ -68,15 +68,9 @@ export default function Input({
     margin="0px",
     placeholder="Enter Text Here",
     padding="10px",
-    onChange=()=>{},
-    value="",
-    props
+    onChangingTheText=()=>{},
 }){
 
-  function aNewFunction(input) {
-    console.log("This is the Title sohrab is writing::::::::>", input)
-    // props.onChangingTheText(input)
-  }
     return(
     <FlexBox flexWrap="wrap">
         {/* <Label>Hello</Label> */}
@@ -90,7 +84,7 @@ export default function Input({
             </FlexBox>
         }
         {type !== ("file") &&
-                <InputRectangle onChange={(e) => aNewFunction(e.target.value)} type={type} placeholder={placeholder} bgColor={bgColor} border={border} borderRadius={borderRadius} width={width} height={height} margin={margin} padding={padding}></InputRectangle>
+                <InputRectangle onChange={(e) => onChangingTheText(e.target.value)} type={type} placeholder={placeholder} bgColor={bgColor} border={border} borderRadius={borderRadius} width={width} height={height} margin={margin} padding={padding}></InputRectangle>
         
         }
         {/* {typeText === "textarea" &&
@@ -113,17 +107,13 @@ export function TextInput({
     margin="0px",
     placeholder="Enter Text Here",
     padding="10px",
-    onChange=()=>{},
-    value=""
+    onChangingTheText=()=>{},
 }){
-  function aNewFunction(input) {
-    console.log("This is the Title sohrab is writing::::::::>", input)
-    // props.onChangingTheText(input)
-  }
+
     return(
     <FlexBox flexWrap="wrap">
         {type === "textarea" &&
-                <TextArea onChange={(e) => aNewFunction(e.target.value)} type={type} placeholder={placeholder} bgColor={bgColor} border={border} borderRadius={borderRadius} width={width} minHeight={minHeight} margin={margin} padding={padding}></TextArea>
+                <TextArea onChange={(e) => onChangingTheText(e.target.value)} type={type} placeholder={placeholder} bgColor={bgColor} border={border} borderRadius={borderRadius} width={width} minHeight={minHeight} margin={margin} padding={padding}></TextArea>
         }    
     </FlexBox>
     )
