@@ -8,7 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "migrate:dev": "npx dotenv -e .env.local -- prisma migrate dev",
+    "db:push": "npx dotenv -e .env.local -- prisma db push",
+    "migrate:reset": "npx dotenv -e .env.local -- prisma migrate reset",
+    "db:seed": "npx dotenv -e .env.local -- prisma db seed",
+    "prisma:generate": "npx dotenv -e .env.local -- prisma generate",
+    "prisma:studio": "npx dotenv -e .env.local -- prisma studio",
+    "production:build": "npx prisma generate && npx prisma migrate deploy && next build"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -39,8 +46,10 @@
     "@storybook/react": "^6.5.12",
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.2.5",
+    "dotenv-cli": "^6.0.0",
     "eslint": "8.25.0",
     "eslint-config-next": "12.3.1",
-    "eslint-plugin-storybook": "^0.6.6"
+    "eslint-plugin-storybook": "^0.6.6",
+    "prisma": "^4.5.0"
   }
 }
