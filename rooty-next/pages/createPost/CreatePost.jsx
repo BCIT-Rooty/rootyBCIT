@@ -24,8 +24,9 @@ export default function CreatePost(props) {
     "Broadcast & Media",
     "Digital Arts & Design",
     "Business & Finance",
-    "Marketing Management",
+    "Marketing",
     "Tutoring",
+    "Computing",
   ]);
   const [potentialPostKeywords, setPotentialPostKeywords] = useState([
     "Audio Mix",
@@ -100,6 +101,13 @@ export default function CreatePost(props) {
     return theUrlToReturn;
   }
 
+
+  //this is handling the button clicking
+  function handleButtonClick(input) {
+    // e.preventDefault();
+    console.log(input)
+  }
+
   async function handleS3Url(e) {
     e.preventDefault();
     setPhotoInput(e.target);
@@ -137,54 +145,18 @@ export default function CreatePost(props) {
             padding="15px 0px 20px 20px"
           ></Text>
           <FlexBox flexWrap="wrap">
-            <Button
-              txt="Broadcast & Media"
-              border="solid 2px #545454"
-              bgColor="white"
-              color="#545454"
-              width="fit-content"
-              padding="15px"
-            ></Button>
-            <Button
-              txt="Business & Finance"
-              border="solid 2px #545454"
-              bgColor="white"
-              color="#545454"
-              width="fit-content"
-              padding="15px"
-            ></Button>
-            <Button
-              txt="Computing"
-              border="solid 2px #545454"
-              bgColor="white"
-              color="#545454"
-              width="fit-content"
-              padding="15px"
-            ></Button>
-            <Button
-              txt="Digital Arts & Media"
-              border="solid 2px #545454"
-              bgColor="white"
-              color="#545454"
-              width="fit-content"
-              padding="15px"
-            ></Button>
-            <Button
-              txt="Marketing"
-              border="solid 2px #545454"
-              bgColor="white"
-              color="#545454"
-              width="fit-content"
-              padding="15px"
-            ></Button>
-            <Button
-              txt="Tutoring"
-              border="solid 2px #545454"
-              bgColor="white"
-              color="#545454"
-              width="fit-content"
-              padding="15px"
-            ></Button>
+            {listOfCategories.map((m) => (
+              <Button
+                txt= {m}
+                value = {m}
+                border="solid 2px #545454"
+                bgColor="white"
+                color="#545454"
+                width="fit-content"
+                padding="15px"
+                onClick={handleButtonClick}
+              />
+            ))}
           </FlexBox>
         </FlexBox>
         <FlexBox

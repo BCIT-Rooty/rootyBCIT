@@ -26,7 +26,7 @@ export default function Button({
     `
 
     return(
-        <ButtonClick onClick={onClick} fzsize={size} width={width} height={height} bgColor={bgColor} padding={padding} borderRadius={borderRadius} color={color} textAlign={textAlign} margin={margin} fontWeight={fontWeight} border={border}>{txt}</ButtonClick>
+        <ButtonClick onClick={(e) => onClick(e.target.innerText)} fzsize={size} width={width} height={height} bgColor={bgColor} padding={padding} borderRadius={borderRadius} color={color} textAlign={textAlign} margin={margin} fontWeight={fontWeight} border={border}>{txt}</ButtonClick>
     )
 
 }
