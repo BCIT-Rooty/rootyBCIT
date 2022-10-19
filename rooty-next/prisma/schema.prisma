@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,24 +7,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  userId        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
-  role      Role     @default(USER)
+  userId    Int           @id @default(autoincrement())
+  createdAt DateTime      @default(now())
+  name      String
+  lastname  String
+  password  String
+  email     String        @unique
+  aboutMe   String        @db.Text
+  role      Role          @default(USER)
   posts     Post[]
+  photo     Photo?
+  program   Program?
+  Skills    SkillOnUser[]
+  Photos    UserOnPhoto[]
 }
 
+// add stuff like photos to this
 model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
   title     String   @db.VarChar(255)
-  author    User?    @relation(fields: [authorId], references: [userId])
-  authorId  Int?
+  author    User     @relation(fields: [authorId], references: [userId])
+  authorId  Int
+}
+
+// Relationship with the User works now
+model Program {
+  programId   Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  programName String   @db.VarChar(50)
+  author      User     @relation(fields: [authorId], references: [userId])
+  authorId    Int      @unique
+}
+
+model Skill {
+  skillId   Int           @id @default(autoincrement())
+  skillName String        @unique @db.VarChar(30)
+  users     SkillOnUser[]
+}
+
+model SkillOnUser {
+  skillOnUserId Int   @id @default(autoincrement())
+  skill         Skill @relation(fields: [sKillId], references: [skillId])
+  sKillId       Int
+  user          User  @relation(fields: [userid], references: [userId])
+  userid        Int
+}
+
+model Photo {
+  photoId      Int           @id @default(autoincrement())
+  userPhotoUrl String        @db.Text
+  author       User          @relation(fields: [userId], references: [userId])
+  userId       Int           @unique
+  users        UserOnPhoto[]
+}
+
+model UserOnPhoto {
+  UserOnPhotoId Int   @id @default(autoincrement())
+  photo         Photo @relation(fields: [photoId], references: [photoId])
+  photoId       Int
+  user          User  @relation(fields: [userid], references: [userId])
+  userid        Int
 }
 
 enum Role {
