@@ -22,6 +22,8 @@ export const FlexBox = styled.div`
     position: ${props=>props.position};
     top: ${props=>props.top};
     left:${props=>props.left};
+    box-shadow: ${props=>props.boxShadow};
+    border-top: ${props=>props.topBorder};
     
 `
 
