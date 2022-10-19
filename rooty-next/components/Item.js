@@ -9,11 +9,11 @@ export default function Item({ id, name, rating, compensation, image, onClick=()
 
 
   return (
-        <FlexBox onClick={onClick} key={id} width="338px" height="154px" bgColor="#F6F6F9" borderRadius="8px" margin="20px" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
+        <FlexBox onClick={onClick} key={id} width="338px" height="154px" bgColor="#F7F7FC" borderRadius="8px" margin="20px" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
           <ImgPlaceholder bgImage={image} width='138px'></ImgPlaceholder>
           <FlexBox dir="column" padding="12px" height="154px" width="228px" alignItems="start" justifyContent="space-between">
             <FlexBox alignItems="baseline">
-              <Text txt={name} size="16px" weight="bold" align="left"></Text>
+              <Text txt={name} size="16px" weight="regular" align="left"></Text>
               <Heart></Heart>
             </FlexBox>
             <FlexBox alignItems="left" justifyContent="space-between" width="100%">

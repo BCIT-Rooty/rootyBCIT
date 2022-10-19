@@ -1,6 +1,11 @@
 import Item from '../../components/Item';
 import { getItemsForEachCategory } from '../../server/database.js';
 import {useRouter} from 'next/router';
+import { FlexBox, Wrapper } from '../../styles/globals';
+import { ImgPlaceholder } from '../../styles/globals';
+import Text from '../../components/text';
+import GradientCard from '../../components/gradientCard';
+import { Search } from 'semantic-ui-react'
 
 
 
@@ -10,22 +15,34 @@ export default function OneCategory({ categoryItems }) {
 
     console.log(categoryItems)
     return (
-        <div>
-            {
-                categoryItems.map((item) => {
-                    return (
-                    <div key={item.id}>
-                        <Item 
-                            // onClick={
-                            // ()=>r.push({
-                            // pathname:`${item.id}/descript`,
-                            // })}
-                            name={item.name} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image}/>
-                    </div>
-                    )
-                })
-            }
-        </div>
+        <Wrapper>
+            <FlexBox dir="column" width="100%">
+                <FlexBox width="100%" dir="column">
+                    <GradientCard bgImage="/3081629.jpg" width="100%" height="328px" borderRadius="0px" txt="Broadcast and Media" size="24px" margin="0px"></GradientCard>
+                    <FlexBox margin="12px"><Search size="large"
+                        placeholder='Search...'
+                        onResultSelect={(e, data) =>
+                        dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox>
+                </FlexBox>
+            <div>
+                {
+                    categoryItems.map((item) => {
+                        return (
+                        <div key={item.id}>
+                            <Item 
+                                onClick={
+                                ()=>r.push({
+                                // pathname:`categoriespage/${item.id}/itemDescript`,
+                                pathname:`/categoriespage/itemDescript`,  //hardcoded
+                                })}
+                                name={item.name} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image}/>
+                        </div>
+                        )
+                    })
+                }
+            </div>
+        </FlexBox>
+        </Wrapper>
     )
 }
 

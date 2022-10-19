@@ -22,7 +22,7 @@ export const FlexBox = styled.div`
     position: ${props=>props.position};
     top: ${props=>props.top};
     left:${props=>props.left};
-    
+    border-bottom-style: ${props=>props.borderBottom};
 `
 
 export const Wrapper = styled(FlexBox) `
