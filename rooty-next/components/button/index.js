@@ -15,8 +15,6 @@ export default function Button({
   fontWeight = "600",
   border = "none",
   onClick = () => {},
-  onInsertPhotoInsideS3 = () => {},
-
 }) {
   const ButtonClick = styled(FlexBox)`
     color: ${(props) => props.color};
