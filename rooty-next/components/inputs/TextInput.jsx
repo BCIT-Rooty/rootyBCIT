@@ -1,10 +1,5 @@
 export default function TextInput(props) {
 
-  function aNewFunction(input) {
-    // console.log("This is the Title sohrab is writing::::::::>", input)
-    props.onChangingTheText(input)
-  }
-
 
   return (
     <>
@@ -12,7 +7,7 @@ export default function TextInput(props) {
         {props.inputTitle}
         <input
           value={props.valueOfTheInput}
-          onChange={(e) => aNewFunction(e.target.value)}
+          onChange={(e) => props.onChangingTheText(e.target.value)}
           type="text"
         />
       </label>
