@@ -23,6 +23,7 @@ model User {
 }
 
 // add stuff like photos to this
+// finish up adding all the details to this
 model Post {
   postId     Int      @id @default(autoincrement())
   createdAt  DateTime @default(now())
