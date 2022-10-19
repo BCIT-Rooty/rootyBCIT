@@ -42,7 +42,8 @@ export default function NavBar({ route }) {
     bottom: 0;
     display: flex;
     justify-content: center;
-    z-index: 10
+    z-index: 10;
+    border-top: 0.1px solid #545454
   `
 
   return (

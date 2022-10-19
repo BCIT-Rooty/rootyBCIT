@@ -12,17 +12,21 @@ export default function Button({
     borderRadius="10px",
     textAlign="center",
     margin="5px",
-    fontWeight="600"
+    fontWeight="600",
+    border="none",
+    onClick=()=>{}
 }){
 
     const ButtonClick = styled(FlexBox)`
         color: ${props=>props.color};
         text-align: ${props=>props.textAlign};
-        font-weight: ${props=>props.fontWeight}
+        font-weight: ${props=>props.fontWeight};
+        border: ${props=>props.border};
+        font-size: ${props=>props.fzsize}
     `
 
     return(
-        <ButtonClick size={size} width={width} height={height} bgColor={bgColor} padding={padding} borderRadius={borderRadius} color={color} textAlign={textAlign} margin={margin} fontWeight={fontWeight}>{txt}</ButtonClick>
+        <ButtonClick onClick={onClick} fzsize={size} width={width} height={height} bgColor={bgColor} padding={padding} borderRadius={borderRadius} color={color} textAlign={textAlign} margin={margin} fontWeight={fontWeight} border={border}>{txt}</ButtonClick>
     )
 
 }
