@@ -51,13 +51,8 @@ function promptFile(multiple) {
       input.click();
     });
   }
-  function promptFilename() {
-    promptFile().then(function(file) {
-      document.querySelector("img").src = file && file.name || "no photo selected";
-    });
-  }
-
-export default function Input({
+  
+  export default function Input({
     type="none",
     fileBgImage="/camera.png",
     bgColor="#F7F7FC",
@@ -69,12 +64,19 @@ export default function Input({
     placeholder="Enter Text Here",
     padding="10px",
     onChangingTheText=()=>{},
-}){
+    onInsertPhotoInsideS3= () => {}
+  }){
+    
+  function promptFilename() {
+    promptFile().then(function(file) {
+      // console.log(file)
+      onInsertPhotoInsideS3(file)
+      document.querySelector("img").src = file && file.name || "no photo selected";
+    });
+  }
 
     return(
-    <FlexBox flexWrap="wrap">
-        {/* <Label>Hello</Label> */}
-        
+    <FlexBox flexWrap="wrap">     
         {type === "file" &&
             <FlexBox>
                 <FlexBox width="70px" height="70px" onClick={()=>promptFilename()} color="white" borderRadius="10px" boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)">
@@ -86,12 +88,7 @@ export default function Input({
         {type !== ("file") &&
                 <InputRectangle onChange={(e) => onChangingTheText(e.target.value)} type={type} placeholder={placeholder} bgColor={bgColor} border={border} borderRadius={borderRadius} width={width} height={height} margin={margin} padding={padding}></InputRectangle>
         
-        }
-        {/* {typeText === "textarea" &&
-                <TextArea></TextArea>
-        } */}
-        
-        
+        }           
     </FlexBox>
     )
 }

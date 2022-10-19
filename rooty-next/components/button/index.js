@@ -15,7 +15,8 @@ export default function Button({
   fontWeight = "600",
   border = "none",
   onClick = () => {},
-  onClickSeeIfTheLogicWOrks = () => {}
+  onInsertPhotoInsideS3 = () => {},
+
 }) {
   const ButtonClick = styled(FlexBox)`
     color: ${(props) => props.color};
@@ -27,10 +28,7 @@ export default function Button({
 
   return (
     <ButtonClick
-      onClick={(e) => {
-        onClick(e.target.innerText);
-        onClickSeeIfTheLogicWOrks()
-      }}
+      onClick={(e) => onClick(e.target.innerText)}
       fzsize={size}
       width={width}
       height={height}

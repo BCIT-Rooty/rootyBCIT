@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import axios from "axios";
+import axios from "axios";
 // import SubmitButton from "../../components/sohrabs buttons/SubmitButton";
 // import ImageInputS3 from "../../components/sohrabs inputs/ImageInputS3";
 // import TextInput from "../../components/sohrabs inputs/TextInput";
@@ -79,35 +79,36 @@ export default function CreatePost(props) {
     return null; // or undefined, or your preferred default for none checked
   }
 
-  async function uploadThePhotoToS3() {
-    if (photoInput == false) {
-      let theUrlToReturn = "no Url bro";
-      return theUrlToReturn;
-    }
+  async function uploadThePhotoToS3(inputFile) {
+    // if (photoInput == false) {
+    //   let theUrlToReturn = "no Url bro";
+    //   return theUrlToReturn;
+    // }
     let theUrlToReturn;
     await axios.get("/api/s3").then(async (res) => {
       const theUrlData = res.data.url;
       await axios({
         method: "PUT",
         url: theUrlData,
-        data: photoInput.files[0],
+        data: inputFile,
       }).then(() => {
         const [photoUrlRet] = theUrlData.split("?");
         setPhotoUrl(photoUrlRet);
         theUrlToReturn = photoUrlRet;
       });
     });
+    console.log(theUrlToReturn)
     return theUrlToReturn;
   }
 
-  function seeIfShitWorks() {
-    console.log(title, description, price, isBarter, postKeywords)
-  }
+  // function seeIfShitWorks() {
+  //   console.log(title, description, price, isBarter, postKeywords)
+  // }
 
-  async function handleS3Url(e) {
-    e.preventDefault();
-    setPhotoInput(e.target);
-  }
+  // async function handleS3Url(e) {
+  //   e.preventDefault();
+  //   setPhotoInput(e.target);
+  // }
 
   return (
     <>
@@ -124,7 +125,7 @@ export default function CreatePost(props) {
           width="100vw"
           justifyContent="flex-start"
         >
-          <Input type="file"></Input>
+          <Input type="file" onInsertPhotoInsideS3={uploadThePhotoToS3}></Input>
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -144,8 +145,8 @@ export default function CreatePost(props) {
             {listOfCategories.map((m) => (
               <Button
                 key={m}
-                txt= {m}
-                value = {m}
+                txt={m}
+                value={m}
                 border="solid 2px #545454"
                 bgColor="white"
                 color="#545454"
@@ -255,7 +256,6 @@ export default function CreatePost(props) {
             size="16px"
             weight="bold"
             padding="15px 0px 20px 20px"
-            onChangingTheText={setPrice}
           ></Text>
           <Input
             type="text"
@@ -263,6 +263,7 @@ export default function CreatePost(props) {
             margin="10px 0px 0px 20px"
             placeholder=" "
             width="60px"
+            onChangingTheText={setPrice}
           ></Input>
         </FlexBox>
         <FlexBox padding="0px 0px 85px 0px" width="100vw">
@@ -275,7 +276,6 @@ export default function CreatePost(props) {
             color="white"
             border="solid 1px #545454"
             margin="10px 0px 0px 20px"
-            onClickSeeIfTheLogicWOrks={seeIfShitWorks}
           ></Button>
         </FlexBox>
         <AnimatePresence exitBeforeEnter>
