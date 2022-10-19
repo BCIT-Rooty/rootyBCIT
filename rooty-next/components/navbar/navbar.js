@@ -53,7 +53,7 @@ export default function NavBar({ route }) {
         <Tab icon={<SearchIcon fontSize="large" />}
           onClick={() => HandleNavBarIcons("/categoriespage", 2)} />
         <Tab icon={<AddIcon fontSize="large" />}
-          onClick={() => HandleNavBarIcons("/postspage", 3)} />
+          onClick={() => HandleNavBarIcons("/createPost", 3)} />
         <Tab icon={<ChatBubbleOutlineIcon fontSize="large" />}
           onClick={() => HandleNavBarIcons("/chatpage", 4)} />
         <Tab icon={<PersonIcon fontSize="large" />}
