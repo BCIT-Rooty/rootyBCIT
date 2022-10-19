@@ -20,17 +20,19 @@ model User {
   photo     Photo?
   program   Program?
   Skills    SkillOnUser[]
-  Photos    UserOnPhoto[]
 }
 
 // add stuff like photos to this
 model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  author    User     @relation(fields: [authorId], references: [userId])
-  authorId  Int
+  postId     Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  title      String   @db.VarChar(255)
+  author     User     @relation(fields: [authorId], references: [userId])
+  authorId   Int
+  category   Category @relation(fields: [categoryId], references: [categoryId])
+  categoryId Int      @unique
+  Photos     Photo[]
 }
 
 // Relationship with the User works now
@@ -42,6 +44,7 @@ model Program {
   authorId    Int      @unique
 }
 
+// MTM relationship works with the users now (using a join tabel called SkillOnUser)
 model Skill {
   skillId   Int           @id @default(autoincrement())
   skillName String        @unique @db.VarChar(30)
@@ -56,20 +59,30 @@ model SkillOnUser {
   userid        Int
 }
 
+// A user can have a photo and a photo might belong to a user
+// A Post can have a lot of photos, but a photo must have a post
 model Photo {
-  photoId      Int           @id @default(autoincrement())
-  userPhotoUrl String        @db.Text
-  author       User          @relation(fields: [userId], references: [userId])
-  userId       Int           @unique
-  users        UserOnPhoto[]
+  photoId      Int    @id @default(autoincrement())
+  userPhotoUrl String @db.Text
+  author       User?  @relation(fields: [userId], references: [userId])
+  userId       Int?   @unique
+  post         Post   @relation(fields: [postId], references: [postId])
+  postId       Int    @unique
 }
 
-model UserOnPhoto {
-  UserOnPhotoId Int   @id @default(autoincrement())
-  photo         Photo @relation(fields: [photoId], references: [photoId])
-  photoId       Int
-  user          User  @relation(fields: [userid], references: [userId])
-  userid        Int
+// MTM for posts and photos that was wrong but it was good code so I just kept it
+// model PostOnPhoto {
+//   UserOnPhotoId Int   @id @default(autoincrement())
+//   photo         Photo @relation(fields: [photoId], references: [photoId])
+//   photoId       Int
+//   post          Post  @relation(fields: [postId], references: [postId])
+//   postId        Int
+// }
+
+model Category {
+  categoryId   Int    @id @default(autoincrement())
+  categoryName String
+  posts        Post[]
 }
 
 enum Role {
