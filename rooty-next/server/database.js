@@ -3,8 +3,8 @@ import { Icon } from "semantic-ui-react";
 
 
 export const categoryList = [
-    { id: 1, name: 'FINANCE & BUSINESS', image: "/2205_w037_n003_408b_p1_408.jpg"},
-    { id: 2, name: 'BROADCAST & MEDIA', image: "/3081629.jpg" },
+    { id: 1, name: 'BROADCAST & MEDIA', image: "/2205_w037_n003_408b_p1_408.jpg"},
+    { id: 2, name: 'FINANCE & BUSINESS', image: "/3081629.jpg" },
     { id: 3, name: 'TUTORING', image: "/3081629.jpg" },
     { id: 4, name: 'ARTS & DESIGN', image: "/2205_w037_n003_408b_p1_408.jpg" },
     { id: 5, name: 'MARKETING', image: "/2205_w037_n003_408b_p1_408.jpg" },
@@ -22,7 +22,7 @@ export const items = [
         compensation: "$15",
         // barter: "or " <Icon />,
         categoryId: 1,
-        image: "/free-stock-videos-1.jpeg" 
+        image: "/camera-man.jpg" 
     },
     {
         id: 2,
@@ -31,7 +31,16 @@ export const items = [
         description: 'item2 description',
         compensation: "$25",
         categoryId: 1,
-        image: "/motion+graphics+animation+nyc.jpeg" 
+        image: "/vector-drawing.jpg" 
+    },
+    {
+        id: 10,
+        name: 'Audio mixing for Video editing',
+        rating: "4.5/5",
+        description: 'item2 description',
+        compensation: "$40",
+        categoryId: 1,
+        image: "/video-edit.jpg" 
     },
     {
         id: 3,

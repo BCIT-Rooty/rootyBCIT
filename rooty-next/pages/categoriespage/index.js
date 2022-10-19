@@ -3,9 +3,11 @@ import CategoryCard from "../../components/categoryCard";
 import {useRouter} from 'next/router';
 import { FlexBox, Wrapper } from "../../styles/globals";
 import Review from "../../components/review";
+import Text from "../../components/text";
+import { Search } from 'semantic-ui-react';
 
 
-export default function categories() {
+export default function Categories() {
 
   const r = useRouter();
 
@@ -20,16 +22,26 @@ export default function categories() {
          key={category.id} name={category.name} image={category.image}>
       </CategoryCard>
 
-
 )))};
   
     
   return (
     <>
 
-      <Wrapper>
-        <FlexBox flexWrap="wrap" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
-      {getCategories(categoryList)}
+      <Wrapper alignItems="start">
+        <FlexBox dir="column" width="100%">
+            <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="15px" minHeight="100px">
+                <Text txt="Search" size="24px" weight="bold"></Text>
+            </FlexBox>
+            <FlexBox padding="30px 0px 13px 0px">
+            <Search size="big"
+                placeholder='Search...'
+                onResultSelect={(e, data) =>
+                  dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/>
+            </FlexBox>
+            <FlexBox flexWrap="wrap" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
+                {getCategories(categoryList)}
+            </FlexBox>
         </FlexBox>
       </Wrapper>
       <Wrapper>
