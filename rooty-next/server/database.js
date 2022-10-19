@@ -1,37 +1,26 @@
-import { Icon } from "semantic-ui-react";
-
-
 
 export const categoryList = [
-    { id: 1, name: 'FINANCE & BUSINESS', image: "/2205_w037_n003_408b_p1_408.jpg"},
-    { id: 2, name: 'BROADCAST & MEDIA', image: "/3081629.jpg" },
-    { id: 3, name: 'TUTORING', image: "/3081629.jpg" },
-    { id: 4, name: 'ARTS & DESIGN', image: "/2205_w037_n003_408b_p1_408.jpg" },
-    { id: 5, name: 'MARKETING', image: "/2205_w037_n003_408b_p1_408.jpg" },
-    { id: 6, name: 'COMPUTING', image: "/3081629.jpg" },
+    { id: 1, name: 'FINANCE & BUSINESS' },
+    { id: 2, name: 'BROADCAST & MEDIA' },
+    { id: 3, name: 'TUTORING' },
+    { id: 4, name: 'ARTS & DESIGN' },
+    { id: 5, name: 'MARKETING' },
 ];
-
-
 
 export const items = [
     {
         id: 1,
-        name: 'Video Editor using Premiere Pro and After Effects',
-        rating: "4.2/5",
+        name: 'item1',
+        rating: 5,
         description: 'item1 description',
-        compensation: "$15",
-        // barter: "or " <Icon />,
-        categoryId: 1,
-        image: "/free-stock-videos-1.jpeg" 
+        categoryId: 1
     },
     {
         id: 2,
-        name: '1-2 Minute Motion Graphics editor',
-        rating: "3.8/5",
+        name: 'item2',
+        rating: 4,
         description: 'item2 description',
-        compensation: "$25",
-        categoryId: 1,
-        image: "/motion+graphics+animation+nyc.jpeg" 
+        categoryId: 1
     },
     {
         id: 3,
@@ -46,51 +35,43 @@ export const items = [
         rating: 2,
         description: 'item4 description',
         categoryId: 2
-    },
-    {
-        id: 3,
-        name: 'item3',
-        rating: 3,
-        description: 'item3 description',
-        categoryId: 3
-    },
-    {
-        id: 4,
-        name: 'item4',
-        rating: 2,
-        description: 'item4 description',
-        categoryId: 3
-    },
-    {
-        id: 3,
-        name: 'item3',
-        rating: 3,
-        description: 'item3 description',
-        categoryId: 4
-    },
-    {
-        id: 4,
-        name: 'item4',
-        rating: 2,
-        description: 'item4 description',
-        categoryId: 4
-    },
-    {
-        id: 3,
-        name: 'item3',
-        rating: 3,
-        description: 'item3 description',
-        categoryId: 5
-    },
-    {
-        id: 4,
-        name: 'item4',
-        rating: 2,
-        description: 'item4 description',
-        categoryId: 5
     },
 ];
 
+export const fakeDbChat = [
+    {
+        chatRoomId: 18,
+        user_id_1: 1,
+        User_id_2: 2,
+    }
+]
+
+export const fakeDbMessage = [
+    {
+        message_id: 1,
+        content: "This is the first message",
+        user_id: 1,
+        chatRoomId: 1
+    }, 
+    {
+        message_id: 2,
+        content: "This is the second message",
+        user_id: 2,
+        chatRoomId: 1
+    }
+]
+
+export function writeChatToTheDataBase(inputText, dateDB, userIdGlobal, room) {
+    fakeDbMessage.push({
+        content: inputText, user_id: userIdGlobal, chatRoomId: room
+    })
+    // console.log(fakeDbMessage)
+}
+
+export function getAllChatWithRoomId(roomId) {
+    const newFakeDb = fakeDbMessage.filter(m => m.chatRoomId == roomId)
+    return newFakeDb
+}
 
 
 export async function getItemsForEachCategory(categoryId){

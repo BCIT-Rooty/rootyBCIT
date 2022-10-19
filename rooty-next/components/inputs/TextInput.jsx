@@ -1,7 +1,7 @@
 export default function TextInput(props) {
 
   function aNewFunction(input) {
-    console.log("This is the Title sohrab is writing::::::::>", input)
+    // console.log("This is the Title sohrab is writing::::::::>", input)
     props.onChangingTheText(input)
   }
 
