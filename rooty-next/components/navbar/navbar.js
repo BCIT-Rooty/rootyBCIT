@@ -21,7 +21,7 @@ export default function NavBar({ route }) {
   const pages = [
     "/homepage", "/categoriespage", "/postspage", "/chatpage", "/accountpage"
   ]
-  const index = pages.findIndex(page => page == route)
+  const index = pages.findIndex(page => route.startsWith(page))
   const r = useRouter();
   const HandleNavBarIcons = (name, num) => {
     r.push(name)
