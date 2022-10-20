@@ -2,7 +2,7 @@ import { categoryList } from "../../server/database";
 import CategoryCard from "../../components/categoryCard";
 import {useRouter} from 'next/router';
 import { FlexBox, Wrapper } from "../../styles/globals";
-import Review from "../../components/review";
+import Review from "../../components/reviews/review";
 import Text from "../../components/text";
 import { Search } from 'semantic-ui-react';
 
@@ -30,7 +30,7 @@ export default function Categories() {
 
       <Wrapper alignItems="start">
         <FlexBox dir="column" width="100%">
-            <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="15px" minHeight="100px">
+            <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 40px" minHeight="100px">
                 <Text txt="Search" size="24px" weight="bold"></Text>
             </FlexBox>
             <FlexBox padding="30px 0px 13px 0px">

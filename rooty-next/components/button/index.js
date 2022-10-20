@@ -6,7 +6,7 @@ export default function Button({
     size="16px",
     color = "white",
     bgColor="#4F4DB0",
-    width="150px",
+    width="165px",
     height="40px",
     padding="20px",
     borderRadius="10px",

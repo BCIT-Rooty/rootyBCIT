@@ -25,19 +25,19 @@ export default function Home(){
       <FlexBox padding="0px 0px 0px 20px">
         <GradientCard txt="How to Write the Perfect Freelancing Bio" bgImage="/tip1.png" onClick={()=> setShowModal("firstArticle")}></GradientCard>
         <GradientCard txt="6 Habits of High Successful Freelancers" bgImage="/tip2.jpg" onClick={()=> setShowModal("secondArticle")}></GradientCard>
-        <GradientCard txt="4 Steps to Successfully Completing Your First Gig" bgImage="/tip3.png" onClick={()=> setShowModal("thirdArticle")}></GradientCard>
-        <GradientCard txt="5 Ways Freelancers can Improve Focus and Productivity" bgImage="/tip4.png" onClick={()=> setShowModal("fourthArticle")}></GradientCard>
+        <GradientCard txt="4 Steps to Complete Your First Gig" bgImage="/tip3.png" onClick={()=> setShowModal("thirdArticle")}></GradientCard>
+        <GradientCard txt="5 Ways to Improve Focus and Productivity" bgImage="/tip4.png" onClick={()=> setShowModal("fourthArticle")}></GradientCard>
       </FlexBox>
     </HorizontalScrollContainer>
     
     <Text txt="Popular Searches" padding="30px 0px 10px 20px" size="24px" weight="bolder"></Text>
     <FlexBox flexWrap="wrap" width="100vw">
-      <Button txt="Motion Graphics" ></Button>
-      <Button txt="Logo Designer" ></Button>
-      <Button txt="Web Developer" ></Button>
-      <Button txt="Social Content" ></Button>
-      <Button txt="English Tutor" ></Button>
-      <Button txt="Calculus Tutor" ></Button>
+      <Button padding= "15px 0px 15px 0px" txt="Motion Graphics" ></Button>
+      <Button padding= "15px 0px 15px 0px" txt="Logo Designer" ></Button>
+      <Button padding= "15px 0px 15px 0px" txt="Web Developer" ></Button>
+      <Button padding= "15px 0px 15px 0px" txt="Social Content" ></Button>
+      <Button padding= "15px 0px 15px 0px" txt="English Tutor" ></Button>
+      <Button padding= "15px 0px 15px 0px" txt="Calculus Tutor" ></Button>
     </FlexBox>
    
     <Text txt="Contest For The Week" padding="30px 0px 10px 20px" size="24px" weight="bolder"></Text>
