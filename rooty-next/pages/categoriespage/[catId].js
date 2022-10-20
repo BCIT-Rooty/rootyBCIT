@@ -5,7 +5,8 @@ import { FlexBox, Wrapper } from '../../styles/globals';
 import { ImgPlaceholder } from '../../styles/globals';
 import Text from '../../components/text';
 import GradientCard from '../../components/gradientCard';
-import { Search } from 'semantic-ui-react'
+import { Search } from 'semantic-ui-react';
+import CardWithSearch from '../../components/gradientCard/cardWithSearch';
 
 
 
@@ -18,11 +19,12 @@ export default function OneCategory({ categoryItems }) {
         <Wrapper>
             <FlexBox dir="column" width="100%">
                 <FlexBox width="100%" dir="column">
-                    <GradientCard bgImage="/3081629.jpg" width="100%" height="328px" borderRadius="0px" txt="Broadcast and Media" size="24px" margin="0px"></GradientCard>
+                    {/* <GradientCard bgImage="/3081629.jpg" width="100%" height="328px" borderRadius="0px" txt="Broadcast and Media" size="24px" margin="0px"></GradientCard>
                     <FlexBox margin="12px"><Search size="large"
                         placeholder='Search...'
                         onResultSelect={(e, data) =>
-                        dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox>
+                        dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox> */}
+                    <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
                 </FlexBox>
             <div>
                 {
