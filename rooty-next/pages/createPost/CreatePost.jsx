@@ -1,3 +1,8 @@
+// make it so there is only one category, change the categories state name and price should only be numbers
+
+
+
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { TextInput } from "../../components/inputs";
@@ -15,6 +20,8 @@ export default function CreatePost(props) {
   const [isBarter, setIsBarter] = useState("");
   const [price, setPrice] = useState(0);
   const [postKeywords, setPostKeywords] = useState([]);
+  const [keywords, setKeywords] = useState([]);
+  const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("")
   const [listOfCategories, setListOfCategories] = useState([
     "Broadcast & Media",
     "Digital Arts & Design",
@@ -49,6 +56,7 @@ export default function CreatePost(props) {
     });
   }
 
+
   function handleAddTagsToThePost(inputValue) {
     if (!postKeywords.includes(inputValue)) {
       setPostKeywords([...postKeywords, inputValue]);
@@ -62,7 +70,7 @@ export default function CreatePost(props) {
     var rads = document.getElementsByName(radioGroupName),
       i;
     for (i = 0; i < rads.length; i++) if (rads[i].checked) return rads[i].value;
-    return null; // or undefined, or your preferred default for none checked
+    return null;
   }
 
   async function uploadThePhotoToS3(inputFile) {
@@ -83,9 +91,22 @@ export default function CreatePost(props) {
         theUrlToReturn = photoUrlRet;
       });
     });
-    console.log(theUrlToReturn)
+    console.log(theUrlToReturn);
     return theUrlToReturn;
   }
+
+  function handleKeywords(input) {
+    setKeywordButtonStateValue(input)
+    console.log(input);
+  }
+
+  function handleKeywordsButtonClick() {
+    setKeywords([...keywords, keywordButtonStateValue])
+    console.log(keywords)
+    setKeywordButtonStateValue("")
+  }
+
+  const areThereKeywords = (keywords.length !== 0)
 
   return (
     <>
@@ -148,12 +169,25 @@ export default function CreatePost(props) {
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
+          {areThereKeywords ? keywords.map(m => <p>{m}</p>) : <></>}
           <Input
             placeholder="Type Keywords for your Post"
             type="search"
             border="solid 1px #545454"
             margin="0px 0px 0px 20px"
+            onChangingTheText={handleKeywords}
           ></Input>
+          <Button
+                key="handleKeywordAdding"
+                txt="Add Keyword"
+                value={keywordButtonStateValue}
+                border="solid 2px #545454"
+                bgColor="white"
+                color="#545454"
+                width="fit-content"
+                padding="15px"
+                onClick={handleKeywordsButtonClick}
+              />
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -245,7 +279,10 @@ export default function CreatePost(props) {
         </FlexBox>
         <FlexBox padding="0px 0px 85px 0px" width="100vw">
           <Button
-            onClick={() => setShowDownload("active")}
+            onClick={() => {
+              console.log(keywords)
+              setShowDownload("active");
+            }}
             txt="Publish"
             size="20px"
             padding="22px"

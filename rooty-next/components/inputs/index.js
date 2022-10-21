@@ -63,6 +63,7 @@ export default function Input({
   padding = "10px",
   onChangingTheText = () => {},
   onInsertPhotoInsideS3 = () => {},
+  onKeywordClick = () => {},
 }) {
   function promptFilename() {
     promptFile().then(function (file) {

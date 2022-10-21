@@ -13,6 +13,7 @@ export default function Button({
   textAlign = "center",
   margin = "5px",
   fontWeight = "600",
+  value = "nothing",
   border = "none",
   onClick = () => {},
 }) {
@@ -26,7 +27,10 @@ export default function Button({
 
   return (
     <ButtonClick
-      onClick={(e) => onClick(e.target.innerText)}
+      onClick={(e) => {
+        console.log(value)
+        onClick(e.target.innerText);
+      }}
       fzsize={size}
       width={width}
       height={height}
