@@ -2,20 +2,20 @@ import Item from '../../components/Item';
 import { useRouter } from 'next/router';
 import { prisma } from '../../server/db/client';
 
-export default function OneCategory({ ParsedItems }) {
+export default function OneCategory({ parsedItems }) {
     const r = useRouter();
 
     return (
         <div>
             {
-                ParsedItems.map((item) => {
+                parsedItems.map((item) => {
 
                     return (
                         <div key={item.postId}>
                             <Item
                                 onClick={
                                     () => r.push({
-                                        pathname: `${item.PostId}/itemDescript`,
+                                        pathname: `/posts/${item.postId}`,
                                     })}
                                 name={item.title} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image} />
                         </div>
@@ -31,11 +31,11 @@ export async function getServerSideProps(context) { // we need to use getServerS
     const categoryItems = await prisma.post.findMany({
         where: {
             categoryId: +context.params.catId
-          },
+        },
     });
-    let ParsedItems = JSON.parse(JSON.stringify(categoryItems));
+    let parsedItems = JSON.parse(JSON.stringify(categoryItems));
     console.log('categoryItemss', categoryItems)
     return {
-        props: { ParsedItems }
+        props: { parsedItems }
     }
 }

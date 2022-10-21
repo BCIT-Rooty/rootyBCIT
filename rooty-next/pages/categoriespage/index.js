@@ -13,7 +13,7 @@ export default function categories() {
 
   let response;
   useEffect(() => {
-    axios.get('http://localhost:3001/api/categories')
+    axios.get('/api/categories')
       .then(res => {
         response = res.data;
         setCategories(response);

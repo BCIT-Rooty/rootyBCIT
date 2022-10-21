@@ -28,15 +28,16 @@ model User {
 // add stuff like photos to this
 // finish up adding all the details to this
 model Post {
-  postId     Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  title      String   @db.VarChar(255)
-  author     User     @relation(fields: [authorId], references: [userId])
-  authorId   Int
-  category   Category @relation(fields: [categoryId], references: [categoryId])
-  categoryId Int      
-  Photos     Photo[]
+  postId      Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String   @db.VarChar(255)
+  description String   @default("")
+  author      User     @relation(fields: [authorId], references: [userId])
+  authorId    Int
+  category    Category @relation(fields: [categoryId], references: [categoryId])
+  categoryId  Int
+  Photos      Photo[]
 }
 
 // Relationship with the User works now
@@ -90,12 +91,12 @@ model Category {
 }
 
 model ChatRoom {
-  chatRoomId Int      @id @default(autoincrement())
-  userOne    User     @relation("UserNumberOne", fields: [userOneId], references: [userId])
+  chatRoomId Int       @id @default(autoincrement())
+  userOne    User      @relation("UserNumberOne", fields: [userOneId], references: [userId])
   userOneId  Int
-  userTwo    User     @relation("UserNumberTwo", fields: [userTwoId], references: [userId])
+  userTwo    User      @relation("UserNumberTwo", fields: [userTwoId], references: [userId])
   userTwoId  Int
-  createdAt  DateTime @default(now())
+  createdAt  DateTime  @default(now())
   Message    Message[]
 }
 
@@ -106,7 +107,7 @@ model Message {
   author     User     @relation(fields: [userId], references: [userId])
   userId     Int      @unique
   chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [chatRoomId])
-  chatRoomId Int     @unique
+  chatRoomId Int      @unique
 }
 
 enum Role {
