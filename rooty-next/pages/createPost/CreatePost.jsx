@@ -1,4 +1,4 @@
-// price should only be numbers
+// make sure that the fields are required and they are required in the database too the error for keywords/// make vercel work 
 
 import { useState, useEffect } from "react";
 import axios from "axios";

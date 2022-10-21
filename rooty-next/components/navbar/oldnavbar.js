@@ -63,7 +63,6 @@ export default function OldNavBar({ route }) {
   return (
     <Box sx={{ width: "100vw", color: purple[400] }}>
       <BottomNavigation
-        showLabels
         value={index}
       >
         <Tab icon={<HomeIcon fontSize="large" />} to="/homepage"

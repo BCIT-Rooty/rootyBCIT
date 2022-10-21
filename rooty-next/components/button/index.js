@@ -32,7 +32,6 @@ export default function Button({
       onClick={(e) => {
         onClick(e.target.innerText);
         if (ifThisIsTheCategoriesButtons) onKeywordWantToRemove(true)
-        
       }}
       fzsize={size}
       width={width}
