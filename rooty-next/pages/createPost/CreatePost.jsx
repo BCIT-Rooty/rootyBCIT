@@ -22,6 +22,7 @@ export default function CreatePost(props) {
   const [postKeywords, setPostKeywords] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("")
+  const [stateTrackerToRemoveText, setStateTrackerToRemoveText] = useState(false)
   const [listOfCategories, setListOfCategories] = useState([
     "Broadcast & Media",
     "Digital Arts & Design",
@@ -102,8 +103,11 @@ export default function CreatePost(props) {
 
   function handleKeywordsButtonClick() {
     setKeywords([...keywords, keywordButtonStateValue])
-    console.log(keywords)
     setKeywordButtonStateValue("")
+  }
+
+  function handleResetText(theStateInputFunction) {
+    theStateInputFunction("")
   }
 
   const areThereKeywords = (keywords.length !== 0)
@@ -173,9 +177,12 @@ export default function CreatePost(props) {
           <Input
             placeholder="Type Keywords for your Post"
             type="search"
+            value={keywordButtonStateValue}
             border="solid 1px #545454"
             margin="0px 0px 0px 20px"
             onChangingTheText={handleKeywords}
+            keywordRemoveValue={stateTrackerToRemoveText}
+            onKeywordClick={setStateTrackerToRemoveText}
           ></Input>
           <Button
                 key="handleKeywordAdding"
@@ -187,6 +194,7 @@ export default function CreatePost(props) {
                 width="fit-content"
                 padding="15px"
                 onClick={handleKeywordsButtonClick}
+                onKeywordWantToRemove={setStateTrackerToRemoveText}
               />
         </FlexBox>
         <FlexBox

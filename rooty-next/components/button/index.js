@@ -16,6 +16,7 @@ export default function Button({
   value = "nothing",
   border = "none",
   onClick = () => {},
+  onKeywordWantToRemove = () => {},
 }) {
   const ButtonClick = styled(FlexBox)`
     color: ${(props) => props.color};
@@ -28,8 +29,8 @@ export default function Button({
   return (
     <ButtonClick
       onClick={(e) => {
-        console.log(value)
         onClick(e.target.innerText);
+        onKeywordWantToRemove(true)
       }}
       fzsize={size}
       width={width}

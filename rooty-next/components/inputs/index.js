@@ -61,6 +61,8 @@ export default function Input({
   margin = "0px",
   placeholder = "Enter Text Here",
   padding = "10px",
+  keywordRemoveValue = "false",
+  value = "nothing",
   onChangingTheText = () => {},
   onInsertPhotoInsideS3 = () => {},
   onKeywordClick = () => {},
@@ -97,7 +99,10 @@ export default function Input({
       )}
       {type !== "file" && (
         <InputRectangle
-          onChange={(e) => onChangingTheText(e.target.value)}
+          value={value}  
+          onChange={(e) => {
+            onChangingTheText(e.target.value);
+          }}
           type={type}
           placeholder={placeholder}
           bgColor={bgColor}
@@ -130,7 +135,9 @@ export function TextInput({
     <FlexBox flexWrap="wrap">
       {type === "textarea" && (
         <TextArea
-          onChange={(e) => onChangingTheText(e.target.value)}
+          onChange={(e) => {
+            onChangingTheText(e.target.value);
+          }}
           type={type}
           placeholder={placeholder}
           bgColor={bgColor}
