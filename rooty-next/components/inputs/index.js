@@ -61,11 +61,9 @@ export default function Input({
   margin = "0px",
   placeholder = "Enter Text Here",
   padding = "10px",
-  keywordRemoveValue = "false",
-  value = "nothing",
+  value ,
   onChangingTheText = () => {},
   onInsertPhotoInsideS3 = () => {},
-  onKeywordClick = () => {},
 }) {
   function promptFilename() {
     promptFile().then(function (file) {

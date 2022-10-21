@@ -23,6 +23,7 @@ export default function CreatePost(props) {
   const [keywords, setKeywords] = useState([]);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("")
   const [stateTrackerToRemoveText, setStateTrackerToRemoveText] = useState(false)
+  const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] = useState(false)
   const [listOfCategories, setListOfCategories] = useState([
     "Broadcast & Media",
     "Digital Arts & Design",
@@ -41,7 +42,6 @@ export default function CreatePost(props) {
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [photoInput, setPhotoInput] = useState("");
-  // const [barterValues, setBarterValues] = useState(["Barter", "Cash"]);
   async function handleSubmit(e) {
     e.preventDefault();
     const theCategoryValue = getCheckedRadioValue("categories");
@@ -97,17 +97,19 @@ export default function CreatePost(props) {
   }
 
   function handleKeywords(input) {
+    // console.log(input)
     setKeywordButtonStateValue(input)
-    console.log(input);
   }
 
   function handleKeywordsButtonClick() {
+    if (keywordButtonStateValue == "") {
+      setErrorStateForEmptyInputKeyWord(true)
+      return
+    } else if (keywordButtonStateValue) {
+      setErrorStateForEmptyInputKeyWord(false)
+    }
     setKeywords([...keywords, keywordButtonStateValue])
     setKeywordButtonStateValue("")
-  }
-
-  function handleResetText(theStateInputFunction) {
-    theStateInputFunction("")
   }
 
   const areThereKeywords = (keywords.length !== 0)
@@ -196,6 +198,7 @@ export default function CreatePost(props) {
                 onClick={handleKeywordsButtonClick}
                 onKeywordWantToRemove={setStateTrackerToRemoveText}
               />
+              {errorStateForEmptyInputKeyWord ? <p>You need an input!!</p> : <></>}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
