@@ -1,4 +1,4 @@
-// change the categories state name                and price should only be numbers
+// price should only be numbers
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -16,7 +16,6 @@ export default function CreatePost(props) {
   const [description, setDescription] = useState("");
   const [isBarter, setIsBarter] = useState("");
   const [price, setPrice] = useState(0);
-  const [postKeywords, setPostKeywords] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
   const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
@@ -36,28 +35,6 @@ export default function CreatePost(props) {
   const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] =
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   const theCategoryValue = getCheckedRadioValue("categories");
-  //   await uploadThePhotoToS3().then((res) => {
-  //     props.onSubmitForm(
-  //       title,
-  //       description,
-  //       isBarter,
-  //       theCategoryValue,
-  //       postKeywords,
-  //       res
-  //     );
-  //   });
-  // }
-
-  // https://stackoverflow.com/questions/8666229/how-to-get-value-from-form-input-type-radio
-  function getCheckedRadioValue(radioGroupName) {
-    var rads = document.getElementsByName(radioGroupName),
-      i;
-    for (i = 0; i < rads.length; i++) if (rads[i].checked) return rads[i].value;
-    return null;
-  }
 
   async function uploadThePhotoToS3(inputFile) {
     // if (photoInput == false) {
