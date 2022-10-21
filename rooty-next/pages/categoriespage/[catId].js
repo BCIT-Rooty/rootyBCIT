@@ -16,10 +16,10 @@ export default function OneCategory({ categoryItems }) {
                     return (
                     <div key={item.id}>
                         <Item 
-                            // onClick={
-                            // ()=>r.push({
-                            // pathname:`${item.id}/descript`,
-                            // })}
+                            onClick={
+                            ()=>r.push({
+                            pathname:`${item.id}/descript`,
+                            })}
                             name={item.name} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image}/>
                     </div>
                     )

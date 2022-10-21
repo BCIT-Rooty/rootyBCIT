@@ -5,6 +5,7 @@ export const categoryList = [
     { id: 3, name: 'TUTORING' },
     { id: 4, name: 'ARTS & DESIGN' },
     { id: 5, name: 'MARKETING' },
+    { id: 5, name: 'fds' },
 ];
 
 export const items = [
