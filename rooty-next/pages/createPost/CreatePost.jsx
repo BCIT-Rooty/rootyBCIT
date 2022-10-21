@@ -1,7 +1,4 @@
-// make it so there is only one category, change the categories state name and price should only be numbers
-
-
-
+// change the categories state name                and price should only be numbers
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -21,10 +18,13 @@ export default function CreatePost(props) {
   const [price, setPrice] = useState(0);
   const [postKeywords, setPostKeywords] = useState([]);
   const [keywords, setKeywords] = useState([]);
-  const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("")
-  const [stateTrackerToRemoveText, setStateTrackerToRemoveText] = useState(false)
-  const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] = useState(false)
-  const [errorThatKeywordAlreadyExists, setErrorThatKeywordAlreadyExists] = useState(false)
+  const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
+  const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
+    useState(false);
+  const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] =
+    useState(false);
+  const [errorThatKeywordAlreadyExists, setErrorThatKeywordAlreadyExists] =
+    useState(false);
   const [listOfCategories, setListOfCategories] = useState([
     "Broadcast & Media",
     "Digital Arts & Design",
@@ -36,30 +36,20 @@ export default function CreatePost(props) {
   const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] =
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-  const [photoInput, setPhotoInput] = useState("");
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const theCategoryValue = getCheckedRadioValue("categories");
-    await uploadThePhotoToS3().then((res) => {
-      props.onSubmitForm(
-        title,
-        description,
-        isBarter,
-        theCategoryValue,
-        postKeywords,
-        res
-      );
-    });
-  }
-
-
-  function handleAddTagsToThePost(inputValue) {
-    // if (!postKeywords.includes(inputValue)) {
-    //   setPostKeywords([...postKeywords, inputValue]);
-    // } else {
-    //   setPostKeywords(postKeywords.filter((m) => m !== inputValue));
-    // }
-  }
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   const theCategoryValue = getCheckedRadioValue("categories");
+  //   await uploadThePhotoToS3().then((res) => {
+  //     props.onSubmitForm(
+  //       title,
+  //       description,
+  //       isBarter,
+  //       theCategoryValue,
+  //       postKeywords,
+  //       res
+  //     );
+  //   });
+  // }
 
   // https://stackoverflow.com/questions/8666229/how-to-get-value-from-form-input-type-radio
   function getCheckedRadioValue(radioGroupName) {
@@ -93,36 +83,43 @@ export default function CreatePost(props) {
 
   function handleKeywords(input) {
     // console.log(input)
-    setKeywordButtonStateValue(input)
+    setKeywordButtonStateValue(input);
   }
 
   function removeSpaces(inputText) {
-    const str = inputText.replace(/\s/g, '');
-    return str
+    const str = inputText.replace(/\s/g, "");
+    return str;
   }
 
   function handleKeywordsButtonClick() {
-    const keywordWithoutSpaces = removeSpaces(keywordButtonStateValue)
+    const keywordWithoutSpaces = removeSpaces(keywordButtonStateValue);
     if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
       if (errorThatKeywordAlreadyExists) {
-        setErrorThatKeywordAlreadyExists(false)
+        setErrorThatKeywordAlreadyExists(false);
       }
-      setErrorStateForEmptyInputKeyWord(true)
-      return
+      setErrorStateForEmptyInputKeyWord(true);
+      return;
     } else if (keywordButtonStateValue && keywordWithoutSpaces !== "") {
-      setErrorStateForEmptyInputKeyWord(false)
-    } 
-    if (keywords.includes(keywordButtonStateValue) || keywords.includes(keywordWithoutSpaces)) {
-      setErrorThatKeywordAlreadyExists(true)
-      return
-    } else if(!keywords.includes(keywordButtonStateValue) && errorThatKeywordAlreadyExists == true && keywords.includes(keywordWithoutSpaces)) {
-      setErrorThatKeywordAlreadyExists(false)
+      setErrorStateForEmptyInputKeyWord(false);
     }
-    setKeywords([...keywords, keywordButtonStateValue])
-    setKeywordButtonStateValue("")
+    if (
+      keywords.includes(keywordButtonStateValue) ||
+      keywords.includes(keywordWithoutSpaces)
+    ) {
+      setErrorThatKeywordAlreadyExists(true);
+      return;
+    } else if (
+      !keywords.includes(keywordButtonStateValue) &&
+      errorThatKeywordAlreadyExists == true &&
+      keywords.includes(keywordWithoutSpaces)
+    ) {
+      setErrorThatKeywordAlreadyExists(false);
+    }
+    setKeywords([...keywords, keywordButtonStateValue]);
+    setKeywordButtonStateValue("");
   }
 
-  const areThereKeywords = (keywords.length !== 0)
+  const areThereKeywords = keywords.length !== 0;
 
   return (
     <>
@@ -186,7 +183,7 @@ export default function CreatePost(props) {
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
-          {areThereKeywords ? keywords.map(m => <p>{m}</p>) : <></>}
+          {areThereKeywords ? keywords.map((m) => <p>{m}</p>) : <></>}
           <Input
             placeholder="Type Keywords for your Post"
             type="search"
@@ -198,20 +195,24 @@ export default function CreatePost(props) {
             onKeywordClick={setStateTrackerToRemoveText}
           ></Input>
           <Button
-                key="handleKeywordAdding"
-                txt="Add Keyword"
-                value={keywordButtonStateValue}
-                border="solid 2px #545454"
-                bgColor="white"
-                color="#545454"
-                width="fit-content"
-                padding="15px"
-                ifThisIsTheCategoriesButtons={true}
-                onClick={handleKeywordsButtonClick}
-                onKeywordWantToRemove={setStateTrackerToRemoveText}
-              />
-              {errorStateForEmptyInputKeyWord ? <p>You need an input!</p> : <></>}
-              {errorThatKeywordAlreadyExists ? <p>That Value already exist</p> : <></>}
+            key="handleKeywordAdding"
+            txt="Add Keyword"
+            value={keywordButtonStateValue}
+            border="solid 2px #545454"
+            bgColor="white"
+            color="#545454"
+            width="fit-content"
+            padding="15px"
+            ifThisIsTheCategoriesButtons={true}
+            onClick={handleKeywordsButtonClick}
+            onKeywordWantToRemove={setStateTrackerToRemoveText}
+          />
+          {errorStateForEmptyInputKeyWord ? <p>You need an input!</p> : <></>}
+          {errorThatKeywordAlreadyExists ? (
+            <p>That Value already exist</p>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -304,7 +305,14 @@ export default function CreatePost(props) {
         <FlexBox padding="0px 0px 85px 0px" width="100vw">
           <Button
             onClick={() => {
-              console.log(keywords, whatIsTheCategoryOfThisPost, title, description, isBarter, price)
+              console.log(
+                keywords,
+                whatIsTheCategoryOfThisPost,
+                title,
+                description,
+                isBarter,
+                price
+              );
               setShowDownload("active");
             }}
             txt="Publish"
