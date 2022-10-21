@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import SubmitButton from "../../components/sohrabs buttons/SubmitButton";
-// import ImageInputS3 from "../../components/sohrabs inputs/ImageInputS3";
-// import TextInput from "../../components/sohrabs inputs/TextInput";
 import { TextInput } from "../../components/inputs";
-// import KeywordButton from "../../components/sohrabs buttons/KeyWordButton";
-// import RadioInputComponent from "../../components/inputs/RadioInputComponent";
 import { FlexBox, Wrapper } from "../../styles/globals";
-// import Input, {TextIn} from "../components/inputs";
 import Input from "../../components/inputs";
 import Button from "../../components/button";
 import Text from "../../components/text";
@@ -52,16 +46,8 @@ export default function CreatePost(props) {
         postKeywords,
         res
       );
-      // setTitle("");
-      // setDescription("");
-      // setIsBarter("");
-      // setPhotoUrl("");
     });
   }
-
-  // function handlePreventDefault(e) {
-  //   e.preventDefault();
-  // }
 
   function handleAddTagsToThePost(inputValue) {
     if (!postKeywords.includes(inputValue)) {
@@ -100,15 +86,6 @@ export default function CreatePost(props) {
     console.log(theUrlToReturn)
     return theUrlToReturn;
   }
-
-  // function seeIfShitWorks() {
-  //   console.log(title, description, price, isBarter, postKeywords)
-  // }
-
-  // async function handleS3Url(e) {
-  //   e.preventDefault();
-  //   setPhotoInput(e.target);
-  // }
 
   return (
     <>
