@@ -24,6 +24,7 @@ export default function CreatePost(props) {
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("")
   const [stateTrackerToRemoveText, setStateTrackerToRemoveText] = useState(false)
   const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] = useState(false)
+  const [errorThatKeywordAlreadyExists, setErrorThatKeywordAlreadyExists] = useState(false)
   const [listOfCategories, setListOfCategories] = useState([
     "Broadcast & Media",
     "Digital Arts & Design",
@@ -31,12 +32,6 @@ export default function CreatePost(props) {
     "Marketing",
     "Tutoring",
     "Computing",
-  ]);
-  const [potentialPostKeywords, setPotentialPostKeywords] = useState([
-    "Audio Mix",
-    "Web Design",
-    "Logo Design",
-    "Anna",
   ]);
   const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] =
     useState("");
@@ -59,11 +54,11 @@ export default function CreatePost(props) {
 
 
   function handleAddTagsToThePost(inputValue) {
-    if (!postKeywords.includes(inputValue)) {
-      setPostKeywords([...postKeywords, inputValue]);
-    } else {
-      setPostKeywords(postKeywords.filter((m) => m !== inputValue));
-    }
+    // if (!postKeywords.includes(inputValue)) {
+    //   setPostKeywords([...postKeywords, inputValue]);
+    // } else {
+    //   setPostKeywords(postKeywords.filter((m) => m !== inputValue));
+    // }
   }
 
   // https://stackoverflow.com/questions/8666229/how-to-get-value-from-form-input-type-radio
@@ -101,12 +96,27 @@ export default function CreatePost(props) {
     setKeywordButtonStateValue(input)
   }
 
+  function removeSpaces(inputText) {
+    const str = inputText.replace(/\s/g, '');
+    return str
+  }
+
   function handleKeywordsButtonClick() {
-    if (keywordButtonStateValue == "") {
+    const keywordWithoutSpaces = removeSpaces(keywordButtonStateValue)
+    if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
+      if (errorThatKeywordAlreadyExists) {
+        setErrorThatKeywordAlreadyExists(false)
+      }
       setErrorStateForEmptyInputKeyWord(true)
       return
-    } else if (keywordButtonStateValue) {
+    } else if (keywordButtonStateValue && keywordWithoutSpaces !== "") {
       setErrorStateForEmptyInputKeyWord(false)
+    } 
+    if (keywords.includes(keywordButtonStateValue) || keywords.includes(keywordWithoutSpaces)) {
+      setErrorThatKeywordAlreadyExists(true)
+      return
+    } else if(!keywords.includes(keywordButtonStateValue) && errorThatKeywordAlreadyExists == true && keywords.includes(keywordWithoutSpaces)) {
+      setErrorThatKeywordAlreadyExists(false)
     }
     setKeywords([...keywords, keywordButtonStateValue])
     setKeywordButtonStateValue("")
@@ -156,7 +166,8 @@ export default function CreatePost(props) {
                 color="#545454"
                 width="fit-content"
                 padding="15px"
-                onClick={handleAddTagsToThePost}
+                ifThisIsTheCategoriesButtons={false}
+                onClick={setWhatIsTheCategoryOfThisPost}
               />
             ))}
           </FlexBox>
@@ -195,10 +206,12 @@ export default function CreatePost(props) {
                 color="#545454"
                 width="fit-content"
                 padding="15px"
+                ifThisIsTheCategoriesButtons={true}
                 onClick={handleKeywordsButtonClick}
                 onKeywordWantToRemove={setStateTrackerToRemoveText}
               />
-              {errorStateForEmptyInputKeyWord ? <p>You need an input!!</p> : <></>}
+              {errorStateForEmptyInputKeyWord ? <p>You need an input!</p> : <></>}
+              {errorThatKeywordAlreadyExists ? <p>That Value already exist</p> : <></>}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -291,7 +304,7 @@ export default function CreatePost(props) {
         <FlexBox padding="0px 0px 85px 0px" width="100vw">
           <Button
             onClick={() => {
-              console.log(keywords)
+              console.log(keywords, whatIsTheCategoryOfThisPost, title, description, isBarter, price)
               setShowDownload("active");
             }}
             txt="Publish"

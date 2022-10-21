@@ -15,6 +15,7 @@ export default function Button({
   fontWeight = "600",
   value = "nothing",
   border = "none",
+  ifThisIsTheCategoriesButtons,
   onClick = () => {},
   onKeywordWantToRemove = () => {},
 }) {
@@ -30,7 +31,8 @@ export default function Button({
     <ButtonClick
       onClick={(e) => {
         onClick(e.target.innerText);
-        onKeywordWantToRemove(true)
+        if (ifThisIsTheCategoriesButtons) onKeywordWantToRemove(true)
+        
       }}
       fzsize={size}
       width={width}
