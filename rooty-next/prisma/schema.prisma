@@ -35,7 +35,7 @@ model Post {
   author     User     @relation(fields: [authorId], references: [userId])
   authorId   Int
   category   Category @relation(fields: [categoryId], references: [categoryId])
-  categoryId Int      @unique
+  categoryId Int      
   Photos     Photo[]
 }
 

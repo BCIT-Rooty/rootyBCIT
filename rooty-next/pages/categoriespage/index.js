@@ -32,8 +32,7 @@ export default function categories() {
           })}
           key={category.categoryId} name={category.categoryName} image={category.image}>
         </CategoryCard>
-
-
+      
       )))
   };
 

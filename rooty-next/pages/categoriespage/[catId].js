@@ -1,27 +1,24 @@
 import Item from '../../components/Item';
-import { getItemsForEachCategory } from '../../server/database.js';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
+import { prisma } from '../../server/db/client';
 
-
-
-export default function OneCategory({ categoryItems }) {
-
+export default function OneCategory({ ParsedItems }) {
     const r = useRouter();
 
-    console.log(categoryItems)
     return (
         <div>
             {
-                categoryItems.map((item) => {
+                ParsedItems.map((item) => {
+
                     return (
-                    <div key={item.id}>
-                        <Item 
-                            onClick={
-                            ()=>r.push({
-                            pathname:`${item.id}/descript`,
-                            })}
-                            name={item.name} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image}/>
-                    </div>
+                        <div key={item.postId}>
+                            <Item
+                                onClick={
+                                    () => r.push({
+                                        pathname: `${item.PostId}/itemDescript`,
+                                    })}
+                                name={item.title} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image} />
+                        </div>
                     )
                 })
             }
@@ -31,10 +28,14 @@ export default function OneCategory({ categoryItems }) {
 
 
 export async function getServerSideProps(context) { // we need to use getServerSideProps because we need to fetch data from the database, and we can't do that on the client side, only on the server side, so we need to use getServerSideProps, which is a next.js function that runs on the server side. (IS THIS ALL TRUE?!?!?!)
-    const categoryItems = await getItemsForEachCategory(+context.params.catId)
-    console.log(categoryItems)
+    const categoryItems = await prisma.post.findMany({
+        where: {
+            categoryId: +context.params.catId
+          },
+    });
+    let ParsedItems = JSON.parse(JSON.stringify(categoryItems));
+    console.log('categoryItemss', categoryItems)
     return {
-        props: { categoryItems }
+        props: { ParsedItems }
     }
 }
-// also what is context?
