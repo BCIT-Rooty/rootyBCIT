@@ -39,7 +39,7 @@ model Post {
   price       Int      @default(0)
   rating      Int      @default(0)
   categoryId  Int
-  image       String  @default("")
+  image
   Photos      Photo[]
 }
 

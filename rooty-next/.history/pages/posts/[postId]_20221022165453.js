@@ -2,7 +2,7 @@ import { categoryList } from "../../server/database";
 import CategoryCard from "../../components/categoryCard";
 import { useRouter } from 'next/router';
 import { FlexBox, ImgPlaceholder, Wrapper } from "../../styles/globals";
-import Review from "../../components/reviews/review";
+import Review from "../../components/reviewsreview";
 import Text from "../../components/text";
 import { prisma } from "../../server/db/client";
 
