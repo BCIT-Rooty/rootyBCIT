@@ -7,11 +7,6 @@ import Text from '../../components/text';
 import GradientCard from '../../components/gradientCard';
 import { Search } from 'semantic-ui-react';
 import CardWithSearch from '../../components/gradientCard/cardWithSearch';
-
-
-
-
-import { useRouter } from 'next/router';
 import { prisma } from '../../server/db/client';
 
 export default function OneCategory({ parsedItems }) {

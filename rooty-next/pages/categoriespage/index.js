@@ -5,7 +5,7 @@ import { FlexBox, Wrapper } from "../../styles/globals";
 import Review from "../../components/reviews/review";
 import Text from "../../components/text";
 import { Search } from 'semantic-ui-react';
-import Review from "../../components/review";
+// import Review from "../../components/review";
 import axios from 'axios';
 import { useEffect, useState } from "react";
 
