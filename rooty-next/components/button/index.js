@@ -17,16 +17,22 @@ export default function Button({
     onClick=()=>{}
 }){
 
-    const ButtonClick = styled(FlexBox)`
-        color: ${props=>props.color};
-        text-align: ${props=>props.textAlign};
-        font-weight: ${props=>props.fontWeight};
-        border: ${props=>props.border};
-        font-size: ${props=>props.fzsize}
-    `
-
-    return(
-        <ButtonClick onClick={onClick} fzsize={size} width={width} height={height} bgColor={bgColor} padding={padding} borderRadius={borderRadius} color={color} textAlign={textAlign} margin={margin} fontWeight={fontWeight} border={border}>{txt}</ButtonClick>
-    )
-
+  return (
+    <ButtonClick
+      onClick={(e) => onClick(e.target.innerText)}
+      fzsize={size}
+      width={width}
+      height={height}
+      bgColor={bgColor}
+      padding={padding}
+      borderRadius={borderRadius}
+      color={color}
+      textAlign={textAlign}
+      margin={margin}
+      fontWeight={fontWeight}
+      border={border}
+    >
+      {txt}
+    </ButtonClick>
+  );
 }
