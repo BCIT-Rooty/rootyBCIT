@@ -37,11 +37,6 @@ export default function CreatePost(props) {
   const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
 
- function SelectingColor(event){
-    if(event === "Broadcast & Media"){
-      setWhatIsTheCategoryOfThisPost("blue")
-    }
- }
 
 
   async function uploadThePhotoToS3(inputFile) {
@@ -147,10 +142,9 @@ export default function CreatePost(props) {
                 color="#545454"
                 width="fit-content"
                 padding="20px 5vw"
-                bgColor={whatIsTheCategoryOfThisPost}
-                // ifThisIsTheCategoriesButtons={false}
-                // onClick={setWhatIsTheCategoryOfThisPost}
-                onClick={(e)=>SelectingColor(e)}
+                whatIsTheStateOfTheAppForCategory={whatIsTheCategoryOfThisPost}
+                ifThisIsTheCategoriesButtons={false}
+                onClick={setWhatIsTheCategoryOfThisPost}
               />
             ))}
           </FlexBox>
