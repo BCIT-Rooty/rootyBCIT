@@ -9,6 +9,7 @@ export const InputRectangle = styled.input`
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
+  font-family: 'Plus Jakarta Sans', sans-serif;
 `;
 
 const Img = styled.img`
@@ -18,8 +19,6 @@ const Img = styled.img`
   border-radius: 10px;
 `;
 
-const Label = styled.label``;
-
 const TextArea = styled.textarea`
   background-color: ${(props) => props.bgColor};
   border: ${(props) => props.border};
@@ -28,6 +27,7 @@ const TextArea = styled.textarea`
   min-height: ${(props) => props.minHeight};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
+  font-family: 'Plus Jakarta Sans', sans-serif;
 `;
 
 // function found online to make a div, in this case FlexBox, act to make
@@ -49,15 +49,22 @@ function promptFile(multiple) {
     input.click();
   });
 }
+// TODO THIS FUNCTION IS FOR THE PRICE INPUT SO THAT ANYTIME A NUMBER IS WRITTEN, IT WILL ALWAYS START WITH THE $ SIGN
+// function addHash(elem) {
+//   var val = elem.value;
+//   if(!val.match(/^#/)) {
+//     elem.value = "#" + val;
+//   }
+// }
 
 export default function Input({
   type = "none",
   fileBgImage = "/camera.png",
   bgColor = "#F7F7FC",
   border = "none",
-  borderRadius = "10px",
-  width = "350px",
-  height = "35px",
+  borderRadius = "16px",
+  width = "90vw",
+  height = "40px",
   margin = "0px",
   placeholder = "Enter Text Here",
   padding = "10px",
@@ -95,6 +102,26 @@ export default function Input({
           <Img></Img>
         </FlexBox>
       )}
+      
+      {/* {type === "number" && (
+        <InputRectangle
+          value={value}  
+          onChange={(e) => {
+            onChangingTheText(e.target.value);
+          }}
+          // onKeyUp = {() => addHash(this)}
+          type={type}
+          placeholder={placeholder}
+          bgColor={bgColor}
+          border={border}
+          borderRadius={borderRadius}
+          width={width}
+          height={height}
+          margin={margin}
+          padding={padding}
+        ></InputRectangle>
+      )} */}
+
       {type !== "file" && (
         <InputRectangle
           value={value}  
@@ -118,15 +145,14 @@ export default function Input({
 
 export function TextInput({
   type = "none",
-  fileBgImage = "/camera.png",
   bgColor = "#F7F7FC",
   border = "none",
-  borderRadius = "10px",
-  width = "350px",
+  borderRadius = "16px",
+  width = "90vw",
   minHeight = "95px",
   margin = "0px",
   placeholder = "Enter Text Here",
-  padding = "10px",
+  padding = "15px",
   onChangingTheText = () => {},
 }) {
   return (
