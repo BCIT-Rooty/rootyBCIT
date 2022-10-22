@@ -24,7 +24,7 @@ export default function categories() {
       .then(res => {
         response = res.data;
         setCategories(response);
-        console.log('THIS IS RES DATA',response);
+        console.log(res)
       })
       .catch(err => console.log('This error', err))
   }, [])
