@@ -17,7 +17,7 @@ export default function OneCategory({ parsedItems }) {
                                     () => r.push({
                                         pathname: `/posts/${item.postId}`,
                                     })}
-                                name={item.title} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image} />
+                                name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.image} />
                         </div>
                     )
                 })

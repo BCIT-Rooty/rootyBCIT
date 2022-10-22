@@ -11,6 +11,7 @@ export default function itemDescript({parsedItems}) {
 
 
 console.log(parsedItems[0])
+
 let userName = parsedItems[0].author.name + " " + parsedItems[0].author.lastname;
 let description = parsedItems[0].description;
 let title = parsedItems[0].title;
@@ -27,7 +28,7 @@ let authorName = parsedItems[0].author.name;
         <Wrapper alignItems="flex-start">
             <FlexBox dir="column" width="100%">
                 <ImgPlaceholder bgImage="/3081629.jpg" width="100%" height="328px"></ImgPlaceholder>
-                <Review name={userName} nameSize="21px" comment="" program="IDSP" boxWidth="73px" image="/2205_w037_n003_408b_p1_408.jpg"></Review>
+                <Review name={userName} nameSize="21px" comment="" program="smth here" boxWidth="73px" image="/2205_w037_n003_408b_p1_408.jpg"></Review>
                 <FlexBox dir="column" alignItems="left" width="100%" padding="0 30px 0 30px" minHeight="108px" border="0.5px solid rgba(191, 191, 191, 1)">
                     <Text txt={title} size="21pt"></Text>
                     <Text txt='make a coloumn in the db for this'></Text>

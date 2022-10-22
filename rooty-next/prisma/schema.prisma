@@ -36,6 +36,8 @@ model Post {
   author      User     @relation(fields: [authorId], references: [userId])
   authorId    Int
   category    Category @relation(fields: [categoryId], references: [categoryId])
+  price       Int     @default(0) 
+  rating      Int     @default(0)
   categoryId  Int
   Photos      Photo[]
 }
