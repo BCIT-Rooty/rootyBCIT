@@ -108,25 +108,6 @@ export default function Input({
           <Img></Img>
         </FlexBox>
       )}
-      
-      {/* {type === "number" && (
-        <InputRectangle
-          value={value}  
-          onChange={(e) => {
-            onChangingTheText(e.target.value);
-          }}
-          // onKeyUp = {() => addHash(this)}
-          type={type}
-          placeholder={placeholder}
-          bgColor={bgColor}
-          border={border}
-          borderRadius={borderRadius}
-          width={width}
-          height={height}
-          margin={margin}
-          padding={padding}
-        ></InputRectangle>
-      )} */}
 
       {type !== "file" && (
         <InputRectangle

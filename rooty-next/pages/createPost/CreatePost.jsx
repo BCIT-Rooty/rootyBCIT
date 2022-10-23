@@ -1,4 +1,4 @@
-// make sure that the fields are required and they are required in the database too the error for keywords/// make vercel work 
+// make sure that the fields are required and they are required in the database too the error for keywords/// make vercel work
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,7 +10,7 @@ import Text from "../../components/text";
 import DownloadPopUp from "../../components/downloadPopUp";
 import Toaster from "../../components/toaster";
 import { motion, AnimatePresence } from "framer-motion";
-import Counter from '../../components/counter'
+import Counter from "../../components/counter";
 
 export default function CreatePost(props) {
   const [showDownload, setShowDownload] = useState("default");
@@ -20,8 +20,8 @@ export default function CreatePost(props) {
   const [price, setPrice] = useState(0);
   const [keywords, setKeywords] = useState([]);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
-  const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
-    useState(false);
+  // const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
+  //   useState(false);
   const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] =
     useState(false);
   const [errorThatKeywordAlreadyExists, setErrorThatKeywordAlreadyExists] =
@@ -29,22 +29,19 @@ export default function CreatePost(props) {
   const [listOfCategories, setListOfCategories] = useState([
     "Broadcast & Media",
     "Computing",
-    "Marketing","Business & Finance",
+    "Marketing",
+    "Business & Finance",
     "Digital Arts & Design",
     "Tutoring",
-    
   ]);
-  const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] = useState("");
+  const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] =
+    useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-  const [isNegotiableActive, setIsNegotiableActive] = useState(false)
+  const [isNegotiableActive, setIsNegotiableActive] = useState(false);
 
   const handleNegotiableButton = () => {
-    setIsNegotiableActive(current=>!current)
-  }
-
- 
-
-
+    setIsNegotiableActive((current) => !current);
+  };
 
   async function uploadThePhotoToS3(inputFile) {
     // if (photoInput == false) {
@@ -68,11 +65,6 @@ export default function CreatePost(props) {
     return theUrlToReturn;
   }
 
-  function handleKeywords(input) {
-    // console.log(input)
-    setKeywordButtonStateValue(input);
-  }
-
   function removeSpaces(inputText) {
     const str = inputText.replace(/\s/g, "");
     return str;
@@ -86,7 +78,7 @@ export default function CreatePost(props) {
       }
       setErrorStateForEmptyInputKeyWord(true);
       return;
-    } else if (keywordButtonStateValue && keywordWithoutSpaces !== "") {
+    } else if (keywordButtonStateValue !== "" && keywordWithoutSpaces !== "") {
       setErrorStateForEmptyInputKeyWord(false);
     }
     if (
@@ -94,9 +86,10 @@ export default function CreatePost(props) {
       keywords.includes(keywordWithoutSpaces)
     ) {
       setErrorThatKeywordAlreadyExists(true);
+      return;
     } else if (
       !keywords.includes(keywordButtonStateValue) &&
-      errorThatKeywordAlreadyExists == true &&
+      errorThatKeywordAlreadyExists !== true &&
       keywords.includes(keywordWithoutSpaces)
     ) {
       setErrorThatKeywordAlreadyExists(false);
@@ -138,7 +131,12 @@ export default function CreatePost(props) {
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
-          <FlexBox flexWrap="wrap" width="95vw" justifyContent="space-between" padding="0px 0px 0px 5vw">
+          <FlexBox
+            flexWrap="wrap"
+            width="95vw"
+            justifyContent="space-between"
+            padding="0px 0px 0px 5vw"
+          >
             {listOfCategories.map((m) => (
               <Button
                 key={m}
@@ -149,7 +147,7 @@ export default function CreatePost(props) {
                 width="fit-content"
                 padding="20px 5vw"
                 whatIsTheStateOfTheAppForCategory={whatIsTheCategoryOfThisPost}
-                ifThisIsTheCategoriesButtons={false}
+                ifThisIsTheCategoriesButtons={true}
                 onClick={setWhatIsTheCategoryOfThisPost}
               />
             ))}
@@ -177,9 +175,7 @@ export default function CreatePost(props) {
               border="solid 1px #545454"
               margin="0px 0px 0px 20px"
               width="60vw"
-              onChangingTheText={handleKeywords}
-              keywordRemoveValue={stateTrackerToRemoveText}
-              onKeywordClick={setStateTrackerToRemoveText}
+              onChangingTheText={setKeywordButtonStateValue}
             ></Input>
             <Button
               type="add"
@@ -191,26 +187,38 @@ export default function CreatePost(props) {
               margin="0px 0px 0px 20px"
               buttonMargin="0px 10px 0px 0px"
               bgColor="#4F4DB0"
-              ifThisIsTheCategoriesButtons={true}
               onClick={handleKeywordsButtonClick}
-              onKeywordWantToRemove={setStateTrackerToRemoveText}
             />
           </FlexBox>
           <FlexBox width="95vw" padding="25px 0px 10px 5vw" flexWrap="wrap">
-          {areThereKeywords ? keywords.map((m) => 
-          <Button txt={m} 
-          width="fit-content" 
-          height="30px"
-          type="keyword" 
-          padding="10px 10px" 
-          fontWeight="300"
-          buttonMargin="0px 0px 0px 10px" 
-          border="solid 1px #545454"
-          color="#545454">
-          </Button>) : <></>}
+            {areThereKeywords ? (
+              keywords.map((m) => (
+                <Button
+                  txt={m}
+                  width="fit-content"
+                  height="30px"
+                  type="keyword"
+                  padding="10px 10px"
+                  fontWeight="300"
+                  buttonMargin="0px 0px 0px 10px"
+                  border="solid 1px #545454"
+                  color="#545454"
+                ></Button>
+              ))
+            ) : (
+              <></>
+            )}
           </FlexBox>
-          {errorStateForEmptyInputKeyWord ? <Toaster txt="You must insert atleast one keyword"></Toaster> : <></>}
-          {errorThatKeywordAlreadyExists ? <Toaster txt="This keyword is already being used"></Toaster> : <></>}
+          {errorStateForEmptyInputKeyWord ? (
+            <Toaster txt="You must insert atleast one keyword"></Toaster>
+          ) : (
+            <></>
+          )}
+          {errorThatKeywordAlreadyExists ? (
+            <Toaster txt="This keyword is already being used"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -301,13 +309,15 @@ export default function CreatePost(props) {
               onChangingTheText={setPrice}
             ></Input>
           </FlexBox>
-          
-          <Button 
-            txt="Negotiable" 
+
+          <Button
+            txt="Negotiable"
             margin="5px 0px 0px 0px"
-            border= {isNegotiableActive ? "solid 2px #4F4DB0" : "solid 2px #545454"}
+            border={
+              isNegotiableActive ? "solid 2px #4F4DB0" : "solid 2px #545454"
+            }
             bgColor={isNegotiableActive ? "#4F4DB0" : "white"}
-            color={isNegotiableActive ? "white" : "#545454"}   
+            color={isNegotiableActive ? "white" : "#545454"}
             width="fit-content"
             padding="20px"
             onClick={handleNegotiableButton}
@@ -321,18 +331,19 @@ export default function CreatePost(props) {
           padding="20px 20px 20px 0px"
         >
           <Text
-              txt="Revision"
-              size="16px"
-              weight="bold"
-              padding="15px 0px 20px 20px"
-            ></Text>
-            <Counter></Counter>
+            txt="Revision"
+            size="16px"
+            weight="bold"
+            padding="15px 0px 20px 20px"
+          ></Text>
+          <Counter></Counter>
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
           width="100vw"
           padding="20px 20px 90px 0px"
-          ><Button
+        >
+          <Button
             onClick={() => {
               console.log(
                 keywords,

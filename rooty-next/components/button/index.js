@@ -32,7 +32,7 @@ export default function Button({
   fontWeight = "600",
   value = "nothing",
   border = "none",
-  ifThisIsTheCategoriesButtons,
+  ifThisIsTheCategoriesButtons = "false",
   onClick = () => {},
   onKeywordWantToRemove = () => {},
   type = "button",
@@ -41,7 +41,7 @@ export default function Button({
 }) {
 
 
-  if (!ifThisIsTheCategoriesButtons) {
+  if (ifThisIsTheCategoriesButtons) {
     if (whatIsTheStateOfTheAppForCategory == value) {
       bgColor = "#4F4DB0";
       color = "white";
@@ -56,7 +56,6 @@ export default function Button({
         <ButtonClick
           onClick={(e) => {
             onClick(e.target.innerText);
-            if (ifThisIsTheCategoriesButtons) onKeywordWantToRemove(true);
           }}
           fzsize={size}
           width={width}
