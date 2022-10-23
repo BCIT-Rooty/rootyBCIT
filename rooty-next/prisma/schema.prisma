@@ -28,15 +28,21 @@ model User {
 // add stuff like photos to this
 // finish up adding all the details to this
 model Post {
-  postId     Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  title      String   @db.VarChar(255)
+  postId            Int              @id @default(autoincrement())
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  title             String           @db.VarChar(255)
   // author     User     @relation(fields: [authorId], references: [userId])
   // authorId   Int
-  category   Category @relation(fields: [categoryId], references: [categoryId])
-  categoryId Int      @unique
-  Photos     Photo[]
+  category          Category         @relation(fields: [categoryId], references: [categoryId])
+  categoryId        Int              @unique
+  keywords          PostOnKeywords[]
+  barterInformation String           @db.Text
+  description       String           @db.Text
+  price             Int
+  negotiable        Boolean
+  count             Int
+  Photos            Photo[]
 }
 
 // Relationship with the User works now
@@ -70,8 +76,8 @@ model Photo {
   userPhotoUrl String @db.Text
   // author       User?  @relation(fields: [userId], references: [userId])
   // userId       Int?   @unique
-  post         Post   @relation(fields: [postId], references: [postId])
-  postId       Int    @unique
+  post         Post?   @relation(fields: [postId], references: [postId])
+  postId       Int?    @unique
 }
 
 // MTM for posts and photos that was wrong but it was good code so I just kept it
@@ -85,17 +91,31 @@ model Photo {
 
 model Category {
   categoryId   Int    @id @default(autoincrement())
-  categoryName String
+  categoryName String @unique
   posts        Post[]
 }
 
+model Keywords {
+  keywordId Int              @id @default(autoincrement())
+  keyword   String
+  posts     PostOnKeywords[]
+}
+
+model PostOnKeywords {
+  postOnKeywordId Int      @id @default(autoincrement())
+  post            Post     @relation(fields: [postId], references: [postId])
+  postId          Int
+  keyword         Keywords @relation(fields: [keywordId], references: [keywordId])
+  keywordId       Int
+}
+
 model ChatRoom {
-  chatRoomId Int      @id @default(autoincrement())
-  userOne    User     @relation("UserNumberOne", fields: [userOneId], references: [userId])
+  chatRoomId Int       @id @default(autoincrement())
+  userOne    User      @relation("UserNumberOne", fields: [userOneId], references: [userId])
   userOneId  Int
-  userTwo    User     @relation("UserNumberTwo", fields: [userTwoId], references: [userId])
+  userTwo    User      @relation("UserNumberTwo", fields: [userTwoId], references: [userId])
   userTwoId  Int
-  createdAt  DateTime @default(now())
+  createdAt  DateTime  @default(now())
   Message    Message[]
 }
 
@@ -106,7 +126,7 @@ model Message {
   author     User     @relation(fields: [userId], references: [userId])
   userId     Int      @unique
   chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [chatRoomId])
-  chatRoomId Int     @unique
+  chatRoomId Int      @unique
 }
 
 enum Role {
