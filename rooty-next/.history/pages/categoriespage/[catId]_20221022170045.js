@@ -1,6 +1,6 @@
 import Item from '../../components/Item';
 import { getItemsForEachCategory } from '../../server/database.js';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import { FlexBox, Wrapper } from '../../styles/globals';
 import { ImgPlaceholder } from '../../styles/globals';
 import Text from '../../components/text';
@@ -13,12 +13,8 @@ export default function OneCategory({ parsedItems }) {
     const r = useRouter();
 
     return (
+        
         <div>
-            <GradientCard bgImage="/3081629.jpg" width="100%" height="328px" borderRadius="0px" txt="Broadcast and Media" size="24px" margin="0px"></GradientCard>
-            <FlexBox margin="12px"><Search size="large"
-                placeholder='Search...'
-                onResultSelect={(e, data) =>
-                    dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })} /></FlexBox>
             {
                 parsedItems.map((item) => {
 
