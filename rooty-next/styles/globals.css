@@ -30,6 +30,11 @@ a {
 .css-ybol96-MuiButtonBase-root-MuiTab-root{
   min-width:0%
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 /* ContestTipCard:after { */
   /* background: linear-gradient(to bottom, transparent 0%, #4F4DB0 100%); */
