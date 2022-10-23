@@ -18,7 +18,7 @@ export default function GradientCard({
 
 
   return(
-    <FlexBox onClick={onClick} width={width} height={height} borderRadius={borderRadius} margin={margin} bgImage={bgImage} linearGradient="linear-gradient(to bottom, rgba(79, 77, 176, 0), rgba(79, 77, 176, 1))" alignItems="flex-end" padding="10px">
+    <FlexBox onClick={onClick} width={width} height={height} borderRadius={borderRadius} margin={margin} bgImage={bgImage} linearGradient="linear-gradient(to bottom, rgba(79, 77, 176, 0), rgba(79, 77, 176, 1))" alignItems="flex-end" padding="10px" cursor="pointer">
         <Text txt={txt} size={size} align={align} color="white" weight={weight}></Text>
     </FlexBox>
   )
