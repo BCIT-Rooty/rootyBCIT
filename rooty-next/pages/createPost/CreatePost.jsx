@@ -36,6 +36,13 @@ export default function CreatePost(props) {
   ]);
   const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
+  const [isNegotiableActive, setIsNegotiableActive] = useState(false)
+
+  const handleNegotiableButton = () => {
+    setIsNegotiableActive(current=>!current)
+  }
+
+ 
 
 
 
@@ -87,7 +94,6 @@ export default function CreatePost(props) {
       keywords.includes(keywordWithoutSpaces)
     ) {
       setErrorThatKeywordAlreadyExists(true);
-      return;
     } else if (
       !keywords.includes(keywordButtonStateValue) &&
       errorThatKeywordAlreadyExists == true &&
@@ -184,6 +190,7 @@ export default function CreatePost(props) {
               padding="15px"
               margin="0px 0px 0px 20px"
               buttonMargin="0px 10px 0px 0px"
+              bgColor="#4F4DB0"
               ifThisIsTheCategoriesButtons={true}
               onClick={handleKeywordsButtonClick}
               onKeywordWantToRemove={setStateTrackerToRemoveText}
@@ -199,16 +206,11 @@ export default function CreatePost(props) {
           fontWeight="300"
           buttonMargin="0px 0px 0px 10px" 
           border="solid 1px #545454"
-          bgColor="white"
           color="#545454">
           </Button>) : <></>}
           </FlexBox>
           {errorStateForEmptyInputKeyWord ? <Toaster txt="You must insert atleast one keyword"></Toaster> : <></>}
-          {errorThatKeywordAlreadyExists ? (
-            <Toaster txt="This keyword is already being used"></Toaster>
-          ) : (
-            <></>
-          )}
+          {errorThatKeywordAlreadyExists ? <Toaster txt="This keyword is already being used"></Toaster> : <></>}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -303,11 +305,12 @@ export default function CreatePost(props) {
           <Button 
             txt="Negotiable" 
             margin="5px 0px 0px 0px"
-            border="solid 2px #545454"
-            bgColor="white"
-            color="#545454"   
+            border= {isNegotiableActive ? "solid 2px #4F4DB0" : "solid 2px #545454"}
+            bgColor={isNegotiableActive ? "#4F4DB0" : "white"}
+            color={isNegotiableActive ? "white" : "#545454"}   
             width="fit-content"
             padding="20px"
+            onClick={handleNegotiableButton}
           ></Button>
         </FlexBox>
         <FlexBox
@@ -348,6 +351,7 @@ export default function CreatePost(props) {
             color="white"
             border="solid 1px #545454"
             margin="10px 0px 0px 20px"
+            bgColor="#4F4DB0"
           ></Button>
         </FlexBox>
         <AnimatePresence exitBeforeEnter>

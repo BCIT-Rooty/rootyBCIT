@@ -67,14 +67,13 @@ export default function Input({
   height = "40px",
   margin = "0px",
   placeholder = "Enter Text Here",
-  padding = "10px",
-  value ,
+  padding = "15px",
+  value,
   onChangingTheText = () => {},
   onInsertPhotoInsideS3 = () => {},
 }) {
   function promptFilename() {
     promptFile().then(function (file) {
-      // console.log(file)
       onInsertPhotoInsideS3(file).then((result) => {
         document.querySelector("img").src = result || "no photo selected";
       });

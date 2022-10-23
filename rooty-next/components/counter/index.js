@@ -15,7 +15,7 @@ export default function Counter(){
     }
     
     return(
-        <FlexBox width="120px" border="1.5px solid #545454" borderRadius="16px">
+        <FlexBox width="120px" border="2px solid #545454" borderRadius="16px">
             <FlexBox onClick={Decrease} width="100%" height="38px">
                 <Icon name="minus" width="200px" ></Icon>
             </FlexBox>
@@ -23,9 +23,6 @@ export default function Counter(){
             <FlexBox onClick={Increase} width="100%" height="38px">
                 <Icon name="add" width="200px" ></Icon>
             </FlexBox>
-            {/* <button onClick={Decrease}></button>
-            <input type="number" value={count}></input>
-            <button onClick={Increase}></button> */}
         </FlexBox>
     )
 }

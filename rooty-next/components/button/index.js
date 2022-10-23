@@ -14,6 +14,7 @@ const ButtonClick = styled(FlexBox)`
   font-weight: ${(props) => props.fontWeight};
   border: ${(props) => props.border};
   font-size: ${(props) => props.fzsize};
+  background-color: ${(props)=>props.bgColor}
 `;
 
 export default function Button({
@@ -34,7 +35,6 @@ export default function Button({
   ifThisIsTheCategoriesButtons,
   onClick = () => {},
   onKeywordWantToRemove = () => {},
-  onChangeBackGround = () => {},
   type = "button",
   buttonMargin = "0px",
 }) {
@@ -42,7 +42,9 @@ export default function Button({
 
   if (!ifThisIsTheCategoriesButtons) {
     if (whatIsTheStateOfTheAppForCategory == value) {
-      bgColor = "blue"
+      bgColor = "#4F4DB0";
+      color = "white";
+      border = "#4F4DB0"
     }
   }
 
@@ -134,22 +136,9 @@ export function CategoriesButton({
   fontWeight = "600",
   value = "nothing",
   border = "none",
-  onClick = () => {},
 }) {
-  var c = "white";
-  const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] =
-    useState("");
-  const [bgColorOfCategory, setBgColorOfCategory] = useState("white");
   return (
     <ButtonClick
-      onClick={(e) => {
-        if (e.target.innerText === "Broadcast & Media") {
-          setWhatIsTheCategoryOfThisPost("Broadcast & Media");
-        }
-        if (setWhatIsTheCategoryOfThisPost === "Broadcast & Media") {
-          c = "blue";
-        }
-      }}
       fzsize={size}
       width={width}
       height={height}
