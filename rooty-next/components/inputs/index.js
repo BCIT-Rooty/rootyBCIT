@@ -51,13 +51,7 @@ function promptFile(multiple) {
   });
 }
 
-function promptFilename() {
-  promptFile().then(function (file) {
-    onInsertPhotoInsideS3(file).then((result) => {
-      document.querySelector("img").src = result || "no photo selected";
-    });
-  });
-}
+
 
 // TODO THIS FUNCTION IS FOR THE PRICE INPUT SO THAT ANYTIME A NUMBER IS WRITTEN, IT WILL ALWAYS START WITH THE $ SIGN
 // function addHash(elem) {
@@ -83,6 +77,14 @@ export default function Input({
   onInsertPhotoInsideS3 = () => {},
   cursor="pointer"
 }) {
+
+  function promptFilename() {
+    promptFile().then(function (file) {
+      onInsertPhotoInsideS3(file).then((result) => {
+        document.querySelector("img").src = result || "no photo selected";
+      });
+    });
+  }
 
   return (
     <FlexBox flexWrap="wrap">
