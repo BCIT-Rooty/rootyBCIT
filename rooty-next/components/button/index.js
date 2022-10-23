@@ -37,6 +37,7 @@ export default function Button({
   onKeywordWantToRemove = () => {},
   type = "button",
   buttonMargin = "0px",
+  cursor = "pointer"
 }) {
 
 
@@ -68,6 +69,7 @@ export default function Button({
           margin={margin}
           fontWeight={fontWeight}
           border={border}
+          cursor={cursor}
         >
           {txt}
         </ButtonClick>
@@ -90,6 +92,7 @@ export default function Button({
           margin={margin}
           fontWeight={fontWeight}
           border={border}
+          cursor={cursor}
         >
           {txt}
           <Icons name="close" buttonMargin={buttonMargin}></Icons>
@@ -113,45 +116,12 @@ export default function Button({
           margin={margin}
           fontWeight={fontWeight}
           border={border}
+          cursor={cursor}
         >
           <Icons name="add" color="#ffffff" buttonMargin={buttonMargin}></Icons>
           {txt}
         </ButtonClick>
       )}
     </FlexBox>
-  );
-}
-
-export function CategoriesButton({
-  txt = "Button Text Here",
-  size = "15px",
-  color = "white",
-  bgColor = "#4F4DB0",
-  width = "150px",
-  height = "40px",
-  padding = "15px",
-  borderRadius = "16px",
-  textAlign = "center",
-  margin = "5px 5px 8px 0px",
-  fontWeight = "600",
-  value = "nothing",
-  border = "none",
-}) {
-  return (
-    <ButtonClick
-      fzsize={size}
-      width={width}
-      height={height}
-      bgColor={c}
-      padding={padding}
-      borderRadius={borderRadius}
-      color={color}
-      textAlign={textAlign}
-      margin={margin}
-      fontWeight={fontWeight}
-      border={border}
-    >
-      {txt}
-    </ButtonClick>
   );
 }

@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { FlexBox, ImgPlaceholder } from "../../styles/globals";
 
 export const InputRectangle = styled.input`
-  background-color: ${(props) => props.bgColor || "#F7F7FC"};
-  border: ${(props) => props.border};
-  border-radius: ${(props) => props.borderRadius};
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
+  background-color: ${props => props.bgColor || "#F7F7FC"};
+  border: ${props => props.border};
+  border-radius: ${props => props.borderRadius};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  margin: ${props => props.margin};
+  padding: ${props => props.padding};
+  cursor = ${props => props.cursor}
   font-family: 'Plus Jakarta Sans', sans-serif;
 `;
 
@@ -49,6 +50,15 @@ function promptFile(multiple) {
     input.click();
   });
 }
+
+function promptFilename() {
+  promptFile().then(function (file) {
+    onInsertPhotoInsideS3(file).then((result) => {
+      document.querySelector("img").src = result || "no photo selected";
+    });
+  });
+}
+
 // TODO THIS FUNCTION IS FOR THE PRICE INPUT SO THAT ANYTIME A NUMBER IS WRITTEN, IT WILL ALWAYS START WITH THE $ SIGN
 // function addHash(elem) {
 //   var val = elem.value;
@@ -71,14 +81,8 @@ export default function Input({
   value,
   onChangingTheText = () => {},
   onInsertPhotoInsideS3 = () => {},
+  cursor="pointer"
 }) {
-  function promptFilename() {
-    promptFile().then(function (file) {
-      onInsertPhotoInsideS3(file).then((result) => {
-        document.querySelector("img").src = result || "no photo selected";
-      });
-    });
-  }
 
   return (
     <FlexBox flexWrap="wrap">
@@ -91,6 +95,7 @@ export default function Input({
             color="white"
             borderRadius="10px"
             boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)"
+            cursor={cursor}
           >
             <ImgPlaceholder
               width="30px"

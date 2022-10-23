@@ -25,7 +25,8 @@ export const FlexBox = styled.div`
     box-shadow: ${props=>props.boxShadow};
     border-top: ${props=>props.topBorder};
     color: ${props=>props.color};
-    font-weight: ${props=>props.fontWeight}
+    font-weight: ${props=>props.fontWeight};
+    cursor: ${props=>props.cursor}
     
 `
 

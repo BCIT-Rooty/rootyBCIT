@@ -16,11 +16,11 @@ export default function Counter(){
     
     return(
         <FlexBox width="120px" border="2px solid #545454" borderRadius="16px">
-            <FlexBox onClick={Decrease} width="100%" height="38px">
+            <FlexBox onClick={Decrease} width="100%" height="38px" cursor="pointer">
                 <Icon name="minus" width="200px" ></Icon>
             </FlexBox>
             <Input width="41px" borderRadius="0px" bgColor="white" value={count} height="100%" border="1px solid #545454" padding="10px 15px"></Input>
-            <FlexBox onClick={Increase} width="100%" height="38px">
+            <FlexBox onClick={Increase} width="100%" height="38px" cursor="pointer">
                 <Icon name="add" width="200px" ></Icon>
             </FlexBox>
         </FlexBox>
