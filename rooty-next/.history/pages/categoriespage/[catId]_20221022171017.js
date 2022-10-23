@@ -25,17 +25,17 @@ export default function OneCategory({ parsedItems }) {
                     </FlexBox>
                 <div>
                     {
-                        parsedItems.map((item) => {
+                        categoryItems.map((item) => {
                             return (
-                            <div key={item.postId}>
-                                <Item
+                            <div key={item.id}>
+                                <Item 
                                     onClick={
-                                        () => r.push({
-                                            pathname: `/posts/${item.postId}`,
-                                         })}
-                                    name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.image} />
+                                    ()=>r.push({
+                                    pathname: `/posts/${item.postId}`,
+                                    })}
+                                    name={item.name} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image}/>
                             </div>
-                        )
+                            )
                         })
                     }
                 </div>
@@ -58,3 +58,34 @@ export async function getServerSideProps(context) { // we need to use getServerS
 }
 
 
+
+// <Wrapper>
+// <FlexBox dir="column" width="100%">
+//     <FlexBox width="100%" dir="column">
+//         <GradientCard bgImage="/3081629.jpg" width="100%" height="328px" borderRadius="0px" txt="Broadcast and Media" size="24px" margin="0px"></GradientCard>
+//         <FlexBox margin="12px"><Search size="large"
+//             placeholder='Search...'
+//             onResultSelect={(e, data) =>
+//             dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox>
+//         <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
+//     </FlexBox>
+//     <div>
+//         </div>
+// {
+//     parsedItems.map((item) => {
+        
+//         return (
+//             <div key={item.postId}>
+//                 <Item
+//                     onClick={
+//                         () => r.push({
+//                             pathname: `/posts/${item.postId}`,
+//                         })}
+//                     name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.image} />
+//             </div>
+//         )
+//     })
+// }
+// </FlexBox>
+// </Wrapper>
+// )

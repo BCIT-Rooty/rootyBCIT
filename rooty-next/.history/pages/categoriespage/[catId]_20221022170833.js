@@ -13,6 +13,7 @@ export default function OneCategory({ parsedItems }) {
     const r = useRouter();
 
     return (
+        return (
             <Wrapper>
                 <FlexBox dir="column" width="100%">
                     <FlexBox width="100%" dir="column">
@@ -25,17 +26,18 @@ export default function OneCategory({ parsedItems }) {
                     </FlexBox>
                 <div>
                     {
-                        parsedItems.map((item) => {
+                        categoryItems.map((item) => {
                             return (
-                            <div key={item.postId}>
-                                <Item
+                            <div key={item.id}>
+                                <Item 
                                     onClick={
-                                        () => r.push({
-                                            pathname: `/posts/${item.postId}`,
-                                         })}
-                                    name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.image} />
+                                    ()=>r.push({
+                                    // pathname:`categoriespage/${item.id}/itemDescript`,
+                                    pathname:`/categoriespage/itemDescript`,  //hardcoded
+                                    })}
+                                    name={item.name} rating={item.rating} description={item.description} compensation={item.compensation} image={item.image}/>
                             </div>
-                        )
+                            )
                         })
                     }
                 </div>
@@ -56,5 +58,3 @@ export async function getServerSideProps(context) { // we need to use getServerS
         props: { parsedItems }
     }
 }
-
-
