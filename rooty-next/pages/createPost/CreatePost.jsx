@@ -111,7 +111,7 @@ export default function CreatePost(props) {
   async function createPost() {
     const axiosRequest = await axios
       .post("/api/createPost", {
-        photoUrl: "https://rootys3bucket.s3.us-west-1.amazonaws.com/40fb0786be30e399c6cfacf07e26fc2d",
+        photoUrl,
         whatIsTheCategoryOfThisPost,
         keywords,
         title,
