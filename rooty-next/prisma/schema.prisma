@@ -16,8 +16,8 @@ model User {
   email      String        @unique
   aboutMe    String        @db.Text
   role       Role          @default(USER)
-  posts      Post[]
-  photo      Photo?
+  // posts      Post[]
+  // photo      Photo?
   program    Program?
   Skills     SkillOnUser[]
   ChatRooms1 ChatRoom[]    @relation("UserNumberOne")
@@ -32,8 +32,8 @@ model Post {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   title      String   @db.VarChar(255)
-  author     User     @relation(fields: [authorId], references: [userId])
-  authorId   Int
+  // author     User     @relation(fields: [authorId], references: [userId])
+  // authorId   Int
   category   Category @relation(fields: [categoryId], references: [categoryId])
   categoryId Int      @unique
   Photos     Photo[]
@@ -68,8 +68,8 @@ model SkillOnUser {
 model Photo {
   photoId      Int    @id @default(autoincrement())
   userPhotoUrl String @db.Text
-  author       User?  @relation(fields: [userId], references: [userId])
-  userId       Int?   @unique
+  // author       User?  @relation(fields: [userId], references: [userId])
+  // userId       Int?   @unique
   post         Post   @relation(fields: [postId], references: [postId])
   postId       Int    @unique
 }

@@ -16,6 +16,7 @@ export default function CreatePost(props) {
   const [showDownload, setShowDownload] = useState("default");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [count, setCount] = useState(0);
   const [isBarter, setIsBarter] = useState("");
   const [price, setPrice] = useState(0);
   const [keywords, setKeywords] = useState([]);
@@ -106,6 +107,24 @@ export default function CreatePost(props) {
   }
 
   const areThereKeywords = keywords.length !== 0;
+
+  async function createPost() {
+    const axiosRequest = await axios
+      .post("/api/createPost", {
+        photoUrl,
+        whatIsTheCategoryOfThisPost,
+        keywords,
+        title,
+        description,
+        isBarter,
+        price,
+        isNegotiableActive,
+        count,
+      })
+      .then((result) => {
+        console.log(result);
+      });
+  }
 
   return (
     <>
@@ -345,7 +364,7 @@ export default function CreatePost(props) {
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
-          <Counter></Counter>
+          <Counter onCounterValue={setCount}></Counter>
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -360,8 +379,11 @@ export default function CreatePost(props) {
                 title,
                 description,
                 isBarter,
-                price
+                price,
+                isNegotiableActive,
+                count
               );
+              createPost();
               setShowDownload("active");
             }}
             txt="Publish"

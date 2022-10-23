@@ -1,17 +1,22 @@
 import styled from 'styled-components'
 import { FlexBox } from '../../styles/globals'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Input from '../inputs'
 import { Icon } from 'semantic-ui-react'
 
-export default function Counter(){
+export default function Counter({onCounterValue}){
     const [count, setCount] = useState(0)
+
+    useEffect(() => {
+        onCounterValue(count)
+    }, [count])
+
 
     const Decrease = () => {
         setCount(Math.max(0, count - 1))
     }
     const Increase = () => {
-        setCount(Math.min(5, count + 1))
+        setCount(Math.min(5, count + 1))  
     }
     
     return(
