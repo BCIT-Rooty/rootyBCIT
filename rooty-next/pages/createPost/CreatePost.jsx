@@ -94,8 +94,15 @@ export default function CreatePost(props) {
     ) {
       setErrorThatKeywordAlreadyExists(false);
     }
+    setErrorThatKeywordAlreadyExists(false);
+    setErrorStateForEmptyInputKeyWord(false);
+
     setKeywords([...keywords, keywordButtonStateValue]);
     setKeywordButtonStateValue("");
+  }
+
+  function removeKeyWordXButton(input) {
+    setKeywords(keywords.filter((m) => m !== input));
   }
 
   const areThereKeywords = keywords.length !== 0;
@@ -194,6 +201,7 @@ export default function CreatePost(props) {
             {areThereKeywords ? (
               keywords.map((m) => (
                 <Button
+                  key={m}
                   txt={m}
                   width="fit-content"
                   height="30px"
@@ -203,6 +211,7 @@ export default function CreatePost(props) {
                   buttonMargin="0px 0px 0px 10px"
                   border="solid 1px #545454"
                   color="#545454"
+                  onRemoveKeyword={removeKeyWordXButton}
                 ></Button>
               ))
             ) : (

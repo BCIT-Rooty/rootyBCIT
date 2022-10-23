@@ -35,6 +35,7 @@ export default function Button({
   ifThisIsTheCategoriesButtons = "false",
   onClick = () => {},
   onKeywordWantToRemove = () => {},
+  onRemoveKeyword = () => {},
   type = "button",
   buttonMargin = "0px",
   cursor = "pointer"
@@ -94,7 +95,7 @@ export default function Button({
           cursor={cursor}
         >
           {txt}
-          <Icons name="close" buttonMargin={buttonMargin}></Icons>
+          <Icons name="close" buttonMargin={buttonMargin} onClick={(e) => onRemoveKeyword(txt)}></Icons>
         </ButtonClick>
       )}
 
