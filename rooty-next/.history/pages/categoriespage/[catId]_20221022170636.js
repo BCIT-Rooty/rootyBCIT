@@ -23,9 +23,8 @@ export default function OneCategory({ parsedItems }) {
                         dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox>
                     <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
                 </FlexBox>
-                <div>
-                    </div>
             {
+                            <div>
                 parsedItems.map((item) => {
                     
                     return (
@@ -41,6 +40,7 @@ export default function OneCategory({ parsedItems }) {
                 })
             }
             </FlexBox>
+        </div>
         </Wrapper>
     )
 }

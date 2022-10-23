@@ -24,7 +24,6 @@ export default function OneCategory({ parsedItems }) {
                     <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
                 </FlexBox>
                 <div>
-                    </div>
             {
                 parsedItems.map((item) => {
                     
@@ -32,6 +31,7 @@ export default function OneCategory({ parsedItems }) {
                         <div key={item.postId}>
                             <Item
                                 onClick={
+                                    </div>
                                     () => r.push({
                                         pathname: `/posts/${item.postId}`,
                                     })}

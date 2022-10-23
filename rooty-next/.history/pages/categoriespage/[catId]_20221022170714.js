@@ -24,7 +24,6 @@ export default function OneCategory({ parsedItems }) {
                     <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
                 </FlexBox>
                 <div>
-                    </div>
             {
                 parsedItems.map((item) => {
                     
@@ -37,6 +36,7 @@ export default function OneCategory({ parsedItems }) {
                                     })}
                                 name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.image} />
                         </div>
+                    </div>
                     )
                 })
             }

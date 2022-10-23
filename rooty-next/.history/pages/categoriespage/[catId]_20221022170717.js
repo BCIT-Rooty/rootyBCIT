@@ -24,9 +24,9 @@ export default function OneCategory({ parsedItems }) {
                     <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
                 </FlexBox>
                 <div>
-                    </div>
             {
                 parsedItems.map((item) => {
+                    </div>
                     
                     return (
                         <div key={item.postId}>

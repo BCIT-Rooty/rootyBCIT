@@ -13,6 +13,7 @@ export default function OneCategory({ parsedItems }) {
     const r = useRouter();
 
     return (
+        <div>
         <Wrapper>
             <FlexBox dir="column" width="100%">
                 <FlexBox width="100%" dir="column">
@@ -22,12 +23,9 @@ export default function OneCategory({ parsedItems }) {
                         onResultSelect={(e, data) =>
                         dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox>
                     <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
-                </FlexBox>
-                <div>
-                    </div>
             {
                 parsedItems.map((item) => {
-                    
+
                     return (
                         <div key={item.postId}>
                             <Item
@@ -41,7 +39,9 @@ export default function OneCategory({ parsedItems }) {
                 })
             }
             </FlexBox>
+
         </Wrapper>
+        </div>
     )
 }
 
