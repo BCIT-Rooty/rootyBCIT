@@ -72,7 +72,7 @@ export default function CreatePost(props) {
   }
 
   function handleKeywordsButtonClick() {
-    const keywordWithoutSpaces = removeSpaces(keywordButtonStateValue);
+    const keywordWithoutSpaces = keywordButtonStateValue.trim();
     if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
       if (errorThatKeywordAlreadyExists) {
         setErrorThatKeywordAlreadyExists(false);
@@ -98,7 +98,7 @@ export default function CreatePost(props) {
     setErrorThatKeywordAlreadyExists(false);
     setErrorStateForEmptyInputKeyWord(false);
 
-    setKeywords([...keywords, keywordButtonStateValue]);
+    setKeywords([...keywords, keywordWithoutSpaces]);
     setKeywordButtonStateValue("");
   }
 
