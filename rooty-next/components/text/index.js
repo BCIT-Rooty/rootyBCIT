@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const TextContain = styled.div`
     display:flex;
+    font-family: ;
+    width: ${props=>props.width};
+    height: ${props=>props.height};
     font-size: ${props=>props.fontSize};
     font-weight: ${props=>props.fontWeight};
     text-align: ${props=>props.textAlign};
@@ -20,11 +23,13 @@ export default function Text({
     color="black",
     padding="0px",
     bgColor="transparent",
-    textDecor="none"
+    textDecor="none",
+    width="fit-content",
+    height="fit-content"
 }){
 
     return (
-    <TextContain fontSize={size} fontWeight={weight} textAlign={align} textColor={color} padding={padding} bgColor={bgColor} textDecor={textDecor}>
+    <TextContain width={width} height={height} fontSize={size} fontWeight={weight} textAlign={align} textColor={color} padding={padding} bgColor={bgColor} textDecor={textDecor}>
         {txt}
     </TextContain>
     )
