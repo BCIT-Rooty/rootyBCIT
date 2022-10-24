@@ -30,8 +30,8 @@ export function Article1({
         <FlexBox height="700px" alignItems="flex-start" position="absolute" top="0px">
        <FlexBox width="100vw" dir="column">
          <ClosingIcon fontSize='large' onClick={onClick}></ClosingIcon>
-         <GradientCard txt="How to Write the Perfect Freelancing Bio" bgImage="/tip1.png" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px'></GradientCard>
-         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  margin="0px 0px 55px 0px">
+         <GradientCard txt="How to Write the Perfect Freelancing Bio" bgImage="/tip1.png" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px' padding="0px 0px 15px 25px"></GradientCard>
+         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 110px 15px">
             <Text padding="10px 20px" txt='Just like a great headline hooks a reader, a great bio can hook your next client. In fact, your bio is one of the most important features of your CV Profile or any writer portfolio for that matter.'></Text>
             <Text padding="10px 20px" txt='And that means it better be good.'></Text>
             <Text padding="10px 20px" txt='This is where most writers suddenly remember they have houseplants to water or spices to alphabetize. No writer likes writing their bio (which is an interesting conundrum when you think about it). But if you’re wondering why brands aren’t picking you for assignments — these tips will help you write an irresistible bio that showcases your talent.'></Text>
@@ -68,8 +68,8 @@ export function Article2({
         <FlexBox height="700px" alignItems="flex-start" position="absolute" top="0px">
        <FlexBox width="100vw" dir="column">
          <ClosingIcon fontSize='large' onClick={onClick}></ClosingIcon>
-         <GradientCard txt="6 Habits of Successful Freelancers" bgImage="/tip2.jpg" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px'></GradientCard>
-         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  margin="0px 0px 55px 0px">
+         <GradientCard txt="6 Habits of Successful Freelancers" bgImage="/tip2.jpg" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px' padding="0px 0px 15px 25px"></GradientCard>
+         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  padding="30px 15px 110px 15px">
             <Text padding="10px 20px" txt='There are a lot of freelancers out there, but all are not created equal. There are those who have a full book of work and they love the work they do. There are others who are perpetually looking for work and taking on work they don’t actually enjoy.'></Text>
             <Text padding="10px 20px" txt='This is where most writers suddenly remember they have houseplants to water or spices to alphabetize. No writer likes writing their bio (which is an interesting conundrum when you think about it). But if you’re wondering why clients aren’t picking you for assignments — these tips will help you write an irresistible bio that showcases your talent.'></Text>
             <Text padding="10px 20px" txt='1. Be Organized' size="20px" weight="bold"></Text>
@@ -110,8 +110,8 @@ export function Article3({
         <FlexBox height="700px" alignItems="flex-start" position="absolute" top="0px">
        <FlexBox width="100vw" dir="column">
          <ClosingIcon fontSize='large' onClick={onClick}></ClosingIcon>
-         <GradientCard txt="4 Steps to Successfully Completing Your First Gig" bgImage="/tip3.png" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px'></GradientCard>
-         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  margin="0px 0px 55px 0px">
+         <GradientCard txt="4 Steps to Successfully Completing Your First Gig" bgImage="/tip3.png" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px' padding="0px 0px 15px 25px"></GradientCard>
+         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  padding="30px 15px 110px 15px">
             <Text padding="10px 20px" txt='Congratulations on landing your first content gig! You pitched, persevered and persisted. You made your polite follow-up calls, sent those respectful emails and letters. And it finally yielded results. You landed that first freelance content assignment from a new client!'></Text>
             <Text padding="10px 20px" txt='Feel free to celebrate and tell all your friends and family about it. You’ve earned it. But also keep in mind that getting that contract is just the start. Your goal should be to successfully complete the work.'></Text>
             <Text padding="10px 20px" txt='1. Mind your manners' size="20px" weight="bold"></Text>
@@ -144,8 +144,8 @@ export function Article4({
         <FlexBox height="700px" alignItems="flex-start" position="absolute" top="0px">
        <FlexBox width="100vw" dir="column">
          <ClosingIcon fontSize='large' onClick={onClick}></ClosingIcon>
-         <GradientCard txt="5 Ways Freelancers can Improve Focus and Productivity" bgImage="/tip4.png" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px'></GradientCard>
-         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  margin="0px 0px 55px 0px">
+         <GradientCard txt="5 Ways Freelancers can Improve Focus and Productivity" bgImage="/tip4.png" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px' padding="0px 0px 15px 25px"></GradientCard>
+         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  padding="30px 15px 110px 15px">
             <Text padding="10px 20px" txt='One of the best aspects of a full-time freelance lifestyle can also be one of the most challenging: the ability to set your own schedule.'></Text>
             <Text padding="10px 20px" txt='Without a boss in the office to check up that you’re doing your work, it’s up to freelancers to motivate themselves to meet their deadlines and be productive. You can use these tips to increase your focus and be a more productive freelancer.'></Text>
             <Text padding="10px 20px" txt='1. Use a calendar' size="20px" weight="bold"></Text>
@@ -190,8 +190,8 @@ export function Contest({
         <FlexBox height="700px" alignItems="flex-start" position="absolute" top="0px">
        <FlexBox width="100vw" dir="column">
          <ClosingIcon fontSize='large' onClick={onClick}></ClosingIcon>
-         <GradientCard txt="Redesign our 'Big Info Poster' - $500" bgImage="/bigInfo.jpg" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px'></GradientCard>
-         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  margin="0px 0px 55px 0px">
+         <GradientCard txt="Redesign our 'Big Info Poster' - $500" bgImage="/bigInfo.jpg" width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px' padding="0px 0px 15px 25px"></GradientCard>
+         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  padding="30px 15px 110px 15px">
             <Text padding="10px 20px" txt="We are looking for a talented designer to recreate BCIT's largest program expo and information session. It's your chance to make an exciting eye-catching poster to attract new potential BCIT students"></Text>
             <Text padding="10px 20px" txt='Only one winner will receive $500 for their amazing poster'></Text>
             <ListItem>Include the BCIT logo.</ListItem>

@@ -12,13 +12,9 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 export default function NavBar({ route }) {
   const pages = [
-    "/homepage",
-    "/categoriespage",
-    "/createPost",
-    "/chatpage",
-    "/accountpage",
-  ];
-  const index = pages.findIndex((page) => page == route);
+    "/homepage", "/categoriespage", "/createPost", "/chatpage", "/accountpage"
+  ]
+  const index = pages.findIndex(page => route.startsWith(page))
   const r = useRouter();
   const HandleNavBarIcons = (name, num) => {
     r.push(name);

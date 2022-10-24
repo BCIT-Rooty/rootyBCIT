@@ -16,7 +16,7 @@ model User {
   email      String        @unique
   aboutMe    String        @db.Text
   role       Role          @default(USER)
-  // posts      Post[]
+  posts      Post[]
   // photo      Photo?
   program    Program?
   Skills     SkillOnUser[]
@@ -28,21 +28,23 @@ model User {
 // add stuff like photos to this
 // finish up adding all the details to this
 model Post {
-  postId            Int              @id @default(autoincrement())
-  createdAt         DateTime         @default(now())
-  updatedAt         DateTime         @updatedAt
-  title             String           @db.VarChar(255)
-  // author     User     @relation(fields: [authorId], references: [userId])
-  // authorId   Int
-  category          Category         @relation(fields: [categoryId], references: [categoryId])
-  categoryId        Int              @unique
-  keywords          PostOnKeywords[]
-  barterInformation String           @db.Text
-  description       String           @db.Text
-  price             Int
-  negotiable        Boolean
-  count             Int
-  Photos            Photo[]
+  postId             Int              @id @default(autoincrement())
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  title              String           @db.VarChar(255)
+  description        String           @default("")
+  barterInformation  String           @default("")
+  isNegotiableActive Boolean          @default(false)
+  author             User             @relation(fields: [authorId], references: [userId])
+  authorId           Int
+  category           Category         @relation(fields: [categoryId], references: [categoryId])
+  categoryId         Int
+  price              Int              @default(0)
+  rating             Int              @default(0)
+  count              Int              @default(0)
+  image              String           @default("")
+  Photos             Photo[]
+  Keywords           PostOnKeywords[]
 }
 
 // Relationship with the User works now
@@ -76,8 +78,8 @@ model Photo {
   userPhotoUrl String @db.Text
   // author       User?  @relation(fields: [userId], references: [userId])
   // userId       Int?   @unique
-  post         Post?   @relation(fields: [postId], references: [postId])
-  postId       Int?    @unique
+  post         Post?  @relation(fields: [postId], references: [postId])
+  postId       Int?   @unique
 }
 
 // MTM for posts and photos that was wrong but it was good code so I just kept it
@@ -92,6 +94,7 @@ model Photo {
 model Category {
   categoryId   Int    @id @default(autoincrement())
   categoryName String @unique
+  image        String @default("https://imgur.com/MH9quRL")
   posts        Post[]
 }
 
