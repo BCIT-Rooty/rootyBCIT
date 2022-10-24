@@ -24,12 +24,11 @@ export default function Text({
     padding="0px",
     bgColor="transparent",
     textDecor="none",
-    width="fit-content",
-    height="fit-content"
+    onChangingTheText = () => {}
 }){
 
     return (
-    <TextContain width={width} height={height} fontSize={size} fontWeight={weight} textAlign={align} textColor={color} padding={padding} bgColor={bgColor} textDecor={textDecor}>
+    <TextContain onChange={(e) => onChangingTheText(e.target.innerText)} width={width} height={height} fontSize={size} fontWeight={weight} textAlign={align} textColor={color} padding={padding} bgColor={bgColor} textDecor={textDecor}>
         {txt}
     </TextContain>
     )

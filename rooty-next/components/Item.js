@@ -5,7 +5,7 @@ import Text from "./text";
 import { Icon } from "semantic-ui-react";
 import { Heart } from "./icons/icons";
 
-export default function Item({ id, name, rating, compensation, image, onClick=()=>{} }) {
+export default function Item({ id, name, price, rating, compensation, image, onClick=()=>{} }) {
 
 
   return (
@@ -17,13 +17,14 @@ export default function Item({ id, name, rating, compensation, image, onClick=()
               <Heart></Heart>
             </FlexBox>
             <FlexBox alignItems="left" justifyContent="space-between" width="100%">
-              <Text txt={rating} size="15px" weight="regular"></Text>
+              <Text txt={"rating: " + rating} size="15px" weight="regular"></Text>
               {/* <FlexBox alignItems="flex-end">
                   <div class="ui disabled rating" role="radiogroup" tabindex="0"><i tabindex="-1" aria-checked="false" aria-posinset="1" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="2" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="true" aria-posinset="3" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="4" aria-setsize="5" class="icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="5" aria-setsize="5" class="icon" role="radio"></i></div>
               </FlexBox> */}  
               {/* --- rating stars in case we want them */}
               <FlexBox alignItems="baseline" justifyContent="space-around" width="40%">
-                  <Text txt={compensation} size="15px" weight="bold"></Text>
+                  {/* <Text txt={compensation} size="15px" weight="bold"></Text> */}
+                  <Text txt={"$" + price} size="15px" weight="bold"></Text>
                   <Text txt="or "></Text>
                   <Icon name="exchange"></Icon>
               </FlexBox>

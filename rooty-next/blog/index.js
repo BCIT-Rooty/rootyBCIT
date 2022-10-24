@@ -11,7 +11,8 @@ import DownloadPopUp from "../components/downloadPopUp";
 const ClosingIcon = styled(CloseIcon)`
 position: absolute;
 right: 15px;
-top: 15px
+top: 15px;
+cursor: pointer
 `
 
 
