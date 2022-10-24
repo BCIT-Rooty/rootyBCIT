@@ -133,6 +133,9 @@ CREATE UNIQUE INDEX "Photo_postId_key" ON "Photo"("postId");
 CREATE UNIQUE INDEX "Category_categoryName_key" ON "Category"("categoryName");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Keywords_keyword_key" ON "Keywords"("keyword");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Message_userId_key" ON "Message"("userId");
 
 -- CreateIndex

@@ -100,7 +100,7 @@ model Category {
 
 model Keywords {
   keywordId Int              @id @default(autoincrement())
-  keyword   String
+  keyword   String           @unique
   posts     PostOnKeywords[]
 }
 

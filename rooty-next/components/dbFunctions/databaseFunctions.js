@@ -17,15 +17,11 @@ export async function createPost({
     },
   });
 
-  console.log(category);
-
   const author = await prisma.user.findUnique({
     where: {
       userId: 1,
     },
   });
-
-  console.log(category);
 
   const post = await prisma.post.create({
     data: {
@@ -46,6 +42,22 @@ export async function createPost({
       postId: post.postId,
     },
   });
+  keywords.map(async (m) => {
+    const keyword = await prisma.keywords.create({
+      data: {
+        keyword: m
+      },
+  })
+    const PostOnKeywords = await prisma.PostOnKeywords.create({
+      data: {
+        postId: post.postId,
+        keywordId: keyword.keywordId
+      },
+    });
+    console.log(keyword, PostOnKeywords)
+  })
+
+
 }
 
 export async function createPhoto(photoUrl) {
@@ -54,5 +66,4 @@ export async function createPhoto(photoUrl) {
       userPhotoUrl: photoUrl,
     },
   });
-  console.log(photo);
 }
