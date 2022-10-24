@@ -17,6 +17,14 @@ export default function Button({
     onClick=()=>{}
 }){
 
+    const ButtonClick = styled(FlexBox)`
+        color: ${props=>props.color};
+        text-align: ${props=>props.textAlign};
+        font-weight: ${props=>props.fontWeight};
+        border: ${props=>props.border};
+        font-size: ${props=>props.fzsize}
+    `
+
   return (
     <ButtonClick
       onClick={(e) => onClick(e.target.innerText)}
