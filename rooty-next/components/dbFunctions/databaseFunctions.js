@@ -19,6 +19,14 @@ export async function createPost({
 
   console.log(category);
 
+  const author = await prisma.user.findUnique({
+    where: {
+      userId: 1,
+    },
+  });
+
+  console.log(category);
+
   const post = await prisma.post.create({
     data: {
       title: title,
@@ -26,8 +34,9 @@ export async function createPost({
       // keywords: figure this out too
       description: description,
       barterInformation: isBarter,
+      authorId: author.userId,
       price: parseInt(price),
-      negotiable: isNegotiableActive,
+      isNegotiableActive: isNegotiableActive,
       count: count,
     },
   });

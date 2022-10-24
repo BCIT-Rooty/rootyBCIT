@@ -21,8 +21,15 @@ CREATE TABLE "Post" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "title" VARCHAR(255) NOT NULL,
+    "description" TEXT NOT NULL DEFAULT '',
+    "barterInformation" TEXT NOT NULL DEFAULT '',
+    "isNegotiableActive" BOOLEAN NOT NULL DEFAULT false,
     "authorId" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
+    "price" INTEGER NOT NULL DEFAULT 0,
+    "rating" INTEGER NOT NULL DEFAULT 0,
+    "count" INTEGER NOT NULL DEFAULT 0,
+    "image" TEXT NOT NULL DEFAULT '',
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("postId")
 );
@@ -58,8 +65,7 @@ CREATE TABLE "SkillOnUser" (
 CREATE TABLE "Photo" (
     "photoId" SERIAL NOT NULL,
     "userPhotoUrl" TEXT NOT NULL,
-    "userId" INTEGER,
-    "postId" INTEGER NOT NULL,
+    "postId" INTEGER,
 
     CONSTRAINT "Photo_pkey" PRIMARY KEY ("photoId")
 );
@@ -68,8 +74,26 @@ CREATE TABLE "Photo" (
 CREATE TABLE "Category" (
     "categoryId" SERIAL NOT NULL,
     "categoryName" TEXT NOT NULL,
+    "image" TEXT NOT NULL DEFAULT 'https://imgur.com/MH9quRL',
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("categoryId")
+);
+
+-- CreateTable
+CREATE TABLE "Keywords" (
+    "keywordId" SERIAL NOT NULL,
+    "keyword" TEXT NOT NULL,
+
+    CONSTRAINT "Keywords_pkey" PRIMARY KEY ("keywordId")
+);
+
+-- CreateTable
+CREATE TABLE "PostOnKeywords" (
+    "postOnKeywordId" SERIAL NOT NULL,
+    "postId" INTEGER NOT NULL,
+    "keywordId" INTEGER NOT NULL,
+
+    CONSTRAINT "PostOnKeywords_pkey" PRIMARY KEY ("postOnKeywordId")
 );
 
 -- CreateTable
@@ -97,19 +121,16 @@ CREATE TABLE "Message" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Post_categoryId_key" ON "Post"("categoryId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Program_authorId_key" ON "Program"("authorId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Skill_skillName_key" ON "Skill"("skillName");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Photo_userId_key" ON "Photo"("userId");
+CREATE UNIQUE INDEX "Photo_postId_key" ON "Photo"("postId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Photo_postId_key" ON "Photo"("postId");
+CREATE UNIQUE INDEX "Category_categoryName_key" ON "Category"("categoryName");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Message_userId_key" ON "Message"("userId");
@@ -133,10 +154,13 @@ ALTER TABLE "SkillOnUser" ADD CONSTRAINT "SkillOnUser_sKillId_fkey" FOREIGN KEY 
 ALTER TABLE "SkillOnUser" ADD CONSTRAINT "SkillOnUser_userid_fkey" FOREIGN KEY ("userid") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Photo" ADD CONSTRAINT "Photo_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Photo" ADD CONSTRAINT "Photo_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("postId") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Photo" ADD CONSTRAINT "Photo_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("postId") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PostOnKeywords" ADD CONSTRAINT "PostOnKeywords_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("postId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PostOnKeywords" ADD CONSTRAINT "PostOnKeywords_keywordId_fkey" FOREIGN KEY ("keywordId") REFERENCES "Keywords"("keywordId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ChatRoom" ADD CONSTRAINT "ChatRoom_userOneId_fkey" FOREIGN KEY ("userOneId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
