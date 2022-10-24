@@ -21,7 +21,7 @@ export default function OneCategory({ parsedItems }) {
                             placeholder='Search...'
                             onResultSelect={(e, data) =>
                             dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox> */}
-                        <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
+                        <CardWithSearch bgImage="/3081629.jpg" txt={parsedItems.map(item => item.category)}></CardWithSearch>
                     </FlexBox>
                 <div>
                     {
@@ -49,6 +49,9 @@ export async function getServerSideProps(context) { // we need to use getServerS
         where: {
             categoryId: +context.params.catId
         },
+        include: {
+            category: true
+        }
     });
     let parsedItems = JSON.parse(JSON.stringify(categoryItems));
     console.log('categoryItemss', categoryItems)

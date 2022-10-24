@@ -1,8 +1,9 @@
-import { users, getItemsForUser } from '../../server/database';
+// import { users, getItemsForUser } from '../../server/database';
+import { prisma } from '../../server/db/client';
 
-export default function UserProfile() {
+export default function UserProfile({parsedItems}) {
 
-    let userName = users.map(user => user.firstName + ' ' + user.lastName);
+    let userName = parsedItems.map(user => user.firstName + ' ' + user.lastName);
     let userId = 1
 
     
@@ -35,4 +36,16 @@ export default function UserProfile() {
             </div>
         </div>
     )
-}
+    }
+
+    // export async function getServerSideProps(context) {
+    //     const userItems = await prisma.post.findMany({
+    //         where: {
+    //             // authorId: +context.params.userId
+    //         },
+    //     })
+    //     let parsedItems = JSON.parse(JSON.stringify(userItems))
+    //     return {
+    //         props: { parsedItems }
+    //     }
+    // }

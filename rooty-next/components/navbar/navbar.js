@@ -58,7 +58,7 @@ export default function NavBar({ route }) {
         <Tab icon={<ChatBubbleOutlineIcon fontSize="large" />}
           onClick={() => HandleNavBarIcons("/chatpage", 4)} />
         <Tab icon={<PersonIcon fontSize="large" />}
-          onClick={() => HandleNavBarIcons("/accountpage", 5)} />
+          onClick={() => HandleNavBarIcons("/userProfile", 5)} />
       </Navigation>
     </Boxy>
   )
