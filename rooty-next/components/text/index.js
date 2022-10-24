@@ -24,6 +24,8 @@ export default function Text({
     padding="0px",
     bgColor="transparent",
     textDecor="none",
+    width,
+    height,
     onChangingTheText = () => {}
 }){
 
