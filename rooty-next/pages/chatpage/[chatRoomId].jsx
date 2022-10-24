@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-import SubmitButton from "../../components/buttons/SubmitButton";
-import TextInput from "../../components/inputs/TextInput";
+import SubmitButton from "../../components/sohrabsButtons/SubmitButton";
+import TextInput from "../../components/sohrabsInputs/TextInput";
 import { fakeDbMessage } from "../../server/database";
 import * as db from "../../server/database";
 
