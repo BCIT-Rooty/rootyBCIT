@@ -5,7 +5,9 @@ import Button from '../../components/button'
 import { useState } from 'react'
 import { Article1, Article2, Article3, Article4, Contest } from '../../blog/articles'
 import Article from '../../blog'
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion";
+import Item from '../../components/Item';
+import ItemDescription from '../../components/itemDescript'
 
 
 
@@ -44,6 +46,7 @@ export default function Home(){
       <GradientCard txt="Redesign our 'Big Info Poster' - $500" bgImage="/bigInfo.jpg" width='340px' height='130px' margin="0px" onClick={()=> setShowModal("contest")}></GradientCard>
     </FlexBox>
 
+
     <AnimatePresence exitBeforeEnter>
     {showModal === "firstArticle" && <FlexBox position="absolute"><motion.div initial={{y: 900}} animate={{y: 0, transition:{duration: 0.7, delay:0}}} exit={{y:900}}><Article article={Article1()} onClick={()=>setShowModal("default")} txt="How to Write the Perfect Freelancing Bio" bgImage="/tip1.png"/></motion.div></FlexBox>}
     {showModal === "secondArticle" && <FlexBox position="absolute"><motion.div initial={{y: 900}} animate={{y: 0, transition:{duration: 0.7, delay:0}}} exit={{y:900}}><Article article={Article2()} onClick={()=>setShowModal("default")} txt="6 Habits of High Successful Freelancers" bgImage="/tip2.jpg"/></motion.div></FlexBox>}
@@ -53,6 +56,7 @@ export default function Home(){
     </AnimatePresence>
 
   </Wrapper>
+  
   
 
   )

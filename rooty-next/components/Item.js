@@ -5,33 +5,45 @@ import Text from "./text";
 import { Icon } from "semantic-ui-react";
 import { Heart } from "./icons/icons";
 
-export default function Item({ id, name, price, rating, compensation, image, onClick=()=>{} }) {
+export default function Item({ 
+  id,
+  name, 
+  price, 
+  rating, 
+  compensation, 
+  image, 
+
+  dir="row",
+  width="338px",
+  height="154px",
+  nameTxtSize="16px",
+  heightTxtBox="154px",
+  widthTxtBox="228px",
+  padding="12px",
+  imgBorderRadius="16px 0px 0px 16px",
+  onClick=()=>{} }) {
 
 
-  return (
-        <FlexBox onClick={onClick} key={id} width="338px" height="154px" bgColor="#F7F7FC" borderRadius="8px" margin="20px" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
-          <ImgPlaceholder bgImage={image} width='138px'></ImgPlaceholder>
-          <FlexBox dir="column" padding="12px" height="154px" width="228px" alignItems="start" justifyContent="space-between">
-            <FlexBox alignItems="baseline">
-              <Text txt={name} size="16px" weight="regular" align="left"></Text>
-              <Heart></Heart>
-            </FlexBox>
-            <FlexBox alignItems="left" justifyContent="space-between" width="100%">
-              <Text txt={"rating: " + rating} size="15px" weight="regular"></Text>
-              {/* <FlexBox alignItems="flex-end">
-                  <div class="ui disabled rating" role="radiogroup" tabindex="0"><i tabindex="-1" aria-checked="false" aria-posinset="1" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="2" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="true" aria-posinset="3" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="4" aria-setsize="5" class="icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="5" aria-setsize="5" class="icon" role="radio"></i></div>
-              </FlexBox> */}  
-              {/* --- rating stars in case we want them */}
-              <FlexBox alignItems="baseline" justifyContent="space-around" width="40%">
-                  {/* <Text txt={compensation} size="15px" weight="bold"></Text> */}
-                  <Text txt={"$" + price} size="15px" weight="bold"></Text>
-                  <Text txt="or "></Text>
-                  <Icon name="exchange"></Icon>
-              </FlexBox>
-            </FlexBox>
-            
-          </FlexBox>
-        </FlexBox>
+ return (
+       <FlexBox dir={dir} onClick={onClick} key={id} width={width} height={height} bgColor="#F7F7FC" borderRadius="16px" margin="20px" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
+         <ImgPlaceholder bgImage={image} width='138px' borderRadius={imgBorderRadius}></ImgPlaceholder>
+         <FlexBox dir="column" height={heightTxtBox} width={widthTxtBox} padding={padding} alignItems="start" justifyContent="space-between">
+           <FlexBox alignItems="baseline" justifyContent="space-between" width="100%">
+             <Text txt={name} size={nameTxtSize} weight="regular" align="left"></Text>
+             <Heart></Heart>
+           </FlexBox>
+           <FlexBox alignItems="left" justifyContent="space-between" width="100%">
+             <Text txt={rating + "/5"} size="15px" weight="regular"></Text>
+             <FlexBox alignItems="baseline" justifyContent="space-around" width="40%">
+                 {/* <Text txt={compensation} size="15px" weight="bold"></Text> */}
+                 <Text txt={"$" + price} size="15px" weight="bold"></Text>
+                 <Text txt="or "></Text>
+                 <Icon name="exchange"></Icon>
+             </FlexBox>
+           </FlexBox>
+           
+         </FlexBox>
+       </FlexBox>
   );
 };
 
