@@ -7,7 +7,10 @@ export default {
   component: Article,
   title: 'Article',
   argTypes: {
-    color: { control: 'color' }
+    color: { control: 'color' },
+    contest: {control: "text"},
+    bgImage: {control: "text"},
+    
   },
 };
 

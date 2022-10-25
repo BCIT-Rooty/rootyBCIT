@@ -16,7 +16,6 @@ export default function IconText({
     return(
         <FlexBox padding={paddingBox} onClick={onDownload}>
             <FolderZipIcon fontSize="medium"></FolderZipIcon>
-            {/* <{icon} fontSize="medium"></{icon}> */}
             <Text padding={paddingText} txt={txt} size={size} weight={weight} textDecor={textDecor} color={color}></Text>
         </FlexBox>
     )
