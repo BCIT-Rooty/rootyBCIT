@@ -18,7 +18,7 @@ export default function UserProfile({ parsedItems }) {
                 <span>
                     <div>Account<br></br>
                         <a>My Profile</a><br></br>
-                        <a href={`userPosts/${parsedItems.userId}`}>My Posts</a><br></br>
+                        <a href={`/userPosts/${parsedItems.userId}`}>My Posts</a><br></br>
                         <a>Favourites list</a><br></br>
                         <a>Recently viewed (?)</a><br></br>
                         <a>Notifications</a><br></br>
@@ -39,15 +39,15 @@ export default function UserProfile({ parsedItems }) {
     )
 }
 
-    export async function getServerSideProps(context) {
-        const userItems = await prisma.user.findUnique({
-            where: {
-                userId: +context.params.userId
-            },
-        })
-        let parsedItems = JSON.parse(JSON.stringify(userItems))
-        console.log('HERE CUNT', parsedItems)
-        return {
-            props: { parsedItems }
-        }
+export async function getServerSideProps(context) {
+    const userItems = await prisma.user.findUnique({
+        where: {
+            userId: +context.params.userId
+        },
+    })
+    let parsedItems = JSON.parse(JSON.stringify(userItems))
+    console.log('HERE CUNT', parsedItems)
+    return {
+        props: { parsedItems }
     }
+}
