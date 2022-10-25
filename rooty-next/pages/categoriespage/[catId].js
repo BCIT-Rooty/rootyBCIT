@@ -11,7 +11,7 @@ import { prisma } from '../../server/db/client';
 
 export default function OneCategory({ parsedItems }) {
     const r = useRouter();
-
+    let categoryNames = parsedItems.map(item => item.categoryName);
     return (
             <Wrapper>
                 <FlexBox dir="column" width="100%">
@@ -48,8 +48,15 @@ export async function getServerSideProps(context) { // we need to use getServerS
     const categoryItems = await prisma.post.findMany({
         where: {
             categoryId: +context.params.catId
-        },
+        }
     });
+
+    const categoryName = await prisma.category.findUnique({
+        where: {
+            id: +context.params.catId
+        }
+    });
+    
     let parsedItems = JSON.parse(JSON.stringify(categoryItems));
     console.log('categoryItemss', categoryItems)
     return {
