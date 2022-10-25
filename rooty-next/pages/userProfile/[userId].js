@@ -1,50 +1,53 @@
-import Item from '../../components/Item'
-import { getItemsForUser } from '../../server/database.js'
+// import { users, getItemsForUser } from '../../server/database';
 import { prisma } from '../../server/db/client';
 
+export default function UserProfile({ parsedItems }) {
+
+    // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
+    // console.log('THIS IS THE USERNAME', userName)
+    let userId = 1
 
 
-export default function userPosts({ parsedItems }) {
 
     return (
         <div>
-            <h1>My Posts</h1>
-            <br></br>
-            <br></br>
+            <h1>{parsedItems.name + ' ' + parsedItems.lastname}</h1>
             <div>
-                {
-                    parsedItems.map((item) => {
-                        return (
-                            <div key={item.postId}>
-         
-                            <div key={item.id}>
-                                <Item key={item.id} name={item.title} price={item.price} rating={item.rating} description={item.description} />
-                                <br></br>
-                                <br></br>
-                            </div>
-                        </div>
-                        )
-                    })
-                }
+                <br></br>
+                <br></br>
+                <span>
+                    <div>Account<br></br>
+                        <a>My Profile</a><br></br>
+                        <a href={`userPosts/${parsedItems.userId}`}>My Posts</a><br></br>
+                        <a>Favourites list</a><br></br>
+                        <a>Recently viewed (?)</a><br></br>
+                        <a>Notifications</a><br></br>
+                        <a></a>
+                    </div>
+                </span>
+                <br></br>
+                <span>
+                    <div>Account Settings<br></br>
+                        <a>Accessability</a><br></br>
+                        <a>Security</a><br></br>
+                        <a>Recently viewed (?)</a><br></br>
+                        <a></a>
+                    </div>
+                </span>
             </div>
         </div>
     )
 }
 
-
-export async function getServerSideProps(context) {                                                                                     // we need to use getServerSideProps because we need to fetch data from the database, and we can't do that on the client side, only on the server side, so we need to use getServerSideProps, which is a next.js function that runs on the server side. (IS THIS ALL TRUE?!?!?!)
-    const userItems = await prisma.post.findMany({
-        where: {
-            authorId: +context.params.userId
-        },
-        include: {
-            author: true
+    export async function getServerSideProps(context) {
+        const userItems = await prisma.user.findUnique({
+            where: {
+                userId: +context.params.userId
+            },
+        })
+        let parsedItems = JSON.parse(JSON.stringify(userItems))
+        console.log('HERE CUNT', parsedItems)
+        return {
+            props: { parsedItems }
         }
-    })
-    let parsedItems = JSON.parse(JSON.stringify(userItems))
-    console.log("LOOK HERE",userItems)
-
-    return {
-        props: { parsedItems }
     }
-}

@@ -9,6 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import Tab from '@mui/material/Tab';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import { prisma } from '@prisma/client';
 // import Button from '@mui/material/Button';
 // import Link from 'next/link'
 // import { NextLinkComposed } from '../src/Link';
@@ -58,12 +59,17 @@ export default function NavBar({ route }) {
         <Tab icon={<ChatBubbleOutlineIcon fontSize="large" />}
           onClick={() => HandleNavBarIcons("/chatpage", 4)} />
         <Tab icon={<PersonIcon fontSize="large" />}
-          onClick={() => HandleNavBarIcons("/userProfile", 5)} />
+          onClick={() => HandleNavBarIcons("/userProfile/1", 5)} />
       </Navigation>
     </Boxy>
   )
 }
 
+
+// export async function getServerSideProps(context){
+//   let userId = await prisma.
+
+// }
 
 //   const Container = styled.div`
 //     width: 100vw;
