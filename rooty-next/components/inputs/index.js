@@ -9,7 +9,7 @@ export const InputRectangle = styled.input`
   height: ${props => props.height};
   margin: ${props => props.margin};
   padding: ${props => props.padding};
-  cursor = ${props => props.cursor}
+  cursor = ${props => props.cursor};
   font-family: 'Plus Jakarta Sans', sans-serif;
 `;
 

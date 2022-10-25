@@ -1,4 +1,3 @@
-import { categoryList } from "../../server/database";
 import CategoryCard from "../../components/categoryCard";
 import { useRouter } from 'next/router';
 import { FlexBox, Wrapper } from "../../styles/globals";
@@ -41,7 +40,8 @@ export default function categories() {
           key={category.categoryId} name={category.categoryName} image={category.image}>
         </CategoryCard>
 
-      )))
+      ))
+      )
   };
 
 
