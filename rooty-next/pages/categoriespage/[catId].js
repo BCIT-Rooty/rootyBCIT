@@ -9,19 +9,16 @@ import { Search } from 'semantic-ui-react';
 import CardWithSearch from '../../components/gradientCard/cardWithSearch';
 import { prisma } from '../../server/db/client';
 
-export default function OneCategory({ parsedItems }) {
+export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const r = useRouter();
+    const categoryName = parsedCategoryName.map((category) => category.categoryName)
+
 
     return (
             <Wrapper>
                 <FlexBox dir="column" width="100%">
                     <FlexBox width="100%" dir="column">
-                        {/* <GradientCard bgImage="/3081629.jpg" width="100%" height="328px" borderRadius="0px" txt="Broadcast and Media" size="24px" margin="0px"></GradientCard>
-                        <FlexBox margin="12px"><Search size="large"
-                            placeholder='Search...'
-                            onResultSelect={(e, data) =>
-                            dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox> */}
-                        <CardWithSearch bgImage="/3081629.jpg" txt={parsedItems.map(item => item.category)}></CardWithSearch>
+                        <CardWithSearch bgImage="/3081629.jpg" txt={categoryName}></CardWithSearch>
                     </FlexBox>
                 <div>
                     {
@@ -53,10 +50,17 @@ export async function getServerSideProps(context) { // we need to use getServerS
             category: true
         }
     });
+    const categoryName = await prisma.category.findMany({
+        where: {
+            categoryId: +context.params.catId
+        }
+    });
     let parsedItems = JSON.parse(JSON.stringify(categoryItems));
-    console.log('categoryItemss', categoryItems)
+    let parsedCategoryName = JSON.parse(JSON.stringify(categoryName));
+    // console.log('categoryItemss', categoryItems)
+    // console.log('parsdedName', categoryName)
     return {
-        props: { parsedItems }
+        props: { parsedItems, parsedCategoryName }
     }
 }
 
