@@ -94,7 +94,7 @@ model Photo {
 model Category {
   categoryId   Int    @id @default(autoincrement())
   categoryName String @unique
-  image        String @default("https://imgur.com/MH9quRL")
+  image        String @default("")
   posts        Post[]
 }
 
