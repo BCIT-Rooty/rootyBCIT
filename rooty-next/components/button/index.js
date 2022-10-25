@@ -14,7 +14,6 @@ const ButtonClick = styled(FlexBox)`
   font-weight: ${(props) => props.fontWeight};
   border: ${(props) => props.border};
   font-size: ${(props) => props.fzsize};
-  background-color: ${(props)=>props.bgColor}
 `;
 
 export default function Button({
@@ -27,7 +26,7 @@ export default function Button({
   padding = "15px",
   borderRadius = "16px",
   textAlign = "center",
-  margin = "5px 5px 8px 0px",
+  margin = "5px 5px 8px 5px",
   whatIsTheStateOfTheAppForCategory,
   fontWeight = "600",
   value = "nothing",
