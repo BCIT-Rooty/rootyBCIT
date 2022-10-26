@@ -5,18 +5,25 @@ import Button from '../../components/button'
 import { useState } from 'react'
 import { Article1, Article2, Article3, Article4, Contest } from '../../blog/articles'
 import Article from '../../blog'
-import { AnimatePresence, motion } from "framer-motion"
-
+import { AnimatePresence, motion } from "framer-motion";
+import Item from '../../components/Item';
+import ItemDescription from '../../components/itemDescript'
+import { useRouter } from "next/router";
+import ReviewBox from '../../components/reviews/reviewBox'
 
 
 export default function Home(){
 
   const [showModal, setShowModal] = useState("default")
+  const r = useRouter();
+  const HandleNavBarIcons = (name) => {
+    r.push(name);
+  };
 
   return( 
     
   
-  <Wrapper justifyContent="flex-start" alignItems="flex-start" dir="column">
+  <Wrapper justifyContent="flex-start" alignItems="flex-start" dir="column" height="fit-content">
     <Text txt="Welcome, Student" padding="30px 0px 0px 20px" size="24px" weight="bolder"></Text>
 
     <Text txt="Insights & Tips" padding="30px 0px 10px 20px" size="21px" weight="bolder"></Text>
@@ -31,18 +38,19 @@ export default function Home(){
     
     <Text txt="Popular Searches" padding="30px 0px 10px 20px" size="21px" weight="bolder"></Text>
     <FlexBox flexWrap="wrap" width="100vw">
-      <Button padding= "15px 0px 15px 0px" txt="Motion Graphics" ></Button>
-      <Button padding= "15px 0px 15px 0px" txt="Logo Designer" ></Button>
-      <Button padding= "15px 0px 15px 0px" txt="Web Developer" ></Button>
-      <Button padding= "15px 0px 15px 0px" txt="Social Content" ></Button>
-      <Button padding= "15px 0px 15px 0px" txt="English Tutor" ></Button>
-      <Button padding= "15px 0px 15px 0px" txt="Calculus Tutor" ></Button>
+      <Button padding="25px 1vw 25px 1vw" txt="Broadcast & Media" bgColor='#4F4DB0' onClick={() => HandleNavBarIcons("/categories/1")} width="43vw"></Button>
+      <Button padding="25px 1vw 25px 1vw" txt="Digital Arts & Design" bgColor='#4F4DB0' onClick={() => HandleNavBarIcons("/categories/2")} width="43vw"></Button>
+      <Button padding="25px 1vw 25px 1vw" txt="Business & Finance" bgColor='#4F4DB0' onClick={() => HandleNavBarIcons("/categories/3")} width="43vw"></Button>
+      <Button padding="25px 1vw 25px 1vw" txt="Marketing" bgColor='#4F4DB0' onClick={() => HandleNavBarIcons("/categories/4")} width="43vw"></Button>
+      <Button padding="25px 1vw 25px 1vw" txt="Tutoring" bgColor='#4F4DB0' onClick={() => HandleNavBarIcons("/categories/5")} width="43vw"></Button>
+      <Button padding="25px 1vw 25px 1vw" txt="Computing" bgColor='#4F4DB0' onClick={() => HandleNavBarIcons("/categories/6")} width="43vw"></Button>
     </FlexBox>
    
     <Text txt="Contest For The Week" padding="30px 0px 10px 20px" size="21px" weight="bolder"></Text>
     <FlexBox width="100vw">
       <GradientCard txt="Redesign our 'Big Info Poster' - $500" bgImage="/bigInfo.jpg" width='340px' height='130px' margin="0px" onClick={()=> setShowModal("contest")}></GradientCard>
     </FlexBox>
+
 
     <AnimatePresence exitBeforeEnter>
     {showModal === "firstArticle" && <FlexBox position="absolute"><motion.div initial={{y: 900}} animate={{y: 0, transition:{duration: 0.7, delay:0}}} exit={{y:900}}><Article article={Article1()} onClick={()=>setShowModal("default")} txt="How to Write the Perfect Freelancing Bio" bgImage="/tip1.png"/></motion.div></FlexBox>}
@@ -53,6 +61,7 @@ export default function Home(){
     </AnimatePresence>
 
   </Wrapper>
+  
   
 
   )

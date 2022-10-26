@@ -13,6 +13,7 @@ export const TextContain = styled.div`
     background-color: ${props=>props.bgColor};
     text-decoration: ${props=>props.textDecor};
     line-height: normal;
+    border-bottom: ${props=>props.borderBottom};
 `
 
 export default function Text({
@@ -22,15 +23,18 @@ export default function Text({
     align="left",
     color="black",
     padding="0px",
+    value,
     bgColor="transparent",
     textDecor="none",
     width,
     height,
-    onChangingTheText = () => {}
+    borderBottom,
+    onChangingTheText = () => {},
+    onClick=()=>{}
 }){
 
     return (
-    <TextContain onChange={(e) => onChangingTheText(e.target.innerText)} width={width} height={height} fontSize={size} fontWeight={weight} textAlign={align} textColor={color} padding={padding} bgColor={bgColor} textDecor={textDecor}>
+    <TextContain onChange={(e) => onChangingTheText(e.target.innerText)} onClick={onClick} width={width} height={height} fontSize={size} fontWeight={weight} textAlign={align} textColor={color} padding={padding} bgColor={bgColor} textDecor={textDecor} borderBottom={borderBottom}>
         {txt}
     </TextContain>
     )

@@ -13,14 +13,11 @@ export default function Home() {
     name: "I will mix your audio"
   }])
 
-  function handleCreateFromSubmit(titleInput, descriptionInput, barterInput, categoriesValue, keyWordsValue, onePhotoInput) {
-    console.log(titleInput, descriptionInput, barterInput, categoriesValue, keyWordsValue, onePhotoInput)
-  }
 
 
   return (
-    <div className="App">
-      {showPost ? <CreatePost onSubmitForm={handleCreateFromSubmit} /> : posts.map(m => <p>{m.name}</p>)}
-    </div>
+    <>
+      {showPost ? <CreatePost key={"createPostComponent"} /> : posts.map(m => <p key={m}>{m.name}</p>)}
+    </>
   )
 }

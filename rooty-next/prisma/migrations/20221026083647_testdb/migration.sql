@@ -22,14 +22,14 @@ CREATE TABLE "Post" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "title" VARCHAR(255) NOT NULL,
     "description" TEXT NOT NULL DEFAULT '',
-    "barterInformation" TEXT NOT NULL DEFAULT '',
-    "isNegotiableActive" BOOLEAN NOT NULL DEFAULT false,
+    "barterInformation" TEXT DEFAULT '',
+    "isNegotiableActive" BOOLEAN DEFAULT false,
     "authorId" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
-    "price" INTEGER NOT NULL DEFAULT 0,
-    "rating" INTEGER NOT NULL DEFAULT 0,
-    "count" INTEGER NOT NULL DEFAULT 0,
-    "image" TEXT NOT NULL DEFAULT '',
+    "price" INTEGER DEFAULT 0,
+    "rating" INTEGER DEFAULT 0,
+    "count" INTEGER DEFAULT 0,
+    "image" TEXT DEFAULT '',
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("postId")
 );
@@ -64,7 +64,7 @@ CREATE TABLE "SkillOnUser" (
 -- CreateTable
 CREATE TABLE "Photo" (
     "photoId" SERIAL NOT NULL,
-    "userPhotoUrl" TEXT NOT NULL,
+    "postPhotoUrl" TEXT NOT NULL,
     "postId" INTEGER,
 
     CONSTRAINT "Photo_pkey" PRIMARY KEY ("photoId")
@@ -127,10 +127,10 @@ CREATE UNIQUE INDEX "Program_authorId_key" ON "Program"("authorId");
 CREATE UNIQUE INDEX "Skill_skillName_key" ON "Skill"("skillName");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Photo_postId_key" ON "Photo"("postId");
+CREATE UNIQUE INDEX "Category_categoryName_key" ON "Category"("categoryName");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Category_categoryName_key" ON "Category"("categoryName");
+CREATE UNIQUE INDEX "Keywords_keyword_key" ON "Keywords"("keyword");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Message_userId_key" ON "Message"("userId");

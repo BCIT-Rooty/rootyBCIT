@@ -8,20 +8,18 @@ import GradientCard from '../../components/gradientCard';
 import { Search } from 'semantic-ui-react';
 import CardWithSearch from '../../components/gradientCard/cardWithSearch';
 import { prisma } from '../../server/db/client';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-export default function OneCategory({ parsedItems }) {
+export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const r = useRouter();
-    let categoryNames = parsedItems.map(item => item.categoryName);
+    const categoryName = parsedCategoryName.map((category) => category.categoryName);
+    const image = parsedCategoryName.map((category) => category.image)
+
     return (
-            <Wrapper>
+            <Wrapper alignItems="start">
                 <FlexBox dir="column" width="100%">
                     <FlexBox width="100%" dir="column">
-                        {/* <GradientCard bgImage="/3081629.jpg" width="100%" height="328px" borderRadius="0px" txt="Broadcast and Media" size="24px" margin="0px"></GradientCard>
-                        <FlexBox margin="12px"><Search size="large"
-                            placeholder='Search...'
-                            onResultSelect={(e, data) =>
-                            dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox> */}
-                        <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
+                        <CardWithSearch bgImage={image} txt={categoryName}></CardWithSearch>
                     </FlexBox>
                 <div>
                     {
@@ -33,7 +31,7 @@ export default function OneCategory({ parsedItems }) {
                                         () => r.push({
                                             pathname: `/posts/${item.postId}`,
                                          })}
-                                    name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.image} />
+                                    name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.Photos[0].postPhotoUrl} />
                             </div>
                         )
                         })
@@ -48,6 +46,15 @@ export async function getServerSideProps(context) { // we need to use getServerS
     const categoryItems = await prisma.post.findMany({
         where: {
             categoryId: +context.params.catId
+        },
+        include: {
+            category: true,
+            Photos: true
+        }
+    });
+    const categoryName = await prisma.category.findMany({
+        where: {
+            categoryId: +context.params.catId
         }
     });
 
@@ -58,9 +65,10 @@ export async function getServerSideProps(context) { // we need to use getServerS
     });
     
     let parsedItems = JSON.parse(JSON.stringify(categoryItems));
-    console.log('categoryItemss', categoryItems)
+    let parsedCategoryName = JSON.parse(JSON.stringify(categoryName));
+    // console.log('parsdedName', parsedItems[0].Photos)
     return {
-        props: { parsedItems }
+        props: { parsedItems, parsedCategoryName }
     }
 }
 

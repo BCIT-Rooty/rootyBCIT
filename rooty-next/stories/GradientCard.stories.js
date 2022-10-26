@@ -6,8 +6,19 @@ export default {
   component: GradientCard,
   title: 'GradientCard',
   argTypes: {
-    bgImage: { control: 'img' },
-    color: { control: 'color' }
+    bgImage: { control: 'text' },
+    color: { control: 'color' },
+    width: {control: "text"},
+    height: {control: "text"},
+    bgImage: {control: "text"},
+    margin: {control: "text"},
+    size: {control: "text"},
+    align: {control: "text"},
+    weight: {control: "text"},
+    padding: {control: "text"},
+    linearGradient: {control: "text"},
+    bgColor: {control: "color"},
+    borderRadius: {control: "text"},
   },
 };
 

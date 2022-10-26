@@ -11,6 +11,7 @@ import DownloadPopUp from "../../components/downloadPopUp";
 import Toaster from "../../components/toaster";
 import { motion, AnimatePresence } from "framer-motion";
 import Counter from "../../components/counter";
+import { useRouter } from "next/router";
 
 export default function CreatePost(props) {
   const [showDownload, setShowDownload] = useState("default");
@@ -20,6 +21,12 @@ export default function CreatePost(props) {
   const [isBarter, setIsBarter] = useState("");
   const [price, setPrice] = useState(0);
   const [keywords, setKeywords] = useState([]);
+  const [postTitleError, setPostTitleError] = useState(false);
+  const [noServiceError, setNoServiceError] = useState(false);
+  const [noKeywords, setNoKeywords] = useState(false);
+  const [noPhotoError, setNoPhotoError] = useState(false);
+  const [noCategory, setNoCategory] = useState(false);
+  const [noPriceError, setNoPriceError] = useState(false);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
   // const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
   //   useState(false);
@@ -39,7 +46,7 @@ export default function CreatePost(props) {
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [isNegotiableActive, setIsNegotiableActive] = useState(false);
-
+  const router = useRouter();
   const handleNegotiableButton = () => {
     setIsNegotiableActive((current) => !current);
   };
@@ -66,13 +73,8 @@ export default function CreatePost(props) {
     return theUrlToReturn;
   }
 
-  function removeSpaces(inputText) {
-    const str = inputText.replace(/\s/g, "");
-    return str;
-  }
-
   function handleKeywordsButtonClick() {
-    const keywordWithoutSpaces = removeSpaces(keywordButtonStateValue);
+    const keywordWithoutSpaces = keywordButtonStateValue.trim();
     if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
       if (errorThatKeywordAlreadyExists) {
         setErrorThatKeywordAlreadyExists(false);
@@ -98,7 +100,7 @@ export default function CreatePost(props) {
     setErrorThatKeywordAlreadyExists(false);
     setErrorStateForEmptyInputKeyWord(false);
 
-    setKeywords([...keywords, keywordButtonStateValue]);
+    setKeywords([...keywords, keywordWithoutSpaces]);
     setKeywordButtonStateValue("");
   }
 
@@ -109,9 +111,89 @@ export default function CreatePost(props) {
   const areThereKeywords = keywords.length !== 0;
 
   async function createPost() {
+
+    if(photoUrl == "") {
+      setNoPhotoError(true)
+    } else {
+      setNoPhotoError(false)
+    }
+
+    if (whatIsTheCategoryOfThisPost === "") {
+      setNoCategory(true);
+    } else {
+      setNoCategory(false);
+    }
+
+    if (keywords.length === 0) {
+      setNoKeywords(true);
+    } else {
+      setNoKeywords(false);
+    }
+
+    if (title === "" || title.trim() === "") {
+      setPostTitleError(true);
+    } else {
+      setPostTitleError(false);
+    }
+
+    if (description === "" || description.trim() === "") {
+      setNoServiceError(true);
+    } else {
+      setNoServiceError(false);
+    }
+
+    if (price === 0 || price === "") {
+      setNoPriceError(true);
+    } else {
+      setNoPriceError(false);
+    }
+
+
+    if(photoUrl == "") {
+      setNoPhotoError(true)
+      return
+    } else {
+      setNoPhotoError(false)
+    }
+
+
+    if (title === "" || title.trim() === "") {
+      setPostTitleError(true);
+      return;
+    } else {
+      setPostTitleError(false);
+    }
+
+    if (description === "" || description.trim() === "") {
+      setNoServiceError(true);
+      return;
+    } else {
+      setNoServiceError(false);
+    }
+
+    if (price === 0 || price === "") {
+      setNoPriceError(true);
+      return;
+    } else {
+      setNoPriceError(false);
+    }
+    if (whatIsTheCategoryOfThisPost === "") {
+      setNoCategory(true);
+      return;
+    } else {
+      setNoCategory(false);
+    }
+
+    if (keywords.length === 0) {
+      setNoKeywords(true);
+      return;
+    } else {
+      setNoKeywords(false);
+    }
+
     const axiosRequest = await axios
       .post("/api/createPost", {
-        photoUrl: "https://rootys3bucket.s3.us-west-1.amazonaws.com/1c39f1f325f295c511efdc1ae4b0bc14",
+        photoUrl,
         whatIsTheCategoryOfThisPost,
         keywords,
         title,
@@ -123,12 +205,21 @@ export default function CreatePost(props) {
       })
       .then((result) => {
         console.log(result);
+      })
+      .then(() => {
+        router.push("/categories");
       });
+    // setShowDownload("active");
   }
 
   return (
     <>
-      <Wrapper justifyContent="flex-start" alignItems="flex-start" dir="column">
+      <Wrapper
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        dir="column"
+        height="fit-content"
+      >
         <Text
           txt="Create your post"
           size="24px"
@@ -142,6 +233,11 @@ export default function CreatePost(props) {
           justifyContent="flex-start"
         >
           <Input type="file" onInsertPhotoInsideS3={uploadThePhotoToS3}></Input>
+          {noPhotoError ? (
+            <Toaster txt="You need one photo for your post"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -177,6 +273,11 @@ export default function CreatePost(props) {
                 onClick={setWhatIsTheCategoryOfThisPost}
               />
             ))}
+            {noCategory ? (
+              <Toaster txt="You need at least one category"></Toaster>
+            ) : (
+              <></>
+            )}
           </FlexBox>
         </FlexBox>
         <FlexBox
@@ -247,6 +348,11 @@ export default function CreatePost(props) {
           ) : (
             <></>
           )}
+          {noKeywords ? (
+            <Toaster txt="You need at least one Keyword"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -269,6 +375,11 @@ export default function CreatePost(props) {
             margin="0px 0px 0px 20px"
             onChangingTheText={setTitle}
           ></Input>
+          {postTitleError ? (
+            <Toaster txt="You need a post title!"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -291,6 +402,11 @@ export default function CreatePost(props) {
             margin="0px 0px 0px 20px"
             onChangingTheText={setDescription}
           ></TextInput>
+          {noServiceError ? (
+            <Toaster txt="You need a post description!"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -332,6 +448,7 @@ export default function CreatePost(props) {
               type="number"
               border="solid 1px #545454"
               margin="0px 0px 0px 20px"
+              value={price}
               placeholder="$"
               width="70px"
               onChangingTheText={setPrice}
@@ -351,6 +468,7 @@ export default function CreatePost(props) {
             onClick={handleNegotiableButton}
           ></Button>
         </FlexBox>
+        {noPriceError ? <Toaster txt="You need a price!"></Toaster> : <></>}
         <FlexBox
           topBorder="0.5px solid #545454"
           width="100vw"
@@ -369,7 +487,7 @@ export default function CreatePost(props) {
         <FlexBox
           topBorder="0.5px solid #545454"
           width="100vw"
-          padding="20px 20px 90px 0px"
+          padding="20px 20px 30px 0px"
         >
           <Button
             onClick={() => {
@@ -384,7 +502,6 @@ export default function CreatePost(props) {
                 count
               );
               createPost();
-              setShowDownload("active");
             }}
             txt="Publish"
             size="20px"
@@ -408,7 +525,7 @@ export default function CreatePost(props) {
                 exit={{ opacity: 0 }}
               >
                 <DownloadPopUp
-                  height="180vh"
+                  height="163vh"
                   onClose={() => setShowDownload("default")}
                   txt="Successfully Posted 😁"
                 ></DownloadPopUp>
