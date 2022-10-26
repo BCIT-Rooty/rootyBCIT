@@ -9,10 +9,10 @@ import { Search } from 'semantic-ui-react';
 import CardWithSearch from '../../components/gradientCard/cardWithSearch';
 import { prisma } from '../../server/db/client';
 
-export default function OneCategory({ parsedItems, parsedCategoryName, parsedImageName }) {
+export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const r = useRouter();
     const categoryName = parsedCategoryName.map((category) => category.categoryName);
-    const image = parsedImageName.map((category) => category.image)
+    const image = parsedCategoryName.map((category) => category.image)
 
 
     return (

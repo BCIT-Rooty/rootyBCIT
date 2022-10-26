@@ -34,7 +34,7 @@ async function main() {
       },
       {
         categoryName: "Computing",
-        image: "/programming",
+        image: "/programming.png",
       },
     ],
   });
