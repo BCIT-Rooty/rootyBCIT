@@ -113,6 +113,7 @@ export default function Input({
         <InputRectangle
           value={value}  
           onChange={(e) => {
+            console.log("this is it")
             onChangingTheText(e.target.value);
           }}
           type={type}

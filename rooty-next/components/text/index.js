@@ -22,6 +22,7 @@ export default function Text({
     align="left",
     color="black",
     padding="0px",
+    value,
     bgColor="transparent",
     textDecor="none",
     width,

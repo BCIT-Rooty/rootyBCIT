@@ -125,9 +125,7 @@ export default function CreatePost(props) {
     }
 
     if (price === 0 || price === "") {
-      setNoPriceError(true)
-    } else {
-      setNoPriceError(false)
+      setPrice("0") 
     }
 
     if (title === "" || title.trim() === "") {
@@ -144,11 +142,9 @@ export default function CreatePost(props) {
       setNoServiceError(false)
     }
     if (price === 0 || price === "") {
-      setNoPriceError(true)
-      return
-    } else {
-      setNoPriceError(false)
-    }
+      setPrice("0") 
+
+    } 
 
     const axiosRequest = await axios
       .post("/api/createPost", {
@@ -384,6 +380,7 @@ export default function CreatePost(props) {
               type="number"
               border="solid 1px #545454"
               margin="0px 0px 0px 20px"
+              value ={price}
               placeholder="$"
               width="70px"
               onChangingTheText={setPrice}
