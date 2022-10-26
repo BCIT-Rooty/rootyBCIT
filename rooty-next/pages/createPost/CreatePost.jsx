@@ -128,7 +128,7 @@ export default function CreatePost(props) {
 
   return (
     <>
-      <Wrapper justifyContent="flex-start" alignItems="flex-start" dir="column">
+      <Wrapper justifyContent="flex-start" alignItems="flex-start" dir="column" height="fit-content">
         <Text
           txt="Create your post"
           size="24px"
@@ -369,7 +369,7 @@ export default function CreatePost(props) {
         <FlexBox
           topBorder="0.5px solid #545454"
           width="100vw"
-          padding="20px 20px 90px 0px"
+          padding="20px 20px 30px 0px"
         >
           <Button
             onClick={() => {
@@ -408,7 +408,7 @@ export default function CreatePost(props) {
                 exit={{ opacity: 0 }}
               >
                 <DownloadPopUp
-                  height="180vh"
+                  height="163vh"
                   onClose={() => setShowDownload("default")}
                   txt="Successfully Posted 😁"
                 ></DownloadPopUp>

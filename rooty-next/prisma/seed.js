@@ -26,11 +26,11 @@ async function main() {
       },
       {
         categoryName: "Marketing",
-        image: "marketing.png",
+        image: "/marketing.png",
       },
       {
         categoryName: "Tutoring",
-        image: "tutoring.png",
+        image: "/tutoring.png",
       },
       {
         categoryName: "Computing",
@@ -43,7 +43,8 @@ async function main() {
     data: [
       {
         name: "Sohrab",
-        lastname: "radmehr",
+        lastname: "Radmehr",
+        program: "Digital Design and Development",
         password: "Password!",
         email: "sohrab@gmail.com",
         aboutMe: "I'm cool",
