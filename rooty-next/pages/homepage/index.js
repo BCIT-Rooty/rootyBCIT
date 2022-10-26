@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Item from '../../components/Item';
 import ItemDescription from '../../components/itemDescript'
 import { useRouter } from "next/router";
+import ReviewBox from '../../components/reviews/reviewBox'
 
 
 export default function Home(){

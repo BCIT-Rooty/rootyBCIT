@@ -28,6 +28,11 @@ export default function ReviewHorizontalScroll({
         </FlexBox>
 
         <FlexBox  dir="column" borderRadius="15px" width="251px" height="262px" weight="regular" bgImage="" bgColor="#E5E5FC" color="#101010" padding="10px" margin="7px" justifyContent="flex-start">
+            <Review name={reviewText[4].name} program={reviewText[4].program} image={bgImage5} fourth="icon" comment="" boxHeight="70px" borderColor="transparent"></Review>
+            <Text txt={reviewText[4].text} size="16px" align="left" weight="regular"></Text>
+        </FlexBox>
+
+        <FlexBox  dir="column" borderRadius="15px" width="251px" height="262px" weight="regular" bgImage="" bgColor="#E5E5FC" color="#101010" padding="10px" margin="7px" justifyContent="flex-start">
             <Review name={reviewText[2].name} program={reviewText[2].program} image={bgImage3} fifth="active icon" comment="" boxHeight="70px" borderColor="transparent"></Review>
             <Text txt={reviewText[2].text} size="16px" align="left" weight="regular"></Text>
         </FlexBox>
@@ -37,10 +42,6 @@ export default function ReviewHorizontalScroll({
             <Text txt={reviewText[3].text} size="16px" align="left" weight="regular"></Text>
         </FlexBox>
 
-        <FlexBox  dir="column" borderRadius="15px" width="251px" height="262px" weight="regular" bgImage="" bgColor="#E5E5FC" color="#101010" padding="10px" margin="7px" justifyContent="flex-start">
-            <Review name={reviewText[4].name} program={reviewText[4].program} image={bgImage5} fourth="icon" comment="" boxHeight="70px" borderColor="transparent"></Review>
-            <Text txt={reviewText[4].text} size="16px" align="left" weight="regular"></Text>
-        </FlexBox>
 
       </HorizontalScrollContainer>
     )
