@@ -10,7 +10,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import React from 'react';
 import { useRouter } from "next/router";
 
-export default function itemDescript({parsedItems}) {
+export default function ItemDescript({parsedItems}) {
 
 let userName = parsedItems[0].author.name + " " + parsedItems[0].author.lastname;
 let description = parsedItems[0].description;

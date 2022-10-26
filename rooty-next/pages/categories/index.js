@@ -13,7 +13,7 @@ import {prisma} from "../../server/db/client"
 
 
 
-export default function categories({jsonCategories}) {
+export default function Categories({jsonCategories}) {
   const r = useRouter();
 
   const [categories, setCategories] = useState([]);

@@ -13,9 +13,6 @@ export default function Home() {
     name: "I will mix your audio"
   }])
 
-  function handleCreateFromSubmit(titleInput, descriptionInput, barterInput, categoriesValue, keyWordsValue, onePhotoInput) {
-    console.log(titleInput, descriptionInput, barterInput, categoriesValue, keyWordsValue, onePhotoInput)
-  }
 
 
   return (
