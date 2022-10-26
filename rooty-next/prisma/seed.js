@@ -1,11 +1,3 @@
-// const broadcast = require("../public/broadcast");
-// const business = require("../public/business");
-// const digitalArts = require("../public/digitalarts");
-// const marketing = require("../public/marketing");
-// const programming = require("../public/programming");
-// const tutoring = require("../public/tutoring");
-
-// const { PrismaClient } = require( "@prisma/client";
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -14,27 +6,27 @@ async function main() {
     data: [
       {
         categoryName: "Broadcast & Media",
-        image: "https://rootys3bucket.s3.us-west-1.amazonaws.com/f8e63bfc678a569581a0defea8bb0957",
+        image: "/broadcast.png",
       },
       {
         categoryName: "Digital Arts & Design",
-        image: "https://rootys3bucket.s3.us-west-1.amazonaws.com/c247c79ef0a4de48038ebf42e346354c",
+        image: "/digitalarts.png",
       },
       {
         categoryName: "Business & Finance",
-        image: "https://rootys3bucket.s3.us-west-1.amazonaws.com/273d1fa7ad0df7f21f84a2ceaaae4c6f",
+        image: "/business.png",
       },
       {
         categoryName: "Marketing",
-        image: "https://rootys3bucket.s3.us-west-1.amazonaws.com/ccb7ffe9a5b88f3e40f58658634d9c97 ",
+        image: "/marketing.png",
       },
       {
         categoryName: "Tutoring",
-        image: "https://rootys3bucket.s3.us-west-1.amazonaws.com/e32e76a3b7d651bd529b6d3f8b418c9f",
+        image: "/tutoring.png",
       },
       {
         categoryName: "Computing",
-        image: "https://rootys3bucket.s3.us-west-1.amazonaws.com/f6293f3eb38925b06fc91bf084dd42c1",
+        image: "/programming.png",
       },
     ],
   });
@@ -43,13 +35,31 @@ async function main() {
     data: [
       {
         name: "Sohrab",
-        lastname: "radmehr",
+        lastname: "Radmehr",
         password: "Password!",
         email: "sohrab@gmail.com",
         aboutMe: "I'm cool",
       },
     ],
   });
+
+  const author1 = await prisma.user.findUnique({
+    where: {
+      userId: 1,
+    },
+  });
+
+  console.log(author)
+  const program = await prisma.program.createMany({
+    data: [
+      {
+        programName: "Full-Stack Web Development",
+        authorId: author1.userId
+      },
+    ],
+  });
+
+
   console.log({ categories, author });
 }
 main()

@@ -50,6 +50,14 @@ export default function Button({
   }
 
 
+    const ButtonClick = styled(FlexBox)`
+        color: ${props=>props.color};
+        text-align: ${props=>props.textAlign};
+        font-weight: ${props=>props.fontWeight};
+        border: ${props=>props.border};
+        font-size: ${props=>props.fzsize}
+    `
+
   return (
     <FlexBox>
       {type === "button" && (
