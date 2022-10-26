@@ -20,6 +20,9 @@ export default function CreatePost(props) {
   const [isBarter, setIsBarter] = useState("");
   const [price, setPrice] = useState(0);
   const [keywords, setKeywords] = useState([]);
+  const [postTitleError, setPostTitleError] = useState(false);
+  const [noServiceError, setNoServiceError] = useState(false);
+  const [noPriceError, setNoPriceError] = useState(false);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
   // const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
   //   useState(false);
@@ -109,6 +112,44 @@ export default function CreatePost(props) {
   const areThereKeywords = keywords.length !== 0;
 
   async function createPost() {
+    if (title === "" || title.trim() === "") {
+      setPostTitleError(true)
+    } else {
+      setPostTitleError(false)
+    }
+
+    if (description === "" || description.trim() === "") {
+      setNoServiceError(true)
+    } else {
+      setNoServiceError(false)
+    }
+
+    if (price === 0 || price === "") {
+      setNoPriceError(true)
+    } else {
+      setNoPriceError(false)
+    }
+
+    if (title === "" || title.trim() === "") {
+      setPostTitleError(true)
+      return
+    } else {
+      setPostTitleError(false)
+    }
+
+    if (description === "" || description.trim() === "") {
+      setNoServiceError(true)
+      return
+    } else {
+      setNoServiceError(false)
+    }
+    if (price === 0 || price === "") {
+      setNoPriceError(true)
+      return
+    } else {
+      setNoPriceError(false)
+    }
+
     const axiosRequest = await axios
       .post("/api/createPost", {
         photoUrl: "https://rootys3bucket.s3.us-west-1.amazonaws.com/f6293f3eb38925b06fc91bf084dd42c1",
@@ -124,6 +165,7 @@ export default function CreatePost(props) {
       .then((result) => {
         console.log(result);
       });
+    setShowDownload("active");
   }
 
   return (
@@ -269,6 +311,11 @@ export default function CreatePost(props) {
             margin="0px 0px 0px 20px"
             onChangingTheText={setTitle}
           ></Input>
+          {postTitleError ? (
+            <Toaster txt="You need a post title!"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -291,6 +338,11 @@ export default function CreatePost(props) {
             margin="0px 0px 0px 20px"
             onChangingTheText={setDescription}
           ></TextInput>
+          {noServiceError ? (
+            <Toaster txt="You need a post description!"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -336,6 +388,7 @@ export default function CreatePost(props) {
               width="70px"
               onChangingTheText={setPrice}
             ></Input>
+
           </FlexBox>
 
           <Button
@@ -351,6 +404,11 @@ export default function CreatePost(props) {
             onClick={handleNegotiableButton}
           ></Button>
         </FlexBox>
+        {noPriceError ? (
+          <Toaster txt="You need a price!"></Toaster>
+        ) : (
+          <></>
+        )}
         <FlexBox
           topBorder="0.5px solid #545454"
           width="100vw"
@@ -384,7 +442,6 @@ export default function CreatePost(props) {
                 count
               );
               createPost();
-              setShowDownload("active");
             }}
             txt="Publish"
             size="20px"

@@ -1,11 +1,3 @@
-// const broadcast = require("../public/broadcast");
-// const business = require("../public/business");
-// const digitalArts = require("../public/digitalarts");
-// const marketing = require("../public/marketing");
-// const programming = require("../public/programming");
-// const tutoring = require("../public/tutoring");
-
-// const { PrismaClient } = require( "@prisma/client";
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -26,11 +18,11 @@ async function main() {
       },
       {
         categoryName: "Marketing",
-        image: "marketing.png",
+        image: "/marketing.png",
       },
       {
         categoryName: "Tutoring",
-        image: "tutoring.png",
+        image: "/tutoring.png",
       },
       {
         categoryName: "Computing",
@@ -43,7 +35,7 @@ async function main() {
     data: [
       {
         name: "Sohrab",
-        lastname: "radmehr",
+        lastname: "Radmehr",
         password: "Password!",
         email: "sohrab@gmail.com",
         aboutMe: "I'm cool",
