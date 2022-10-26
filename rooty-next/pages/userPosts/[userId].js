@@ -42,7 +42,7 @@ export async function getServerSideProps(context) {                             
         }
     })
     let parsedItems = JSON.parse(JSON.stringify(userItems))
-    console.log("LOOK HERE",userItems)
+    // console.log("LOOK HERE",userItems)
 
     return {
         props: { parsedItems }

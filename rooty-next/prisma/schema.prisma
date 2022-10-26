@@ -33,16 +33,16 @@ model Post {
   updatedAt          DateTime         @updatedAt
   title              String           @db.VarChar(255)
   description        String           @default("")
-  barterInformation  String           @default("")
-  isNegotiableActive Boolean          @default(false)
+  barterInformation  String?          @default("")
+  isNegotiableActive Boolean?         @default(false)
   author             User             @relation(fields: [authorId], references: [userId])
   authorId           Int
   category           Category         @relation(fields: [categoryId], references: [categoryId])
   categoryId         Int
-  price              Int              @default(0)
-  rating             Int              @default(0)
-  count              Int              @default(0)
-  image              String           @default("")
+  price              Int?             @default(0)
+  rating             Int?             @default(0)
+  count              Int?             @default(0)
+  image              String?          @default("")
   Photos             Photo[]
   Keywords           PostOnKeywords[]
 }
@@ -75,11 +75,11 @@ model SkillOnUser {
 // A Post can have a lot of photos, but a photo must have a post
 model Photo {
   photoId      Int    @id @default(autoincrement())
-  userPhotoUrl String @db.Text
+  postPhotoUrl String @db.Text
   // author       User?  @relation(fields: [userId], references: [userId])
   // userId       Int?   @unique
   post         Post?  @relation(fields: [postId], references: [postId])
-  postId       Int?   @unique
+  postId       Int?
 }
 
 // MTM for posts and photos that was wrong but it was good code so I just kept it

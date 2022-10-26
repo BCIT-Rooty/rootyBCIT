@@ -14,7 +14,6 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const categoryName = parsedCategoryName.map((category) => category.categoryName);
     const image = parsedCategoryName.map((category) => category.image)
 
-
     return (
             <Wrapper>
                 <FlexBox dir="column" width="100%">
@@ -31,7 +30,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
                                         () => r.push({
                                             pathname: `/posts/${item.postId}`,
                                          })}
-                                    name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.image} />
+                                    name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.Photos[0].postPhotoUrl} />
                             </div>
                         )
                         })
@@ -48,7 +47,8 @@ export async function getServerSideProps(context) { // we need to use getServerS
             categoryId: +context.params.catId
         },
         include: {
-            category: true
+            category: true,
+            Photos: true
         }
     });
     const categoryName = await prisma.category.findMany({
@@ -58,8 +58,7 @@ export async function getServerSideProps(context) { // we need to use getServerS
     });
     let parsedItems = JSON.parse(JSON.stringify(categoryItems));
     let parsedCategoryName = JSON.parse(JSON.stringify(categoryName));
-    // console.log('categoryItemss', categoryItems)
-    // console.log('parsdedName', categoryName)
+    console.log('parsdedName', parsedItems[0].Photos)
     return {
         props: { parsedItems, parsedCategoryName }
     }

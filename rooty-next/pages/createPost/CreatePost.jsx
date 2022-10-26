@@ -11,6 +11,7 @@ import DownloadPopUp from "../../components/downloadPopUp";
 import Toaster from "../../components/toaster";
 import { motion, AnimatePresence } from "framer-motion";
 import Counter from "../../components/counter";
+import { useRouter } from "next/router";
 
 export default function CreatePost(props) {
   const [showDownload, setShowDownload] = useState("default");
@@ -18,10 +19,11 @@ export default function CreatePost(props) {
   const [description, setDescription] = useState("");
   const [count, setCount] = useState(0);
   const [isBarter, setIsBarter] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState();
   const [keywords, setKeywords] = useState([]);
   const [postTitleError, setPostTitleError] = useState(false);
   const [noServiceError, setNoServiceError] = useState(false);
+  const [noCategory, setNoCategory] = useState(false);
   const [noPriceError, setNoPriceError] = useState(false);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
   // const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
@@ -42,7 +44,7 @@ export default function CreatePost(props) {
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [isNegotiableActive, setIsNegotiableActive] = useState(false);
-
+  const router = useRouter();
   const handleNegotiableButton = () => {
     setIsNegotiableActive((current) => !current);
   };
@@ -112,43 +114,55 @@ export default function CreatePost(props) {
   const areThereKeywords = keywords.length !== 0;
 
   async function createPost() {
-    if (title === "" || title.trim() === "") {
-      setPostTitleError(true)
+    if (whatIsTheCategoryOfThisPost === "") {
+      setNoCategory(true);
     } else {
-      setPostTitleError(false)
-    }
-
-    if (description === "" || description.trim() === "") {
-      setNoServiceError(true)
-    } else {
-      setNoServiceError(false)
-    }
-
-    if (price === 0 || price === "") {
-      setPrice("0") 
+      setNoCategory(false);
     }
 
     if (title === "" || title.trim() === "") {
-      setPostTitleError(true)
-      return
+      setPostTitleError(true);
     } else {
-      setPostTitleError(false)
+      setPostTitleError(false);
     }
 
     if (description === "" || description.trim() === "") {
-      setNoServiceError(true)
-      return
+      setNoServiceError(true);
     } else {
-      setNoServiceError(false)
+      setNoServiceError(false);
     }
-    if (price === 0 || price === "") {
-      setPrice("0") 
 
-    } 
+    // if (price === 0 || price === "") {
+    //   setPrice("0")
+    // }
+
+    if (title === "" || title.trim() === "") {
+      setPostTitleError(true);
+      return;
+    } else {
+      setPostTitleError(false);
+    }
+
+    if (description === "" || description.trim() === "") {
+      setNoServiceError(true);
+      return;
+    } else {
+      setNoServiceError(false);
+    }
+    // if (price === 0 || price === "") {
+    //   setPrice("0")
+    // }
+    if (whatIsTheCategoryOfThisPost === "") {
+      setNoCategory(true);
+      return;
+    } else {
+      setNoCategory(false);
+    }
 
     const axiosRequest = await axios
       .post("/api/createPost", {
-        photoUrl: "https://rootys3bucket.s3.us-west-1.amazonaws.com/f6293f3eb38925b06fc91bf084dd42c1",
+        photoUrl:
+          "https://rootys3bucket.s3.us-west-1.amazonaws.com/f6293f3eb38925b06fc91bf084dd42c1",
         whatIsTheCategoryOfThisPost,
         keywords,
         title,
@@ -160,8 +174,11 @@ export default function CreatePost(props) {
       })
       .then((result) => {
         console.log(result);
+      })
+      .then(() => {
+        router.push("/categories");
       });
-    setShowDownload("active");
+    // setShowDownload("active");
   }
 
   return (
@@ -215,6 +232,11 @@ export default function CreatePost(props) {
                 onClick={setWhatIsTheCategoryOfThisPost}
               />
             ))}
+            {noCategory ? (
+              <Toaster txt="You need at least one category"></Toaster>
+            ) : (
+              <></>
+            )}
           </FlexBox>
         </FlexBox>
         <FlexBox
@@ -380,12 +402,11 @@ export default function CreatePost(props) {
               type="number"
               border="solid 1px #545454"
               margin="0px 0px 0px 20px"
-              value ={price}
+              value={price}
               placeholder="$"
               width="70px"
               onChangingTheText={setPrice}
             ></Input>
-
           </FlexBox>
 
           <Button
@@ -401,11 +422,7 @@ export default function CreatePost(props) {
             onClick={handleNegotiableButton}
           ></Button>
         </FlexBox>
-        {noPriceError ? (
-          <Toaster txt="You need a price!"></Toaster>
-        ) : (
-          <></>
-        )}
+        {noPriceError ? <Toaster txt="You need a price!"></Toaster> : <></>}
         <FlexBox
           topBorder="0.5px solid #545454"
           width="100vw"
