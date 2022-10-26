@@ -33,7 +33,7 @@ function handleLinkClick() {
     
 
     return (
-        <Wrapper alignItems="flex-start">
+        <Wrapper alignItems="flex-start" height="fit-content" >
             <FlexBox dir="column" width="100%">
             <FlexBox position="relative" top="40px" left="-140px"><ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon></FlexBox>
                 <ImgPlaceholder bgImage={postPhoto} width="100%" height="328px"></ImgPlaceholder>
