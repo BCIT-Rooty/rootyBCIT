@@ -1,4 +1,4 @@
-import Item from '../../components/item';
+import Item from '../../components/Item';
 // import { getItemsForUser } from '../../../server/database.js'
 import { prisma } from '../../server/db/client';
 
