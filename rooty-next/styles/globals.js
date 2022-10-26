@@ -33,7 +33,7 @@ export const FlexBox = styled.div`
 export const Wrapper = styled(FlexBox) `
     width: 100vw;
     height: ${props=>props.height || "100vh"};
-    padding:0px 0px 55px 0px;
+    padding:${props=>props.padding};
     overflow-x: hidden;
     overflow-y: hidden
 `

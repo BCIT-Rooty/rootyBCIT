@@ -5,7 +5,7 @@ import { Wrapper } from "../../styles/globals";
 
 export default function userPosts({ parsedItems }) {
   return (
-      <Wrapper padding="50px 0 0 0 " height="fit-content" dir="column">
+      <Wrapper padding="50px 0 0 0" height="fit-content" dir="column">
       <h1>My Posts</h1>
         <br></br>
         <br></br>
