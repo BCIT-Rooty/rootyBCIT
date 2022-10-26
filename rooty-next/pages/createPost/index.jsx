@@ -16,8 +16,8 @@ export default function Home() {
 
 
   return (
-    <div key={"mainCreateDiv"} className="App">
-      {showPost ? <CreatePost key={"createPostComponent"} onSubmitForm={handleCreateFromSubmit} /> : posts.map(m => <p>{m.name}</p>)}
-    </div>
+    <>
+      {showPost ? <CreatePost key={"createPostComponent"} onSubmitForm={handleCreateFromSubmit} /> : posts.map(m => <p key={m}>{m.name}</p>)}
+    </>
   )
 }
