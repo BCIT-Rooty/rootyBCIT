@@ -42,6 +42,24 @@ async function main() {
       },
     ],
   });
+
+  const author1 = await prisma.user.findUnique({
+    where: {
+      userId: 1,
+    },
+  });
+
+  console.log(author)
+  const program = await prisma.program.createMany({
+    data: [
+      {
+        programName: "Full-Stack Web Development",
+        authorId: author1.userId
+      },
+    ],
+  });
+
+
   console.log({ categories, author });
 }
 main()
