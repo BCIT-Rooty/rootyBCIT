@@ -8,15 +8,18 @@ import GradientCard from '../../components/gradientCard';
 import { Search } from 'semantic-ui-react';
 import CardWithSearch from '../../components/gradientCard/cardWithSearch';
 import { prisma } from '../../server/db/client';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function OneCategory({ parsedItems }) {
     const r = useRouter();
 
     return (
-            <Wrapper>
+            <Wrapper alignItems="start">
                 <FlexBox dir="column" width="100%">
                     <FlexBox width="100%" dir="column">
+                        <FlexBox position="relative" top="40px" left="-140px" onClick={()=>r.push("/categories")}><ArrowBackIosIcon fontSize="large"></ArrowBackIosIcon></FlexBox>
                         <CardWithSearch bgImage="/3081629.jpg" txt="Broadcast & Media"></CardWithSearch>
+
                     </FlexBox>
                 <div>
                     {

@@ -40,7 +40,7 @@ export default function ItemDescription({img="/vector-drawing.jpg"}) {
                 <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.5"></Text></FlexBox>
             </FlexBox>
     </FlexBox>
-    <ReviewHorizontalScroll></ReviewHorizontalScroll>
+    <ReviewHorizontalScroll bgImage1="/face5.jpg" bgImage2="/face4.jpg" bgImage3="/face3.jpg" bgImage4="/face2.jpg" bgImage5="/face1.jpg"></ReviewHorizontalScroll>
     </FlexBox>
   );
 };
