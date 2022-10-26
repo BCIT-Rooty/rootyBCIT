@@ -28,14 +28,14 @@ export const FlexBox = styled.div`
     color: ${props=>props.color};
     font-weight: ${props=>props.fontWeight};
     cursor: ${props=>props.cursor}
-    
-
 `
 
 export const Wrapper = styled(FlexBox) `
     width: 100vw;
     height: ${props=>props.height || "100vh"};
-    padding:0px 0px 55px 0px
+    padding:0px 0px 55px 0px;
+    overflow-x: hidden;
+    overflow-y: hidden
 `
 
 export const HorizontalScrollContainer = styled(FlexBox)`

@@ -36,6 +36,7 @@ async function main() {
       {
         name: "Sohrab",
         lastname: "Radmehr",
+        program: "Digital Design and Development",
         password: "Password!",
         email: "sohrab@gmail.com",
         aboutMe: "I'm cool",

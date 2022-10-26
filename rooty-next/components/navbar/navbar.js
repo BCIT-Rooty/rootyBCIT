@@ -19,7 +19,7 @@ import { prisma } from '@prisma/client';
 
 export default function NavBar({ route }) {
   const pages = [
-    "/home", "/categories", "/createPost", "/chat", "/userProfile/1"
+    "/home", "/categories", "/createPost", "/chat", "/userProfile"
   ]
   const index = pages.findIndex(page => route.startsWith(page))
   const r = useRouter();
