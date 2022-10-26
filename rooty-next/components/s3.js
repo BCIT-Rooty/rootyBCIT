@@ -8,8 +8,8 @@ dotenv.config()
 // I need to fix these things here!!!
 const region = "us-west-1"
 const bucketName = "rootys3bucket" 
-const accessKeyId = process.env.AWS_ACCESS_KEY_ID
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+const accessKeyId = process.env.AWSACCESS_KEY_ID
+const secretAccessKey = process.env.AWSSECRET_ACCESS_KEY
 
 const s3 = new aws.S3({
   region,
