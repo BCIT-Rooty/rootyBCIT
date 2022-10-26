@@ -39,8 +39,8 @@ export default function UserProfile({ parsedItems }) {
         <FlexBox dir="column">
             <Text txt="Account" width="100vw" padding="40px 0px 15px 35px" weight="600"></Text>
             <SettingLine name="edit" txt="My Profile" onClick={()=> setShowModal("show")}></SettingLine>
-            <SettingLine name="heart" txt="Favourites List" onClick={()=>{r.push(`/userPosts/${parsedItems.userId}`)}}></SettingLine>
-            <SettingLine name="archive" txt="My Posts" onClick={()=> setShowModal("show")}></SettingLine>
+            <SettingLine name="heart" txt="Favourites List" onClick={()=> setShowModal("show")}></SettingLine>
+            <SettingLine name="archive" txt="My Posts" onClick={() =>{r.push(`/userPosts/${parsedItems.userId}`)}}></SettingLine>
             <SettingLine name="star" txt="Reviews Received" onClick={()=> setShowModal("show")}></SettingLine>
             <Text txt="App Settings" width="100vw" padding="50px 0px 15px 35px" weight="600"></Text>
             <SettingLine name="bell" txt="Notifications" onClick={()=> setShowModal("show")}></SettingLine>

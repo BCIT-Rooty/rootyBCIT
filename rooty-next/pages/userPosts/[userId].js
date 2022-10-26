@@ -18,7 +18,7 @@ export default function userPosts({ parsedItems }) {
                             <div key={item.postId}>
          
                             <div key={item.id}>
-                                <Item key={item.id} name={item.title} price={item.price} rating={item.rating} description={item.description} />
+                                <Item key={item.id} name={item.title} price={item.price} rating={item.rating} description={item.description} image={item.Photos[0].postPhotoUrl} />
                                 <br></br>
                                 <br></br>
                             </div>
@@ -38,7 +38,8 @@ export async function getServerSideProps(context) {                             
             authorId: +context.params.userId
         },
         include: {
-            author: true
+            category: true,
+            Photos: true
         }
     })
     let parsedItems = JSON.parse(JSON.stringify(userItems))

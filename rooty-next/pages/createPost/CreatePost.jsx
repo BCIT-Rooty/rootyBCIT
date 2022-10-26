@@ -19,10 +19,12 @@ export default function CreatePost(props) {
   const [description, setDescription] = useState("");
   const [count, setCount] = useState(0);
   const [isBarter, setIsBarter] = useState("");
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState(0);
   const [keywords, setKeywords] = useState([]);
   const [postTitleError, setPostTitleError] = useState(false);
   const [noServiceError, setNoServiceError] = useState(false);
+  const [noKeywords, setNoKeywords] = useState(false);
+  const [noPhotoError, setNoPhotoError] = useState(false);
   const [noCategory, setNoCategory] = useState(false);
   const [noPriceError, setNoPriceError] = useState(false);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
@@ -71,11 +73,6 @@ export default function CreatePost(props) {
     return theUrlToReturn;
   }
 
-  function removeSpaces(inputText) {
-    const str = inputText.replace(/\s/g, "");
-    return str;
-  }
-
   function handleKeywordsButtonClick() {
     const keywordWithoutSpaces = keywordButtonStateValue.trim();
     if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
@@ -114,10 +111,23 @@ export default function CreatePost(props) {
   const areThereKeywords = keywords.length !== 0;
 
   async function createPost() {
+
+    if(photoUrl == "") {
+      setNoPhotoError(true)
+    } else {
+      setNoPhotoError(false)
+    }
+
     if (whatIsTheCategoryOfThisPost === "") {
       setNoCategory(true);
     } else {
       setNoCategory(false);
+    }
+
+    if (keywords.length === 0) {
+      setNoKeywords(true);
+    } else {
+      setNoKeywords(false);
     }
 
     if (title === "" || title.trim() === "") {
@@ -132,9 +142,20 @@ export default function CreatePost(props) {
       setNoServiceError(false);
     }
 
-    // if (price === 0 || price === "") {
-    //   setPrice("0")
-    // }
+    if (price === 0 || price === "") {
+      setNoPriceError(true);
+    } else {
+      setNoPriceError(false);
+    }
+
+
+    if(photoUrl == "") {
+      setNoPhotoError(true)
+      return
+    } else {
+      setNoPhotoError(false)
+    }
+
 
     if (title === "" || title.trim() === "") {
       setPostTitleError(true);
@@ -149,20 +170,30 @@ export default function CreatePost(props) {
     } else {
       setNoServiceError(false);
     }
-    // if (price === 0 || price === "") {
-    //   setPrice("0")
-    // }
+
+    if (price === 0 || price === "") {
+      setNoPriceError(true);
+      return;
+    } else {
+      setNoPriceError(false);
+    }
     if (whatIsTheCategoryOfThisPost === "") {
       setNoCategory(true);
       return;
     } else {
       setNoCategory(false);
+    }
+
+    if (keywords.length === 0) {
+      setNoKeywords(true);
+      return;
+    } else {
+      setNoKeywords(false);
     }
 
     const axiosRequest = await axios
       .post("/api/createPost", {
-        photoUrl:
-          "https://rootys3bucket.s3.us-west-1.amazonaws.com/f6293f3eb38925b06fc91bf084dd42c1",
+        photoUrl,
         whatIsTheCategoryOfThisPost,
         keywords,
         title,
@@ -183,7 +214,12 @@ export default function CreatePost(props) {
 
   return (
     <>
-      <Wrapper justifyContent="flex-start" alignItems="flex-start" dir="column" height="fit-content">
+      <Wrapper
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        dir="column"
+        height="fit-content"
+      >
         <Text
           txt="Create your post"
           size="24px"
@@ -197,6 +233,11 @@ export default function CreatePost(props) {
           justifyContent="flex-start"
         >
           <Input type="file" onInsertPhotoInsideS3={uploadThePhotoToS3}></Input>
+          {noPhotoError ? (
+            <Toaster txt="You need one photo for your post"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -304,6 +345,11 @@ export default function CreatePost(props) {
           )}
           {errorThatKeywordAlreadyExists ? (
             <Toaster txt="This keyword is already being used"></Toaster>
+          ) : (
+            <></>
+          )}
+          {noKeywords ? (
+            <Toaster txt="You need at least one Keyword"></Toaster>
           ) : (
             <></>
           )}
