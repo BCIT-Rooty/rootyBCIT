@@ -8,6 +8,7 @@ import GradientCard from '../../components/gradientCard';
 import { Search } from 'semantic-ui-react';
 import CardWithSearch from '../../components/gradientCard/cardWithSearch';
 import { prisma } from '../../server/db/client';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const r = useRouter();
@@ -15,7 +16,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const image = parsedCategoryName.map((category) => category.image)
 
     return (
-            <Wrapper>
+            <Wrapper alignItems="start">
                 <FlexBox dir="column" width="100%">
                     <FlexBox width="100%" dir="column">
                         <CardWithSearch bgImage={image} txt={categoryName}></CardWithSearch>
@@ -58,7 +59,7 @@ export async function getServerSideProps(context) { // we need to use getServerS
     });
     let parsedItems = JSON.parse(JSON.stringify(categoryItems));
     let parsedCategoryName = JSON.parse(JSON.stringify(categoryName));
-    console.log('parsdedName', parsedItems[0].Photos)
+    // console.log('parsdedName', parsedItems[0].Photos)
     return {
         props: { parsedItems, parsedCategoryName }
     }
