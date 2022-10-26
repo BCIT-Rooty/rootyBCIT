@@ -60,10 +60,13 @@ export async function createPost({
       });
       console.log(keyword, PostOnKeywords)
     })
-  
+    console.log("Its in here")
   } catch (error) {
   console.log(error)    
   }
+
+console.log("its out there");
+  return "everythingWorks"
 
 }
 
