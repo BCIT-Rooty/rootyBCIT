@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <>
-      {showPost ? <CreatePost key={"createPostComponent"} onSubmitForm={handleCreateFromSubmit} /> : posts.map(m => <p key={m}>{m.name}</p>)}
+      {showPost ? <CreatePost key={"createPostComponent"} /> : posts.map(m => <p key={m}>{m.name}</p>)}
     </>
   )
 }
