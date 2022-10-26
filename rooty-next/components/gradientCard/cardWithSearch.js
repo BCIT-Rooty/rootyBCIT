@@ -5,8 +5,8 @@ import { Search } from 'semantic-ui-react'
 import GradientCard from '.'
 
 export default function CardWithSearch({
-    width="195px",
-    height="195px",
+    width="100%",
+    height="328px",
     bgImage="http://placekitten.com/210/210",
     bgColor="",
     txt="Enter Text Here",
@@ -22,11 +22,11 @@ export default function CardWithSearch({
 
 
   return(
-    <FlexBox bgImage={bgImage} width="100%" height="328px" borderRadius="0px" margin="0px" alignItems="flex-end" linearGradient={linearGradient}>
+    <FlexBox bgImage={bgImage} width={width} height={height} borderRadius="0px" margin="0px" alignItems="flex-end" linearGradient={linearGradient}>
         <FlexBox dir="column" margin="20px">
         <Text txt={txt} size={size} align={align} color={color} weight={weight} padding={padding}></Text>
         <FlexBox margin="12px"><Search size="large"
-                        placeholder='Search...'
+                        placeholder='Search services'
                         onResultSelect={(e, data) =>
                         dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox>
         </FlexBox>

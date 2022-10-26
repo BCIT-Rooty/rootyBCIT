@@ -4,32 +4,43 @@ import { FlexBox, Wrapper, ImgPlaceholder } from "../styles/globals";
 import Text from "./text";
 import { Icon } from "semantic-ui-react";
 import { Heart } from "./icons/icons";
+import Review from "./reviews/review";
+import DisabledStars from "./icons/starsDisabled";
+import ReviewHorizontalScroll from "./reviews/reviewCards";
 
-export default function Item({ id, name, rating, compensation, image, onClick=()=>{} }) {
+export default function ItemDescription({img="/vector-drawing.jpg"}) {
 
 
   return (
-        <FlexBox onClick={onClick} key={id} width="338px" height="154px" bgColor="#F6F6F9" borderRadius="8px" margin="20px" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
-          <ImgPlaceholder bgImage={image} width='138px'></ImgPlaceholder>
-          <FlexBox dir="column" padding="12px" height="154px" width="228px" alignItems="start" justifyContent="space-between">
-            <FlexBox alignItems="baseline">
-              <Text txt={name} size="16px" weight="bold" align="left"></Text>
-              <Heart></Heart>
+    <FlexBox dir="column" width="100%" padding="0">
+    <ImgPlaceholder bgImage={img} width="100%" height="328px"></ImgPlaceholder>
+    <Review name="Joyce" nameSize="21px" comment="" program="Broadcast & Media" boxWidth="73px" image="/2205_w037_n003_408b_p1_408.jpg"></Review> 
+    <FlexBox  dir="column" alignItems="left" width="100%" padding="0 30px 0 30px" minHeight="90px" border="0.5px solid rgba(191, 191, 191, 1)">
+        <Text txt='1-2 minute Motion Graphic editor' size="21px"></Text>
+        <Text txt='Digital Arts and Design' color="grey"></Text>
+    </FlexBox>
+    <FlexBox  dir="column" alignItems="left" width="100%" padding="0 30px 0 30px" minHeight="130px" border="0.5px solid rgba(191, 191, 191, 1)">
+        <Text txt="I am a D3 student. I can make unique logos for and motion graphic explainer videos. Up to 2 revisions are allowed for this price."></Text>
+    </FlexBox>
+    <FlexBox justifyContent="flex-start" width="100%" padding="20px 30px 0 30px">
+        <DisabledStars></DisabledStars>
+        <Text padding="0 10px 0 10px"txt="4.0"></Text>
+    </FlexBox >
+    <FlexBox dir="column" justifyContent="flex-start" width="100%" padding="20px 30px 0 30px">
+            <FlexBox justifyContent="space-between" width="100%">
+                <Text txt="Service Satisfaction"></Text>
+                <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.0"></Text></FlexBox>
             </FlexBox>
-            <FlexBox alignItems="left" justifyContent="space-between" width="100%">
-              <Text txt={rating} size="15px" weight="regular"></Text>
-              {/* <FlexBox alignItems="flex-end">
-                  <div class="ui disabled rating" role="radiogroup" tabindex="0"><i tabindex="-1" aria-checked="false" aria-posinset="1" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="2" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="true" aria-posinset="3" aria-setsize="5" class="active icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="4" aria-setsize="5" class="icon" role="radio"></i><i tabindex="-1" aria-checked="false" aria-posinset="5" aria-setsize="5" class="icon" role="radio"></i></div>
-              </FlexBox> */}  
-              {/* --- rating stars in case we want them */}
-              <FlexBox alignItems="baseline" justifyContent="space-around" width="40%">
-                  <Text txt={compensation} size="15px" weight="bold"></Text>
-                  <Text txt="or "></Text>
-                  <Icon name="exchange"></Icon>
-              </FlexBox>
+            <FlexBox justifyContent="space-between" width="100%">
+                <Text txt="Seller Response"></Text>
+                <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.0"></Text></FlexBox>
             </FlexBox>
-            
-          </FlexBox>
-        </FlexBox>
+            <FlexBox justifyContent="space-between" width="100%">
+                <Text txt="Would Recommend"></Text>
+                <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.5"></Text></FlexBox>
+            </FlexBox>
+    </FlexBox>
+    <ReviewHorizontalScroll></ReviewHorizontalScroll>
+    </FlexBox>
   );
 };

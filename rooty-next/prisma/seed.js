@@ -1,5 +1,12 @@
-// import { PrismaClient } from "@prisma/client";
-const { PrismaClient } = require('@prisma/client');
+// const broadcast = require("../public/broadcast");
+// const business = require("../public/business");
+// const digitalArts = require("../public/digitalarts");
+// const marketing = require("../public/marketing");
+// const programming = require("../public/programming");
+// const tutoring = require("../public/tutoring");
+
+// const { PrismaClient } = require( "@prisma/client";
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
@@ -7,48 +14,43 @@ async function main() {
     data: [
       {
         categoryName: "Broadcast & Media",
+        image: "/broadcast.png",
       },
       {
         categoryName: "Digital Arts & Design",
+        image: "/digitalarts.png",
       },
       {
         categoryName: "Business & Finance",
+        image: "/business.png",
       },
       {
         categoryName: "Marketing",
+        image: "marketing.png",
       },
       {
         categoryName: "Tutoring",
+        image: "tutoring.png",
       },
       {
         categoryName: "Computing",
+        image: "/programming",
       },
     ],
   });
 
-  //   const bob = await prisma.user.upsert({
-  //     where: { email: 'bob@prisma.io' },
-  //     update: {},
-  //     create: {
-  //       email: 'bob@prisma.io',
-  //       name: 'Bob',
-  //       posts: {
-  //         create: [
-  //           {
-  //             title: 'Follow Prisma on Twitter',
-  //             content: 'https://twitter.com/prisma',
-  //             published: true,
-  //           },
-  //           {
-  //             title: 'Follow Nexus on Twitter',
-  //             content: 'https://twitter.com/nexusgql',
-  //             published: true,
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   })
-  console.log({ categories });
+  const author = await prisma.user.createMany({
+    data: [
+      {
+        name: "Sohrab",
+        lastname: "radmehr",
+        password: "Password!",
+        email: "sohrab@gmail.com",
+        aboutMe: "I'm cool",
+      },
+    ],
+  });
+  console.log({ categories, author });
 }
 main()
   .then(async () => {

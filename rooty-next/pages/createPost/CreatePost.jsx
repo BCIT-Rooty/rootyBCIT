@@ -1,83 +1,48 @@
+// make sure that the fields are required and they are required in the database too the error for keywords/// make vercel work
+
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import SubmitButton from "../../components/sohrabs buttons/SubmitButton";
-// import ImageInputS3 from "../../components/sohrabs inputs/ImageInputS3";
-// import TextInput from "../../components/sohrabs inputs/TextInput";
 import { TextInput } from "../../components/inputs";
-// import KeywordButton from "../../components/sohrabs buttons/KeyWordButton";
-// import RadioInputComponent from "../../components/inputs/RadioInputComponent";
 import { FlexBox, Wrapper } from "../../styles/globals";
-// import Input, {TextIn} from "../components/inputs";
 import Input from "../../components/inputs";
 import Button from "../../components/button";
 import Text from "../../components/text";
 import DownloadPopUp from "../../components/downloadPopUp";
+import Toaster from "../../components/toaster";
 import { motion, AnimatePresence } from "framer-motion";
+import Counter from "../../components/counter";
 
 export default function CreatePost(props) {
   const [showDownload, setShowDownload] = useState("default");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [count, setCount] = useState(0);
   const [isBarter, setIsBarter] = useState("");
   const [price, setPrice] = useState(0);
-  const [postKeywords, setPostKeywords] = useState([]);
+  const [keywords, setKeywords] = useState([]);
+  const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
+  // const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
+  //   useState(false);
+  const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] =
+    useState(false);
+  const [errorThatKeywordAlreadyExists, setErrorThatKeywordAlreadyExists] =
+    useState(false);
   const [listOfCategories, setListOfCategories] = useState([
     "Broadcast & Media",
-    "Digital Arts & Design",
-    "Business & Finance",
-    "Marketing",
-    "Tutoring",
     "Computing",
-  ]);
-  const [potentialPostKeywords, setPotentialPostKeywords] = useState([
-    "Audio Mix",
-    "Web Design",
-    "Logo Design",
-    "Anna",
+    "Marketing",
+    "Business & Finance",
+    "Digital Arts & Design",
+    "Tutoring",
   ]);
   const [whatIsTheCategoryOfThisPost, setWhatIsTheCategoryOfThisPost] =
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-  const [photoInput, setPhotoInput] = useState("");
-  // const [barterValues, setBarterValues] = useState(["Barter", "Cash"]);
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const theCategoryValue = getCheckedRadioValue("categories");
-    await uploadThePhotoToS3().then((res) => {
-      props.onSubmitForm(
-        title,
-        description,
-        isBarter,
-        theCategoryValue,
-        postKeywords,
-        res
-      );
-      // setTitle("");
-      // setDescription("");
-      // setIsBarter("");
-      // setPhotoUrl("");
-    });
-  }
+  const [isNegotiableActive, setIsNegotiableActive] = useState(false);
 
-  // function handlePreventDefault(e) {
-  //   e.preventDefault();
-  // }
-
-  function handleAddTagsToThePost(inputValue) {
-    if (!postKeywords.includes(inputValue)) {
-      setPostKeywords([...postKeywords, inputValue]);
-    } else {
-      setPostKeywords(postKeywords.filter((m) => m !== inputValue));
-    }
-  }
-
-  // https://stackoverflow.com/questions/8666229/how-to-get-value-from-form-input-type-radio
-  function getCheckedRadioValue(radioGroupName) {
-    var rads = document.getElementsByName(radioGroupName),
-      i;
-    for (i = 0; i < rads.length; i++) if (rads[i].checked) return rads[i].value;
-    return null; // or undefined, or your preferred default for none checked
-  }
+  const handleNegotiableButton = () => {
+    setIsNegotiableActive((current) => !current);
+  };
 
   async function uploadThePhotoToS3(inputFile) {
     // if (photoInput == false) {
@@ -97,18 +62,69 @@ export default function CreatePost(props) {
         theUrlToReturn = photoUrlRet;
       });
     });
-    console.log(theUrlToReturn)
+    console.log(theUrlToReturn);
     return theUrlToReturn;
   }
 
-  // function seeIfShitWorks() {
-  //   console.log(title, description, price, isBarter, postKeywords)
-  // }
+  function removeSpaces(inputText) {
+    const str = inputText.replace(/\s/g, "");
+    return str;
+  }
 
-  // async function handleS3Url(e) {
-  //   e.preventDefault();
-  //   setPhotoInput(e.target);
-  // }
+  function handleKeywordsButtonClick() {
+    const keywordWithoutSpaces = keywordButtonStateValue.trim();
+    if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
+      if (errorThatKeywordAlreadyExists) {
+        setErrorThatKeywordAlreadyExists(false);
+      }
+      setErrorStateForEmptyInputKeyWord(true);
+      return;
+    } else if (keywordButtonStateValue !== "" && keywordWithoutSpaces !== "") {
+      setErrorStateForEmptyInputKeyWord(false);
+    }
+    if (
+      keywords.includes(keywordButtonStateValue) ||
+      keywords.includes(keywordWithoutSpaces)
+    ) {
+      setErrorThatKeywordAlreadyExists(true);
+      return;
+    } else if (
+      !keywords.includes(keywordButtonStateValue) &&
+      errorThatKeywordAlreadyExists !== true &&
+      keywords.includes(keywordWithoutSpaces)
+    ) {
+      setErrorThatKeywordAlreadyExists(false);
+    }
+    setErrorThatKeywordAlreadyExists(false);
+    setErrorStateForEmptyInputKeyWord(false);
+
+    setKeywords([...keywords, keywordWithoutSpaces]);
+    setKeywordButtonStateValue("");
+  }
+
+  function removeKeyWordXButton(input) {
+    setKeywords(keywords.filter((m) => m !== input));
+  }
+
+  const areThereKeywords = keywords.length !== 0;
+
+  async function createPost() {
+    const axiosRequest = await axios
+      .post("/api/createPost", {
+        photoUrl: "https://rootys3bucket.s3.us-west-1.amazonaws.com/f6293f3eb38925b06fc91bf084dd42c1",
+        whatIsTheCategoryOfThisPost,
+        keywords,
+        title,
+        description,
+        isBarter,
+        price,
+        isNegotiableActive,
+        count,
+      })
+      .then((result) => {
+        console.log(result);
+      });
+  }
 
   return (
     <>
@@ -121,7 +137,7 @@ export default function CreatePost(props) {
         ></Text>
         <FlexBox
           padding="20px 0px 20px 20px"
-          border="0.5px solid #545454"
+          topBorder="0.5px solid #545454"
           width="100vw"
           justifyContent="flex-start"
         >
@@ -141,18 +157,24 @@ export default function CreatePost(props) {
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
-          <FlexBox flexWrap="wrap">
+          <FlexBox
+            flexWrap="wrap"
+            width="95vw"
+            justifyContent="space-between"
+            padding="0px 0px 0px 5vw"
+          >
             {listOfCategories.map((m) => (
               <Button
                 key={m}
                 txt={m}
                 value={m}
                 border="solid 2px #545454"
-                bgColor="white"
                 color="#545454"
                 width="fit-content"
-                padding="15px"
-                onClick={handleAddTagsToThePost}
+                padding="20px 5vw"
+                whatIsTheStateOfTheAppForCategory={whatIsTheCategoryOfThisPost}
+                ifThisIsTheCategoriesButtons={true}
+                onClick={setWhatIsTheCategoryOfThisPost}
               />
             ))}
           </FlexBox>
@@ -171,12 +193,60 @@ export default function CreatePost(props) {
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
-          <Input
-            placeholder="Type Keywords for your Post"
-            type="search"
-            border="solid 1px #545454"
-            margin="0px 0px 0px 20px"
-          ></Input>
+          <FlexBox>
+            <Input
+              placeholder="Type Keywords for your Post"
+              type="search"
+              value={keywordButtonStateValue}
+              border="solid 1px #545454"
+              margin="0px 0px 0px 20px"
+              width="60vw"
+              onChangingTheText={setKeywordButtonStateValue}
+            ></Input>
+            <Button
+              type="add"
+              key="handleKeywordAdding"
+              txt="Add"
+              value={keywordButtonStateValue}
+              width="fit-content"
+              padding="15px"
+              margin="0px 0px 0px 20px"
+              buttonMargin="0px 10px 0px 0px"
+              bgColor="#4F4DB0"
+              onClick={handleKeywordsButtonClick}
+            />
+          </FlexBox>
+          <FlexBox width="95vw" padding="25px 0px 10px 5vw" flexWrap="wrap">
+            {areThereKeywords ? (
+              keywords.map((m) => (
+                <Button
+                  key={m}
+                  txt={m}
+                  width="fit-content"
+                  height="30px"
+                  type="keyword"
+                  padding="10px 10px"
+                  fontWeight="300"
+                  buttonMargin="0px 0px 0px 10px"
+                  border="solid 1px #545454"
+                  color="#545454"
+                  onRemoveKeyword={removeKeyWordXButton}
+                ></Button>
+              ))
+            ) : (
+              <></>
+            )}
+          </FlexBox>
+          {errorStateForEmptyInputKeyWord ? (
+            <Toaster txt="You must insert atleast one keyword"></Toaster>
+          ) : (
+            <></>
+          )}
+          {errorThatKeywordAlreadyExists ? (
+            <Toaster txt="This keyword is already being used"></Toaster>
+          ) : (
+            <></>
+          )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
@@ -247,28 +317,75 @@ export default function CreatePost(props) {
         <FlexBox
           topBorder="0px solid #545454"
           width="100vw"
-          justifyContent="flex-start"
+          justifyContent="space-between"
           alignItems="flex-start"
-          padding="0px 0px 20px 0px"
+          padding="0px 20px 20px 0px"
+        >
+          <FlexBox>
+            <Text
+              txt="Price"
+              size="16px"
+              weight="bold"
+              padding="15px 0px 20px 20px"
+            ></Text>
+            <Input
+              type="number"
+              border="solid 1px #545454"
+              margin="0px 0px 0px 20px"
+              placeholder="$"
+              width="70px"
+              onChangingTheText={setPrice}
+            ></Input>
+          </FlexBox>
+
+          <Button
+            txt="Negotiable"
+            margin="5px 0px 0px 0px"
+            border={
+              isNegotiableActive ? "solid 2px #4F4DB0" : "solid 2px #545454"
+            }
+            bgColor={isNegotiableActive ? "#4F4DB0" : "white"}
+            color={isNegotiableActive ? "white" : "#545454"}
+            width="fit-content"
+            padding="20px"
+            onClick={handleNegotiableButton}
+          ></Button>
+        </FlexBox>
+        <FlexBox
+          topBorder="0.5px solid #545454"
+          width="100vw"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          padding="20px 20px 20px 0px"
         >
           <Text
-            txt="Price"
+            txt="Revision"
             size="16px"
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
-          <Input
-            type="text"
-            border="solid 1px #545454"
-            margin="10px 0px 0px 20px"
-            placeholder=" "
-            width="60px"
-            onChangingTheText={setPrice}
-          ></Input>
+          <Counter onCounterValue={setCount}></Counter>
         </FlexBox>
-        <FlexBox padding="0px 0px 85px 0px" width="100vw">
+        <FlexBox
+          topBorder="0.5px solid #545454"
+          width="100vw"
+          padding="20px 20px 90px 0px"
+        >
           <Button
-            onClick={() => setShowDownload("active")}
+            onClick={() => {
+              console.log(
+                keywords,
+                whatIsTheCategoryOfThisPost,
+                title,
+                description,
+                isBarter,
+                price,
+                isNegotiableActive,
+                count
+              );
+              createPost();
+              setShowDownload("active");
+            }}
             txt="Publish"
             size="20px"
             padding="22px"
@@ -276,6 +393,7 @@ export default function CreatePost(props) {
             color="white"
             border="solid 1px #545454"
             margin="10px 0px 0px 20px"
+            bgColor="#4F4DB0"
           ></Button>
         </FlexBox>
         <AnimatePresence exitBeforeEnter>
