@@ -16,7 +16,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const image = parsedCategoryName.map((category) => category.image)
 
     return (
-            <Wrapper alignItems="start">
+            <Wrapper alignItems="start" height="fit-content">
                 <FlexBox dir="column" width="100%">
                     <FlexBox width="100%" dir="column">
                         <CardWithSearch bgImage={image} txt={categoryName}></CardWithSearch>
