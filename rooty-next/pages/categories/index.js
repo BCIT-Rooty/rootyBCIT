@@ -7,25 +7,20 @@ import { Search } from 'semantic-ui-react';
 // import Review from "../../components/review";
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import {prisma} from "../../server/db/client"
 
 
 
 
 
-export default function categories() {
+export default function categories({jsonCategories}) {
   const r = useRouter();
 
   const [categories, setCategories] = useState([]);
 
-  let response;
   useEffect(() => {
-    axios.get('/api/categories')
-      .then(res => {
-        response = res.data;
-        setCategories(response);
-        console.log('THIS IS RES DATA',response);
-      })
-      .catch(err => console.log('This error', err))
+  console.log(jsonCategories);
+  setCategories(jsonCategories)
   }, [])
 
 
@@ -69,4 +64,12 @@ export default function categories() {
 }
 
 
-
+export async function getStaticProps() {
+  const categoriesBE = await prisma.category.findMany();
+      const jsonCategories = JSON.parse(JSON.stringify(categoriesBE));
+      return {
+        props: {
+          jsonCategories
+        }
+      }
+}

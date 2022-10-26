@@ -101,7 +101,7 @@ export async function getServerSideProps(context) {
         },
     })
     let parsedItems = JSON.parse(JSON.stringify(userItems))
-    console.log('HERE CUNT', parsedItems)
+    // console.log('HERE CUNT', parsedItems)
     return {
         props: { parsedItems }
     }

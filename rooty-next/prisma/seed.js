@@ -1,11 +1,3 @@
-// const broadcast = require("../public/broadcast");
-// const business = require("../public/business");
-// const digitalArts = require("../public/digitalarts");
-// const marketing = require("../public/marketing");
-// const programming = require("../public/programming");
-// const tutoring = require("../public/tutoring");
-
-// const { PrismaClient } = require( "@prisma/client";
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -51,6 +43,24 @@ async function main() {
       },
     ],
   });
+
+  const author1 = await prisma.user.findUnique({
+    where: {
+      userId: 1,
+    },
+  });
+
+  console.log(author)
+  const program = await prisma.program.createMany({
+    data: [
+      {
+        programName: "Full-Stack Web Development",
+        authorId: author1.userId
+      },
+    ],
+  });
+
+
   console.log({ categories, author });
 }
 main()
