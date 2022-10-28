@@ -14,10 +14,17 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const r = useRouter();
     const categoryName = parsedCategoryName.map((category) => category.categoryName);
     const image = parsedCategoryName.map((category) => category.image)
+    const router = useRouter()
+    function handleLinkClick() {
+        const link = `/categories`
+        router.push(link)
+    }
+
 
     return (
-            <Wrapper alignItems="start">
+            <Wrapper alignItems="start" height="fit-content">
                 <FlexBox dir="column" width="100%">
+                <FlexBox position="relative" top="40px" left="-140px"><ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon></FlexBox>
                     <FlexBox width="100%" dir="column">
                         <CardWithSearch bgImage={image} txt={categoryName}></CardWithSearch>
                     </FlexBox>

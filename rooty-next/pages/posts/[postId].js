@@ -15,6 +15,16 @@ export default function ItemDescript({parsedItems}) {
 let userName = parsedItems[0].author.name + " " + parsedItems[0].author.lastname;
 let description = parsedItems[0].description;
 let title = parsedItems[0].title;
+let image = parsedItems[0].image;
+let rating = parsedItems[0].rating;
+let compensation = parsedItems[0].compensation;
+let authorImage = parsedItems[0].author.image;
+let authorId = parsedItems[0].authorId;
+let postId = parsedItems[0].postId;
+let postPhoto = parsedItems[0].Photos[0].postPhotoUrl
+
+let categoryText = parsedItems[0].category.categoryName;
+let authorName = parsedItems[0].author.name;
 const router = useRouter()
 function handleLinkClick() {
     const link = `/categories/${parsedItems[0].categoryId}`
@@ -23,14 +33,14 @@ function handleLinkClick() {
     
 
     return (
-        <Wrapper alignItems="flex-start">
+        <Wrapper alignItems="flex-start" height="fit-content" >
             <FlexBox dir="column" width="100%">
             <FlexBox position="relative" top="40px" left="-140px"><ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon></FlexBox>
-                <ImgPlaceholder bgImage="/3081629.jpg" width="100%" height="328px"></ImgPlaceholder>
-                <Review name={userName} nameSize="21px" comment="" program="here should be a program of the user" boxWidth="73px" image="/2205_w037_n003_408b_p1_408.jpg"></Review>
+                <ImgPlaceholder bgImage={postPhoto} width="100%" height="328px"></ImgPlaceholder>
+                <Review name={userName} nameSize="21px" comment="" program="" boxWidth="73px" image="/camera-man.jpg"></Review>
                 <FlexBox dir="column" alignItems="left" width="100%" padding="0 30px 0 30px" minHeight="108px" border="0.5px solid rgba(191, 191, 191, 1)">
                     <Text txt={title} size="21px"></Text>
-                    <Text size="15px" txt='make a coloumn in the db its gonna show category it falls into' color="grey"></Text>
+                    <Text size="15px" txt={categoryText} color="grey"></Text>
                 </FlexBox>
                 <FlexBox  dir="column" alignItems="left" width="100%" padding="0 30px 0 30px" minHeight="130px" border="0.5px solid rgba(191, 191, 191, 1)">
                     <Text txt={description}></Text>
@@ -65,11 +75,15 @@ export async function getServerSideProps(context){
         },
         include: {
             author: true,
+            category: true,
+            Photos: true
         }
     });
 
-
+    
+    
     let parsedItems = JSON.parse(JSON.stringify(items));
+    console.log(parsedItems);
     return {
         props: { parsedItems }
     }

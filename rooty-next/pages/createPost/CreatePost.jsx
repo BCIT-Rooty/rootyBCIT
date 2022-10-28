@@ -215,6 +215,7 @@ export default function CreatePost(props) {
   return (
     <>
       <Wrapper
+        padding= "0 0 50px 0"
         justifyContent="flex-start"
         alignItems="flex-start"
         dir="column"
