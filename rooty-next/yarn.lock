@@ -5295,7 +5295,7 @@ dot-case@^3.0.4:
 
 dotenv-cli@^6.0.0:
   version "6.0.0"
-  resolved "https://registry.npmjs.org/dotenv-cli/-/dotenv-cli-6.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/dotenv-cli/-/dotenv-cli-6.0.0.tgz#8a30cbc59d0a8aaa166b2fee0a9a55e23a1223ab"
   integrity sha512-qXlCOi3UMDhCWFKe0yq5sg3X+pJAz+RQDiFN38AMSbUrnY3uZshSfDJUAge951OS7J9gwLZGfsBlWRSOYz/TRg==
   dependencies:
     cross-spawn "^7.0.3"
