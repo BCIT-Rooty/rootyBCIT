@@ -112,11 +112,11 @@ export default function CreatePost(props) {
 
   async function createPost() {
 
-    if(photoUrl == "") {
-      setNoPhotoError(true)
-    } else {
-      setNoPhotoError(false)
-    }
+    // if(photoUrl == "") {
+    //   setNoPhotoError(true)
+    // } else {
+    //   setNoPhotoError(false)
+    // }
 
     if (whatIsTheCategoryOfThisPost === "") {
       setNoCategory(true);
@@ -149,12 +149,12 @@ export default function CreatePost(props) {
     }
 
 
-    if(photoUrl == "") {
-      setNoPhotoError(true)
-      return
-    } else {
-      setNoPhotoError(false)
-    }
+    // if(photoUrl == "") {
+    //   setNoPhotoError(true)
+    //   return
+    // } else {
+    //   setNoPhotoError(false)
+    // }
 
 
     if (title === "" || title.trim() === "") {
@@ -193,7 +193,7 @@ export default function CreatePost(props) {
 
     const axiosRequest = await axios
       .post("/api/createPost", {
-        photoUrl,
+        photoUrl: "https://rootys3bucket.s3.us-west-1.amazonaws.com/76a9c6cd74e8fc9fb801ba5cb9bb26fb",
         whatIsTheCategoryOfThisPost,
         keywords,
         title,
