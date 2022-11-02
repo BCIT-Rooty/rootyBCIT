@@ -234,11 +234,11 @@ export default function CreatePost(props) {
           justifyContent="flex-start"
         >
           <Input type="file" onInsertPhotoInsideS3={uploadThePhotoToS3}></Input>
-          {noPhotoError ? (
+          {/* {noPhotoError ? (
             <Toaster txt="You need one photo for your post"></Toaster>
           ) : (
             <></>
-          )}
+          )} */}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"

@@ -74,7 +74,7 @@ CREATE TABLE "Photo" (
 CREATE TABLE "Category" (
     "categoryId" SERIAL NOT NULL,
     "categoryName" TEXT NOT NULL,
-    "image" TEXT NOT NULL DEFAULT 'https://imgur.com/MH9quRL',
+    "image" TEXT NOT NULL DEFAULT '',
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("categoryId")
 );

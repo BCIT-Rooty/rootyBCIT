@@ -65,11 +65,11 @@ export async function getServerSideProps(context) { // we need to use getServerS
         }
     });
 
-    const categoryName = await prisma.category.findUnique({
-        where: {
-            id: +context.params.catId
-        }
-    });
+    // const categoryName = await prisma.category.findUnique({
+    //     where: {
+    //         id: +context.params.catId
+    //     }
+    // });
     
     let parsedItems = JSON.parse(JSON.stringify(categoryItems));
     let parsedCategoryName = JSON.parse(JSON.stringify(categoryName));
