@@ -62,6 +62,19 @@ export default function Categories({jsonCategories}) {
           </FlexBox>
         </FlexBox>
       </Wrapper>
+      <Wrapper>
+      <FlexBox dir="column" width="100%">
+            <DialogueBox date="Today"></DialogueBox>
+            <DialogueBox postTitle="Video Editing" userName="Raki Devon" image="/face2.jpg" type="unread"></DialogueBox>
+            <DialogueBox postTitle="Motion Graphics" userName="Aaron Hans" image="/face4.jpg" date="3/8" type="unread"></DialogueBox>
+            <ChatHeader></ChatHeader>
+            <MyMessage type="messageImage" image="/2205_w037_n003_408b_p1_408.jpg"></MyMessage>
+            <MyMessage text="hey how are you doing queen long time no see I'm so happy to see you"></MyMessage>
+            <NotMyMessage type="messageImage" image="/3081629.jpg" text="message with an image"></NotMyMessage>
+            <NotMyMessage text="Ana is nice and Renata is nice but Sohrab is not really nice"></NotMyMessage>
+            <ChatNavBar></ChatNavBar>
+      </FlexBox>
+      </Wrapper>
     </>
   )
 }

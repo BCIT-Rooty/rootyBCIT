@@ -4,7 +4,6 @@ import { FlexBox, Wrapper, ImgPlaceholder } from "../styles/globals";
 import Text from "./text";
 import { Icon } from "semantic-ui-react";
 import { Heart } from "./icons/icons";
-import HandshakeIcon from '@mui/icons-material/Handshake';
 
 export default function Item({ 
   id,
@@ -35,11 +34,11 @@ export default function Item({
            </FlexBox>
            <FlexBox alignItems="left" justifyContent="space-between" width="100%">
              <Text txt={rating + "/5"} size="15px" weight="regular"></Text>
-             <FlexBox alignItems="flex-end" justifyContent="space-around" width="50%">
+             <FlexBox alignItems="baseline" justifyContent="space-around" width="40%">
                  {/* <Text txt={compensation} size="15px" weight="bold"></Text> */}
                  <Text txt={"$" + price} size="15px" weight="bold"></Text>
                  <Text txt="or "></Text>
-                 <HandshakeIcon></HandshakeIcon>
+                 <Icon name="exchange"></Icon>
              </FlexBox>
            </FlexBox>
            

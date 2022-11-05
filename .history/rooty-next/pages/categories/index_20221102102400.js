@@ -5,15 +5,11 @@ import Review from "../../components/reviews/review";
 import Text from "../../components/text";
 import { Search } from 'semantic-ui-react';
 // import Review from "../../components/review";
-import { ImgPlaceholder } from "../../styles/globals";
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import {prisma} from "../../server/db/client";
-import DialogueBox from "../../components/chat/dialogueBox";
-import MyMessage from "../../components/chat/myMessage";
-import NotMyMessage from "../../components/chat/notMyMessage";
-import ChatNavBar from "../../components/chat/chatNavBar";
-import ChatHeader from "../../components/chat/chatHeader";
+import {prisma} from "../../server/db/client"
+
+
 
 
 
@@ -46,6 +42,7 @@ export default function Categories({jsonCategories}) {
 
   return (
     <>
+
       <Wrapper alignItems="start">
         <FlexBox dir="column" width="100%">
           <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 40px" minHeight="100px">
