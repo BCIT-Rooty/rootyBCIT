@@ -5,6 +5,7 @@ import SubmitButton from "../../components/sohrabsButtons/SubmitButton";
 import TextInput from "../../components/sohrabsInputs/TextInput";
 import { fakeDbMessage } from "../../server/database";
 import * as db from "../../server/database";
+import ChatNavBar from "../../components/chat/chatNavBar";
 
 export default function ACertainChatRoom(props) {
   const router = useRouter();
@@ -52,6 +53,10 @@ export default function ACertainChatRoom(props) {
 
   return (
     <>
+
+<ChatNavBar onChangingTheText={setMessage} onSubmitButtonClicked={handleSendButton} />
+
+{/*     
       <form>
         <TextInput
           inputTitle={"Send a message"}
@@ -62,7 +67,7 @@ export default function ACertainChatRoom(props) {
           onSubmitButtonClicked={handleSendButton}
           textInsideTheButton={"Done"}
         />
-      </form>
+      </form> */}
     </>
   );
 }

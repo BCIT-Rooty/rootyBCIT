@@ -12,10 +12,15 @@ export default function DialogueBox({
     userName="Samantha Brown",
     date="17/6",
     type="read",
+    onClick=() => {},
+    userTwo,
+    chatRoomId,
+    userOneId,
+    userTwoId,
 
 }){
     return(
-        <FlexBox width="88%" height="60px" justifyContent="flex-start" padding="0 3px 0 3px" margin="9px">
+        <FlexBox width="88%" height="60px" justifyContent="flex-start" padding="0 3px 0 3px" margin="9px" onClick={()=> {onClick(chatRoomId)}}>
                 <FlexBox width="20%"><ImgPlaceholder margin="0 5px 0 5px" height="50px" width="50px" bgImage={image} borderRadius="50%"></ImgPlaceholder></FlexBox>
                 <FlexBox width="90%" dir="column" alignItems="flex-start" margin="0 10px 0 13px">
                     <FlexBox width="100%" justifyContent="space-between">
