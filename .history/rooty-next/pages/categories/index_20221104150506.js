@@ -11,9 +11,8 @@ import { useEffect, useState } from "react";
 import {prisma} from "../../server/db/client";
 import DialogueBox from "../../components/chat/dialogueBox";
 import MyMessage from "../../components/chat/myMessage";
-import NotMyMessage from "../../components/chat/notMyMessage";
-import ChatNavBar from "../../components/chat/chatNavBar";
-import ChatHeader from "../../components/chat/chatHeader";
+
+
 
 
 
@@ -46,6 +45,7 @@ export default function Categories({jsonCategories}) {
 
   return (
     <>
+
       <Wrapper alignItems="start">
         <FlexBox dir="column" width="100%">
           <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 40px" minHeight="100px">
@@ -61,6 +61,16 @@ export default function Categories({jsonCategories}) {
             {getCategories(categories)}
           </FlexBox>
         </FlexBox>
+      </Wrapper>
+      <Wrapper>
+      <FlexBox dir="column" width="100%">
+            <DialogueBox date="Today"></DialogueBox>
+            <DialogueBox postTitle="Video Editing" userName="Raki Devon" image="/face2.jpg"></DialogueBox>
+            <DialogueBox postTitle="Motion Graphics" userName="Aaron Hans" image="/face4.jpg" date="3/8"></DialogueBox>
+      </FlexBox>
+      <FlexBox>
+        <MyMessage></MyMessage>
+      </FlexBox>
       </Wrapper>
     </>
   )

@@ -35,7 +35,7 @@ export default function Item({
            </FlexBox>
            <FlexBox alignItems="left" justifyContent="space-between" width="100%">
              <Text txt={rating + "/5"} size="15px" weight="regular"></Text>
-             <FlexBox alignItems="flex-end" justifyContent="space-around" width="50%">
+             <FlexBox alignItems="baseline" justifyContent="space-around" width="40%">
                  {/* <Text txt={compensation} size="15px" weight="bold"></Text> */}
                  <Text txt={"$" + price} size="15px" weight="bold"></Text>
                  <Text txt="or "></Text>

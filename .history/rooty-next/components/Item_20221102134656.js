@@ -4,7 +4,6 @@ import { FlexBox, Wrapper, ImgPlaceholder } from "../styles/globals";
 import Text from "./text";
 import { Icon } from "semantic-ui-react";
 import { Heart } from "./icons/icons";
-import HandshakeIcon from '@mui/icons-material/Handshake';
 
 export default function Item({ 
   id,
@@ -26,7 +25,7 @@ export default function Item({
 
 
  return (
-       <FlexBox dir={dir} onClick={onClick} key={id} width={width} height={height} bgColor="#F7F7FC" borderRadius="16px" margin="20px" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
+       <FlexBox dir={dir} key={id} width={width} height={height} bgColor="#F7F7FC" borderRadius="16px" margin="20px" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
          <ImgPlaceholder bgImage={image} width='138px' borderRadius={imgBorderRadius}></ImgPlaceholder>
          <FlexBox dir="column" height={heightTxtBox} width={widthTxtBox} padding={padding} alignItems="start" justifyContent="space-between">
            <FlexBox alignItems="baseline" justifyContent="space-between" width="100%">
@@ -35,11 +34,11 @@ export default function Item({
            </FlexBox>
            <FlexBox alignItems="left" justifyContent="space-between" width="100%">
              <Text txt={rating + "/5"} size="15px" weight="regular"></Text>
-             <FlexBox alignItems="flex-end" justifyContent="space-around" width="50%">
+             <FlexBox alignItems="baseline" justifyContent="space-around" width="40%">
                  {/* <Text txt={compensation} size="15px" weight="bold"></Text> */}
                  <Text txt={"$" + price} size="15px" weight="bold"></Text>
                  <Text txt="or "></Text>
-                 <HandshakeIcon></HandshakeIcon>
+                 <Icon name="exchange"></Icon>
              </FlexBox>
            </FlexBox>
            

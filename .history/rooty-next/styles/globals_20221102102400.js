@@ -25,11 +25,9 @@ export const FlexBox = styled.div`
     border-bottom-style: ${props=>props.borderBottom};
     box-shadow: ${props=>props.boxShadow};
     border-top: ${props=>props.topBorder};
-    border-bottom: ${props=>props.bottomBorder};
     color: ${props=>props.color};
     font-weight: ${props=>props.fontWeight};
-    cursor: ${props=>props.cursor};
-    max-width: ${props=>props.maxWidth};
+    cursor: ${props=>props.cursor}
 `
 
 export const Wrapper = styled(FlexBox) `

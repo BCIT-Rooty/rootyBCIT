@@ -8,12 +8,9 @@ import { Search } from 'semantic-ui-react';
 import { ImgPlaceholder } from "../../styles/globals";
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import {prisma} from "../../server/db/client";
-import DialogueBox from "../../components/chat/dialogueBox";
-import MyMessage from "../../components/chat/myMessage";
-import NotMyMessage from "../../components/chat/notMyMessage";
-import ChatNavBar from "../../components/chat/chatNavBar";
-import ChatHeader from "../../components/chat/chatHeader";
+import {prisma} from "../../server/db/client"
+
+
 
 
 
@@ -46,6 +43,7 @@ export default function Categories({jsonCategories}) {
 
   return (
     <>
+
       <Wrapper alignItems="start">
         <FlexBox dir="column" width="100%">
           <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 40px" minHeight="100px">
@@ -61,6 +59,19 @@ export default function Categories({jsonCategories}) {
             {getCategories(categories)}
           </FlexBox>
         </FlexBox>
+      </Wrapper>
+      <Wrapper>
+      <FlexBox dir="column" width="100%">
+            <FlexBox width="88%" border="1px black solid" height="60px" justifyContent="flex-start" padding="0 5px 0 5px">
+
+                    <ImgPlaceholder margin="0 5px 0 5px" height="50px" width="50px" bgImage="/face3.jpg" borderRadius="50%"></ImgPlaceholder>
+                <FlexBox width="265px" dir="column" alignItems="flex-start" margin="0 10px 0 13px">
+                    <Text txt="Logo Design" size="18px" margin="2px"></Text>
+                    <Text txt="Samantha Brown" size="15px"></Text>
+                </FlexBox>
+                
+          </FlexBox>
+      </FlexBox>
       </Wrapper>
     </>
   )
