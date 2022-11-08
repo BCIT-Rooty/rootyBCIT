@@ -23,7 +23,7 @@ export default function Item({
   padding="12px",
   imgBorderRadius="16px 0px 0px 16px",
   onClick=()=>{},
-}) {
+  onHeartClick=()=>{} }) {
 
 
  return (
@@ -32,7 +32,7 @@ export default function Item({
          <FlexBox dir="column" height={heightTxtBox} width={widthTxtBox} padding={padding} alignItems="start" justifyContent="space-between">
            <FlexBox alignItems="baseline" justifyContent="space-between" width="100%">
              <Text txt={name} size={nameTxtSize} weight="regular" align="left"></Text>
-             <Heart></Heart>
+             <Heart link onClick={onHeartClick}></Heart>
            </FlexBox>
            <FlexBox alignItems="left" justifyContent="space-between" width="100%">
              <Text txt={rating + "/5"} size="15px" weight="regular"></Text>
