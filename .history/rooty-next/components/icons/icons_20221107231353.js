@@ -8,13 +8,12 @@ const RatingExampleDisabled = () => (
 
 export default RatingExampleDisabled;
 
-function HandleHeartClick(e){
+function whateverFunction(e){
   e.stopPropagation();
-  //put your "put into favourites" code after this line
   console.log("Renata is nice")
 }
 
 // ------HEART
-export const Heart = () => (
-  <Rating icon='heart' defaultRating={0} maxRating={1} size='huge' link onClick={HandleHeartClick}/>
+export const Heart = () => (  
+  <Rating icon='heart' defaultRating={0} maxRating={1} size='huge' link onClick={this.whateverFunction}/>
 )

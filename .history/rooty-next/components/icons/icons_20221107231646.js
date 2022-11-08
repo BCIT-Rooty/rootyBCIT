@@ -10,7 +10,6 @@ export default RatingExampleDisabled;
 
 function HandleHeartClick(e){
   e.stopPropagation();
-  //put your "put into favourites" code after this line
   console.log("Renata is nice")
 }
 

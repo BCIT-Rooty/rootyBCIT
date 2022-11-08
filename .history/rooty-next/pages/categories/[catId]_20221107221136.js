@@ -19,6 +19,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
         const link = `/categories`
         router.push(link)
     }
+    
 
 
     return (
@@ -38,6 +39,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
                                         () => r.push({
                                             pathname: `/posts/${item.postId}`,
                                         })}
+                                    
                                    
                                     name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.Photos[0].postPhotoUrl} />
                             </div>
