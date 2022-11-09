@@ -22,17 +22,14 @@ export default async function handler(req, res) {
             data: {
                 userId: 1,
                 postId: +heartsItem,
-                Photos: {
-                    connect: {
-                        postPhotoId: +post.Photos[0].postPhotoId
-                    }
-                }
+
             }
         })
     } else if (heart === "true") {
-        await prisma.favorite.delete({
+        await prisma.favorite.deleteMany({
             where: {
-                favoriteId: 1 // here i need to have the postId in the where but i cant do that rn because only the PK of the favourite table is allowed in the where (ask sam tomorrow)
+                userId: 1,
+                postId: +heartsItem // here i need to have the postId in the where but i cant do that rn because only the PK of the favourite table is allowed in the where (ask sam tomorrow)
             }
         })
     }
