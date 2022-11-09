@@ -11,25 +11,50 @@ export default function ACertainChatRoom(props) {
   const [message, setMessage] = useState("");
   const socket = io();
   const [chats, setChats] = useState([]);
+  const [userId, setUserId] = useState("")
   var userIdGlobal;
+
+
 
   useEffect(() => {
     userIdGlobal = Math.floor(Math.random() * 10000) + 1;
     fetch("/api/socketio").finally(() => {
       socket.on("connect", () => {
         joinRoom(theChatRoomId);
+        console.log(socket.id)
+        setUserId(socket.id)
         // The userID doesn't exits now because that we don't have users now!
-        socket.on("receive-message", (message, userId, hexCode) => {
-          console.log("This is someone else", message, userId);
-          // setChats([...chats, <NotMyMessage text={message} />])
+        socket.on("receive-message", (message, userId, frontId) => {
+          if (frontId == socket.id) {
+            return
+          } else {
+            console.log("This is someone else", message, userId, frontId);
+            ;(async function yo()  {
+              await axios.post("/api/allChat", {userId: props.theId}).then((res) => {
+                console.log(res)
+                const oldPosts = (res.data).map(m => <MyMessage text={m.content} />)
+                setChats([...oldPosts, <MyMessage text={message} />])
+              })
+            })()
+            
+          }
         });
       });
     });
-
     window.onbeforeunload = function () {
       socket.emit("avoid-duplicate");
     };
   }, []);
+  
+  useEffect(() => {
+    ;(async function yo()  {
+      await axios.post("/api/allChat", {userId: socket.id}).then((res) => {
+        console.log(res)
+        const oldPosts = (res.data).map(m => <MyMessage text={m.content} />)
+        setChats(oldPosts)
+      })
+    })()
+  }, [])
 
   function joinRoom(room) {
     console.log("Joined room", room);
@@ -37,7 +62,7 @@ export default function ACertainChatRoom(props) {
   }
 
   async function sendTextToTheBackEnd(inputText, room) {
-    socket.emit("send-text", inputText, room);
+    socket.emit("send-text", inputText, room, userId);
     setChats([...chats, <MyMessage text={inputText} />]);
   }
 
