@@ -6,6 +6,7 @@ import TextInput from "../../components/sohrabsInputs/TextInput";
 import { fakeDbMessage } from "../../server/database";
 import * as db from "../../server/database";
 import ChatNavBar from "../../components/chat/chatNavBar";
+import axios from "axios";
 
 export default function ACertainChatRoom(props) {
   const router = useRouter();
@@ -51,23 +52,16 @@ export default function ACertainChatRoom(props) {
     }
   }
 
+  function handleChangeText(input) {
+    setMessage(input);
+  }
+
   return (
     <>
-
-<ChatNavBar onChangingTheText={setMessage} onSubmitButtonClicked={handleSendButton} />
-
-{/*     
-      <form>
-        <TextInput
-          inputTitle={"Send a message"}
-          value={message}
-          onChangingTheText={setMessage}
-        />
-        <SubmitButton
-          onSubmitButtonClicked={handleSendButton}
-          textInsideTheButton={"Done"}
-        />
-      </form> */}
+      <ChatNavBar
+        onChangingTheTextForChat={handleChangeText}
+        onSubmitButtonClicked={handleSendButton}
+      />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { Server } from 'socket.io'
 import date from "date-and-time";
-import * as db from "../../../server/database.js"
+import * as db from "../../../components/dbFunctions/databaseFunctions"
+import {prisma} from "../../../server/db/client"
 // import { useState } from 'react';
 
 export default function ioHandler(req, res)  {
@@ -19,7 +20,7 @@ export default function ioHandler(req, res)  {
             socket.broadcast.emit("receive-message", inputText);
           } else {
             const dateDB = date.format(new Date(), "YYYY-DD-MM");
-            db.writeChatToTheDataBase(inputText, dateDB, userIdGlobal, room);
+            db.createChat(inputText, dateDB, userIdGlobal, room);
             socket.to(room).emit("receive-message", inputText, userIdGlobal);
           }
         });

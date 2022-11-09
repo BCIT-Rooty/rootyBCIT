@@ -45,6 +45,7 @@ model Post {
   image              String?          @default("")
   Photos             Photo[]
   Keywords           PostOnKeywords[]
+  Chats              ChatRoom[]
 }
 
 // Relationship with the User works now
@@ -120,12 +121,14 @@ model ChatRoom {
   userTwoId  Int
   createdAt  DateTime  @default(now())
   Message    Message[]
+  post       Post?      @relation(fields: [postId], references: [postId])
+  postId     Int?
 }
 
 model Message {
   messageId  Int      @id @default(autoincrement())
   content    String   @db.VarChar(500)
-  createdAt  DateTime @default(now())
+  createdAt  DateTime? @default(now())
   author     User     @relation(fields: [userId], references: [userId])
   userId     Int      @unique
   chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [chatRoomId])
