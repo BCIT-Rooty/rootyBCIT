@@ -32,7 +32,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
                     {
                         parsedItems.map((item) => {
                             return (
-                            <div key={item.postId}>
+                            <div id={item.postId} key={item.postId}>
                                 <Item
                                     onClick={
                                         () => r.push({
