@@ -14,6 +14,7 @@ export const TextContain = styled.div`
     text-decoration: ${props=>props.textDecor};
     line-height: normal;
     border-bottom: ${props=>props.borderBottom};
+    justify-content: ${props=>props.justifyContent}
 `
 
 export default function Text({
@@ -29,12 +30,13 @@ export default function Text({
     width,
     height,
     borderBottom,
+    justifyContent,
     onChangingTheText = () => {},
     onClick=()=>{}
 }){
 
     return (
-    <TextContain onChange={(e) => onChangingTheText(e.target.innerText)} onClick={onClick} width={width} height={height} fontSize={size} fontWeight={weight} textAlign={align} textColor={color} padding={padding} bgColor={bgColor} textDecor={textDecor} borderBottom={borderBottom}>
+    <TextContain onChange={(e) => onChangingTheText(e.target.innerText)} onClick={onClick} width={width} height={height} fontSize={size} fontWeight={weight} textAlign={align} textColor={color} padding={padding} bgColor={bgColor} textDecor={textDecor} borderBottom={borderBottom} justifyContent={justifyContent}>
         {txt}
     </TextContain>
     )

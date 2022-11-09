@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FlexBox, ImgPlaceholder } from "../../styles/globals";
 
 export const InputRectangle = styled.input`
-  background-color: ${props => props.bgColor || "#F7F7FC"};
+  background-color: ;
   border: ${props => props.border};
   border-radius: ${props => props.borderRadius};
   width: ${props => props.width};
@@ -10,6 +10,7 @@ export const InputRectangle = styled.input`
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   cursor = ${props => props.cursor};
+  background: url(${props => props.bgImage}) no-repeat 5px 0px, ${props => props.bgColor || "#F7F7FC"};
   font-family: 'Plus Jakarta Sans', sans-serif;
 `;
 
@@ -17,7 +18,7 @@ const Img = styled.img`
   width: 60px;
   height: 60px;
   margin-left: 20px;
-  border-radius: 10px;
+  border-radius: ${props => props.brImage};
 `;
 
 const TextArea = styled.textarea`
@@ -75,7 +76,9 @@ export default function Input({
   value,
   onChangingTheText = () => {},
   onInsertPhotoInsideS3 = () => {},
-  cursor="pointer"
+  cursor="pointer",
+  bgImage="",
+  brImage="10px"
 }) {
 
   function promptFilename() {
@@ -96,6 +99,7 @@ export default function Input({
             onClick={() => promptFilename()}
             color="white"
             borderRadius="10px"
+            bgColor="white"
             boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)"
             cursor={cursor}
           >
@@ -105,7 +109,7 @@ export default function Input({
               bgImage={fileBgImage}
             ></ImgPlaceholder>
           </FlexBox>
-          <Img></Img>
+          <Img brImage={brImage}></Img>
         </FlexBox>
       )}
 
@@ -124,6 +128,7 @@ export default function Input({
           height={height}
           margin={margin}
           padding={padding}
+          bgImage={bgImage}
         ></InputRectangle>
       )}
     </FlexBox>
