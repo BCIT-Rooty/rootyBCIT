@@ -14,13 +14,13 @@ export default function ioHandler(req, res)  {
       io.on("connection", (socket) => {
         userIdGlobal = socket.id
         // socket.join(theChatRoomId);
-        socket.on("send-text", (inputText, room, hexCode) => {
+        socket.on("send-text", (inputText, room) => {
           if (room == null) {
             socket.broadcast.emit("receive-message", inputText);
           } else {
             const dateDB = date.format(new Date(), "YYYY-DD-MM");
             db.createChat(inputText, dateDB, userIdGlobal, room);
-            socket.broadcast.to(room).emit("receive-message", inputText, userIdGlobal, hexCode);
+            socket.broadcast.to(room).emit("receive-message", inputText, userIdGlobal);
           }
         });
         socket.on("join-room", (room) => {         
