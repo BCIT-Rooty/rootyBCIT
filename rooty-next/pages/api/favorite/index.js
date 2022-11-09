@@ -21,7 +21,12 @@ export default async function handler(req, res) {
         await prisma.favorite.create({
             data: {
                 userId: 1,
-                postId: +heartsItem
+                postId: +heartsItem,
+                Photos: {
+                    connect: {
+                        postPhotoId: +post.Photos[0].postPhotoId
+                    }
+                }
             }
         })
     } else if (heart === "true") {
