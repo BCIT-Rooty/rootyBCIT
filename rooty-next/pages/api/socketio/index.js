@@ -6,7 +6,6 @@ import {prisma} from "../../../server/db/client"
 
 export default function ioHandler(req, res)  {
   var userIdGlobal
-  
     if (!res.socket.server.io) {
       console.log('First use, starting socket.io')
       const io = new Server(res.socket.server)
@@ -14,14 +13,14 @@ export default function ioHandler(req, res)  {
       var theChatRoomId;
       io.on("connection", (socket) => {
         userIdGlobal = socket.id
-        socket.join(theChatRoomId);
-        socket.on("send-text", (inputText, room) => {
+        // socket.join(theChatRoomId);
+        socket.on("send-text", (inputText, room, hexCode) => {
           if (room == null) {
             socket.broadcast.emit("receive-message", inputText);
           } else {
             const dateDB = date.format(new Date(), "YYYY-DD-MM");
             db.createChat(inputText, dateDB, userIdGlobal, room);
-            socket.to(room).emit("receive-message", inputText, userIdGlobal);
+            socket.broadcast.to(room).emit("receive-message", inputText, userIdGlobal, hexCode);
           }
         });
         socket.on("join-room", (room) => {         
@@ -33,7 +32,7 @@ export default function ioHandler(req, res)  {
           socket.leave(theChatRoomId);
         });
         socket.on("disconnect", function () {
-          console.log("disconnected!");
+          // console.log("disconnected!");
         });
       });
 

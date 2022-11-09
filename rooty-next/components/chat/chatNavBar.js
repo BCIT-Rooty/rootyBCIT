@@ -13,14 +13,13 @@ onSubmitButtonClicked= () => {},
 value,
 }){
     function newFunction(input) {
-        console.log(input)
         onChangingTheTextForChat(input)
     }
     return(
     <FlexBox width="100%" justifyContent="space-around" padding="10px" topBorder="1px #EDEDED solid" margin="10px 10px 70px 10px">
         <AddIcon fontSize="large" sx={{ color: grey[500] }}></AddIcon>
         <FlexBox>
-            <Input onChangingTheText={newFunction} placeholder="Type a Message Here" width="75vw" />
+            <Input value={value} onChangingTheText={newFunction} placeholder="Type a Message Here" width="75vw" />
         </FlexBox>
        <button onClick={(e) => onSubmitButtonClicked(e) }> <TelegramIcon fontSize="large" sx={{ color: purple[900] }}/> </button>
     </FlexBox>

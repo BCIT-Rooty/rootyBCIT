@@ -133,12 +133,6 @@ CREATE UNIQUE INDEX "Category_categoryName_key" ON "Category"("categoryName");
 -- CreateIndex
 CREATE UNIQUE INDEX "Keywords_keyword_key" ON "Keywords"("keyword");
 
--- CreateIndex
-CREATE UNIQUE INDEX "Message_userId_key" ON "Message"("userId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Message_chatRoomId_key" ON "Message"("chatRoomId");
-
 -- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
