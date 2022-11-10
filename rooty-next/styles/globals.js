@@ -52,6 +52,8 @@ export const ImgPlaceholder = styled.div`
     border-radius: ${props=>props.borderRadius || "8px 0px 0px 8px"};
     background-image: url(${props=>props.bgImage});
     margin: ${props=>props.margin};
+    position: ${props=>props.position};
+    top: ${props=>props.top};
     background-position: center;
     background-size: cover;
 `
