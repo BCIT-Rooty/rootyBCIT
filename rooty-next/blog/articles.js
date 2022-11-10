@@ -6,10 +6,24 @@ const ListItem = styled.li`
 padding-left:40px;
 padding-right:20px
 `
+export const gradientCard = [
+    ["How to Write the Perfect Freelancing Bio", "/tip1.png", "firstArticle"],
+    ["6 Habits of High Successful Freelancers", "/tip2.jpg", "secondArticle"],
+    ["4 Steps to Complete Your First Gig","/tip3.png", "thirdArticle"],
+    ["5 Ways to Improve Focus and Productivity", "/tip1.png", "fourthArticle"]
+  ]
+export const popularSearches = [
+    ["Broadcast & Media", "/categories/1"],
+    ["Digital Arts & Design", "/categories/2"],
+    ["Business & Finance","/categories/3"],
+    ["Marketing", "/categories/4"],
+    ["Tutoring", "/categories/5"],
+    ["Computing", "/categories/6"] 
+  ]
 
 export const Article1 = () => {
     return(
-        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 30px 15px">
+        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 30px 15px" maxWidth="900px">
             <Text padding="10px 20px" txt='Just like a great headline hooks a reader, a great bio can hook your next client. In fact, your bio is one of the most important features of your CV Profile or any writer portfolio for that matter.'></Text>
             <Text padding="10px 20px" txt='And that means it better be good.'></Text>
             <Text padding="10px 20px" txt='This is where most writers suddenly remember they have houseplants to water or spices to alphabetize. No writer likes writing their bio (which is an interesting conundrum when you think about it). But if you’re wondering why brands aren’t picking you for assignments — these tips will help you write an irresistible bio that showcases your talent.'></Text>
@@ -36,7 +50,7 @@ export const Article1 = () => {
 
 export const Article2 = () => {
     return(
-        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 30px 15px">
+        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 30px 15px" maxWidth="900px">
             <Text padding="10px 20px" txt='There are a lot of freelancers out there, but all are not created equal. There are those who have a full book of work and they love the work they do. There are others who are perpetually looking for work and taking on work they don’t actually enjoy.'></Text>
             <Text padding="10px 20px" txt='This is where most writers suddenly remember they have houseplants to water or spices to alphabetize. No writer likes writing their bio (which is an interesting conundrum when you think about it). But if you’re wondering why clients aren’t picking you for assignments — these tips will help you write an irresistible bio that showcases your talent.'></Text>
             <Text padding="10px 20px" txt='1. Be Organized' size="20px" weight="bold"></Text>
@@ -69,7 +83,7 @@ export const Article2 = () => {
 
 export const Article3 = () => {
     return(
-        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 30px 15px">
+        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 30px 15px" maxWidth="900px">
             <Text padding="10px 20px" txt='Congratulations on landing your first content gig! You pitched, persevered and persisted. You made your polite follow-up calls, sent those respectful emails and letters. And it finally yielded results. You landed that first freelance content assignment from a new client!'></Text>
             <Text padding="10px 20px" txt='Feel free to celebrate and tell all your friends and family about it. You’ve earned it. But also keep in mind that getting that contract is just the start. Your goal should be to successfully complete the work.'></Text>
             <Text padding="10px 20px" txt='1. Mind your manners' size="20px" weight="bold"></Text>
@@ -94,7 +108,7 @@ export const Article3 = () => {
 
 export const Article4 = () => {
     return(
-        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 30px 15px">
+        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 30px 15px" maxWidth="900px">
             <Text padding="10px 20px" txt='One of the best aspects of a full-time freelance lifestyle can also be one of the most challenging: the ability to set your own schedule.'></Text>
             <Text padding="10px 20px" txt='Without a boss in the office to check up that you’re doing your work, it’s up to freelancers to motivate themselves to meet their deadlines and be productive. You can use these tips to increase your focus and be a more productive freelancer.'></Text>
             <Text padding="10px 20px" txt='1. Use a calendar' size="20px" weight="bold"></Text>
@@ -130,7 +144,7 @@ export const Article4 = () => {
 
 export const Contest = () => {
     return(
-        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 10px 15px">
+        <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 10px 15px" maxWidth="900px">
         <Text padding="10px 20px" txt="We are looking for a talented designer to recreate BCIT's largest program expo and information session. It's your chance to make an exciting eye-catching poster to attract new potential BCIT students"></Text>
         <Text padding="10px 20px" txt='Only one winner will receive $500 for their amazing poster'></Text>
         <ListItem>Include the BCIT logo.</ListItem>

@@ -12,6 +12,9 @@ export const InputRectangle = styled.input`
   cursor = ${props => props.cursor};
   background: url(${props => props.bgImage}) no-repeat 5px 0px, ${props => props.bgColor || "#F7F7FC"};
   font-family: 'Plus Jakarta Sans', sans-serif;
+  max-width: ${props => props.maxWidth};
+  min-width: ${props => props.minWidth};
+  box-sizing: border-box;
 `;
 
 const Img = styled.img`
@@ -30,6 +33,8 @@ const TextArea = styled.textarea`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   font-family: 'Plus Jakarta Sans', sans-serif;
+  max-width: ${props=>props.maxWidth};
+  min-width: ${props => props.minWidth}
 `;
 
 // function found online to make a div, in this case FlexBox, act to make
@@ -78,7 +83,10 @@ export default function Input({
   onInsertPhotoInsideS3 = () => {},
   cursor="pointer",
   bgImage="",
-  brImage="10px"
+  brImage="10px",
+  maxWidth,
+  minWidth,
+  justifyContent
 }) {
 
   function promptFilename() {
@@ -90,7 +98,7 @@ export default function Input({
   }
 
   return (
-    <FlexBox flexWrap="wrap">
+    <FlexBox flexWrap="wrap" maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
       {type === "file" && (
         <FlexBox>
           <FlexBox
@@ -146,9 +154,12 @@ export function TextInput({
   placeholder = "Enter Text Here",
   padding = "15px",
   onChangingTheText = () => {},
+  maxWidth ="800px",
+  minWidth,
+  justifyContent
 }) {
   return (
-    <FlexBox flexWrap="wrap">
+    <FlexBox flexWrap="wrap"  maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
       {type === "textarea" && (
         <TextArea
           onChange={(e) => {
@@ -163,6 +174,8 @@ export function TextInput({
           minHeight={minHeight}
           margin={margin}
           padding={padding}
+          maxWidth={maxWidth}
+          minWidth={minWidth}
         ></TextArea>
       )}
     </FlexBox>
