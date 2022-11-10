@@ -31,20 +31,22 @@ export const FlexBox = styled.div`
     font-weight: ${props=>props.fontWeight};
     cursor: ${props=>props.cursor};
     max-width: ${props=>props.maxWidth};
+    min-width: ${props=>props.minWidth};
 `
 
 export const Wrapper = styled(FlexBox) `
     width: 100vw;
     height: ${props=>props.height || "100vh"};
     padding:${props=>props.padding};
-    overflow-x: hidden;
-    overflow-y: hidden
+    overflow-x: ${props=>props.overflowX};
+    overflow-y: ${props=>props.overflowY};
 `
 
 export const HorizontalScrollContainer = styled(FlexBox)`
     overflow-y: scroll;
     width: 100vw;
     scrollbar-width: none;
+    
 `
 
 export const ImgPlaceholder = styled.div`

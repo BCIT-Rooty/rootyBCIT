@@ -23,7 +23,7 @@ export default function UserProfile({ parsedItems }) {
 
 
     return (
-        <Wrapper dir="column" justifyContent="start" alignItems="start" >
+        <Wrapper dir="column" justifyContent="start" alignItems="start">
         <FlexBox bgColor="#4F4DB0" padding="55px 30px " width="100vw" boxShadow="0px 3px 5px #888888">
             <ImgPlaceholder bgImage="/camera-man.jpg" borderRadius="80px" width="80px" height="80px"></ImgPlaceholder>
             <FlexBox dir="column" margin="0px 0px 0px 20px" alignItems="start">
@@ -36,7 +36,7 @@ export default function UserProfile({ parsedItems }) {
                 
             </FlexBox>
         </FlexBox>
-        <FlexBox dir="column">
+        <FlexBox dir="column" height="800px">
             <Text txt="Account" width="100vw" padding="40px 0px 15px 35px" weight="600"></Text>
             <SettingLine name="edit" txt="My Profile" onClick={()=> setShowModal("show")}></SettingLine>
             <SettingLine name="heart" txt="Favourites List" onClick={()=> setShowModal("show")}></SettingLine>
@@ -47,7 +47,7 @@ export default function UserProfile({ parsedItems }) {
             <SettingLine name="universal access" txt="Accessibility" onClick={()=> setShowModal("show")}></SettingLine>
             <SettingLine name="shield alternate" txt="Security" onClick={()=> setShowModal("show")}></SettingLine>
         </FlexBox>
-        <FlexBox justifyContent="space-between" width="100vw" padding="30px 35px">
+        <FlexBox justifyContent="space-between" width="100vw" padding="20px 35px 60px 35px">
             <Text txt="Terms of Use" weight="300" size="15px" onClick={()=> setShowModal("show")}></Text>
             <Button bgColor="#4F4DB0" txt="Log Out" width="100px" fontWeight="600" onClick={()=>setLogOut("active")}></Button>
             <Text txt="Privacy Policy" weight="300" size="15px" onClick={()=> setShowModal("show")}></Text>
@@ -76,7 +76,7 @@ export default function UserProfile({ parsedItems }) {
               >
                 <DownloadPopUp
                   height="100vh"
-                  onClose={() => setLogOut("default")}
+                  onClose={() => setLogOut(r.push("/"))}
                   txt="You Logged Out!"
                   txt2="We hope to see you soon! 🥹"
                   size2="20px"

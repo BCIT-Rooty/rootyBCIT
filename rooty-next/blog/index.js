@@ -9,9 +9,9 @@ import { useState } from "react";
 import DownloadPopUp from "../components/downloadPopUp";
 
 const ClosingIcon = styled(CloseIcon)`
-position: absolute;
-right: 15px;
-top: 15px;
+position: relative;
+left: 34vw;
+top: 35px;
 cursor: pointer
 `
 
@@ -27,10 +27,10 @@ export default function Article({
     const [showDownload, setShowDownload] = useState("default")
 
     return(
-        <FlexBox height="700px" alignItems="flex-start" position="absolute" top="0px">
+        <FlexBox height="700px" alignItems="flex-start">
             <FlexBox width="100vw" dir="column" padding="0px 15px 60px 15px">
                 <ClosingIcon fontSize='large' onClick={onClick}></ClosingIcon>
-                <GradientCard txt={txt} bgImage={bgImage} width="100vw" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px' padding="0px 0px 15px 25px"></GradientCard>
+                <GradientCard txt={txt} bgImage={bgImage} width="100vw" maxWidth="900px" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px' padding="0px 0px 15px 25px"></GradientCard>
                 {article}
                 {contest === "yes" && 
                     <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  padding="0px 15px 20px 15px">
