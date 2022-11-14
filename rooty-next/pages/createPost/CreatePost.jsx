@@ -12,6 +12,7 @@ import Toaster from "../../components/toaster";
 import { motion, AnimatePresence } from "framer-motion";
 import Counter from "../../components/counter";
 import { useRouter } from "next/router";
+import TitlePage from "../../components/titlePage";
 
 export default function CreatePost(props) {
   const [showDownload, setShowDownload] = useState("default");
@@ -219,14 +220,7 @@ export default function CreatePost(props) {
         dir="column"
         height="fit-content"
       >
-        <Text
-          txt="Create your post"
-          size="24px"
-          weight="bold"
-          padding="40px 0px 10px 20px"
-          width="100%"
-          maxWidth="900px"
-        ></Text>
+        <TitlePage txt="Create your Post"/>
         <FlexBox
           padding="20px 0px 20px 20px"
           topBorder="0.5px solid #545454"

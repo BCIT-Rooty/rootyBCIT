@@ -1,0 +1,18 @@
+import { FlexBox } from "../../styles/globals"
+import Text from "../text"
+import Button from "../button"
+
+export default function TitlePage({
+    txt="Title Page",
+    type=""
+}){
+    return(
+        <FlexBox width="100vw" justifyContent="space-between" alignItems="flex-end" bottomBorder="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 20px" minHeight="105px">
+        <Text txt={txt} size="24px" weight="bold"></Text>
+        {type === "Edit" && <FlexBox>
+                <Button bgColor="#4F4DB0" txt={type} height="30px" width="70px" margin="0 20px 0 0"></Button>
+            </FlexBox>
+        }
+      </FlexBox>
+    )
+}
