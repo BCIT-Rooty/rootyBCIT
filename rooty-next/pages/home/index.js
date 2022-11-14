@@ -23,9 +23,9 @@ export default function Home(){
     
   
   <Wrapper dir="column" height="fit-content" padding="0 0 80px 0">
-      <Text txt="Welcome, Student" padding="30px 0px 0px 20px" size="24px" weight="bolder" width="100%" maxWidth="900px" justifyContent="flex-start"></Text>
+      <Text txt="Welcome, Student" padding="70px 0px 0px 20px" size="24px" weight="bolder" width="100%" maxWidth="900px" justifyContent="flex-start" ></Text>
 
-      <Text txt="Insights & Tips" padding="30px 0px 10px 20px" size="21px" weight="bolder" width="100%" maxWidth="900px" justifyContent="flex-start"></Text>
+      <Text txt="Insights & Tips" padding="30px 0px 10px 20px" size="21px" weight="bolder" width="100%" maxWidth="900px" justifyContent="flex-start" ></Text>
       <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" maxWidth="900px">
         <FlexBox padding="0px 0px 0px 20px">
           {gradientCard.map((o) => (

@@ -44,7 +44,7 @@ export const Wrapper = styled(FlexBox) `
 
 export const HorizontalScrollContainer = styled(FlexBox)`
     overflow-y: scroll;
-    width: 100vw;
+    width: ${props=>props.width || "100vw"};
     scrollbar-width: none;
     
 `
