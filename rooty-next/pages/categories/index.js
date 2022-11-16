@@ -7,7 +7,7 @@ import { Search } from 'semantic-ui-react';
 // import Review from "../../components/review";
 import { ImgPlaceholder } from "../../styles/globals";
 import axios from 'axios';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {prisma} from "../../server/db/client";
 import DialogueBox from "../../components/chat/dialogueBox";
 import MyMessage from "../../components/chat/myMessage";
@@ -21,11 +21,20 @@ export default function Categories({jsonCategories}) {
   const r = useRouter();
 
   const [categories, setCategories] = useState([]);
+  const [query, setQuery] = useState("")
 
   useEffect(() => {
-  console.log(jsonCategories);
-  setCategories(jsonCategories)
-  }, [])
+  // console.log(jsonCategories);
+  const searchedCategories = jsonCategories.filter(item => {
+    return item.categoryName.toLowerCase().includes(query.toLocaleLowerCase())
+  })
+  setCategories(searchedCategories)
+  }, [query])
+
+useEffect(() => {
+  console.log(query)
+}, [query])
+
 
 
   function getCategories(categories) {
@@ -54,7 +63,10 @@ export default function Categories({jsonCategories}) {
           <FlexBox padding="30px 0px 13px 0px">
             <Search size="big"
               placeholder='Search...'
-              onResultSelect={(e, data) =>
+              onSearchChange={(e, data) => {
+                setQuery(data.value)
+              }}
+              onResultSelect={(e, data) => 
                 dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })} />
           </FlexBox>
           <FlexBox flexWrap="wrap" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
