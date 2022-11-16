@@ -55,6 +55,7 @@ export default function ACertainChatRoom(props) {
   }
 
   async function sendTextToTheBackEnd(inputText, room) {
+    await axios.post("/api/allChat/makeOneChat", {data: inputText, room})
     socket.emit("send_message", inputText, room, userId);
     // setChats([...chats, <MyMessage text={inputText} />]);
   }
