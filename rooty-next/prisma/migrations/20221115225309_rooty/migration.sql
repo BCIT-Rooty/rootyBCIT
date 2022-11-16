@@ -5,11 +5,12 @@ CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 CREATE TABLE "User" (
     "userId" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "name" TEXT NOT NULL,
-    "lastname" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
+    "name" TEXT,
+    "lastname" TEXT,
+    "password" TEXT,
     "email" TEXT NOT NULL,
-    "aboutMe" TEXT NOT NULL,
+    "isActive" TEXT NOT NULL,
+    "aboutMe" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("userId")

@@ -32,16 +32,16 @@ export default function Button({
   value = "nothing",
   border = "none",
   ifThisIsTheCategoriesButtons = "false",
-  onClick = () => {},
-  onKeywordWantToRemove = () => {},
-  onRemoveKeyword = () => {},
+  onClick = () => { },
+  onKeywordWantToRemove = () => { },
+  onRemoveKeyword = () => { },
   type = "button",
   buttonMargin = "0px",
   cursor = "pointer",
   minWidth,
   maxWidth,
-  onNext = () => {},
-  onPrev = () => {}
+  onNext = () => { },
+  onPrev = () => { }
 }) {
 
 
@@ -54,12 +54,12 @@ export default function Button({
   }
 
 
-    const ButtonClick = styled(FlexBox)`
-        color: ${props=>props.color};
-        text-align: ${props=>props.textAlign};
-        font-weight: ${props=>props.fontWeight};
-        border: ${props=>props.border};
-        font-size: ${props=>props.fzsize};
+  const ButtonClick = styled(FlexBox)`
+        color: ${props => props.color};
+        text-align: ${props => props.textAlign};
+        font-weight: ${props => props.fontWeight};
+        border: ${props => props.border};
+        font-size: ${props => props.fzsize};
         max-width: ${(props) => props.maxWidth};
         min-width: ${(props) => props.minWidth};
     `
@@ -141,7 +141,7 @@ export default function Button({
           {txt}
         </ButtonClick>
       )}
-      {type === "next" && (
+      {type === "submit" && (
         <ButtonClick
           onClick={onNext}
           fzsize={size}

@@ -39,6 +39,7 @@ async function main() {
         password: "Password!",
         email: "sohrab@gmail.com",
         aboutMe: "I'm cool",
+        isActive: "true",
       },
     ],
   });

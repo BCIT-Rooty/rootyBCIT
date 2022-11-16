@@ -33,7 +33,7 @@ const TextArea = styled.textarea`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   font-family: 'Plus Jakarta Sans', sans-serif;
-  max-width: ${props=>props.maxWidth};
+  max-width: ${props => props.maxWidth};
   min-width: ${props => props.minWidth}
 `;
 
@@ -79,11 +79,12 @@ export default function Input({
   placeholder = "Enter Text Here",
   padding = "15px",
   value,
-  onChangingTheText = () => {},
-  onInsertPhotoInsideS3 = () => {},
-  cursor="pointer",
-  bgImage="",
-  brImage="10px",
+  onChangingTheText = () => { },
+  // onChange,
+  onInsertPhotoInsideS3 = () => { },
+  cursor = "pointer",
+  bgImage = "",
+  brImage = "10px",
   maxWidth,
   minWidth,
   justifyContent
@@ -110,6 +111,9 @@ export default function Input({
             bgColor="white"
             boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)"
             cursor={cursor}
+          // onChange={(e) => {
+          //   onChangingTheText(e.target.value);
+          // }}
           >
             <ImgPlaceholder
               width="30px"
@@ -123,7 +127,7 @@ export default function Input({
 
       {type !== "file" && (
         <InputRectangle
-          value={value}  
+          value={value}
           onChange={(e) => {
             onChangingTheText(e.target.value);
           }}
@@ -153,13 +157,13 @@ export function TextInput({
   margin = "0px",
   placeholder = "Enter Text Here",
   padding = "15px",
-  onChangingTheText = () => {},
-  maxWidth ="800px",
+  onChangingTheText = () => { },
+  maxWidth = "800px",
   minWidth,
   justifyContent
 }) {
   return (
-    <FlexBox flexWrap="wrap"  maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
+    <FlexBox flexWrap="wrap" maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
       {type === "textarea" && (
         <TextArea
           onChange={(e) => {
