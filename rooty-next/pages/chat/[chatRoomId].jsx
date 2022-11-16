@@ -18,44 +18,16 @@ export default function ACertainChatRoom(props) {
 
   useEffect(() => {
     userIdGlobal = Math.floor(Math.random() * 10000) + 1;
-    fetch("/api/socketio").finally(() => {
-      socket.on("connect", () => {
-        joinRoom(theChatRoomId);
-        console.log(socket.id);
-        setUserId(socket.id);
-        (async function yo() {
-          await axios
-            .post("/api/allChat", { userId: props.theId })
-            .then((res) => {
-              console.log(res);
-              oldPosts = res.data.map((m) => <MyMessage text={m.content} />);
-            });
-        })();
-        // The userID doesn't exits now because that we don't have users now!
-        socket.on("receive-message", (message, userId, frontId) => {
-          if (frontId == socket.id) {
-            return;
-          } else {
-            console.log("This is someone else", message, userId, frontId);
-            getNewData()
-            // setChats([...oldPosts, <MyMessage text={message} />]);
-          }
-        });
-      });
-    });
-    window.onbeforeunload = function () {
-      socket.emit("avoid-duplicate");
-    };
+    fetch('http://localhost:8000/').finally(() => {
+      const socket = io()
+      socket.on('connect', () => {
+        console.log('connect')
+        socket.emit('hello')
+      })
+    })
+
   }, []);
 
-  useEffect(() => {
-    (async function yo() {
-      await axios.post("/api/allChat", { userId: socket.id }).then((res) => {
-        const oldPosts = res.data.map((m) => <MyMessage text={m.content} />);
-        setChats(oldPosts);
-      });
-    })();
-  }, []);
 
   function getNewData() {
     (async function yo() {
