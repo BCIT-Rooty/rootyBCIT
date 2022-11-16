@@ -156,7 +156,8 @@ export function TextInput({
   onChangingTheText = () => {},
   maxWidth ="800px",
   minWidth,
-  justifyContent
+  justifyContent,
+  defaultValue
 }) {
   return (
     <FlexBox flexWrap="wrap"  maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
@@ -176,7 +177,9 @@ export function TextInput({
           padding={padding}
           maxWidth={maxWidth}
           minWidth={minWidth}
-        ></TextArea>
+        >
+          {}
+        </TextArea>
       )}
     </FlexBox>
   );
