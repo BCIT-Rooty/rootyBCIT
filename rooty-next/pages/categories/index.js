@@ -31,9 +31,6 @@ export default function Categories({jsonCategories}) {
   setCategories(searchedCategories)
   }, [query])
 
-useEffect(() => {
-  console.log(query)
-}, [query])
 
 
 

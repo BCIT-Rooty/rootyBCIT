@@ -16,6 +16,7 @@ export default function CardWithSearch({
     weight="bold",
     padding="10px",
     linearGradient="linear-gradient(to bottom, rgba(79, 77, 176, 0), rgba(79, 77, 176, 1))",
+    onChangingTheText = () => {},
     color="white"
 }){
 
@@ -27,6 +28,9 @@ export default function CardWithSearch({
         <Text txt={txt} size={size} align={align} color={color} weight={weight} padding={padding}></Text>
         <FlexBox margin="12px"><Search size="large"
                         placeholder='Search services'
+                        onSearchChange={(e, data) => {
+                          onChangingTheText(data.value)
+                        }}
                         onResultSelect={(e, data) =>
                         dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox>
         </FlexBox>
