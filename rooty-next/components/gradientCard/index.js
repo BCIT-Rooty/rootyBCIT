@@ -3,7 +3,9 @@ import Text from '../text'
 import { FlexBox } from '../../styles/globals'
 
 export default function GradientCard({
-    width="195px",
+    minWidth="195px",
+    width,
+    maxWidth="275px",
     height="195px",
     bgImage="http://placekitten.com/210/210",
     bgColor="",
@@ -22,8 +24,8 @@ export default function GradientCard({
 
 
   return(
-    <FlexBox onClick={onClick} width={width} height={height} borderRadius={borderRadius} margin={margin} bgImage={bgImage} linearGradient={linearGradient} alignItems="flex-end" padding="10px" bgColor={bgColor}>
-        <Text txt={txt} size={size} align={align} color={color} weight={weight} padding={padding}></Text>
+    <FlexBox onClick={onClick} width={width} minWidth={minWidth} maxWidth={maxWidth} height={height} borderRadius={borderRadius} margin={margin} bgImage={bgImage} linearGradient={linearGradient} alignItems="flex-end" padding="10px" bgColor={bgColor}>
+        <Text txt={txt} size={size} align={align} color={color} weight={weight} padding={padding} ></Text>
     </FlexBox>
   )
 }

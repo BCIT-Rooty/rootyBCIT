@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FlexBox, ImgPlaceholder } from "../../styles/globals";
 
 export const InputRectangle = styled.input`
-  background-color: ${props => props.bgColor || "#F7F7FC"};
+  background-color: ;
   border: ${props => props.border};
   border-radius: ${props => props.borderRadius};
   width: ${props => props.width};
@@ -10,14 +10,20 @@ export const InputRectangle = styled.input`
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   cursor = ${props => props.cursor};
+  background: url(${props => props.bgImage}) no-repeat 5px 0px, ${props => props.bgColor || "#F7F7FC"};
   font-family: 'Plus Jakarta Sans', sans-serif;
+  max-width: ${props => props.maxWidth};
+  min-width: ${props => props.minWidth};
+  box-sizing: border-box;
+  background-size: ${props => props.bgSize};
+  background-position: 3% 50%;
 `;
 
 const Img = styled.img`
   width: 60px;
   height: 60px;
   margin-left: 20px;
-  border-radius: 10px;
+  border-radius: ${props => props.brImage};
 `;
 
 const TextArea = styled.textarea`
@@ -29,6 +35,8 @@ const TextArea = styled.textarea`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   font-family: 'Plus Jakarta Sans', sans-serif;
+  max-width: ${props=>props.maxWidth};
+  min-width: ${props => props.minWidth}
 `;
 
 // function found online to make a div, in this case FlexBox, act to make
@@ -75,7 +83,13 @@ export default function Input({
   value,
   onChangingTheText = () => {},
   onInsertPhotoInsideS3 = () => {},
-  cursor="pointer"
+  cursor="pointer",
+  bgImage="",
+  brImage="10px",
+  maxWidth,
+  minWidth,
+  justifyContent,
+  bgSize,
 }) {
 
   function promptFilename() {
@@ -87,7 +101,7 @@ export default function Input({
   }
 
   return (
-    <FlexBox flexWrap="wrap">
+    <FlexBox flexWrap="wrap" maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
       {type === "file" && (
         <FlexBox>
           <FlexBox
@@ -96,6 +110,7 @@ export default function Input({
             onClick={() => promptFilename()}
             color="white"
             borderRadius="10px"
+            bgColor="white"
             boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)"
             cursor={cursor}
           >
@@ -105,7 +120,7 @@ export default function Input({
               bgImage={fileBgImage}
             ></ImgPlaceholder>
           </FlexBox>
-          <Img></Img>
+          <Img brImage={brImage}></Img>
         </FlexBox>
       )}
 
@@ -124,6 +139,10 @@ export default function Input({
           height={height}
           margin={margin}
           padding={padding}
+          bgImage={bgImage}
+          bgSize={bgSize}
+          justifyContent="center"
+          alignItems="center"
         ></InputRectangle>
       )}
     </FlexBox>
@@ -141,9 +160,12 @@ export function TextInput({
   placeholder = "Enter Text Here",
   padding = "15px",
   onChangingTheText = () => {},
+  maxWidth ="800px",
+  minWidth,
+  justifyContent
 }) {
   return (
-    <FlexBox flexWrap="wrap">
+    <FlexBox flexWrap="wrap"  maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
       {type === "textarea" && (
         <TextArea
           onChange={(e) => {
@@ -158,6 +180,8 @@ export function TextInput({
           minHeight={minHeight}
           margin={margin}
           padding={padding}
+          maxWidth={maxWidth}
+          minWidth={minWidth}
         ></TextArea>
       )}
     </FlexBox>

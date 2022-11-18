@@ -24,7 +24,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
     return (
             <Wrapper alignItems="start" height="fit-content">
                 <FlexBox dir="column" width="100%">
-                <FlexBox position="relative" top="40px" left="-140px"><ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon></FlexBox>
+                <FlexBox position="relative" top="40px" left="-155px"><ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon></FlexBox>
                     <FlexBox width="100%" dir="column">
                         <CardWithSearch bgImage={image} txt={categoryName}></CardWithSearch>
                     </FlexBox>
@@ -37,7 +37,8 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
                                     onClick={
                                         () => r.push({
                                             pathname: `/posts/${item.postId}`,
-                                         })}
+                                        })}
+                                   
                                     name={item.title} rating={item.rating} price={item.price} description={item.description} compensation={item.compensation} image={item.Photos[0].postPhotoUrl} />
                             </div>
                         )

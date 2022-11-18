@@ -22,6 +22,7 @@ export const FlexBox = styled.div`
     position: ${props=>props.position};
     top: ${props=>props.top};
     left:${props=>props.left};
+    bottom: ${props=>props.bottom};
     border-bottom-style: ${props=>props.borderBottom};
     box-shadow: ${props=>props.boxShadow};
     border-top: ${props=>props.topBorder};
@@ -30,20 +31,22 @@ export const FlexBox = styled.div`
     font-weight: ${props=>props.fontWeight};
     cursor: ${props=>props.cursor};
     max-width: ${props=>props.maxWidth};
+    min-width: ${props=>props.minWidth};
 `
 
 export const Wrapper = styled(FlexBox) `
     width: 100vw;
     height: ${props=>props.height || "100vh"};
     padding:${props=>props.padding};
-    overflow-x: hidden;
-    overflow-y: hidden
+    overflow-x: ${props=>props.overflowX};
+    overflow-y: ${props=>props.overflowY};
 `
 
 export const HorizontalScrollContainer = styled(FlexBox)`
     overflow-y: scroll;
-    width: 100vw;
+    width: ${props=>props.width || "100vw"};
     scrollbar-width: none;
+    
 `
 
 export const ImgPlaceholder = styled.div`
@@ -52,6 +55,8 @@ export const ImgPlaceholder = styled.div`
     border-radius: ${props=>props.borderRadius || "8px 0px 0px 8px"};
     background-image: url(${props=>props.bgImage});
     margin: ${props=>props.margin};
+    position: ${props=>props.position};
+    top: ${props=>props.top};
     background-position: center;
     background-size: cover;
 `

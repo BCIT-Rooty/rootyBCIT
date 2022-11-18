@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import io from "socket.io-client";
-import { Wrapper } from "../../styles/globals";
+import { FlexBox, Wrapper } from "../../styles/globals";
 import {prisma} from "../../server/db/client";
 import DialogBox from "../../components/chat/dialogueBox"
 import { useRouter } from "next/router";
+import Text from "../../components/text";
 
 
 export default function Chat({allTheChatsThatUserWasInJson}) {
@@ -23,7 +24,7 @@ export default function Chat({allTheChatsThatUserWasInJson}) {
         dir="column"
         height="fit-content"
       >
-        <h1>Chats</h1>
+        <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 40px" minHeight="100px"><Text txt="Chats" size="24px" weight="bold"></Text></FlexBox>
 
         { allTheChatsThatUserWasInJson.map(m => <DialogBox {...m} userName={m.userTwo.name} onClick={handleClickChat} />)}
 
