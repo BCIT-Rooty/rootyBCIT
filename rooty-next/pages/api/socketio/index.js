@@ -1,11 +1,11 @@
 import { Server } from 'socket.io'
 import date from "date-and-time";
-import * as db from "../../../server/database.js"
+import * as db from "../../../components/dbFunctions/databaseFunctions"
+import {prisma} from "../../../server/db/client"
 // import { useState } from 'react';
 
 export default function ioHandler(req, res)  {
   var userIdGlobal
-  
     if (!res.socket.server.io) {
       console.log('First use, starting socket.io')
       const io = new Server(res.socket.server)
@@ -13,14 +13,14 @@ export default function ioHandler(req, res)  {
       var theChatRoomId;
       io.on("connection", (socket) => {
         userIdGlobal = socket.id
-        socket.join(theChatRoomId);
-        socket.on("send-text", (inputText, room) => {
+        // socket.join(theChatRoomId);
+        socket.on("send-text", (inputText, room, userId) => {
           if (room == null) {
             socket.broadcast.emit("receive-message", inputText);
           } else {
             const dateDB = date.format(new Date(), "YYYY-DD-MM");
-            db.writeChatToTheDataBase(inputText, dateDB, userIdGlobal, room);
-            socket.to(room).emit("receive-message", inputText, userIdGlobal);
+            db.createChat(inputText, dateDB, userIdGlobal, room);
+            socket.broadcast.to(room).emit("receive-message", inputText, userIdGlobal, userId);
           }
         });
         socket.on("join-room", (room) => {         
@@ -32,7 +32,7 @@ export default function ioHandler(req, res)  {
           socket.leave(theChatRoomId);
         });
         socket.on("disconnect", function () {
-          console.log("disconnected!");
+          // console.log("disconnected!");
         });
       });
 

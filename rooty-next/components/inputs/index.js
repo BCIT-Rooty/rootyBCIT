@@ -15,6 +15,8 @@ export const InputRectangle = styled.input`
   max-width: ${props => props.maxWidth};
   min-width: ${props => props.minWidth};
   box-sizing: border-box;
+  background-size: ${props => props.bgSize};
+  background-position: 3% 50%;
 `;
 
 const Img = styled.img`
@@ -86,7 +88,8 @@ export default function Input({
   brImage="10px",
   maxWidth,
   minWidth,
-  justifyContent
+  justifyContent,
+  bgSize,
 }) {
 
   function promptFilename() {
@@ -137,6 +140,9 @@ export default function Input({
           margin={margin}
           padding={padding}
           bgImage={bgImage}
+          bgSize={bgSize}
+          justifyContent="center"
+          alignItems="center"
         ></InputRectangle>
       )}
     </FlexBox>

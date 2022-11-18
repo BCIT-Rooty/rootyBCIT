@@ -138,9 +138,9 @@ export default function Home() {
           {steps === 1 && <FlexBox width="100%" maxWidth="900px" dir="column" alignItems="flex-start" justifyContent="flex-start" >
             <motion.div key={steps} initial={{x: 400}} animate={{x: 0, transition:{duration: 0.4, delay:0.7}}} exit={{x:-400}}>
             <Text padding='30px 0px 10px 20px' size='18px' weight='500' txt="BCIT Email" color="white" ></Text>
-            <Input bgImage="/bx-envelope.svg" type="email" placeholder='ex/jdoe@my.bcit.ca' margin="0px 20px 0px 20px" padding='0 0 0 45px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
+            <Input bgImage="/bx-envelope.svg" type="email" placeholder='ex/jdoe@my.bcit.ca' margin="0px 20px 0px 20px" padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
             <Text padding='30px 0px 10px 20px' size='18px' weight='500' txt="Password" color="white" ></Text>
-            <Input bgImage="/bx-lock.svg" type="password" placeholder='' margin="0px 20px 0px 20px" padding='0 0 0 45px' width="90vw" maxWidth="900px" justifyContent="flex-start" ></Input>
+            <Input bgImage="/bx-lock.svg" type="password" placeholder='' margin="0px 20px 0px 20px" padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start" ></Input>
             <Text padding='10px 20px 10px 20px' size='14px' weight='500' txt="Forgot Password?" color="white" textDecor="underline" justifyContent="flex-end" width="100vw"></Text>
             </motion.div>
             </FlexBox>

@@ -3,6 +3,7 @@ import Text from '../text'
 import { FlexBox } from '../../styles/globals'
 import { Search } from 'semantic-ui-react'
 import GradientCard from '.'
+import Input from '../inputs'
 
 export default function CardWithSearch({
     width="100%",
@@ -25,10 +26,14 @@ export default function CardWithSearch({
     <FlexBox bgImage={bgImage} width={width} height={height} borderRadius="0px" margin="0px" alignItems="flex-end" linearGradient={linearGradient}>
         <FlexBox dir="column" margin="20px">
         <Text txt={txt} size={size} align={align} color={color} weight={weight} padding={padding}></Text>
-        <FlexBox margin="12px"><Search size="large"
+        <FlexBox margin="12px">
+          {/* <Search size="large"
                         placeholder='Search services'
                         onResultSelect={(e, data) =>
-                        dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/></FlexBox>
+                        dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/> */}
+                        {/* <Input type="search" bgImage="/face4.jpg" padding="0 0 0 45px"></Input> */}
+                        <Input bgImage="/icons8-search-48.png" bgSize="30px" type="email" placeholder='Search services' padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
+                        </FlexBox>
         </FlexBox>
     </FlexBox>
   )

@@ -39,7 +39,7 @@ function startChat() {
 
     return ( <div>
         
-        <FlexBox width="100%" position="sticky" top="0px" bgImage={postPhoto} height="328px" boxShadow="">
+        <FlexBox width="100%" position="sticky" top="0px" bgImage={postPhoto} height="300px" boxShadow="">
             <FlexBox position="relative" top="-100px" left="-160px" ><ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon></FlexBox>
             {/* <ImgPlaceholder bgImage={postPhoto} width="100%" height="328px"></ImgPlaceholder> */}
         </FlexBox>

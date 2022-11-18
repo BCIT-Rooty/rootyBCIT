@@ -77,3 +77,14 @@ export async function createPhoto(photoUrl) {
     },
   });
 }
+
+
+export async function createChat(inputText, dateDB, userIdGlobal, room) {
+  const message = await prisma.message.create({
+    data: {
+      content: inputText,
+      userId: 1,
+      chatRoomId: room
+    },
+  });
+}
