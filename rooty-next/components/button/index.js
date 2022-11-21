@@ -41,7 +41,8 @@ export default function Button({
   minWidth,
   maxWidth,
   onNext = () => {},
-  onPrev = () => {}
+  onPrev = () => {},
+  onClose
 }) {
 
 
@@ -144,6 +145,28 @@ export default function Button({
       {type === "next" && (
         <ButtonClick
           onClick={onNext}
+          fzsize={size}
+          width={width}
+          height={height}
+          bgColor={bgColor}
+          padding={padding}
+          borderRadius={borderRadius}
+          color={color}
+          textAlign={textAlign}
+          margin={margin}
+          fontWeight={fontWeight}
+          border={border}
+          cursor={cursor}
+          minWidth={minWidth}
+          maxWidth={maxWidth}
+        >
+          {txt}
+          {/* <Icons name="close" buttonMargin={buttonMargin} onClick={(e) => onRemoveKeyword(txt)}></Icons> */}
+        </ButtonClick>
+      )}
+      {type === "cancel" && (
+        <ButtonClick
+          onClick={onClose}
           fzsize={size}
           width={width}
           height={height}

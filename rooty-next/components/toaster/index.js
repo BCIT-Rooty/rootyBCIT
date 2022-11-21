@@ -17,7 +17,8 @@ export default function Toaster({
   border = "none",
   iconName="warning sign",
   buttonMargin="0px 0px 0px 10px",
-  maxWidth
+  maxWidth,
+  onClick
 }) {
 
   return (<FlexBox 
@@ -31,6 +32,7 @@ export default function Toaster({
     color={color}
     maxWidth={maxWidth}
     margin={margin}
+    onClick={onClick}
     >
     {txt}
     <Icons name={iconName} buttonMargin={buttonMargin}></Icons>
