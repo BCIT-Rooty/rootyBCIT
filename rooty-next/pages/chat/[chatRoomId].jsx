@@ -1,3 +1,7 @@
+// for making it work check the user id with the id we have here and if there were not the same it will be the other person sending chat not us
+
+
+
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ChatNavBar from "../../components/chat/chatNavBar";
