@@ -370,7 +370,7 @@ export default function CreatePost(props) {
             <></>
           )}
           {errorThatKeywordAlreadyExists ? (
-            <Toaster txt="This keyword is already being used"maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+            <Toaster txt="This keyword is already being used" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
           ) : (
             <></>
           )}
