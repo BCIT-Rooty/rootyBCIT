@@ -100,7 +100,8 @@ export default function Input({
   return (
     <FlexBox flexWrap="wrap" maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
       {type === "file" && (
-        <FlexBox>
+        <FlexBox
+        margin={margin}>
           <FlexBox
             width="70px"
             height="70px"

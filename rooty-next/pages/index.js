@@ -29,6 +29,7 @@ export default function Home() {
     "Tutoring",
   ]);
   useEffect(()=>{
+
     if(steps===1){
       setHeaderText("Welcome")
       setHeaderImage("/signin1.png")
