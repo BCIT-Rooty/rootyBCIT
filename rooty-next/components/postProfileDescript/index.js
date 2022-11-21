@@ -23,7 +23,7 @@ export default function PostProfileDescript({
         <Text size="15px" txt={descriptTxt}></Text>
         {type1 === "image1" && <FlexBox dir="column" alignItems="left" height="fit-content"  width="60vw">
             <Text size="15px" weight="600" txt={type1Text} padding="0 0 15px 0"></Text>
-            <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" maxWidth="900px" height="fit-content" width="92vw">
+            <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" maxWidth="900px" height="fit-content" padding="5px 0px" width="92vw">
                 <FlexBox padding="0px">
                     {portfolioImage.map((o) => (
                         <ImgPlaceholder bgImage={o[0]} borderRadius="16px" height="160px" width="160px" margin="5px 10px 5px 0"></ImgPlaceholder>
@@ -34,7 +34,7 @@ export default function PostProfileDescript({
         }
         {type2 === "image2" && <FlexBox dir="column" alignItems="left" height="fit-content" width="60vw">
             <Text size="15px" weight="600" txt={type2Text} padding="25px 0 15px 0"></Text>
-            <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" maxWidth="900px" height="fit-content"  width="92vw">
+            <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" maxWidth="900px" height="fit-content" padding="5px 0px" width="92vw">
                 <FlexBox padding="0px">
                 {portfolioImage.map((o) => (
                         <ImgPlaceholder bgImage={o[0]} borderRadius="16px" height="160px" width="160px" margin="5px"></ImgPlaceholder>

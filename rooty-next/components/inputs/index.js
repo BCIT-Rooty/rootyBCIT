@@ -103,7 +103,8 @@ export default function Input({
   return (
     <FlexBox flexWrap="wrap" maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
       {type === "file" && (
-        <FlexBox>
+        <FlexBox
+        margin={margin}>
           <FlexBox
             width="70px"
             height="70px"
@@ -162,7 +163,8 @@ export function TextInput({
   onChangingTheText = () => {},
   maxWidth ="800px",
   minWidth,
-  justifyContent
+  justifyContent,
+  defaultValue
 }) {
   return (
     <FlexBox flexWrap="wrap"  maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
@@ -182,7 +184,9 @@ export function TextInput({
           padding={padding}
           maxWidth={maxWidth}
           minWidth={minWidth}
-        ></TextArea>
+        >
+          {}
+        </TextArea>
       )}
     </FlexBox>
   );
