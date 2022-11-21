@@ -1,27 +1,35 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import io from "socket.io-client";
 import ChatNavBar from "../../components/chat/chatNavBar";
 import axios from "axios";
 import MyMessage from "../../components/chat/myMessage";
 import NotMyMessage from "../../components/chat/notMyMessage";
 import { FlexBox, Wrapper } from "../../styles/globals";
-const socket = io.connect("http://localhost:3001");
+import Pusher from "pusher-js";
 
 export default function ACertainChatRoom(props) {
   const theChatRoomId = props.theId;
+  const newChatRoomId = `${props.theId}`
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
   const [userId, setUserId] = useState("");
-  var userIdGlobal;
-  let oldPosts;
 
   useEffect(() => {
-    userIdGlobal = Math.floor(Math.random() * 10000) + 1;
-    socket.emit("join_room", props.theId);
+    const pusher = new Pusher("70d9960be5691b5baa3a", {
+      cluster: "us3",
+      encrypted: true,
+    });
+    // console.log(pusher)
+
+    const channel = pusher.subscribe(newChatRoomId);
+    channel.bind("send-message", function (data) {
+      setChats((chats) => [...chats, <MyMessage text={data.txt} />]);
+    });
+
     return () => {
-      socket.emit("avoid-duplicate", {room : props.theId});
-    }
+      pusher.unsubscribe(newChatRoomId);
+      pusher.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -33,37 +41,16 @@ export default function ACertainChatRoom(props) {
     })();
   }, []);
 
-  useEffect(() => {
-    socket.on("receive_message", (data) => {
-      getNewData()
-    });
-  }, [socket]);
 
-  function getNewData() {
-    (async function yo() {
-      await axios.post("/api/allChat", { userId: props.theId }).then((res) => {
-        // console.log(res);
-        oldPosts = res.data.map((m) => <MyMessage key={m.messageId} text={m.content} />);
-        setChats(oldPosts);
-      });
-    })();
+  async function sendTextToTheBackEnd(inputText) {
+    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId });
   }
 
-  function joinRoom(room) {
-    console.log("Joined room", room);
-    socket.emit("join_room", room);
-  }
-
-  async function sendTextToTheBackEnd(inputText, room) {
-    await axios.post("/api/allChat/makeOneChat", {data: inputText, room})
-    socket.emit("send_message", inputText, room, userId);
-    // setChats([...chats, <MyMessage text={inputText} />]);
-  }
-
-  function handleSendButton(e) {
+  async function handleSendButton(e) {
     e.preventDefault();
     if (message.length) {
-      sendTextToTheBackEnd(message, theChatRoomId);
+      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId})
+      sendTextToTheBackEnd(message);
       setMessage("");
     }
   }
