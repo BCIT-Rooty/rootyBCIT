@@ -23,10 +23,10 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
 
     return (
             <Wrapper alignItems="start" height="fit-content">
-                <FlexBox dir="column" width="100%">
-                <FlexBox position="relative" top="40px" left="-155px"><ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon></FlexBox>
+                <FlexBox dir="column" width="100%" >
                     <FlexBox width="100%" dir="column">
-                        <CardWithSearch bgImage={image} txt={categoryName}></CardWithSearch>
+                        
+                    <CardWithSearch bgImage={image} txt={categoryName} onClick={() =>handleLinkClick()}></CardWithSearch>
                     </FlexBox>
                 <div>
                     {
