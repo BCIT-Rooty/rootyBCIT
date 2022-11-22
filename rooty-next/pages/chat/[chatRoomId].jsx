@@ -23,7 +23,6 @@ export default function ACertainChatRoom(props) {
       cluster: "us3",
       encrypted: true,
     });
-    // console.log(pusher)
 
     const channel = pusher.subscribe(newChatRoomId);
     channel.bind("send-message", function (data) {
