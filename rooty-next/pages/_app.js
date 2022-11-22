@@ -45,6 +45,21 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // If I wanted to make changes later
 
 // useEffect(() => {
