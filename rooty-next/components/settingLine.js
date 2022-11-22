@@ -10,9 +10,9 @@ export default function SettingLine({
 }) {
 
     return (
-        <FlexBox padding="7px 35px" width="100vw" onClick={onClick} justifyContent="start">
+        <FlexBox padding="10px 35px" width="100vw" onClick={onClick} justifyContent="start">
             <Icon name={name} size="large"></Icon>
-            <Text txt={txt} size="15px" padding="0px 0px 10px 20px" width="80vw" borderBottom="1px solid #BEBEBE" weight="300"></Text>
+            <Text txt={txt} size="15px" padding="0px 0px 6px 20px" width="80vw" borderBottom="1px solid #BEBEBE" weight="300"></Text>
             <ArrowForwardIosIcon padding/>
         </FlexBox>
     )

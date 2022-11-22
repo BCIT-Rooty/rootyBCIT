@@ -5,6 +5,8 @@ import Text from "../text";
 import { Icon } from "semantic-ui-react";
 import { Heart } from "../icons/icons";
 import DisabledStars from "../icons/starsDisabled";
+import Rating from '@mui/material/Rating';
+import { useState } from 'react';
 // import Avatar from '@mui/material/Avatar';
 
 
@@ -23,6 +25,7 @@ export default function Review({
     borderColor="0.5px solid #D9D9D9"
     // showStars=true
 }) {
+    // const [value, setValue] = useState(4)
 
     return (
           <FlexBox width="100%" minHeight={boxHeight} border={borderColor} alignItems="flex-start" padding="10px">
@@ -33,6 +36,7 @@ export default function Review({
                     <FlexBox justifyContent="space-between" alignItems="center" width="100%">
                         <Text txt={name} weight="bold" size={nameSize}></Text>
                         <FlexBox padding="0 10px 0 10px">
+                            {/* <Rating name="read-only" value={value} readOnly /> */}
                             <DisabledStars
                             one={one}
                             second={second}

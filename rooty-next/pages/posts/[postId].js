@@ -10,6 +10,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import React from 'react';
 import { useRouter } from "next/router";
 import ItemDescNavbar from "../../components/navbar/itemDescNavbar";
+import ReviewActiveStars from "../../components/reviews/reviewActiveStars";
+import Rating from '@mui/material/Rating';
+import { useState } from 'react';
 
 export default function ItemDescript({parsedItems}) {
 
@@ -35,45 +38,55 @@ function startChat() {
     const link = `/chat`
     router.push(link)
 }
-    
+const [value, setValue] = useState(4)
 
-    return ( <div>
+    return ( 
         
-        <FlexBox width="100%" position="sticky" top="0px" bgImage={postPhoto} height="300px" boxShadow="">
-            <FlexBox position="relative" top="-100px" left="-160px" ><ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon></FlexBox>
-            {/* <ImgPlaceholder bgImage={postPhoto} width="100%" height="328px"></ImgPlaceholder> */}
-        </FlexBox>
+        
         <Wrapper alignItems="flex-start" height="fit-content" dir="column" padding="0 0 50px 0">
                 {/* <FlexBox dir="column" width="100%"> */}
+                <FlexBox width="100%"  top="0px" bgImage={postPhoto} height="300px" boxShadow="">
+                     <FlexBox position="relative" top="-100px" left="-160px">
+                        <ArrowBackIosIcon fontSize="large" onClick={() =>handleLinkClick()}></ArrowBackIosIcon>
+                    </FlexBox>
+            {/* <ImgPlaceholder bgImage={postPhoto} width="100%" height="328px"></ImgPlaceholder> */}
+                </FlexBox>
                 <FlexBox width="100%" dir="column">
-                    <Review name={userName} nameSize="21px" comment="" program="" boxWidth="73px" image="/camera-man.jpg"></Review>
+                    <ReviewActiveStars name={userName} nameSize="20px" comment="" program="" boxWidth="73px" image="/camera-man.jpg"></ReviewActiveStars>
                 <FlexBox dir="column" alignItems="left" width="100%" padding="0 30px 0 30px" minHeight="100px" border="0.5px solid rgba(191, 191, 191, 1)">
-                    <Text txt={title} size="21px"></Text>
+                    <Text txt={title} size="21px" weight="600"></Text>
                     <Text size="15px" txt={categoryText} color="grey"></Text>
                 </FlexBox>
                 <FlexBox  dir="column" alignItems="left" width="100%" padding="0 30px 0 30px" minHeight="100px" border="0.5px solid rgba(191, 191, 191, 1)">
                     <Text txt={description}></Text>
                 </FlexBox>
-                <FlexBox dir="column" justifyContent="flex-start" width="100%" padding="20px 30px 0 30px">
-                        <FlexBox justifyContent="space-between" width="100%">
-                            <Text txt="Service Satisfaction"></Text>
-                            <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.0"></Text></FlexBox>
-                        </FlexBox>
-                        <FlexBox justifyContent="space-between" width="100%">
-                            <Text txt="Seller Response"></Text>
-                            <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.0"></Text></FlexBox>
-                        </FlexBox>
-                        <FlexBox justifyContent="space-between" width="100%">
-                            <Text txt="Would Recommend"></Text>
-                            <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.5"></Text></FlexBox>
-                        </FlexBox>
+                <FlexBox dir="column" width="100%">
+
+                    <FlexBox dir="column" justifyContent="flex-start" alignItems="flex-start" width="100%" padding="20px 30px 0 30px">
+                            <FlexBox padding="0 0 15px 0">
+                                <Rating name="read-only" value={value} max={4} readOnly />
+                                <Text txt="4.0" weight="bold" size="19px" padding="0 10px"></Text>
+                            </FlexBox>
+                            <FlexBox justifyContent="space-between" width="100%">
+                                <Text txt="Service Satisfaction"></Text>
+                                <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.0"></Text></FlexBox>
+                            </FlexBox>
+                            <FlexBox justifyContent="space-between" width="100%">
+                                <Text txt="Seller Response"></Text>
+                                <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.0"></Text></FlexBox>
+                            </FlexBox>
+                            <FlexBox justifyContent="space-between" width="100%" padding="0 2px 0 0">
+                                <Text txt="Would Recommend"></Text>
+                                <FlexBox alignItems="flex-start"><Icon className="star"></Icon><Text txt="4.5"></Text></FlexBox>
+                            </FlexBox>
+                    </FlexBox>
                 </FlexBox>
                 <ReviewHorizontalScroll bgImage1="/face5.jpg" bgImage2="/face4.jpg" bgImage3="/face3.jpg" bgImage4="/face2.jpg" bgImage5="/face1.jpg"></ReviewHorizontalScroll>
                 </FlexBox>
             {/* </FlexBox> */}
             <ItemDescNavbar position="fixed" top="92vh" onClick={() =>startChat()}></ItemDescNavbar>
         </Wrapper>
-        </div>
+       
     )
 
 

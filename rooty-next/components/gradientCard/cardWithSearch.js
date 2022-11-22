@@ -4,6 +4,7 @@ import { FlexBox } from '../../styles/globals'
 import { Search } from 'semantic-ui-react'
 import GradientCard from '.'
 import Input from '../inputs'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function CardWithSearch({
     width="100%",
@@ -17,13 +18,17 @@ export default function CardWithSearch({
     weight="bold",
     padding="10px",
     linearGradient="linear-gradient(to bottom, rgba(79, 77, 176, 0), rgba(79, 77, 176, 1))",
-    color="white"
+    color="white",
+    onClick=()=>{},
 }){
 
 
 
   return(
-    <FlexBox bgImage={bgImage} width={width} height={height} borderRadius="0px" margin="0px" alignItems="flex-end" linearGradient={linearGradient}>
+    <FlexBox bgImage={bgImage} height={height} borderRadius="0px" margin="0px" alignItems="flex-end" linearGradient={linearGradient}>
+          <FlexBox position="relative" top="-260px" left="55px">
+              <ArrowBackIosIcon fontSize="large" onClick={onClick}></ArrowBackIosIcon>
+          </FlexBox>
         <FlexBox dir="column" margin="20px">
         <Text txt={txt} size={size} align={align} color={color} weight={weight} padding={padding}></Text>
         <FlexBox margin="12px">
