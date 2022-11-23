@@ -15,7 +15,7 @@ export default function ReviewHorizontalScroll({
 }){
 
     return(
-        <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" margin="50px 0 80px 0 " >
+        <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" margin="50px 0 40px 0 " >
 
         <FlexBox  dir="column" borderRadius="15px" width="251px" height="262px" weight="regular" bgImage="" bgColor="#E5E5FC" color="#101010" padding="10px" margin="7px" justifyContent="flex-start">
             <Review name={reviewText[0].name} program={reviewText[0].program} image={bgImage1} fifth="active icon" comment="" boxHeight="70px" borderColor="transparent"></Review>
