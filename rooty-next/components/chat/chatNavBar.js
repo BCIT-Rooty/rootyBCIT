@@ -14,7 +14,7 @@ export default function ChatNavBar({
 onChangingTheTextForChat= () => {},
 onSubmitButtonClicked= () => {},
 value,
-position={position},
+position="fixed",
 }){
     const [photoUrl, setPhotoUrl] = useState("");
 
@@ -45,7 +45,7 @@ position={position},
       }
 
     return(
-    <FlexBox width="100%" justifyContent="space-around" padding="10px" topBorder="1px #EDEDED solid" top="93vh" position={position} zIndex="20" bgColor="white">
+    <FlexBox width="100%" justifyContent="space-around" padding="10px" topBorder="1px #EDEDED solid" bottom="0" position={position} zIndex="20" bgColor="white">
        {/* <AddIcon onClick={(e) => onSubmitButtonClicked(e)} fontSize="large" sx={{ color: grey[500] }} /> */}
        <Input chatPhoto="file" onInsertPhotoInsideS3={uploadThePhotoToS3}></Input>
         <FlexBox>

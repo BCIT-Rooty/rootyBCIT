@@ -74,10 +74,11 @@ export default function ACertainChatRoom(props) {
     <>
     <ChatHeader margin="0px 9px 20px 0px" position="fixed"/>
       <Wrapper
-        justifyContent="flex-start"
+        // justifyContent="flex-start"
         alignItems="flex-start"
         height="fit-content"
         padding="0 0 80px 0"
+        dir="column-reverse"
       >
             <FlexBox
               dir="column"
