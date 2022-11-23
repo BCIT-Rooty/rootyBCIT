@@ -42,15 +42,24 @@ export default function Button({
   maxWidth,
   onNext = () => {},
   onPrev = () => {},
-  onClose
+  onClose,
+  registerValue = false
 }) {
 
 
-  if (ifThisIsTheCategoriesButtons) {
+  if (ifThisIsTheCategoriesButtons && !registerValue) {
     if (whatIsTheStateOfTheAppForCategory == value) {
       bgColor = "#4F4DB0";
       color = "white";
-      border = "#4F4DB0"
+      border = "2px solid white"
+    }
+  }
+
+  if (ifThisIsTheCategoriesButtons && registerValue) {
+    if (whatIsTheStateOfTheAppForCategory == value) {
+      bgColor = "white";
+      color = "#4F4DB0";
+      border = "2px solid #4F4DB0"
     }
   }
 

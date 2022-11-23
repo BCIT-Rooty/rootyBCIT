@@ -34,23 +34,23 @@ export default function Home() {
   useEffect(() => {
     if (steps === 1) {
       setHeaderText("Welcome");
-      setHeaderImage("/signin1.png");
+      setHeaderImage("/register1.png");
     }
     if (steps === 2) {
       setHeaderText("Set up your Profile");
-      setHeaderImage("/signin2.png");
+      setHeaderImage("/register2.png");
     }
     if (steps === 3) {
       setHeaderText("What Program are you in?");
-      setHeaderImage("/signin3.png");
+      setHeaderImage("/register3.png");
     }
     if (steps === 4) {
       setHeaderText("What Skills do you Offer?");
-      setHeaderImage("/signin4.png");
+      setHeaderImage("/register4.png");
     }
     if (steps === 5) {
       setHeaderText("Create Profile");
-      setHeaderImage("/signin5.png");
+      setHeaderImage("/register5.png");
     }
   }, [steps]);
 
@@ -140,8 +140,8 @@ export default function Home() {
             exit={{x:-1000}}
           >
             <ImgPlaceholder
-              width="190px"
-              height="190px"
+              width="250px"
+              height="250px"
               bgImage={headerImage}
             ></ImgPlaceholder>
           </motion.div>
@@ -321,7 +321,10 @@ export default function Home() {
                       key={category.id}
                       txt={category.name}
                       value={category.name}
-                      color="#545454"
+                      registerValue={true}
+                      color="white"
+                      bgColor="#4F4DB0"
+                      border="2px solid white"
                       width="fit-content"
                       padding="20px 5vw"
                       whatIsTheStateOfTheAppForCategory={categoryMain}
@@ -349,7 +352,7 @@ export default function Home() {
               >
                 <FlexBox
                   padding="30px 20px 0px 20px"
-                  justifyContent="space-between"
+                  justifyContent="start"
                   width="100vw"
                   maxWidth="100%"
                 >
@@ -359,7 +362,7 @@ export default function Home() {
                     // value={keywordButtonStateValue}
                     border="solid 1px #545454"
                     // onChangingTheText={setKeywordButtonStateValue}
-                    width="65vw"
+                    width="55vw"
                     maxWidth="80%"
                   />
                   <Button
