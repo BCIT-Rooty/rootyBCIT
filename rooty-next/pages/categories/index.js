@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useEffect, useState, useMemo } from "react";
 import {prisma} from "../../server/db/client";
 import Input from "../../components/inputs";
+import { motion } from "framer-motion";
 
 
 
@@ -48,7 +49,11 @@ export default function Categories({jsonCategories}) {
 
   return (
     <>
-      <Wrapper alignItems="start">
+      <motion.Wrapper alignItems="start"
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      exit={{opacity: 0}}
+      >
         <FlexBox dir="column" width="100%">
           <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 40px" minHeight="100px">
             <Text txt="Search" size="24px" weight="bold"></Text>
@@ -68,7 +73,7 @@ export default function Categories({jsonCategories}) {
             {getCategories(categories)}
           </FlexBox>
         </FlexBox>
-      </Wrapper>
+      </motion.Wrapper>
     </>
   )
 }

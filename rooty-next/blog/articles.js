@@ -142,6 +142,20 @@ export const Article4 = () => {
     )
 }
 
+export const Welcome = () => {
+    return(
+        <FlexBox width="100vw" height="100vh" bgColor="#F8F8F8" justifyContent="flex-start" alignItems="flex-start"dir="column" padding="30px 15px 30px 15px" maxWidth="900px">
+            <Text padding="10px 20px" txt='Rooty provides BCIT students with a safe space to build their credibility, experience, and network within the BCIT community. Compared to other freelance apps where professionals take over the global market, Rooty allows entry-level student freelancers to stand out and prepare for their career paths before entering the workforce.'></Text>
+            <Text padding="10px 30px" txt='Rooty exclusively focuses on helping BCIT students to'></Text>
+            
+            <ListItem>Make extra income</ListItem>
+            <ListItem>Barter for each other's services</ListItem>
+            <ListItem>Gain work experience to develop portfolios/resumes</ListItem>
+            <ListItem>Network in-person</ListItem>
+         </FlexBox>
+    )
+}
+
 export const Contest = () => {
     return(
         <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column" padding="30px 15px 10px 15px" maxWidth="900px">
