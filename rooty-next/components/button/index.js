@@ -31,6 +31,7 @@ export default function Button({
   fontWeight = "600",
   value = "nothing",
   border = "none",
+  iconName="add",
   ifThisIsTheCategoriesButtons = "false",
   onClick = () => {},
   onKeywordWantToRemove = () => {},
@@ -137,7 +138,7 @@ export default function Button({
           minWidth={minWidth}
           maxWidth={maxWidth}
         >
-          <Icons name="add" color="#ffffff" buttonMargin={buttonMargin}></Icons>
+          <Icons name={iconName} color="#ffffff" buttonMargin={buttonMargin}></Icons>
           {txt}
         </ButtonClick>
       )}

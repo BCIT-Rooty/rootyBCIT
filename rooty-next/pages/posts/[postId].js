@@ -13,6 +13,7 @@ import ItemDescNavbar from "../../components/navbar/itemDescNavbar";
 import ReviewActiveStars from "../../components/reviews/reviewActiveStars";
 import Rating from '@mui/material/Rating';
 import { useState } from 'react';
+import Button from "../../components/button";
 
 export default function ItemDescript({parsedItems}) {
 
@@ -82,6 +83,9 @@ const [value, setValue] = useState(4)
                     </FlexBox>
                 </FlexBox>
                 <ReviewHorizontalScroll bgImage1="/face5.jpg" bgImage2="/face4.jpg" bgImage3="/face3.jpg" bgImage4="/face2.jpg" bgImage5="/face1.jpg"></ReviewHorizontalScroll>
+                </FlexBox>
+                <FlexBox width="100%" margin="0 0 30px 0px">
+                <Button width="fit-content" padding="0px 20px" type="add" iconName="write" txt="Write a review" bgColor="#4F4DB0" borderRadius="16px" border="2px solid #232323"></Button>
                 </FlexBox>
             {/* </FlexBox> */}
             <ItemDescNavbar position="fixed" top="92vh" onClick={() =>startChat()}></ItemDescNavbar>
