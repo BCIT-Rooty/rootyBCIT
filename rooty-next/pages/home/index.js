@@ -7,6 +7,9 @@ import { Article1, Article2, Article3, Article4, Contest, gradientCard, popularS
 import Article from '../../blog'
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { purple } from '@mui/material/colors';
+import Notification from "../../components/userProfile/notification";
 
 
 export default function Home(){
@@ -16,18 +19,21 @@ export default function Home(){
   const HandleNavBarIcons = (name) => {
     r.push(name);
   };
-
-
+  function handleLinkClick() {
+    const link = `/notifications`
+    r.push(link)
+}
 
   return( 
     
   
   <Wrapper dir="column" height="fit-content" padding="0 0 80px 0">
-      <Text txt="Welcome, Student" padding="70px 0px 0px 20px" size="24px" weight="bolder" width="100%" maxWidth="900px" justifyContent="flex-start" ></Text>
+    <FlexBox width="100%" justifyContent="flex-end" padding="30px 25px 0 0"><NotificationsIcon sx={{ color: "#FEB506", fontSize: 35 }} onClick={() =>handleLinkClick()}></NotificationsIcon></FlexBox>
+      <Text txt="Welcome, Student" padding="10px 0px 0px 20px" size="24px" weight="bolder" width="100%" maxWidth="900px" justifyContent="flex-start" ></Text>
 
       <Text txt="Insights & Tips" padding="30px 0px 10px 20px" size="21px" weight="bolder" width="100%" maxWidth="900px" justifyContent="flex-start" ></Text>
       <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" maxWidth="900px">
-        <FlexBox padding="0px 0px 0px 20px">
+      <FlexBox padding="0px 0px 0px 20px">
           {gradientCard.map((o) => (
             <GradientCard txt={o[0]} bgImage={o[1]} onClick={()=> setShowModal(o[2])}></GradientCard>
           ))}
