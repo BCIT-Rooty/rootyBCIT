@@ -1,6 +1,7 @@
 
 import ItemDescription from "../../components/itemDescript";
 import ItemDescNavbar from "../../components/navbar/itemDescNavbar";
+import { Wrapper } from "../../styles/globals";
 
 export default function ItemDescript() {
 
