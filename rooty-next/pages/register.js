@@ -31,6 +31,48 @@ export default function Home() {
   const [aboutMe, setAboutMe] = useState("");
   const [categoryMain, setCategoryMain] = useState("");
   const [profileImage, setProfileImage] = useState("");
+  const [keywords, setKeywords] = useState([]);
+  const [noKeywords, setNoKeywords] = useState(false);
+  const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] =
+    useState(false);
+  const [errorThatKeywordAlreadyExists, setErrorThatKeywordAlreadyExists] =
+    useState(false);
+  const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
+
+  function handleKeywordsButtonClick() {
+    const keywordWithoutSpaces = keywordButtonStateValue.trim();
+    if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
+      if (errorThatKeywordAlreadyExists) {
+        setErrorThatKeywordAlreadyExists(false);
+      }
+      setErrorStateForEmptyInputKeyWord(true);
+      return;
+    } else if (keywordButtonStateValue !== "" && keywordWithoutSpaces !== "") {
+      setErrorStateForEmptyInputKeyWord(false);
+    }
+    if (
+      keywords.includes(keywordButtonStateValue) ||
+      keywords.includes(keywordWithoutSpaces)
+    ) {
+      setErrorThatKeywordAlreadyExists(true);
+      return;
+    } else if (
+      !keywords.includes(keywordButtonStateValue) &&
+      errorThatKeywordAlreadyExists !== true &&
+      keywords.includes(keywordWithoutSpaces)
+    ) {
+      setErrorThatKeywordAlreadyExists(false);
+    }
+    setErrorThatKeywordAlreadyExists(false);
+    setErrorStateForEmptyInputKeyWord(false);
+
+    setKeywords([...keywords, keywordWithoutSpaces]);
+    setKeywordButtonStateValue("");
+  }
+
+  function removeKeyWordXButton(input) {
+    setKeywords(keywords.filter((m) => m !== input));
+  }
 
   useEffect(() => {
     if (steps === 1) {
@@ -54,6 +96,8 @@ export default function Home() {
       setHeaderImage("/register5.png");
     }
   }, [steps]);
+
+  const areThereKeywords = keywords.length !== 0;
 
   const [noPhotoError, setNoPhotoError] = useState(false);
 
@@ -360,9 +404,9 @@ export default function Home() {
                   <Input
                     type="search"
                     placeholder="Add up to 5 Skills"
-                    // value={keywordButtonStateValue}
+                    value={keywordButtonStateValue}
                     border="solid 1px #545454"
-                    // onChangingTheText={setKeywordButtonStateValue}
+                    onChangingTheText={setKeywordButtonStateValue}
                     width="55vw"
                     maxWidth="80%"
                   />
@@ -370,14 +414,51 @@ export default function Home() {
                     type="add"
                     key="handleKeywordAdding"
                     txt="Add"
-                    // value={keywordButtonStateValue}
+                    value={keywordButtonStateValue}
                     width="fit-content"
                     padding="15px"
                     margin="0px 0px 0px 20px"
                     buttonMargin="0px 10px 0px 0px"
                     color="#4F4DB0"
+                    onClick={handleKeywordsButtonClick}
                   />
                 </FlexBox>
+                <FlexBox width="100%" maxWidth="850px" padding="25px 20px 10px 20px" flexWrap="wrap">
+            {areThereKeywords ? (
+              keywords.map((m) => (
+                <Button
+                  key={m}
+                  txt={m}
+                  width="fit-content"
+                  height="30px"
+                  type="keyword"
+                  padding="10px 10px"
+                  fontWeight="300"
+                  buttonMargin="0px 0px 0px 10px"
+                  border="solid 1px #545454"
+                  color="#545454"
+                  onRemoveKeyword={removeKeyWordXButton}
+                ></Button>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </FlexBox>
+                  {errorStateForEmptyInputKeyWord ? (
+                    <Toaster txt="You must insert atleast one keyword" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+                  ) : (
+                    <></>
+                  )}
+                  {errorThatKeywordAlreadyExists ? (
+                    <Toaster txt="This keyword is already being used" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+                  ) : (
+                    <></>
+                  )}
+                  {noKeywords ? (
+                    <Toaster txt="You need at least one Keyword"maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+                  ) : (
+                    <></>
+                  )}
               </motion.div>
             </FlexBox>
           )}
