@@ -62,7 +62,6 @@ export default function Categories({jsonCategories}) {
               onResultSelect={(e, data) => 
                 dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })} />
                 {/* delete the input if anything wrong */}
-          <Input bgImage="/icons8-search-48.png" bgSize="30px" type="email" placeholder='Search services' margin="0px 20px 0px 20px" padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
           </FlexBox>
           <FlexBox flexWrap="wrap" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
             {getCategories(categories)}
