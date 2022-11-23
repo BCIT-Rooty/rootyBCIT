@@ -12,7 +12,7 @@ import { SessionProvider } from "next-auth/react";
   function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     const router = useRouter();
     
-    const [routesWeDoNotWant, setRoutesWeDoNotWant] = useState(["/chat/*"]);
+    const [routesWeDoNotWant, setRoutesWeDoNotWant] = useState(["/chat/*", "/", "/register"]);
     const [shouldTheRouteLoad, setShouldTheRouteLoad] = useState(true);
 
   // console.log(router)
@@ -67,6 +67,38 @@ export default MyApp;
 
 
 // If I wanted to make changes later
+
+
+
+
+
+
+// {routesWeDoNotWant.map((m) => {
+//   const lengthOfPath = m.length;
+//   if (m[lengthOfPath - 1] == "*") {
+//     if (router.asPath.startsWith(m.slice(0, -1))) {
+//       return <></>;
+//     } else {
+//       return <NavBar route={router.route} />;
+//     }
+//   } else if (m == router.asPath) {
+//     return <></>;
+//   } else {
+//     return <NavBar route={router.route} />;
+//   }
+// })}
+
+
+
+
+
+
+
+
+
+
+
+
 
 // useEffect(() => {
 //   const thisPath = router.asPath

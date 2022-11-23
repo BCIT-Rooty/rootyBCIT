@@ -50,14 +50,14 @@ async function main() {
   });
 
   console.log(author)
-  const program = await prisma.program.createMany({
-    data: [
-      {
-        programName: "Full-Stack Web Development",
-        authorId: author1.userId
-      },
-    ],
-  });
+  // const program = await prisma.program.createMany({
+  //   data: [
+  //     {
+  //       programName: "Full-Stack Web Development",
+  //       authorId: author1.userId
+  //     },
+  //   ],
+  // });
 
 
   console.log({ categories, author });

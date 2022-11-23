@@ -7,7 +7,7 @@ export default async function handle(req, res) {
   switch (method) {
     case "POST":
       // get the title and content from the request body
-      const { name, lastname, email, password, aboutMe, category } = req.body;
+      const { firstName, lastName, email, password, aboutMe, category } = req.body;
       console.log("REQ BODY", req.body);
       const user = await prisma.user.findUnique({
         where: {
@@ -23,12 +23,12 @@ export default async function handle(req, res) {
       } else {
         const newUser = await prisma.user.create({
           data: {
-            firstName: name,
-            lastName: lastname,
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             password: hash,
             aboutMe: aboutMe,
-            // program: category,
+            program: category,
           },
         });
         res.status(201).json(newUser);
