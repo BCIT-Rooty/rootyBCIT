@@ -18,7 +18,7 @@ model User {
   aboutMe    String?       @db.Text
   role       Role          @default(USER)
   posts      Post[]
-  program    Program?
+  program    String?
   Skills     SkillOnUser[]
   ChatRooms1 ChatRoom[]    @relation("UserNumberOne")
   ChatRooms2 ChatRoom[]    @relation("UserNumberTwo")
@@ -89,13 +89,13 @@ model Post {
 }
 
 // Relationship with the User works now
-model Program {
-  programId   Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  programName String   @db.VarChar(50)
-  author      User     @relation(fields: [authorId], references: [userId])
-  authorId    Int      @unique
-}
+// model Program {
+//   programId   Int      @id @default(autoincrement())
+//   createdAt   DateTime @default(now())
+//   programName String   @db.VarChar(50)
+//   author      User     @relation(fields: [authorId], references: [userId])
+//   authorId    Int      @unique
+// }
 
 // MTM relationship works with the users now (using a join tabel called SkillOnUser)
 model Skill {

@@ -28,7 +28,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [aboutMe, setAboutMe] = useState("");
-  // const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("");
   const [profileImage, setProfileImage] = useState("");
 
   useEffect(() => {
@@ -59,12 +59,12 @@ export default function Home() {
   const registerUser = async (e) => {
     e?.preventDefault();
     const data = {
-      name: firstName,
-      lastname: lastName,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password,
       aboutMe: aboutMe,
-      // category: category,
+      program: category,
     };
 
     // VERIFY THE USER THRUOUGH A CONFIRMATION LINK SENT TO EMAIL...
@@ -81,6 +81,9 @@ export default function Home() {
 
   const handleSteps = (newStep) => {
     setSteps(newStep);
+    // if(steps == 1) {
+    //   r.push("/")
+    // }
     if (steps >= 5) {
       r.push("/home");
       registerUser();

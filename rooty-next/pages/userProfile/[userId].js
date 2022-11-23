@@ -27,7 +27,7 @@ export default function UserProfile({ parsedItems }) {
         <FlexBox bgColor="#4F4DB0" padding="55px 30px " width="100vw" boxShadow="0px 3px 5px #888888">
             <ImgPlaceholder bgImage="/camera-man.jpg" borderRadius="80px" width="80px" height="80px"></ImgPlaceholder>
             <FlexBox dir="column" margin="0px 0px 0px 20px" alignItems="start">
-                <Text size="21px" weight="700" txt={parsedItems.name + ' ' + parsedItems.lastname} color="white"></Text>
+                <Text size="21px" weight="700" txt={parsedItems.firstName + ' ' + parsedItems.lastName} color="white"></Text>
                 <Text size="15px" weight="300" txt={parsedItems.program || "Digital Design and Development"} color="white" padding="5px 0px 20px 0px"></Text>
                 <FlexBox>
                     <Text size="16px" weight="300" txt="4/5" color="white" padding="0px 20px 0px 0px"></Text>
