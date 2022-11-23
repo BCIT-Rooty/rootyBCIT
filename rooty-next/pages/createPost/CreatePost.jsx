@@ -12,6 +12,7 @@ import Toaster from "../../components/toaster";
 import { motion, AnimatePresence } from "framer-motion";
 import Counter from "../../components/counter";
 import { useRouter } from "next/router";
+import TitlePage from "../../components/titlePage";
 
 export default function CreatePost(props) {
   const [showDownload, setShowDownload] = useState("default");
@@ -216,37 +217,31 @@ export default function CreatePost(props) {
     <>
       <Wrapper
         padding= "0 0 50px 0"
-        justifyContent="flex-start"
-        alignItems="flex-start"
         dir="column"
         height="fit-content"
       >
-        <Text
-          txt="Create your post"
-          size="24px"
-          weight="bold"
-          padding="40px 0px 10px 20px"
-        ></Text>
+        <TitlePage txt="Create your Post"/>
         <FlexBox
           padding="20px 0px 20px 20px"
           topBorder="0.5px solid #545454"
-          width="100vw"
           justifyContent="flex-start"
+          width="100%"
+          maxWidth="900px"
         >
           <Input type="file" onInsertPhotoInsideS3={uploadThePhotoToS3}></Input>
           {noPhotoError ? (
-            <Toaster txt="You need one photo for your post"></Toaster>
+            <Toaster txt="You need one photo for your post" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
           ) : (
             <></>
           )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
-          width="100vw"
           justifyContent="flex-start"
           alignItems="flex-start"
           dir="column"
           padding="0px 0px 15px 0px"
+          width="100%" maxWidth="900px"
         >
           <Text
             txt="Choose a Category"
@@ -256,9 +251,8 @@ export default function CreatePost(props) {
           ></Text>
           <FlexBox
             flexWrap="wrap"
-            width="95vw"
             justifyContent="space-between"
-            padding="0px 0px 0px 5vw"
+            padding="0px 20px 0px 20px"
           >
             {listOfCategories.map((m) => (
               <Button
@@ -269,21 +263,52 @@ export default function CreatePost(props) {
                 color="#545454"
                 width="fit-content"
                 padding="20px 5vw"
+                maxWidth="300px"
                 whatIsTheStateOfTheAppForCategory={whatIsTheCategoryOfThisPost}
                 ifThisIsTheCategoriesButtons={true}
                 onClick={setWhatIsTheCategoryOfThisPost}
               />
             ))}
+            </FlexBox>
             {noCategory ? (
-              <Toaster txt="You need at least one category"></Toaster>
+              <Toaster txt="You need at least one category" maxWidth="900px" margin="5px 0px 15px 0px"></Toaster>
             ) : (
               <></>
             )}
-          </FlexBox>
+          
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
-          width="100vw"
+          width="100%" maxWidth="900px"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          dir="column"
+          padding="0px 0px 20px 0px"
+        >
+          <Text
+            txt="Post Title"
+            size="16px"
+            weight="bold"
+            padding="15px 0px 20px 20px"
+            width="100%" maxWidth="900px"
+          ></Text>
+          <Input
+            placeholder="Type your Post's Title"
+            type="search"
+            border="solid 1px #545454"
+            margin="0px 0px 0px 20px"
+            onChangingTheText={setTitle}
+            width="91vw" maxWidth="880px"
+          ></Input>
+          {postTitleError ? (
+            <Toaster txt="You need a post title!" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+          ) : (
+            <></>
+          )}
+        </FlexBox>
+        <FlexBox
+          topBorder="0.5px solid #545454"
+          width="100%" maxWidth="900px"
           justifyContent="flex-start"
           alignItems="flex-start"
           dir="column"
@@ -294,16 +319,16 @@ export default function CreatePost(props) {
             size="16px"
             weight="bold"
             padding="15px 0px 20px 20px"
+            width="100%" maxWidth="900px"
           ></Text>
-          <FlexBox>
+          <FlexBox width="100%" maxWidth="900px" justifyContent="flex-start" padding="0 20px 0 20px">
             <Input
               placeholder="Type Keywords for your Post"
               type="search"
               value={keywordButtonStateValue}
               border="solid 1px #545454"
-              margin="0px 0px 0px 20px"
-              width="60vw"
               onChangingTheText={setKeywordButtonStateValue}
+              width="67vw" maxWidth="760px"
             ></Input>
             <Button
               type="add"
@@ -318,7 +343,7 @@ export default function CreatePost(props) {
               onClick={handleKeywordsButtonClick}
             />
           </FlexBox>
-          <FlexBox width="95vw" padding="25px 0px 10px 5vw" flexWrap="wrap">
+          <FlexBox width="100%" maxWidth="850px" padding="25px 20px 10px 20px" flexWrap="wrap">
             {areThereKeywords ? (
               keywords.map((m) => (
                 <Button
@@ -340,51 +365,25 @@ export default function CreatePost(props) {
             )}
           </FlexBox>
           {errorStateForEmptyInputKeyWord ? (
-            <Toaster txt="You must insert atleast one keyword"></Toaster>
+            <Toaster txt="You must insert atleast one keyword" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
           ) : (
             <></>
           )}
           {errorThatKeywordAlreadyExists ? (
-            <Toaster txt="This keyword is already being used"></Toaster>
+            <Toaster txt="This keyword is already being used" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
           ) : (
             <></>
           )}
           {noKeywords ? (
-            <Toaster txt="You need at least one Keyword"></Toaster>
+            <Toaster txt="You need at least one Keyword"maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
           ) : (
             <></>
           )}
         </FlexBox>
+        
         <FlexBox
           topBorder="0.5px solid #545454"
-          width="100vw"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          dir="column"
-          padding="0px 0px 20px 0px"
-        >
-          <Text
-            txt="Post Title"
-            size="16px"
-            weight="bold"
-            padding="15px 0px 20px 20px"
-          ></Text>
-          <Input
-            placeholder="Type your Post's Title"
-            type="search"
-            border="solid 1px #545454"
-            margin="0px 0px 0px 20px"
-            onChangingTheText={setTitle}
-          ></Input>
-          {postTitleError ? (
-            <Toaster txt="You need a post title!"></Toaster>
-          ) : (
-            <></>
-          )}
-        </FlexBox>
-        <FlexBox
-          topBorder="0.5px solid #545454"
-          width="100vw"
+          width="100%" maxWidth="900px"
           justifyContent="flex-start"
           alignItems="flex-start"
           dir="column"
@@ -402,16 +401,18 @@ export default function CreatePost(props) {
             border="solid 1px #545454"
             margin="0px 0px 0px 20px"
             onChangingTheText={setDescription}
+            width="91vw" maxWidth="880px"
           ></TextInput>
           {noServiceError ? (
-            <Toaster txt="You need a post description!"></Toaster>
+            <Toaster txt="You need a post description!" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
           ) : (
             <></>
           )}
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
-          width="100vw"
+          width="100%"
+          maxWidth="900px"
           justifyContent="flex-start"
           alignItems="flex-start"
           dir="column"
@@ -429,11 +430,13 @@ export default function CreatePost(props) {
             margin="0px 0px 0px 20px"
             placeholder="Describe your barter service needs, if applicable"
             onChangingTheText={setIsBarter}
+            width="91vw" maxWidth="880px"
           ></TextInput>
         </FlexBox>
         <FlexBox
           topBorder="0px solid #545454"
-          width="100vw"
+          width="100%"
+          maxWidth="900px"
           justifyContent="space-between"
           alignItems="flex-start"
           padding="0px 20px 20px 0px"
@@ -444,6 +447,8 @@ export default function CreatePost(props) {
               size="16px"
               weight="bold"
               padding="15px 0px 20px 20px"
+              width="100%"
+          maxWidth="900px"
             ></Text>
             <Input
               type="number"
@@ -469,10 +474,11 @@ export default function CreatePost(props) {
             onClick={handleNegotiableButton}
           ></Button>
         </FlexBox>
-        {noPriceError ? <Toaster txt="You need a price!"></Toaster> : <></>}
+        {noPriceError ? <Toaster txt="You need a price!" maxWidth="900px" margin="15px 0px 30px 0px"></Toaster> : <></>}
         <FlexBox
           topBorder="0.5px solid #545454"
-          width="100vw"
+          width="100%"
+          maxWidth="900px"
           justifyContent="space-between"
           alignItems="flex-start"
           padding="20px 20px 20px 0px"
@@ -482,12 +488,15 @@ export default function CreatePost(props) {
             size="16px"
             weight="bold"
             padding="15px 0px 20px 20px"
+            width="100%"
+          maxWidth="900px"
           ></Text>
           <Counter onCounterValue={setCount}></Counter>
         </FlexBox>
         <FlexBox
           topBorder="0.5px solid #545454"
-          width="100vw"
+          width="100%"
+          maxWidth="900px"
           padding="20px 20px 30px 0px"
         >
           <Button

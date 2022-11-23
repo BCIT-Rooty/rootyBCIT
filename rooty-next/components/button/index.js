@@ -38,8 +38,11 @@ export default function Button({
   type = "button",
   buttonMargin = "0px",
   cursor = "pointer",
+  minWidth,
+  maxWidth,
   onNext = () => {},
-  onPrev = () => {}
+  onPrev = () => {},
+  onClose
 }) {
 
 
@@ -57,7 +60,9 @@ export default function Button({
         text-align: ${props=>props.textAlign};
         font-weight: ${props=>props.fontWeight};
         border: ${props=>props.border};
-        font-size: ${props=>props.fzsize}
+        font-size: ${props=>props.fzsize};
+        max-width: ${(props) => props.maxWidth};
+        min-width: ${(props) => props.minWidth};
     `
 
   return (
@@ -79,6 +84,8 @@ export default function Button({
           fontWeight={fontWeight}
           border={border}
           cursor={cursor}
+          minWidth={minWidth}
+          maxWidth={maxWidth}
         >
           {txt}
         </ButtonClick>
@@ -102,6 +109,8 @@ export default function Button({
           fontWeight={fontWeight}
           border={border}
           cursor={cursor}
+          minWidth={minWidth}
+          maxWidth={maxWidth}
         >
           {txt}
           <Icons name="close" buttonMargin={buttonMargin} onClick={(e) => onRemoveKeyword(txt)}></Icons>
@@ -126,6 +135,8 @@ export default function Button({
           fontWeight={fontWeight}
           border={border}
           cursor={cursor}
+          minWidth={minWidth}
+          maxWidth={maxWidth}
         >
           <Icons name="add" color="#ffffff" buttonMargin={buttonMargin}></Icons>
           {txt}
@@ -146,6 +157,30 @@ export default function Button({
           fontWeight={fontWeight}
           border={border}
           cursor={cursor}
+          minWidth={minWidth}
+          maxWidth={maxWidth}
+        >
+          {txt}
+          {/* <Icons name="close" buttonMargin={buttonMargin} onClick={(e) => onRemoveKeyword(txt)}></Icons> */}
+        </ButtonClick>
+      )}
+      {type === "cancel" && (
+        <ButtonClick
+          onClick={onClose}
+          fzsize={size}
+          width={width}
+          height={height}
+          bgColor={bgColor}
+          padding={padding}
+          borderRadius={borderRadius}
+          color={color}
+          textAlign={textAlign}
+          margin={margin}
+          fontWeight={fontWeight}
+          border={border}
+          cursor={cursor}
+          minWidth={minWidth}
+          maxWidth={maxWidth}
         >
           {txt}
           {/* <Icons name="close" buttonMargin={buttonMargin} onClick={(e) => onRemoveKeyword(txt)}></Icons> */}

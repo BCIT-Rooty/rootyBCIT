@@ -22,11 +22,13 @@ export default function Item({
   widthTxtBox="228px",
   padding="12px",
   imgBorderRadius="16px 0px 0px 16px",
-  onClick=()=>{} }) {
+  onClick=()=>{},
+  margin="20px"
+}) {
 
 
  return (
-       <FlexBox dir={dir} onClick={onClick} key={id} width={width} height={height} bgColor="#F7F7FC" borderRadius="16px" margin="20px" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
+       <FlexBox dir={dir} onClick={onClick} key={id} width={width} height={height} bgColor="#F7F7FC" borderRadius="16px" margin={margin} filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
          <ImgPlaceholder bgImage={image} width='138px' borderRadius={imgBorderRadius}></ImgPlaceholder>
          <FlexBox dir="column" height={heightTxtBox} width={widthTxtBox} padding={padding} alignItems="start" justifyContent="space-between">
            <FlexBox alignItems="baseline" justifyContent="space-between" width="100%">

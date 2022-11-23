@@ -11,13 +11,14 @@ export default function Toaster({
   height = "40px",
   padding = "10px",
   color= "red",
-//   borderRadius = "10px",
   textAlign = "center",
-//   margin = "5px",
+  margin,
   fontWeight = "500",
   border = "none",
   iconName="warning sign",
-  buttonMargin="0px 0px 0px 10px"
+  buttonMargin="0px 0px 0px 10px",
+  maxWidth,
+  onClick
 }) {
 
   return (<FlexBox 
@@ -25,12 +26,13 @@ export default function Toaster({
     width={width} 
     height={height} 
     padding={padding} 
-    // borderRadius={borderRadius}
     textAlign={textAlign}
-    // margin={margin}
     fontWeight={fontWeight}
     border={border}
     color={color}
+    maxWidth={maxWidth}
+    margin={margin}
+    onClick={onClick}
     >
     {txt}
     <Icons name={iconName} buttonMargin={buttonMargin}></Icons>

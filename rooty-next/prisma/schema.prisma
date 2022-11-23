@@ -7,23 +7,64 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// start of session stuff
 model User {
   userId     Int           @id @default(autoincrement())
   createdAt  DateTime      @default(now())
-  name       String
-  lastname   String
+  firstName  String?
+  lastName   String?
   password   String
   email      String        @unique
-  aboutMe    String        @db.Text
+  aboutMe    String?       @db.Text
   role       Role          @default(USER)
   posts      Post[]
-  // photo      Photo?
   program    Program?
   Skills     SkillOnUser[]
   ChatRooms1 ChatRoom[]    @relation("UserNumberOne")
   ChatRooms2 ChatRoom[]    @relation("UserNumberTwo")
   Message    Message[]
 }
+
+// model Account {
+//   id                String  @id @default(cuid())
+//   userId            Int
+//   type              String
+//   provider          String
+//   providerAccountId String
+//   refresh_token     String?
+//   access_token      String?
+//   expires_at        Int?
+//   token_type        String?
+//   scope             String?
+//   id_token          String?
+//   session_state     String?
+
+//   user User @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+//   @@unique([provider, providerAccountId])
+// }
+
+// model Session {
+//   id           String   @id @default(cuid())
+//   sessionToken String   @unique
+//   userId       Int
+//   expires      DateTime
+//   user         User     @relation(fields: [userId], references: [userId], onDelete: Cascade)
+// }
+
+// model VerificationToken {
+//   identifier String
+//   token      String   @unique
+//   expires    DateTime
+
+//   @@unique([identifier, token])
+// }
+
+// end of session stuff
+
+// id            String    @id @default(cuid())
+// name          String?
+// email         String?   @unique
 
 // add stuff like photos to this
 // finish up adding all the details to this
@@ -45,7 +86,6 @@ model Post {
   image              String?          @default("")
   Photos             Photo[]
   Keywords           PostOnKeywords[]
-  Chats              ChatRoom[]
 }
 
 // Relationship with the User works now
@@ -121,18 +161,16 @@ model ChatRoom {
   userTwoId  Int
   createdAt  DateTime  @default(now())
   Message    Message[]
-  post       Post?      @relation(fields: [postId], references: [postId])
-  postId     Int?
 }
 
 model Message {
   messageId  Int      @id @default(autoincrement())
   content    String   @db.VarChar(500)
-  createdAt  DateTime? @default(now())
+  createdAt  DateTime @default(now())
   author     User     @relation(fields: [userId], references: [userId])
-  userId     Int      
+  userId     Int      @unique
   chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [chatRoomId])
-  chatRoomId Int      
+  chatRoomId Int      @unique
 }
 
 enum Role {

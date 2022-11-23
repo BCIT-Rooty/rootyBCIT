@@ -34,18 +34,11 @@ async function main() {
   const author = await prisma.user.createMany({
     data: [
       {
-        name: "Sohrab",
-        lastname: "Radmehr",
+        firstName: "Sohrab",
+        lastName: "Radmehr",
         password: "Password!",
         email: "sohrab@gmail.com",
         aboutMe: "I'm cool",
-      },
-      {
-        name: "Murad",
-        lastname: "Murad",
-        password: "Password!",
-        email: "Murad@gmail.com",
-        aboutMe: "I'm cool 2",
       },
     ],
   });
@@ -53,12 +46,6 @@ async function main() {
   const author1 = await prisma.user.findUnique({
     where: {
       userId: 1,
-    },
-  });
-
-  const author2 = await prisma.user.findUnique({
-    where: {
-      userId: 2,
     },
   });
 
@@ -72,14 +59,6 @@ async function main() {
     ],
   });
 
-  const chatRooms = await prisma.chatRoom.createMany({
-    data:[
-      {
-        userOneId: author1.userId,
-        userTwoId: author2.userId,
-      }
-    ]
-  })
 
   console.log({ categories, author });
 }
