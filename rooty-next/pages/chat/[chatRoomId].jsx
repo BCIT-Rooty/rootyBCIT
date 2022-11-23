@@ -43,7 +43,7 @@ export default function ACertainChatRoom(props) {
           if (m.isItText) {
             return <MyMessage key={m.messageId} text={m.content} />
           } else {
-            return <MyMessage type="messageImage" bgImage={m.content} />
+            return <MyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
           }
         });
         setChats(oldPosts);

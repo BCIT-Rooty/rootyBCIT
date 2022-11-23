@@ -2,6 +2,7 @@ import Head from "next/head";
 import { FlexBox, Wrapper, ImgPlaceholder } from "../styles/globals";
 import Button from "../components/button";
 import { useRouter } from "next/router";
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -16,13 +17,13 @@ export default function Home() {
       </Head>
 
       <FlexBox>
-        <a href="/register">
+        <Link href="/register">
           <Button txt="Register" bgColor="#4F4DB0"></Button>
-        </a>
+        </Link>
 
-        <a href="/login">
+        <Link href="/login">
           <Button txt="Log In" bgColor="#4F4DB0"></Button>
-        </a>
+        </Link>
       </FlexBox>
     </Wrapper>
   );

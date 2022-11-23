@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import styled from "styled-components";
 import { Email } from "@mui/icons-material";
+import Toaster from "../components/toaster";
 
 export default function Home() {
   const r = useRouter();

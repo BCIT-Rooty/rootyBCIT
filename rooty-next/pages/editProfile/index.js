@@ -26,7 +26,7 @@ export default function EditProfile() {
       <HorizontalScrollContainer height="fit-content" justifyContent="flex-start" alignItems="flex-start" maxWidth="900px" width="94vw" margin="0px 0px 0px 20px" padding="5px">
         <FlexBox>
           {descript[1].map((o) => (
-            <Item name={o[0]} image={o[1]} rating={o[2]} price={o[3]} width="290px" margin="0 20px 0 0" onClick={()=> setShowModal(o)}></Item>
+            <Item key={`itemDescript_${descript.indexOf(o)}`} name={o[0]} image={o[1]} rating={o[2]} price={o[3]} width="290px" margin="0 20px 0 0" onClick={()=> setShowModal(o)}></Item>
           ))}
         </FlexBox>
       </HorizontalScrollContainer>
