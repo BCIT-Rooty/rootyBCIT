@@ -81,12 +81,16 @@ export default function Home() {
 
   const handleSteps = (newStep) => {
     setSteps(newStep);
-    // if(steps == 1) {
-    //   r.push("/")
-    // }
     if (steps >= 5) {
       r.push("/home");
       registerUser();
+    }
+  };
+
+  const goBack = (newStep) => {
+    setSteps(newStep);
+    if(steps === 1){
+      r.push("/")
     }
   };
 
@@ -121,7 +125,7 @@ export default function Home() {
       <FlexBox width="100vw" height="30vh">
         <FlexBox
           bgImage="/back.png"
-          onClick={() => handleSteps(Math.max(1, steps - 1))}
+          onClick={() => goBack(Math.max(1, steps - 1))}
           width="40px"
           height="40px"
           position="absolute"
@@ -131,9 +135,9 @@ export default function Home() {
         <AnimatePresence exitBeforeEnter>
           <motion.div
             key={headerImage}
-            initial={{ x: 300 }}
-            animate={{ x: 0, transition: { duration: 0.4, delay: 0 } }}
-            exit={{ x: -300 }}
+            initial={{x: 1000}} 
+            animate={{x: 0, transition:{duration: 0.4, delay:0}}} 
+            exit={{x:-1000}}
           >
             <ImgPlaceholder
               width="190px"
@@ -156,9 +160,9 @@ export default function Home() {
         <AnimatePresence exitBeforeEnter>
           <motion.div
             key={headerText}
-            initial={{ x: 400 }}
-            animate={{ x: 0, transition: { duration: 0.4, delay: 0 } }}
-            exit={{ x: -400 }}
+            initial={{x: 1000}} 
+            animate={{x: 0, transition:{duration: 0.4, delay:0}}} 
+            exit={{x:-1000}}
           >
             <Text
               padding="60px 20px 0px 20px"
@@ -183,9 +187,9 @@ export default function Home() {
             >
               <motion.div
                 key={steps}
-                initial={{ x: 400 }}
+                initial={{ x: 1000 }}
                 animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                exit={{ x: -400 }}
+                exit={{ x: -1000 }}
               >
                 <Text
                   padding="30px 0px 10px 20px"
@@ -201,10 +205,11 @@ export default function Home() {
                   onChangingTheText={(e) => setEmail(e)}
                   placeholder="jdoe@my.bcit.ca"
                   margin="0px 20px 0px 20px"
-                  padding="0 0 0 45px"
+                  padding="0 0 0 60px"
                   width="90vw"
                   maxWidth="900px"
                   justifyContent="flex-start"
+                  required
                 ></Input>
                 <Text
                   padding="30px 0px 10px 20px"
@@ -220,10 +225,11 @@ export default function Home() {
                   onChangingTheText={(e) => setPassword(e)}
                   placeholder=""
                   margin="0px 20px 0px 20px"
-                  padding="0 0 0 45px"
+                  padding="0 0 0 60px"
                   width="90vw"
                   maxWidth="900px"
                   justifyContent="flex-start"
+                  required
                 ></Input>
                 <Text
                   padding="10px 20px 10px 20px"
@@ -249,9 +255,9 @@ export default function Home() {
               >
                 <motion.div
                   key={steps}
-                  initial={{ x: 400 }}
+                  initial={{ x: 1000 }}
                   animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                  exit={{ x: -400 }}
+                  exit={{ x: -1000 }}
                 >
                   <Text
                     padding="30px 0px 10px 20px"
@@ -297,9 +303,9 @@ export default function Home() {
             >
               <motion.div
                 key={steps}
-                initial={{ x: 400 }}
+                initial={{ x: 1000 }}
                 animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                exit={{ x: -400 }}
+                exit={{ x: -1000 }}
               >
                 <FlexBox
                   flexWrap="wrap"
@@ -337,9 +343,9 @@ export default function Home() {
             >
               <motion.div
                 key={steps}
-                initial={{ x: 400 }}
+                initial={{ x: 1000 }}
                 animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                exit={{ x: -400 }}
+                exit={{ x: -1000 }}
               >
                 <FlexBox
                   padding="30px 20px 0px 20px"
@@ -381,9 +387,9 @@ export default function Home() {
             >
               <motion.div
                 key={steps}
-                initial={{ x: 400 }}
+                initial={{ x: 1000 }}
                 animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                exit={{ x: -400 }}
+                exit={{ x: -1000 }}
               >
                 <Text
                   padding="30px 20px 20px 20px"
