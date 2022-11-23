@@ -8,6 +8,7 @@ import ChatNavBar from "../../components/chat/chatNavBar";
 import axios from "axios";
 import MyMessage from "../../components/chat/myMessage";
 import NotMyMessage from "../../components/chat/notMyMessage";
+import ChatHeader from "../../components/chat/chatHeader";
 import { FlexBox, Wrapper } from "../../styles/globals";
 import Pusher from "pusher-js";
 
@@ -38,7 +39,13 @@ export default function ACertainChatRoom(props) {
   useEffect(() => {
     (async function yo() {
       await axios.post("/api/allChat", { userId: props.theId }).then((res) => {
-        const oldPosts = res.data.map((m) => <MyMessage key={m.messageId} text={m.content} />);
+        const oldPosts = res.data.map((m) => {
+          if (m.isItText) {
+            return <MyMessage key={m.messageId} text={m.content} />
+          } else {
+            return <MyMessage type="messageImage" bgImage={m.content} />
+          }
+        });
         setChats(oldPosts);
       });
     })();
@@ -46,7 +53,7 @@ export default function ACertainChatRoom(props) {
 
 
   async function sendTextToTheBackEnd(inputText) {
-    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId });
+    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true});
   }
 
   async function handleSendButton(e) {
@@ -64,6 +71,7 @@ export default function ACertainChatRoom(props) {
 
   return (
     <>
+    <ChatHeader />
       <Wrapper
         justifyContent="flex-start"
         alignItems="flex-start"

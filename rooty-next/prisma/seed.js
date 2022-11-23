@@ -40,6 +40,13 @@ async function main() {
         email: "sohrab@gmail.com",
         aboutMe: "I'm cool",
       },
+      {
+        firstName: "Sohrab2",
+        lastName: "Radmehr",
+        password: "Password!",
+        email: "sohrab2@gmail.com",
+        aboutMe: "I'm cool",
+      },
     ],
   });
 
