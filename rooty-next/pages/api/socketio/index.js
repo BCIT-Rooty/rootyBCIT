@@ -18,7 +18,7 @@ export default async function ioHandler(req, res) {
         cluster: process.env.cluster,
       });
 
-      pusher.trigger(id, "send-message", {
+      await pusher.trigger(id, "send-message", {
         txt,
         messageId
       });
