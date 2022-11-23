@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { FlexBox, ImgPlaceholder } from "../../styles/globals";
+import AddIcon from '@mui/icons-material/Add';
+import { grey, purple } from '@mui/material/colors';
 
 export const InputRectangle = styled.input`
   background-color: ;
@@ -71,6 +73,7 @@ function promptFile(multiple) {
 
 export default function Input({
   type = "none",
+  chatPhoto = "none",
   fileBgImage = "/camera.png",
   bgColor = "#F7F7FC",
   border = "none",
@@ -125,7 +128,24 @@ export default function Input({
         </FlexBox>
       )}
 
-      {type !== "file" && (
+{chatPhoto === "file" && (
+        // <FlexBox
+        // margin={margin}
+        // width="70px"
+        //     height="70px"
+        //     onClick={() => promptFilename()}
+        //     color="white"
+        //     borderRadius="10px"
+        //     bgColor="white"
+        //     boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)"
+        //     cursor={cursor}
+        // >
+        // </FlexBox>
+        <AddIcon onClick={() => promptFilename()} fontSize="large" sx={{ color: grey[500] }} />
+      )}
+
+
+      {type !== "file" && chatPhoto!=="file" && (
         <InputRectangle
           value={value}  
           onChange={(e) => {

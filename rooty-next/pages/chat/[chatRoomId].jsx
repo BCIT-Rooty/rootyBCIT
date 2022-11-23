@@ -71,30 +71,31 @@ export default function ACertainChatRoom(props) {
 
   return (
     <>
-    <ChatHeader />
+    <ChatHeader margin="0px 9px 20px 0px" position="fixed"/>
       <Wrapper
         justifyContent="flex-start"
         alignItems="flex-start"
         height="fit-content"
         padding="0 0 80px 0"
       >
-        <FlexBox
-          dir="column"
-          justifyContent="flex-end"
-          alignItems="flex-start"
-          width="100%"
-          height="fit-content"
-        >
-          <FlexBox dir="column" width="100%">
-            {chats.map((m) => m)}
-          </FlexBox>
-          <ChatNavBar
-            position="fixed"
-            value={message}
-            onChangingTheTextForChat={handleChangeText}
-            onSubmitButtonClicked={handleSendButton}
-          />
-        </FlexBox>
+            <FlexBox
+              dir="column"
+              justifyContent="flex-end"
+              alignItems="flex-start"
+              width="100%"
+              height="fit-content"
+            >
+              <FlexBox dir="column" width="100%">
+                {chats.map((m) => m)}
+              </FlexBox>
+              <ChatNavBar
+                position="fixed"
+                margin="30px 0 0 0"
+                value={message}
+                onChangingTheTextForChat={handleChangeText}
+                onSubmitButtonClicked={handleSendButton}
+              />
+            </FlexBox>
       </Wrapper>
     </>
   );

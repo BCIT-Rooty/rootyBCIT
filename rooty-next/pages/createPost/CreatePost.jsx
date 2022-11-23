@@ -14,6 +14,7 @@ import Counter from "../../components/counter";
 import { useRouter } from "next/router";
 import TitlePage from "../../components/titlePage";
 
+
 export default function CreatePost(props) {
   const [showDownload, setShowDownload] = useState("default");
   const [title, setTitle] = useState("");
@@ -194,7 +195,7 @@ export default function CreatePost(props) {
 
     const axiosRequest = await axios
       .post("/api/createPost", {
-        photoUrl: "https://rootys3bucket.s3.us-west-1.amazonaws.com/76a9c6cd74e8fc9fb801ba5cb9bb26fb",
+        photoUrl: "/camera-man.jpg",
         whatIsTheCategoryOfThisPost,
         keywords,
         title,
