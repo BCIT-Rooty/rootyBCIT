@@ -3,10 +3,17 @@ import NavBar from "../components/navbar/navbar";
 import "semantic-ui-css/semantic.min.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { useState, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  const router = useRouter();
+
+  
+  
+  function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+    const router = useRouter();
+    
+    const [routesWeDoNotWant, setRoutesWeDoNotWant] = useState(["/chat/*"]);
+    const [shouldTheRouteLoad, setShouldTheRouteLoad] = useState(true);
 
   // console.log(router)
   return (
@@ -21,7 +28,20 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           />
         </Head>
         {/* <AnimatePresence exitBeforeEnter> */}
-        <NavBar route={router.route}></NavBar>
+        {routesWeDoNotWant.map((m) => {
+        const lengthOfPath = m.length;
+        if (m[lengthOfPath - 1] == "*") {
+          if (router.asPath.startsWith(m.slice(0, -1))) {
+            return <></>;
+          } else {
+            return <NavBar route={router.route} />;
+          }
+        } else if (m == router.asPath) {
+          return <></>;
+        } else {
+          return <NavBar route={router.route} />;
+        }
+      })}
         <Component {...pageProps} />
         {/* </AnimatePresence> */}
       </SessionProvider>
@@ -30,3 +50,43 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 }
 
 export default MyApp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// If I wanted to make changes later
+
+// useEffect(() => {
+//   const thisPath = router.asPath
+//   routesWeDoNotWant.map(m => {
+//     const lengthOfPath = m.length
+//     if (m[lengthOfPath - 1] == "*") {
+//       // console.log(thisPath.startsWith(m.slice(0, -1)))
+//       if (thisPath.startsWith(m.slice(0, -1))) {
+//        setShouldTheRouteLoad(false)
+//        return
+//       } else {
+//         setShouldTheRouteLoad(true)
+//         return
+//       }
+//     } else if (m == thisPath) {
+//       setShouldTheRouteLoad(false)
+//       return
+//     } else {
+//       setShouldTheRouteLoad(true)
+//       return
+//     }
+//   })
+// }, [router.asPath])

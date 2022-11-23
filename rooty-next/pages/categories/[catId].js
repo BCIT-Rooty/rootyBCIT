@@ -9,8 +9,11 @@ import { Search } from 'semantic-ui-react';
 import CardWithSearch from '../../components/gradientCard/cardWithSearch';
 import { prisma } from '../../server/db/client';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { useState, useEffect } from 'react';
 
 export default function OneCategory({ parsedItems, parsedCategoryName }) {
+    const [query, setQuery] = useState("")
+    const [items, setItems] = useState(parsedItems)
     const r = useRouter();
     const categoryName = parsedCategoryName.map((category) => category.categoryName);
     const image = parsedCategoryName.map((category) => category.image)
@@ -19,18 +22,25 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
         const link = `/categories`
         router.push(link)
     }
-
+    useEffect(() => {
+        console.log(parsedItems);
+        const newParsedItems = parsedItems.filter(item => {
+          return item.title.toLowerCase().includes(query.toLocaleLowerCase())
+        })
+        setItems(newParsedItems)
+        }, [query])
 
     return (
             <Wrapper alignItems="start" height="fit-content">
                 <FlexBox dir="column" width="100%" >
                     <FlexBox width="100%" dir="column">
-                        
+                        <CardWithSearch bgImage={image} txt={categoryName} onChangingTheText={setQuery}></CardWithSearch>
+                    {/* what is this?  */}
                     <CardWithSearch bgImage={image} txt={categoryName} onClick={() =>handleLinkClick()}></CardWithSearch>
                     </FlexBox>
                 <div>
                     {
-                        parsedItems.map((item) => {
+                        items.map((item) => {
                             return (
                             <div key={item.postId}>
                                 <Item
