@@ -34,9 +34,9 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
             <Wrapper alignItems="start" height="fit-content">
                 <FlexBox dir="column" width="100%" >
                     <FlexBox width="100%" dir="column">
-                        <CardWithSearch bgImage={image} txt={categoryName} onChangingTheText={setQuery}></CardWithSearch>
+                        <CardWithSearch bgImage={image} txt={categoryName} onChangingTheText={setQuery} onClick={() =>handleLinkClick()}></CardWithSearch>
                     {/* what is this?  */}
-                    <CardWithSearch bgImage={image} txt={categoryName} onClick={() =>handleLinkClick()}></CardWithSearch>
+                    {/* <CardWithSearch bgImage={image} txt={categoryName} onClick={() =>handleLinkClick()}></CardWithSearch> */}
                     </FlexBox>
                 <div>
                     {

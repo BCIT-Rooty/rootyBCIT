@@ -41,7 +41,7 @@ export default function CardWithSearch({
                         onResultSelect={(e, data) =>
                         dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/> */}
                         {/* <Input type="search" bgImage="/face4.jpg" padding="0 0 0 45px"></Input> */}
-                        <Input bgImage="/icons8-search-48.png" bgSize="30px" type="email" placeholder='Search services' padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
+                        <Input bgImage="/icons8-search-48.png" onChangingTheText={(e) => onChangingTheText(e)} bgSize="30px" type="email" placeholder='Search services' padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
                         </FlexBox>
         </FlexBox>
     </FlexBox>

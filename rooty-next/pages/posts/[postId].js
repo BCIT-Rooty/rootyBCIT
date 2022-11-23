@@ -16,7 +16,7 @@ import { useState } from 'react';
 
 export default function ItemDescript({parsedItems}) {
 
-let userName = parsedItems[0].author.name + " " + parsedItems[0].author.lastname;
+let userName = parsedItems[0].author.firstName + " " + parsedItems[0].author.lastName;
 let description = parsedItems[0].description;
 let title = parsedItems[0].title;
 let image = parsedItems[0].image;
