@@ -28,7 +28,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [aboutMe, setAboutMe] = useState("");
-  const [category, setCategory] = useState("");
+  const [categoryMain, setCategoryMain] = useState("");
   const [profileImage, setProfileImage] = useState("");
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function Home() {
       email: email,
       password: password,
       aboutMe: aboutMe,
-      program: category,
+      program: categoryMain,
     };
 
     // VERIFY THE USER THRUOUGH A CONFIRMATION LINK SENT TO EMAIL...
@@ -311,13 +311,15 @@ export default function Home() {
                   {listOfCategories.map((category) => (
                     <Button
                       type="button"
-                      onClick={(e) => setCategory(e)}
+                      onClick={(e) => setCategoryMain(e)}
                       key={category.id}
                       txt={category.name}
                       value={category.name}
                       color="#545454"
                       width="fit-content"
                       padding="20px 5vw"
+                      whatIsTheStateOfTheAppForCategory={categoryMain}
+                      ifThisIsTheCategoriesButtons={true}
                     />
                   ))}
                   {/* (e) => setCategory(e) */}
