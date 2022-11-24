@@ -3,7 +3,7 @@
 
 
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ChatNavBar from "../../components/chat/chatNavBar";
 import axios from "axios";
 import MyMessage from "../../components/chat/myMessage";
@@ -18,6 +18,12 @@ export default function ACertainChatRoom(props) {
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
   const [userId, setUserId] = useState("");
+
+  const scrollContainer = useRef()
+
+  useEffect(() => {
+    scrollContainer.current.scrollTo({top: Number.MAX_SAFE_INTEGER, behavior: "smooth"})
+  }, [chats])
 
   useEffect(() => {
     const pusher = new Pusher("70d9960be5691b5baa3a", {
@@ -77,7 +83,7 @@ export default function ACertainChatRoom(props) {
         alignItems="flex-start"
         height="fit-content"
         padding="0 0 80px 0"
-        dir="column-reverse"
+        // dir="column-reverse"
       >
             <FlexBox
               dir="column"
@@ -86,8 +92,10 @@ export default function ACertainChatRoom(props) {
               width="100%"
               height="fit-content"
             >
-              <FlexBox dir="column" width="100%">
-                {chats.map((m) => m)}
+              <FlexBox ref={scrollContainer} justifyContent="flex-end" width="100%" minHeight="50vh" height="77vh" position="absolute" bottom="70px" overflowY="scroll">
+                <FlexBox dir="column">
+                  {chats.map((m) => m)}
+                </FlexBox>
               </FlexBox>
               <ChatNavBar
                 position="fixed"
