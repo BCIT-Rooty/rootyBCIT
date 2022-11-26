@@ -42,28 +42,25 @@ export default function Button({
   maxWidth,
   onNext = () => {},
   onPrev = () => {},
-  onClose
+  onClose,
 }) {
-
-
   if (ifThisIsTheCategoriesButtons) {
     if (whatIsTheStateOfTheAppForCategory == value) {
       bgColor = "#4F4DB0";
       color = "white";
-      border = "#4F4DB0"
+      border = "#4F4DB0";
     }
   }
 
-
-    const ButtonClick = styled(FlexBox)`
-        color: ${props=>props.color};
-        text-align: ${props=>props.textAlign};
-        font-weight: ${props=>props.fontWeight};
-        border: ${props=>props.border};
-        font-size: ${props=>props.fzsize};
-        max-width: ${(props) => props.maxWidth};
-        min-width: ${(props) => props.minWidth};
-    `
+  const ButtonClick = styled(FlexBox)`
+    color: ${(props) => props.color};
+    text-align: ${(props) => props.textAlign};
+    font-weight: ${(props) => props.fontWeight};
+    border: ${(props) => props.border};
+    font-size: ${(props) => props.fzsize};
+    max-width: ${(props) => props.maxWidth};
+    min-width: ${(props) => props.minWidth};
+  `;
 
   return (
     <FlexBox>
@@ -113,7 +110,11 @@ export default function Button({
           maxWidth={maxWidth}
         >
           {txt}
-          <Icons name="close" buttonMargin={buttonMargin} onClick={(e) => onRemoveKeyword(txt)}></Icons>
+          <Icons
+            name="close"
+            buttonMargin={buttonMargin}
+            onClick={(e) => onRemoveKeyword(txt)}
+          ></Icons>
         </ButtonClick>
       )}
 

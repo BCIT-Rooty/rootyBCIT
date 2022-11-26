@@ -34,7 +34,7 @@ async function main() {
   const author = await prisma.user.createMany({
     data: [
       {
-        firstName: "Sohrab",
+        name: "Sohrab",
         lastName: "Radmehr",
         password: "Password!",
         email: "sohrab@gmail.com",
@@ -49,16 +49,15 @@ async function main() {
     },
   });
 
-  console.log(author)
-  const program = await prisma.program.createMany({
-    data: [
-      {
-        programName: "Full-Stack Web Development",
-        authorId: author1.userId
-      },
-    ],
-  });
-
+  console.log(author);
+  // const program = await prisma.program.createMany({
+  //   data: [
+  //     {
+  //       programName: "Full-Stack Web Development",
+  //       authorId: author1.userId
+  //     },
+  //   ],
+  // });
 
   console.log({ categories, author });
 }

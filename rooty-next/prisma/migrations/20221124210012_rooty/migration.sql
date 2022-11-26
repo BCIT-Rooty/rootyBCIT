@@ -5,12 +5,14 @@ CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 CREATE TABLE "User" (
     "userId" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "firstName" TEXT,
+    "name" TEXT,
     "lastName" TEXT,
     "password" TEXT NOT NULL,
+    "image" TEXT,
     "email" TEXT NOT NULL,
     "aboutMe" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
+    "program" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("userId")
 );
@@ -32,16 +34,6 @@ CREATE TABLE "Post" (
     "image" TEXT DEFAULT '',
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("postId")
-);
-
--- CreateTable
-CREATE TABLE "Program" (
-    "programId" SERIAL NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "programName" VARCHAR(50) NOT NULL,
-    "authorId" INTEGER NOT NULL,
-
-    CONSTRAINT "Program_pkey" PRIMARY KEY ("programId")
 );
 
 -- CreateTable
@@ -121,9 +113,6 @@ CREATE TABLE "Message" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Program_authorId_key" ON "Program"("authorId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Skill_skillName_key" ON "Skill"("skillName");
 
 -- CreateIndex
@@ -143,9 +132,6 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") 
 
 -- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("categoryId") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Program" ADD CONSTRAINT "Program_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SkillOnUser" ADD CONSTRAINT "SkillOnUser_sKillId_fkey" FOREIGN KEY ("sKillId") REFERENCES "Skill"("skillId") ON DELETE RESTRICT ON UPDATE CASCADE;

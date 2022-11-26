@@ -23,7 +23,7 @@ export default async function handle(req, res) {
       } else {
         const newUser = await prisma.user.create({
           data: {
-            firstName: name,
+            name: name,
             lastName: lastname,
             email: email,
             password: hash,
