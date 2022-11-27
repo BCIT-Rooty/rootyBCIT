@@ -12,22 +12,22 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        username: { label: "Email", type: "text", placeholder: "ex@gmail.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log("authorize", credentials);
+        // console.log("authorize", credentials);
         const dbUser = await prisma.user.findUnique({
           where: {
             email: credentials.username,
           },
         });
         console.log("DB USERRR AYYYYYYYY", dbUser);
-        console.log("CREDENTIALS", credentials);
+        // console.log("CREDENTIALS", credentials);
 
         if (dbUser) {
           delete dbUser.password;
-          console.log(dbUser);
+          // console.log(dbUser);
           return dbUser;
         } else {
           return null;

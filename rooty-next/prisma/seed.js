@@ -41,7 +41,7 @@ async function main() {
         aboutMe: "I'm cool",
       },
       {
-        firstName: "Sohrab2",
+        name: "Sohrab2",
         lastName: "Radmehr",
         password: "Password!",
         email: "sohrab2@gmail.com",

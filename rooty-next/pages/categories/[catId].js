@@ -11,6 +11,7 @@ import { prisma } from "../../server/db/client";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { useState, useEffect } from "react";
 
 export default function OneCategory({ parsedItems, parsedCategoryName }) {
   const [query, setQuery] = useState("")
