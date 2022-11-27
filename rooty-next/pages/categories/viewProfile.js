@@ -57,7 +57,7 @@ export default function EditProfile() {
       <FlexBox
         bgImage="/back.png"
         onClick={() => {
-          r.push("/userProfile/1");
+          r.push("/account/2");
         }}
         width="30px"
         height="30px"

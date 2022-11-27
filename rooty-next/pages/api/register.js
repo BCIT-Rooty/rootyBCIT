@@ -28,7 +28,7 @@ export default async function handle(req, res) {
             email: email,
             password: hash,
             aboutMe: aboutMe,
-            // program: category,
+            program: category,
           },
         });
         res.status(201).json(newUser);

@@ -6,8 +6,8 @@ import InputWithText from "../../components/inputWithText";
 import AddPortfolio from "../../components/addPortfolio";
 import axios from "axios";
 import { useEffect } from "react";
-// import { unstable_getServerSession } from "next-auth/next";
-// import { authOptions } from "../api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 const descript = [
   [
@@ -40,15 +40,6 @@ export default function EditProfile({ sessionObj }) {
       });
   }, []);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
   return (
     <Wrapper
       dir="column"
@@ -63,7 +54,7 @@ export default function EditProfile({ sessionObj }) {
           type="Done"
           margin="0 0 0 -20px"
           onClick={() => {
-            r.push("/editProfile");
+            r.push("/userProfile");
           }}
         />
         <InputWithText
@@ -102,18 +93,26 @@ export default function EditProfile({ sessionObj }) {
   );
 }
 
-// export async function getServerSideProps(context) {
-//   const session = await unstable_getServerSession(
-//     context.req,
-//     context.res,
-//     authOptions
-//   );
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
 
-//   let sessionObj = JSON.parse(JSON.stringify(session));
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  let sessionObj = JSON.parse(JSON.stringify(session));
 
-//   return {
-//     props: {
-//       sessionObj,
-//     },
-//   };
-// }
+  return {
+    props: {
+      sessionObj,
+    },
+  };
+}

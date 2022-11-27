@@ -13,13 +13,7 @@ import axios from "axios";
 
 export default function NavBar({ route, sessionUserObj }) {
   const [session, setSession] = useState();
-  const pages = [
-    "/home",
-    "/categories",
-    "/createPost",
-    "/chat",
-    "/userProfile",
-  ];
+  const pages = ["/home", "/categories", "/createPost", "/chat", "/account"];
   const index = pages.findIndex((page) => route.startsWith(page));
   const r = useRouter();
   const HandleNavBarIcons = (name, num) => {
@@ -71,7 +65,7 @@ export default function NavBar({ route, sessionUserObj }) {
         <Tab
           icon={<PersonIcon fontSize="large" />}
           onClick={() => {
-            HandleNavBarIcons(`/userProfile/${session.userId}`, 5);
+            HandleNavBarIcons(`/account/${session.userId}`, 5);
           }}
         />
       </Navigation>

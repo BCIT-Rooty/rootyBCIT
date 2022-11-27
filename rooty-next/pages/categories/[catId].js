@@ -93,7 +93,7 @@ export async function getServerSideProps(context) {
 
   let parsedItems = JSON.parse(JSON.stringify(categoryItems));
   let parsedCategoryName = JSON.parse(JSON.stringify(categoryName));
-  // console.log('parsdedName', parsedItems[0].Photos)
+  console.log("parsdedName", parsedItems);
   return {
     props: { parsedItems, parsedCategoryName },
   };
