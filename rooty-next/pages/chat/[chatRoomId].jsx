@@ -59,8 +59,9 @@ export default function ACertainChatRoom(props) {
       await axios.post("/api/allChat", { userId: props.theId }).then((res) => {
         const oldPosts = res.data.map((m) => {
           console.log(formatTimeAgo(m.createdAt))
+          console.log(m.author);
           if (m.isItText) {
-            if (m.userId == props.thisUserId) {
+            if (m.author.userId == props.thisUserId) {
               return <MyMessage key={m.messageId} text={m.content} />
             } else {
               return <NotMyMessage key={m.messageId} text={m.content} />
@@ -86,7 +87,7 @@ export default function ACertainChatRoom(props) {
   async function handleSendButton(e) {
     e.preventDefault();
     if (message.length) {
-      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId}).then(res => {
+      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId, thisUserId: props.thisUserId}).then(res => {
         sendTextToTheBackEnd(message, res.data.messageId);
       })
       setMessage("");
