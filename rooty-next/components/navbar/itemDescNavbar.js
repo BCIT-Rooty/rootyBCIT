@@ -7,17 +7,21 @@ export default function ItemDescNavbar({
     position={position},
     top={top},
     onClick = () => {},
+    priceOfTheService,
+    isItNegotiable,
 }){
+    console.log(priceOfTheService, isItNegotiable)
     return(
     <FlexBox width="100%" justifyContent="space-between" alignItems="center" bgColor="white" zIndex="20" padding="10px 16px 10px 29px" topBorder="1px #EDEDED solid" position={position} top={top}>
         <FlexBox>
-            <Text txt={"$" + 15} size="22px" weight="bold"></Text>
-            <Text txt="or " size="22px" ></Text>
-            <HandshakeIcon fontSize="large"></HandshakeIcon>
+            <Text txt={"$" + priceOfTheService} size="22px" weight="bold"></Text>
+            {isItNegotiable ? <><Text txt="or " size="22px" ></Text>
+            <HandshakeIcon fontSize="large"></HandshakeIcon></> : <></>}
+            
         </FlexBox>
         <FlexBox>
         <FlexBox>
-            <Text txt="Price Negotiable" size="15px" color="#6D6D6D" padding="8px"></Text>
+        {isItNegotiable ?  <Text txt="Price Negotiable" size="15px" color="#6D6D6D" padding="8px"></Text> : <></>}
             <Button
                 onClick={onClick}
                         txt="Chat"
