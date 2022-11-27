@@ -3,7 +3,20 @@ import { FlexBox, Wrapper, ImgPlaceholder } from "../styles/globals";
 import Button from "../components/button";
 import { useRouter } from "next/router";
 
+
 export default function Home() {
+
+  const router = useRouter()
+
+  async function handleClickRegister(e) {
+    router.push("/register")
+  }
+  async function handleClickLogin(e) {
+    router.push("/login")
+  }
+  
+
+
   return (
     <Wrapper
       dir="column"
@@ -16,13 +29,13 @@ export default function Home() {
       </Head>
 
       <FlexBox>
-        <a href="/register">
-          <Button txt="Register" bgColor="#4F4DB0"></Button>
-        </a>
+        
+          <Button onClick={handleClickRegister} txt="Register" bgColor="#4F4DB0"></Button>
+       
 
-        <a href="/login">
-          <Button txt="Log In" bgColor="#4F4DB0"></Button>
-        </a>
+        
+          <Button onClick={handleClickLogin} txt="Log In" bgColor="#4F4DB0"></Button>
+        
       </FlexBox>
     </Wrapper>
   );

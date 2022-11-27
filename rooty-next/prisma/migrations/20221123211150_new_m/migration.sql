@@ -102,6 +102,7 @@ CREATE TABLE "Message" (
     "messageId" SERIAL NOT NULL,
     "content" VARCHAR(500) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "isItText" BOOLEAN DEFAULT true,
     "userId" INTEGER NOT NULL,
     "chatRoomId" INTEGER NOT NULL,
 
@@ -119,12 +120,6 @@ CREATE UNIQUE INDEX "Category_categoryName_key" ON "Category"("categoryName");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Keywords_keyword_key" ON "Keywords"("keyword");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Message_userId_key" ON "Message"("userId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Message_chatRoomId_key" ON "Message"("chatRoomId");
 
 -- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;

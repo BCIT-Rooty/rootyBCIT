@@ -62,6 +62,7 @@ export default function NextAuthLogInButton() {
             <FlexBox padding="0px 0px 0px 20px">
               {gradientCard.map((o) => (
                 <GradientCard
+                  key={o}
                   txt={o[0]}
                   bgImage={o[1]}
                   onClick={() => setShowModal(o[2])}
@@ -88,6 +89,7 @@ export default function NextAuthLogInButton() {
           >
             {popularSearches.map((o) => (
               <Button
+                key={o}
                 width="42vw"
                 maxWidth="205px"
                 padding="25px 1vw 25px 1vw"

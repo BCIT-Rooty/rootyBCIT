@@ -3,7 +3,7 @@
 
 
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ChatNavBar from "../../components/chat/chatNavBar";
 import axios from "axios";
 import MyMessage from "../../components/chat/myMessage";
@@ -19,6 +19,12 @@ export default function ACertainChatRoom(props) {
   const [chats, setChats] = useState([]);
   const [userId, setUserId] = useState("");
 
+  const scrollContainer = useRef()
+
+  useEffect(() => {
+    scrollContainer.current.scrollTo({top: Number.MAX_SAFE_INTEGER, behavior: "smooth"})
+  }, [chats])
+
   useEffect(() => {
     const pusher = new Pusher("70d9960be5691b5baa3a", {
       cluster: "us3",
@@ -27,7 +33,7 @@ export default function ACertainChatRoom(props) {
 
     const channel = pusher.subscribe(newChatRoomId);
     channel.bind("send-message", function (data) {
-      setChats((chats) => [...chats, <MyMessage text={data.txt} />]);
+      setChats((chats) => [...chats, <MyMessage key={data.messageId} text={data.txt} />]);
     });
 
     return () => {
@@ -43,7 +49,7 @@ export default function ACertainChatRoom(props) {
           if (m.isItText) {
             return <MyMessage key={m.messageId} text={m.content} />
           } else {
-            return <MyMessage type="messageImage" bgImage={m.content} />
+            return <MyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
           }
         });
         setChats(oldPosts);
@@ -52,15 +58,16 @@ export default function ACertainChatRoom(props) {
   }, []);
 
 
-  async function sendTextToTheBackEnd(inputText) {
-    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true});
+  async function sendTextToTheBackEnd(inputText, messageId) {
+    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true, messageId});
   }
 
   async function handleSendButton(e) {
     e.preventDefault();
     if (message.length) {
-      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId})
-      sendTextToTheBackEnd(message);
+      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId}).then(res => {
+        sendTextToTheBackEnd(message, res.data.messageId);
+      })
       setMessage("");
     }
   }
@@ -71,30 +78,34 @@ export default function ACertainChatRoom(props) {
 
   return (
     <>
-    <ChatHeader />
+    <ChatHeader margin="0px 9px 20px 0px" position="fixed"/>
       <Wrapper
-        justifyContent="flex-start"
+        // justifyContent="flex-start"
         alignItems="flex-start"
         height="fit-content"
         padding="0 0 80px 0"
+        // dir="column-reverse"
       >
-        <FlexBox
-          dir="column"
-          justifyContent="flex-end"
-          alignItems="flex-start"
-          width="100%"
-          height="fit-content"
-        >
-          <FlexBox dir="column" width="100%">
-            {chats.map((m) => m)}
-          </FlexBox>
-          <ChatNavBar
-            position="fixed"
-            value={message}
-            onChangingTheTextForChat={handleChangeText}
-            onSubmitButtonClicked={handleSendButton}
-          />
-        </FlexBox>
+            <FlexBox
+              dir="column"
+              justifyContent="flex-end"
+              alignItems="flex-start"
+              width="100%"
+              height="fit-content"
+            >
+              <FlexBox ref={scrollContainer} justifyContent="flex-end" width="100%" minHeight="50vh" height="77vh" position="absolute" bottom="70px" overflowY="scroll">
+                <FlexBox dir="column">
+                  {chats.map((m) => m)}
+                </FlexBox>
+              </FlexBox>
+              <ChatNavBar
+                position="fixed"
+                margin="30px 0 0 0"
+                value={message}
+                onChangingTheTextForChat={handleChangeText}
+                onSubmitButtonClicked={handleSendButton}
+              />
+            </FlexBox>
       </Wrapper>
     </>
   );

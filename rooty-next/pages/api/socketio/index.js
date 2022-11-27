@@ -4,13 +4,13 @@ import * as db from "../../../components/dbFunctions/databaseFunctions";
 import { prisma } from "../../../server/db/client";
 const Pusher = require("pusher");
 
-export default function ioHandler(req, res) {
+export default async function ioHandler(req, res) {
   switch (req.method) {
     case "GET":
       res.status(200).json({ name: "John Doe" });
       break;
     case "POST":
-      const { txt, id } = req.body;
+      const { txt, id, messageId } = req.body;
       const pusher = new Pusher({
         appId: process.env.appId,
         key: process.env.key,
@@ -18,8 +18,9 @@ export default function ioHandler(req, res) {
         cluster: process.env.cluster,
       });
 
-      pusher.trigger(id, "send-message", {
+      await pusher.trigger(id, "send-message", {
         txt,
+        messageId
       });
 
       res.status(200).json({ txt });
