@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import io from "socket.io-client";
 import { FlexBox, Wrapper } from "../../styles/globals";
 import {prisma} from "../../server/db/client";
 import DialogBox from "../../components/chat/dialogueBox"

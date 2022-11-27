@@ -14,6 +14,11 @@ import Pusher from "pusher-js";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { prisma } from "../../server/db/client";
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+TimeAgo.addDefaultLocale(en)
+const timeAgo = new TimeAgo('en-US')
+
 
 export default function ACertainChatRoom(props) {
   const theChatRoomId = props.theId;
@@ -53,6 +58,7 @@ export default function ACertainChatRoom(props) {
     (async function yo() {
       await axios.post("/api/allChat", { userId: props.theId }).then((res) => {
         const oldPosts = res.data.map((m) => {
+          console.log(formatTimeAgo(m.createdAt))
           if (m.isItText) {
             if (m.userId == props.thisUserId) {
               return <MyMessage key={m.messageId} text={m.content} />
@@ -89,6 +95,18 @@ export default function ACertainChatRoom(props) {
 
   function handleChangeText(input) {
     setMessage(input);
+  }
+
+  function formatTimeAgo(time) {
+      
+
+    if (!time) {
+      return ''
+    }
+    if (typeof time === 'string') {
+      time = new Date(time)
+    }
+    return timeAgo.format(time)
   }
 
   return (
