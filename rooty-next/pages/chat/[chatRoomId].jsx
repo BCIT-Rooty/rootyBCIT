@@ -11,6 +11,9 @@ import NotMyMessage from "../../components/chat/notMyMessage";
 import ChatHeader from "../../components/chat/chatHeader";
 import { FlexBox, Wrapper } from "../../styles/globals";
 import Pusher from "pusher-js";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { prisma } from "../../server/db/client";
 
 export default function ACertainChatRoom(props) {
   const theChatRoomId = props.theId;
@@ -33,7 +36,11 @@ export default function ACertainChatRoom(props) {
 
     const channel = pusher.subscribe(newChatRoomId);
     channel.bind("send-message", function (data) {
-      setChats((chats) => [...chats, <MyMessage key={data.messageId} text={data.txt} />]);
+      if (data.thisUser == props.thisUserId) {
+        setChats((chats) => [...chats, <MyMessage key={data.messageId} text={data.txt} />]);
+      } else {
+        setChats((chats) => [...chats, <NotMyMessage key={data.messageId} text={data.txt} />]);
+      }
     });
 
     return () => {
@@ -47,9 +54,17 @@ export default function ACertainChatRoom(props) {
       await axios.post("/api/allChat", { userId: props.theId }).then((res) => {
         const oldPosts = res.data.map((m) => {
           if (m.isItText) {
-            return <MyMessage key={m.messageId} text={m.content} />
+            if (m.userId == props.thisUserId) {
+              return <MyMessage key={m.messageId} text={m.content} />
+            } else {
+              return <NotMyMessage key={m.messageId} text={m.content} />
+            }
           } else {
+            if (m.userId == props.thisUserId) {
             return <MyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
+          } else {
+            return <NotMyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
+            }
           }
         });
         setChats(oldPosts);
@@ -59,7 +74,7 @@ export default function ACertainChatRoom(props) {
 
 
   async function sendTextToTheBackEnd(inputText, messageId) {
-    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true, messageId});
+    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true, messageId, thisUser: props.thisUserId});
   }
 
   async function handleSendButton(e) {
@@ -112,8 +127,30 @@ export default function ACertainChatRoom(props) {
 }
 
 export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  console.log(session);
+  const theUserSignIn = await prisma.user.findUnique({
+    where: {
+      email: session.user.email
+    }
+  })
   const theId = +context.params.chatRoomId;
+  const thisUserId = JSON.parse(JSON.stringify(theUserSignIn.userId))
   return {
-    props: { theId },
+    props: { theId, thisUserId },
   };
 }
