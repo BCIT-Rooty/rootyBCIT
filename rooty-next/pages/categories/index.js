@@ -1,20 +1,21 @@
 import CategoryCard from "../../components/categoryCard";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { FlexBox, Wrapper } from "../../styles/globals";
 import Review from "../../components/reviews/review";
 import Text from "../../components/text";
-import { Search } from 'semantic-ui-react';
+import { Search } from "semantic-ui-react";
 // import Review from "../../components/review";
 import { ImgPlaceholder } from "../../styles/globals";
-import axios from 'axios';
-import { useEffect, useState, useMemo } from "react";
-import {prisma} from "../../server/db/client";
-import Input from "../../components/inputs";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { prisma } from "../../server/db/client";
+import Input from "../../components/inputs";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
 
-
-export default function Categories({jsonCategories}) {
+export default function Categories({ jsonCategories }) {
   const r = useRouter();
 
   const [categories, setCategories] = useState([]);
@@ -32,20 +33,19 @@ export default function Categories({jsonCategories}) {
 
 
   function getCategories(categories) {
-    return (
-      categories.map(category => (
-
-        <CategoryCard onClick={
-          () => r.push({
+    return categories.map((category) => (
+      <CategoryCard
+        onClick={() =>
+          r.push({
             pathname: `categories/${category.categoryId}`,
-          })}
-          key={category.categoryId} name={category.categoryName} image={category.image}>
-        </CategoryCard>
-
-      ))
-      )
-  };
-
+          })
+        }
+        key={category.categoryId}
+        name={category.categoryName}
+        image={category.image}
+      ></CategoryCard>
+    ));
+  }
 
   return (
     <>
@@ -69,22 +69,38 @@ export default function Categories({jsonCategories}) {
                 {/* delete the input if anything wrong */}
           <Input bgImage="/icons8-search-48.png" bgSize="30px" onChangingTheText={(e) => setQuery(e)} type="email" placeholder='Search services' margin="0px 20px 0px 20px" padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
           </FlexBox>
-          <FlexBox flexWrap="wrap" filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))">
+          <FlexBox
+            flexWrap="wrap"
+            filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))"
+          >
             {getCategories(categories)}
           </FlexBox>
         </FlexBox>
       </motion.Wrapper>
     </>
-  )
+  );
 }
 
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 
-export async function getStaticProps() {
   const categoriesBE = await prisma.category.findMany();
-      const jsonCategories = JSON.parse(JSON.stringify(categoriesBE));
-      return {
-        props: {
-          jsonCategories
-        }
-      }
+  const jsonCategories = JSON.parse(JSON.stringify(categoriesBE));
+  return {
+    props: {
+      jsonCategories,
+    },
+  };
 }

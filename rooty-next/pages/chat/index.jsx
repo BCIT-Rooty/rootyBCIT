@@ -5,6 +5,8 @@ import {prisma} from "../../server/db/client";
 import DialogBox from "../../components/chat/dialogueBox"
 import { useRouter } from "next/router";
 import Text from "../../components/text";
+// import { unstable_getServerSession } from "next-auth/next";
+// import { authOptions } from "../api/auth/[...nextauth]";
 
 
 export default function Chat({allTheChatsThatUserWasInJson}) {
@@ -45,6 +47,22 @@ export async function getServerSideProps(context) {
       userTwo: true
     }
   })
+
+  // const session = await unstable_getServerSession(
+  //   context.req,
+  //   context.res,
+  //   authOptions
+  // );
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
+
+  // let sessionObj = JSON.parse(JSON.stringify(session));
 
   const allTheChatsThatUserWasInJson = JSON.parse(JSON.stringify(allChatsForThisUser))
   console.log(allTheChatsThatUserWasInJson);

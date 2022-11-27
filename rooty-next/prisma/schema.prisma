@@ -11,9 +11,10 @@ datasource db {
 model User {
   userId     Int           @id @default(autoincrement())
   createdAt  DateTime      @default(now())
-  firstName  String?
+  name       String?
   lastName   String?
   password   String
+  image      String?
   email      String        @unique
   aboutMe    String?       @db.Text
   role       Role          @default(USER)
@@ -23,6 +24,7 @@ model User {
   ChatRooms1 ChatRoom[]    @relation("UserNumberOne")
   ChatRooms2 ChatRoom[]    @relation("UserNumberTwo")
   Message    Message[]
+  // Program    Program?
 }
 
 // model Account {
