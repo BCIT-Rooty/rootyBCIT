@@ -13,6 +13,9 @@ import ItemDescNavbar from "../../components/navbar/itemDescNavbar";
 import ReviewActiveStars from "../../components/reviews/reviewActiveStars";
 import Rating from '@mui/material/Rating';
 import { useState } from 'react';
+import Button from "../../components/button";
+import LeaveReview from "../../components/reviews/leaveReview";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function ItemDescript({parsedItems}) {
 
@@ -38,8 +41,19 @@ function startChat() {
     const link = `/chat`
     router.push(link)
 }
-const [value, setValue] = useState(4)
+const [value, setValue] = useState(4);
+const [showModal, setShowModal] = useState("default")
 
+
+function onPublish() {
+    const link = `/home`
+    r.push(link)
+}
+
+function onCancel() {
+    const link = `/categories/${parsedItems[0].postId}`
+    router.push(link)
+}
     return ( 
         
         
@@ -83,7 +97,22 @@ const [value, setValue] = useState(4)
                 </FlexBox>
                 <ReviewHorizontalScroll bgImage1="/face5.jpg" bgImage2="/face4.jpg" bgImage3="/face3.jpg" bgImage4="/face2.jpg" bgImage5="/face1.jpg"></ReviewHorizontalScroll>
                 </FlexBox>
-            {/* </FlexBox> */}
+                <FlexBox width="100%" margin="0 0 30px 0px" dir="column">
+                <Button onClick={()=> setShowModal("show")}  width="fit-content" padding="0px 20px" type="add" iconName="write" txt="Write a review" bgColor="#4F4DB0" borderRadius="16px" border="2px solid #232323"></Button>
+                </FlexBox>
+
+
+                    <AnimatePresence exitBeforeEnter>
+                    {showModal === "show" && 
+                    // <FlexBox width="100%" height="100vh" maxWidth="900px" dir="column" alignItems="flex-start" justifyContent="flex-start" position="fixed" overflowY="scroll" top="0px">
+                    <FlexBox position="absolute" bottom="-290px" left="0vw" width="100vw">
+                     {/* <motion.div initial={{x: 450}} animate={{x: 0, transition:{duration: 0.4, delay:0}}} exit={{x:450}}> */}
+                     <motion.div initial={{y: 900}} animate={{y: 0, transition:{duration: 0.7, delay:0}}} exit={{y:900}}>
+                        <LeaveReview onClick={() => onCancel()}></LeaveReview>
+                    </motion.div>
+                    </FlexBox>}
+                    </AnimatePresence>
+
             <ItemDescNavbar position="fixed" top="92vh" onClick={() =>startChat()}></ItemDescNavbar>
         </Wrapper>
        
