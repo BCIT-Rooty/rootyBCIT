@@ -35,7 +35,7 @@ export default function Home(){
       <HorizontalScrollContainer justifyContent="flex-start" alignItems="flex-start" maxWidth="900px">
       <FlexBox padding="0px 0px 0px 20px">
           {gradientCard.map((o) => (
-            <GradientCard txt={o[0]} bgImage={o[1]} onClick={()=> setShowModal(o[2])}></GradientCard>
+            <GradientCard key={`gradientCard_${o}`} txt={o[0]} bgImage={o[1]} onClick={()=> setShowModal(o[2])}></GradientCard>
           ))}
         </FlexBox>
       </HorizontalScrollContainer>
@@ -43,7 +43,7 @@ export default function Home(){
       <Text txt="Popular Searches" padding="30px 0px 10px 20px" size="21px" weight="bolder" width="100%" maxWidth="900px" justifyContent="flex-start"></Text>
       <FlexBox flexWrap="wrap" maxWidth="900px" justifyContent="flex-start" alignItems="flex-start" padding="0px 20px 0px 20px">
         {popularSearches.map((o) => (
-          <Button width="42vw" maxWidth="205px" padding="25px 1vw 25px 1vw" txt={o[0]} bgColor='#4F4DB0' onClick={() => HandleNavBarIcons(o[1])}></Button>
+          <Button key={`popularSearches_${o}`} width="42vw" maxWidth="205px" padding="25px 1vw 25px 1vw" txt={o[0]} bgColor='#4F4DB0' onClick={() => HandleNavBarIcons(o[1])}></Button>
         ))
       }
       </FlexBox>

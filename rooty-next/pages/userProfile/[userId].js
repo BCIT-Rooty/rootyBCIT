@@ -47,7 +47,7 @@ export default function UserProfile({ parsedItems }) {
             <SettingLine name="universal access" txt="Accessibility" onClick={()=> setShowModal("show")}></SettingLine>
             <SettingLine name="shield alternate" txt="Security" onClick={()=> setShowModal("show")}></SettingLine>
         </FlexBox>
-        <FlexBox justifyContent="space-between" width="100vw" padding="30px 35px 60px 35px" >
+        <FlexBox justifyContent="space-between" width="100vw" padding="30px 35px 80px 35px">
             <Text txt="Terms of Use" weight="300" size="15px" onClick={()=> setShowModal("show")}></Text>
             <Button bgColor="#4F4DB0" txt="Log Out" width="100px" fontWeight="600" onClick={()=>setLogOut("active")}></Button>
             <Text txt="Privacy Policy" weight="300" size="15px" onClick={()=> setShowModal("show")}></Text>

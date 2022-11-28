@@ -56,7 +56,7 @@ function onCancel() {
 }
     return ( 
         
-        
+       
         <Wrapper alignItems="flex-start" height="fit-content" dir="column" padding="0 0 50px 0">
                 {/* <FlexBox dir="column" width="100%"> */}
                 <FlexBox width="100%"  top="0px" bgImage={postPhoto} height="300px" boxShadow="">
@@ -97,6 +97,7 @@ function onCancel() {
                 </FlexBox>
                 <ReviewHorizontalScroll bgImage1="/face5.jpg" bgImage2="/face4.jpg" bgImage3="/face3.jpg" bgImage4="/face2.jpg" bgImage5="/face1.jpg"></ReviewHorizontalScroll>
                 </FlexBox>
+
                 <FlexBox width="100%" margin="0 0 30px 0px" dir="column">
                 <Button onClick={()=> setShowModal("show")}  width="fit-content" padding="0px 20px" type="add" iconName="write" txt="Write a review" bgColor="#4F4DB0" borderRadius="16px" border="2px solid #232323"></Button>
                 </FlexBox>
@@ -112,6 +113,12 @@ function onCancel() {
                     </motion.div>
                     </FlexBox>}
                     </AnimatePresence>
+
+
+                <FlexBox width="100%" margin="0 0 30px 0px">
+                <Button width="fit-content" padding="0px 20px" type="add" iconName="write" txt="Write a review" bgColor="#4F4DB0" borderRadius="16px" border="2px solid #232323"></Button>
+                </FlexBox>
+            {/* </FlexBox> */}
 
             <ItemDescNavbar position="fixed" top="92vh" onClick={() =>startChat()}></ItemDescNavbar>
         </Wrapper>

@@ -54,7 +54,7 @@ export default function Categories({jsonCategories}) {
       animate={{opacity: 1}}
       exit={{opacity: 0}}
       >
-        <FlexBox dir="column" width="100%">
+        <FlexBox dir="column" width="100%" padding="0 0 70px 0">
           <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 40px" minHeight="100px">
             <Text txt="Search" size="24px" weight="bold"></Text>
           </FlexBox>
