@@ -2,10 +2,10 @@ import Head from "next/head";
 import { FlexBox, Wrapper, ImgPlaceholder } from "../styles/globals";
 import Button from "../components/button";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
+
 
 export default function Home() {
   const r = useRouter();

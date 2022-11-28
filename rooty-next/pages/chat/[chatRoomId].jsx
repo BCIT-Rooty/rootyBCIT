@@ -1,88 +1,95 @@
+// for making it work check the user id with the id we have here and if there were not the same it will be the other person sending chat not us
+
+
+
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import io from "socket.io-client";
+import { useEffect, useState, useRef } from "react";
 import ChatNavBar from "../../components/chat/chatNavBar";
 import axios from "axios";
 import MyMessage from "../../components/chat/myMessage";
 import NotMyMessage from "../../components/chat/notMyMessage";
+import ChatHeader from "../../components/chat/chatHeader";
 import { FlexBox, Wrapper } from "../../styles/globals";
+import Pusher from "pusher-js";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { prisma } from "../../server/db/client";
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+TimeAgo.addDefaultLocale(en)
+const timeAgo = new TimeAgo('en-US')
+
 
 export default function ACertainChatRoom(props) {
   const theChatRoomId = props.theId;
+  const newChatRoomId = `${props.theId}`
   const [message, setMessage] = useState("");
-  const socket = io();
   const [chats, setChats] = useState([]);
   const [userId, setUserId] = useState("");
-  var userIdGlobal;
-  let oldPosts;
+
+  const scrollContainer = useRef()
 
   useEffect(() => {
-    userIdGlobal = Math.floor(Math.random() * 10000) + 1;
-    fetch("/api/socketio").finally(() => {
-      socket.on("connect", () => {
-        joinRoom(theChatRoomId);
-        console.log(socket.id);
-        setUserId(socket.id);
-        (async function yo() {
-          await axios
-            .post("/api/allChat", { userId: props.theId })
-            .then((res) => {
-              console.log(res);
-              oldPosts = res.data.map((m) => <MyMessage text={m.content} />);
-            });
-        })();
-        // The userID doesn't exits now because that we don't have users now!
-        socket.on("receive-message", (message, userId, frontId) => {
-          if (frontId == socket.id) {
-            return;
-          } else {
-            console.log("This is someone else", message, userId, frontId);
-            getNewData()
-            // setChats([...oldPosts, <MyMessage text={message} />]);
-          }
-        });
-      });
+    scrollContainer.current.scrollTo({top: Number.MAX_SAFE_INTEGER, behavior: "smooth"})
+  }, [chats])
+
+  useEffect(() => {
+    const pusher = new Pusher("70d9960be5691b5baa3a", {
+      cluster: "us3",
+      encrypted: true,
     });
-    window.onbeforeunload = function () {
-      socket.emit("avoid-duplicate");
+
+    const channel = pusher.subscribe(newChatRoomId);
+    channel.bind("send-message", function (data) {
+      if (data.thisUser == props.thisUserId) {
+        setChats((chats) => [...chats, <MyMessage key={data.messageId} text={data.txt} />]);
+      } else {
+        setChats((chats) => [...chats, <NotMyMessage key={data.messageId} text={data.txt} />]);
+      }
+    });
+
+    return () => {
+      pusher.unsubscribe(newChatRoomId);
+      pusher.disconnect();
     };
   }, []);
 
   useEffect(() => {
     (async function yo() {
-      await axios.post("/api/allChat", { userId: socket.id }).then((res) => {
-        const oldPosts = res.data.map((m) => <MyMessage text={m.content} />);
+      await axios.post("/api/allChat", { userId: props.theId }).then((res) => {
+        const oldPosts = res.data.map((m) => {
+          console.log(formatTimeAgo(m.createdAt))
+          console.log(m.author);
+          if (m.isItText) {
+            if (m.author.userId == props.thisUserId) {
+              return <MyMessage key={m.messageId} text={m.content} />
+            } else {
+              return <NotMyMessage key={m.messageId} text={m.content} />
+            }
+          } else {
+            if (m.userId == props.thisUserId) {
+            return <MyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
+          } else {
+            return <NotMyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
+            }
+          }
+        });
         setChats(oldPosts);
       });
     })();
   }, []);
 
-  function getNewData() {
-    (async function yo() {
-      await axios
-        .post("/api/allChat", { userId: props.theId })
-        .then((res) => {
-          console.log(res);
-          oldPosts = res.data.map((m) => <MyMessage text={m.content} />);
-          setChats(oldPosts);
-        });
-    })();
+
+  async function sendTextToTheBackEnd(inputText, messageId) {
+    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true, messageId, thisUser: props.thisUserId});
   }
 
-  function joinRoom(room) {
-    console.log("Joined room", room);
-    socket.emit("join-room", room, userIdGlobal);
-  }
-
-  async function sendTextToTheBackEnd(inputText, room) {
-    socket.emit("send-text", inputText, room, userId);
-    setChats([...chats, <MyMessage text={inputText} />]);
-  }
-
-  function handleSendButton(e) {
+  async function handleSendButton(e) {
     e.preventDefault();
     if (message.length) {
-      sendTextToTheBackEnd(message, theChatRoomId);
+      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId, thisUserId: props.thisUserId}).then(res => {
+        sendTextToTheBackEnd(message, res.data.messageId);
+      })
       setMessage("");
     }
   }
@@ -91,25 +98,78 @@ export default function ACertainChatRoom(props) {
     setMessage(input);
   }
 
+  function formatTimeAgo(time) {
+      
+
+    if (!time) {
+      return ''
+    }
+    if (typeof time === 'string') {
+      time = new Date(time)
+    }
+    return timeAgo.format(time)
+  }
+
   return (
     <>
-      <Wrapper justifyContent="flex-start" alignItems="flex-start" height="fit-content" padding="0 0 80px 0">
-        <FlexBox dir="column" justifyContent="flex-end" alignItems="flex-start" width="100%" height="fit-content" >
-      <FlexBox dir="column" width="100%">{chats.map((m) => m)}</FlexBox>
-      <ChatNavBar position="fixed"
-        value={message}
-        onChangingTheTextForChat={handleChangeText}
-        onSubmitButtonClicked={handleSendButton}
-      />
-      </FlexBox>
+    <ChatHeader margin="0px 9px 20px 0px" position="fixed"/>
+      <Wrapper
+        // justifyContent="flex-start"
+        alignItems="flex-start"
+        height="fit-content"
+        padding="0 0 80px 0"
+        // dir="column-reverse"
+      >
+            <FlexBox
+              dir="column"
+              justifyContent="flex-end"
+              alignItems="flex-start"
+              width="100%"
+              height="fit-content"
+            >
+              <FlexBox ref={scrollContainer} justifyContent="flex-end" width="100%" minHeight="50vh" height="77vh" position="absolute" bottom="70px" overflowY="scroll">
+                <FlexBox dir="column">
+                  {chats.map((m) => m)}
+                </FlexBox>
+              </FlexBox>
+              <ChatNavBar
+                position="fixed"
+                margin="30px 0 0 0"
+                value={message}
+                onChangingTheTextForChat={handleChangeText}
+                onSubmitButtonClicked={handleSendButton}
+              />
+            </FlexBox>
       </Wrapper>
     </>
   );
 }
 
 export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  console.log(session);
+  const theUserSignIn = await prisma.user.findUnique({
+    where: {
+      email: session.user.email
+    }
+  })
   const theId = +context.params.chatRoomId;
+  const thisUserId = JSON.parse(JSON.stringify(theUserSignIn.userId))
   return {
-    props: { theId },
+    props: { theId, thisUserId },
   };
 }

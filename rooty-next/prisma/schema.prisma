@@ -169,10 +169,11 @@ model Message {
   messageId  Int      @id @default(autoincrement())
   content    String   @db.VarChar(500)
   createdAt  DateTime @default(now())
+  isItText   Boolean? @default(true)
   author     User     @relation(fields: [userId], references: [userId])
-  userId     Int      @unique
+  userId     Int
   chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [chatRoomId])
-  chatRoomId Int      @unique
+  chatRoomId Int      
 }
 
 enum Role {

@@ -3,14 +3,14 @@ import Text from "../components/text"
 import styled from "styled-components"
 
 const ListItem = styled.li`
-padding-left:40px;
-padding-right:20px
+    padding-left:40px;
+    padding-right:20px
 `
 export const gradientCard = [
-    ["How to Write the Perfect Freelancing Bio", "/tip1.png", "firstArticle"],
-    ["6 Habits of High Successful Freelancers", "/tip2.jpg", "secondArticle"],
-    ["4 Steps to Complete Your First Gig","/tip3.png", "thirdArticle"],
-    ["5 Ways to Improve Focus and Productivity", "/tip1.png", "fourthArticle"]
+    ["How to Write the Perfect Freelancing Bio", "/grad1.jpg", "firstArticle"],
+    ["6 Habits of High Successful Freelancers", "/grad2.jpg", "secondArticle"],
+    ["4 Steps to Complete Your First Gig","/grad3.jpg", "thirdArticle"],
+    ["5 Ways to Improve Focus and Productivity", "/grad4.jpg", "fourthArticle"]
   ]
 export const popularSearches = [
     ["Broadcast & Media", "/categories/1"],
@@ -138,6 +138,20 @@ export const Article4 = () => {
             <ListItem>Maintain social interaction with family, friends, and colleagues.</ListItem>
             <ListItem>Be mindful and stay positive.</ListItem>
             <Text padding="10px 20px" txt='Self-care is crucial to your overall health and well-being. By being physically healthy and mentally well, you’ll be more successful at your freelancing.'></Text>
+         </FlexBox>
+    )
+}
+
+export const Welcome = () => {
+    return(
+        <FlexBox width="100vw" height="100vh" bgColor="#F8F8F8" justifyContent="flex-start" alignItems="flex-start"dir="column" padding="30px 15px 30px 15px" maxWidth="900px">
+            <Text padding="10px 20px" txt='Rooty provides BCIT students with a safe space to build their credibility, experience, and network within the BCIT community. Compared to other freelance apps where professionals take over the global market, Rooty allows entry-level student freelancers to stand out and prepare for their career paths before entering the workforce.'></Text>
+            <Text padding="10px 30px" txt='Rooty exclusively focuses on helping BCIT students to'></Text>
+            
+            <ListItem>Make extra income</ListItem>
+            <ListItem>Barter for each other's services</ListItem>
+            <ListItem>Gain work experience to develop portfolios/resumes</ListItem>
+            <ListItem>Network in-person</ListItem>
          </FlexBox>
     )
 }

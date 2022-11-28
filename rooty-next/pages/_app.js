@@ -3,12 +3,40 @@ import NavBar from "../components/navbar/navbar";
 import "semantic-ui-css/semantic.min.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { useState, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
 
-  // console.log(router)
+  const [routesWeDoNotWant, setRoutesWeDoNotWant] = useState(["/chat/*", "/", "/register"]);
+  
+  function checkRoutes(thisPath) {
+    let shouldItRender = true
+    routesWeDoNotWant.forEach((m) => {
+      const lengthOfPath = m.length;
+      if (m[lengthOfPath - 1] == "*") {
+        // console.log(thisPath.startsWith(m.slice(0, -1)))
+        if (thisPath.startsWith(m.slice(0, -1))) {
+          shouldItRender = false;
+          return;
+        } else {
+          return;
+        }
+      } else if (m == thisPath) {
+        shouldItRender = false;
+        return;
+      } else {
+        return;
+      }
+    });
+    if (shouldItRender) {
+      return  <NavBar route={router.route} /> 
+    } else {
+      <></>
+    }
+  }
+  
   return (
     <>
       <SessionProvider session={session}>
@@ -18,10 +46,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           <link
             href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
             rel="stylesheet"
-          />
+            />
         </Head>
         {/* <AnimatePresence exitBeforeEnter> */}
-        <NavBar route={router.route}></NavBar>
+        {checkRoutes(router.asPath)}
         <Component {...pageProps} />
         {/* </AnimatePresence> */}
       </SessionProvider>
@@ -30,3 +58,44 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 }
 
 export default MyApp;
+
+// If I wanted to make changes later
+// const [shouldTheRouteLoad, setShouldTheRouteLoad] = useState(true);
+
+// {routesWeDoNotWant.map((m) => {
+  //   const lengthOfPath = m.length;
+  //   if (m[lengthOfPath - 1] == "*") {
+    //     if (router.asPath.startsWith(m.slice(0, -1))) {
+      //       return <></>;
+      //     } else {
+        //       return <NavBar route={router.route} />;
+        //     }
+        //   } else if (m == router.asPath) {
+          //     return <></>;
+          //   } else {
+            //     return <NavBar route={router.route} />;
+//   }
+// })}
+
+// useEffect(() => {
+//   const thisPath = router.asPath
+//   routesWeDoNotWant.map(m => {
+//     const lengthOfPath = m.length
+//     if (m[lengthOfPath - 1] == "*") {
+//       // console.log(thisPath.startsWith(m.slice(0, -1)))
+//       if (thisPath.startsWith(m.slice(0, -1))) {
+//        setShouldTheRouteLoad(false)
+//        return
+//       } else {
+//         setShouldTheRouteLoad(true)
+//         return
+//       }
+//     } else if (m == thisPath) {
+//       setShouldTheRouteLoad(false)
+//       return
+//     } else {
+//       setShouldTheRouteLoad(true)
+//       return
+//     }
+//   })
+// }, [router.asPath])

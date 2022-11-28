@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import styled from "styled-components";
 import { Email } from "@mui/icons-material";
+import Toaster from "../components/toaster";
 
 export default function Home() {
   const r = useRouter();
@@ -28,43 +29,87 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [aboutMe, setAboutMe] = useState("");
-  const [category, setCategory] = useState("");
+  const [categoryMain, setCategoryMain] = useState("");
   const [profileImage, setProfileImage] = useState("");
+  const [keywords, setKeywords] = useState([]);
+  const [noKeywords, setNoKeywords] = useState(false);
+  const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] =
+    useState(false);
+  const [errorThatKeywordAlreadyExists, setErrorThatKeywordAlreadyExists] =
+    useState(false);
+  const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
+
+  function handleKeywordsButtonClick() {
+    const keywordWithoutSpaces = keywordButtonStateValue.trim();
+    if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
+      if (errorThatKeywordAlreadyExists) {
+        setErrorThatKeywordAlreadyExists(false);
+      }
+      setErrorStateForEmptyInputKeyWord(true);
+      return;
+    } else if (keywordButtonStateValue !== "" && keywordWithoutSpaces !== "") {
+      setErrorStateForEmptyInputKeyWord(false);
+    }
+    if (
+      keywords.includes(keywordButtonStateValue) ||
+      keywords.includes(keywordWithoutSpaces)
+    ) {
+      setErrorThatKeywordAlreadyExists(true);
+      return;
+    } else if (
+      !keywords.includes(keywordButtonStateValue) &&
+      errorThatKeywordAlreadyExists !== true &&
+      keywords.includes(keywordWithoutSpaces)
+    ) {
+      setErrorThatKeywordAlreadyExists(false);
+    }
+    setErrorThatKeywordAlreadyExists(false);
+    setErrorStateForEmptyInputKeyWord(false);
+
+    setKeywords([...keywords, keywordWithoutSpaces]);
+    setKeywordButtonStateValue("");
+  }
+
+  function removeKeyWordXButton(input) {
+    setKeywords(keywords.filter((m) => m !== input));
+  }
 
   useEffect(() => {
     if (steps === 1) {
       setHeaderText("Welcome");
-      setHeaderImage("/signin1.png");
+      setHeaderImage("/register1.png");
     }
     if (steps === 2) {
       setHeaderText("Set up your Profile");
-      setHeaderImage("/signin2.png");
+      setHeaderImage("/register2.png");
     }
     if (steps === 3) {
       setHeaderText("What Program are you in?");
-      setHeaderImage("/signin3.png");
+      setHeaderImage("/register3.png");
     }
     if (steps === 4) {
       setHeaderText("What Skills do you Offer?");
-      setHeaderImage("/signin4.png");
+      setHeaderImage("/register4.png");
     }
     if (steps === 5) {
       setHeaderText("Create Profile");
-      setHeaderImage("/signin5.png");
+      setHeaderImage("/register5.png");
     }
   }, [steps]);
+
+  const areThereKeywords = keywords.length !== 0;
 
   const [noPhotoError, setNoPhotoError] = useState(false);
 
   const registerUser = async (e) => {
     e?.preventDefault();
     const data = {
-      name: firstName,
-      lastname: lastName,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password,
       aboutMe: aboutMe,
-      category: category,
+      program: categoryMain,
     };
 
     // VERIFY THE USER THRUOUGH A CONFIRMATION LINK SENT TO EMAIL...
@@ -84,6 +129,13 @@ export default function Home() {
     if (steps >= 5) {
       // r.push("/home");
       registerUser();
+    }
+  };
+
+  const goBack = (newStep) => {
+    setSteps(newStep);
+    if(steps === 1){
+      r.push("/")
     }
   };
 
@@ -118,7 +170,7 @@ export default function Home() {
       <FlexBox width="100vw" height="30vh">
         <FlexBox
           bgImage="/back.png"
-          onClick={() => handleSteps(Math.max(1, steps - 1))}
+          onClick={() => goBack(Math.max(1, steps - 1))}
           width="40px"
           height="40px"
           position="absolute"
@@ -128,13 +180,13 @@ export default function Home() {
         <AnimatePresence exitBeforeEnter>
           <motion.div
             key={headerImage}
-            initial={{ x: 300 }}
-            animate={{ x: 0, transition: { duration: 0.4, delay: 0 } }}
-            exit={{ x: -300 }}
+            initial={{x: 1000}} 
+            animate={{x: 0, transition:{duration: 0.4, delay:0}}} 
+            exit={{x:-1000}}
           >
             <ImgPlaceholder
-              width="190px"
-              height="190px"
+              width="250px"
+              height="250px"
               bgImage={headerImage}
             ></ImgPlaceholder>
           </motion.div>
@@ -153,9 +205,9 @@ export default function Home() {
         <AnimatePresence exitBeforeEnter>
           <motion.div
             key={headerText}
-            initial={{ x: 400 }}
-            animate={{ x: 0, transition: { duration: 0.4, delay: 0 } }}
-            exit={{ x: -400 }}
+            initial={{x: 1000}} 
+            animate={{x: 0, transition:{duration: 0.4, delay:0}}} 
+            exit={{x:-1000}}
           >
             <Text
               padding="60px 20px 0px 20px"
@@ -180,9 +232,9 @@ export default function Home() {
             >
               <motion.div
                 key={steps}
-                initial={{ x: 400 }}
+                initial={{ x: 1000 }}
                 animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                exit={{ x: -400 }}
+                exit={{ x: -1000 }}
               >
                 <Text
                   padding="30px 0px 10px 20px"
@@ -198,10 +250,11 @@ export default function Home() {
                   onChangingTheText={(e) => setEmail(e)}
                   placeholder="jdoe@my.bcit.ca"
                   margin="0px 20px 0px 20px"
-                  padding="0 0 0 45px"
+                  padding="0 0 0 60px"
                   width="90vw"
                   maxWidth="900px"
                   justifyContent="flex-start"
+                  required
                 ></Input>
                 <Text
                   padding="30px 0px 10px 20px"
@@ -217,10 +270,11 @@ export default function Home() {
                   onChangingTheText={(e) => setPassword(e)}
                   placeholder=""
                   margin="0px 20px 0px 20px"
-                  padding="0 0 0 45px"
+                  padding="0 0 0 60px"
                   width="90vw"
                   maxWidth="900px"
                   justifyContent="flex-start"
+                  required
                 ></Input>
                 <Text
                   padding="10px 20px 10px 20px"
@@ -246,9 +300,9 @@ export default function Home() {
               >
                 <motion.div
                   key={steps}
-                  initial={{ x: 400 }}
+                  initial={{ x: 1000 }}
                   animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                  exit={{ x: -400 }}
+                  exit={{ x: -1000 }}
                 >
                   <Text
                     padding="30px 0px 10px 20px"
@@ -294,9 +348,9 @@ export default function Home() {
             >
               <motion.div
                 key={steps}
-                initial={{ x: 400 }}
+                initial={{ x: 1000 }}
                 animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                exit={{ x: -400 }}
+                exit={{ x: -1000 }}
               >
                 <FlexBox
                   flexWrap="wrap"
@@ -308,13 +362,18 @@ export default function Home() {
                   {listOfCategories.map((category) => (
                     <Button
                       type="button"
-                      onClick={(e) => setCategory(e)}
+                      onClick={(e) => setCategoryMain(e)}
                       key={category.id}
                       txt={category.name}
                       value={category.name}
-                      color="#545454"
+                      registerValue={true}
+                      color="white"
+                      bgColor="#4F4DB0"
+                      border="2px solid white"
                       width="fit-content"
                       padding="20px 5vw"
+                      whatIsTheStateOfTheAppForCategory={categoryMain}
+                      ifThisIsTheCategoriesButtons={true}
                     />
                   ))}
                   {/* (e) => setCategory(e) */}
@@ -332,37 +391,74 @@ export default function Home() {
             >
               <motion.div
                 key={steps}
-                initial={{ x: 400 }}
+                initial={{ x: 1000 }}
                 animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                exit={{ x: -400 }}
+                exit={{ x: -1000 }}
               >
                 <FlexBox
                   padding="30px 20px 0px 20px"
-                  justifyContent="space-between"
+                  justifyContent="start"
                   width="100vw"
                   maxWidth="100%"
                 >
                   <Input
                     type="search"
                     placeholder="Add up to 5 Skills"
-                    // value={keywordButtonStateValue}
+                    value={keywordButtonStateValue}
                     border="solid 1px #545454"
-                    // onChangingTheText={setKeywordButtonStateValue}
-                    width="65vw"
+                    onChangingTheText={setKeywordButtonStateValue}
+                    width="55vw"
                     maxWidth="80%"
                   />
                   <Button
                     type="add"
                     key="handleKeywordAdding"
                     txt="Add"
-                    // value={keywordButtonStateValue}
+                    value={keywordButtonStateValue}
                     width="fit-content"
                     padding="15px"
                     margin="0px 0px 0px 20px"
                     buttonMargin="0px 10px 0px 0px"
                     color="#4F4DB0"
+                    onClick={handleKeywordsButtonClick}
                   />
                 </FlexBox>
+                <FlexBox width="100%" maxWidth="850px" padding="25px 20px 10px 20px" flexWrap="wrap">
+            {areThereKeywords ? (
+              keywords.map((m) => (
+                <Button
+                  key={m}
+                  txt={m}
+                  width="fit-content"
+                  height="30px"
+                  type="keyword"
+                  padding="10px 10px"
+                  fontWeight="300"
+                  buttonMargin="0px 0px 0px 10px"
+                  border="solid 1px #545454"
+                  color="#545454"
+                  onRemoveKeyword={removeKeyWordXButton}
+                ></Button>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </FlexBox>
+                  {errorStateForEmptyInputKeyWord ? (
+                    <Toaster txt="You must insert atleast one keyword" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+                  ) : (
+                    <></>
+                  )}
+                  {errorThatKeywordAlreadyExists ? (
+                    <Toaster txt="This keyword is already being used" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+                  ) : (
+                    <></>
+                  )}
+                  {noKeywords ? (
+                    <Toaster txt="You need at least one Keyword"maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+                  ) : (
+                    <></>
+                  )}
               </motion.div>
             </FlexBox>
           )}
@@ -376,9 +472,9 @@ export default function Home() {
             >
               <motion.div
                 key={steps}
-                initial={{ x: 400 }}
+                initial={{ x: 1000 }}
                 animate={{ x: 0, transition: { duration: 0.4, delay: 0.7 } }}
-                exit={{ x: -400 }}
+                exit={{ x: -1000 }}
               >
                 <Text
                   padding="30px 20px 20px 20px"

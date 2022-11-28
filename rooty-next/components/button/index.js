@@ -31,6 +31,7 @@ export default function Button({
   fontWeight = "600",
   value = "nothing",
   border = "none",
+  iconName="add",
   ifThisIsTheCategoriesButtons = "false",
   onClick = () => {},
   onKeywordWantToRemove = () => {},
@@ -43,12 +44,23 @@ export default function Button({
   onNext = () => {},
   onPrev = () => {},
   onClose,
+  registerValue = false
 }) {
-  if (ifThisIsTheCategoriesButtons) {
+
+
+  if (ifThisIsTheCategoriesButtons && !registerValue) {
     if (whatIsTheStateOfTheAppForCategory == value) {
       bgColor = "#4F4DB0";
       color = "white";
-      border = "#4F4DB0";
+      border = "2px solid white"
+    }
+  }
+
+  if (ifThisIsTheCategoriesButtons && registerValue) {
+    if (whatIsTheStateOfTheAppForCategory == value) {
+      bgColor = "white";
+      color = "#4F4DB0";
+      border = "2px solid #4F4DB0"
     }
   }
 
@@ -139,7 +151,7 @@ export default function Button({
           minWidth={minWidth}
           maxWidth={maxWidth}
         >
-          <Icons name="add" color="#ffffff" buttonMargin={buttonMargin}></Icons>
+          <Icons name={iconName} color="#ffffff" buttonMargin={buttonMargin}></Icons>
           {txt}
         </ButtonClick>
       )}

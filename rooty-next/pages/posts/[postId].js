@@ -145,6 +145,8 @@ export default function ItemDescript({ parsedItems }) {
         position="fixed"
         top="92vh"
         onClick={() => startChat()}
+        priceOfTheService={parsedItems[0].price}
+        isItNegotiable={parsedItems[0].isNegotiableActive}
       ></ItemDescNavbar>
     </Wrapper>
   );

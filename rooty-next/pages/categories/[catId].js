@@ -11,8 +11,12 @@ import { prisma } from "../../server/db/client";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { useState, useEffect } from "react";
 
 export default function OneCategory({ parsedItems, parsedCategoryName }) {
+  const [query, setQuery] = useState("")
+    const [items, setItems] = useState(parsedItems)
+  
   const r = useRouter();
   const categoryName = parsedCategoryName.map(
     (category) => category.categoryName
@@ -23,6 +27,13 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
     const link = `/categories`;
     router.push(link);
   }
+  useEffect(() => {
+    console.log(parsedItems);
+    const newParsedItems = parsedItems.filter(item => {
+      return item.title.toLowerCase().includes(query.toLocaleLowerCase())
+    })
+    setItems(newParsedItems)
+    }, [query])
 
   return (
     <Wrapper alignItems="start" height="fit-content">
@@ -31,6 +42,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
           <CardWithSearch
             bgImage={image}
             txt={categoryName}
+            onChangingTheText={setQuery}
             onClick={() => handleLinkClick()}
           ></CardWithSearch>
         </FlexBox>

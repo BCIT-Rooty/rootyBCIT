@@ -12,6 +12,7 @@ export const FlexBox = styled.div`
     padding: ${props=>props.padding};
     margin: ${props=>props.margin || "0px"};
     min-height: ${props=>props.minHeight};
+    max-height: ${props=>props.maxHeight};
     background-image: ${props=>props.linearGradient || "none"}, url(${props=>props.bgImage});
     background-position: ${props=>props.bgPosition || "center"};
     background-size: ${props=>props.bgSize || "cover"};
@@ -32,6 +33,8 @@ export const FlexBox = styled.div`
     cursor: ${props=>props.cursor};
     max-width: ${props=>props.maxWidth};
     min-width: ${props=>props.minWidth};
+    overflow-y: ${props=>props.overflowY};
+    overflow-anchor: ${props=>props.overflowA}
 `
 
 export const Wrapper = styled(FlexBox) `
