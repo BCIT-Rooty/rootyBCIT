@@ -115,6 +115,12 @@ function onClose() {
                     </FlexBox>}
                     </AnimatePresence>
 
+
+                <FlexBox width="100%" margin="0 0 30px 0px">
+                <Button width="fit-content" padding="0px 20px" type="add" iconName="write" txt="Write a review" bgColor="#4F4DB0" borderRadius="16px" border="2px solid #232323"></Button>
+                </FlexBox>
+            {/* </FlexBox> */}
+
             <ItemDescNavbar position="fixed" top="92vh" onClick={() =>startChat()}></ItemDescNavbar>
         </Wrapper>
        
