@@ -8,37 +8,26 @@ import axios from "axios";
 import { useEffect } from "react";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { prisma } from "../../server/db/client";
 
-const descript = [
-  [
-    "Hello, I am a D3 student. I am really good at managing my time and I will successfully deliver the project you want. Please text me!",
-  ],
-  [
-    ["Architecture", "/face2.jpg", "4", "90"],
-    ["Logo Design", "/face3.jpg", "4.6", "60"],
-    ["Video Editing", "/face4.jpg", "4.4", "100"],
-  ],
-];
+export default function EditProfile({ sessionUserObj }) {
+  const [firstName, setFirstName] = useState(sessionUserObj.name);
+  const [lastName, setLastName] = useState(sessionUserObj.lastName);
+  const [program, setProgram] = useState(sessionUserObj.program);
+  const [aboutMe, setAboutMe] = useState(sessionUserObj.aboutMe);
 
-export default function EditProfile({ sessionObj }) {
-  const [name, setName] = useState("Renata");
   const r = useRouter();
 
   function handleSubmit(e) {
     e.preventDefault();
-    r.push("/profile");
+    axios.post("/api/editUserProfile", {
+      firstName,
+      lastName,
+      program,
+      aboutMe,
+    });
+    r.push(`/userProfile/${sessionUserObj.userId}`);
   }
-
-  useEffect(() => {
-    axios
-      .get("/api/editUserProfile")
-      .then((res) => {
-        console.log("FROM THE SAUNA", res);
-      })
-      .catch((err) => {
-        console.log("ERROR IN SQWUA", err);
-      });
-  }, []);
 
   return (
     <Wrapper
@@ -54,7 +43,7 @@ export default function EditProfile({ sessionObj }) {
           type="Done"
           margin="0 0 0 -20px"
           onClick={() => {
-            r.push("/userProfile");
+            r.push(`/userProfile/${sessionUserObj.userId}`);
           }}
         />
         <InputWithText
@@ -64,30 +53,44 @@ export default function EditProfile({ sessionObj }) {
           margin="0 0 0 -20px"
         ></InputWithText>
         <InputWithText
-          txt="Name"
+          txt="First name"
           type="textarea"
           margin="0 0 0 -20px"
-          defaultValue={name}
-          onChange={(e) => {
-            setName(e.target.value);
+          defaultValue={firstName}
+          onChangingTheText={(e) => {
+            setFirstName(e);
           }}
-
-          // defaultValue="Renata Dzotova"
+        ></InputWithText>
+        <InputWithText
+          txt="Last name"
+          type="textarea"
+          margin="0 0 0 -20px"
+          defaultValue={lastName}
+          onChange={(e) => {
+            setLastName(e);
+          }}
         ></InputWithText>
         <InputWithText
           txt="Program"
           type="textarea"
           margin="0 0 0 -20px"
-          defaultValue="Digital Design and Development"
+          defaultValue={program}
+          onChange={(e) => {
+            setProgram(e);
+          }}
         ></InputWithText>
         <InputWithText
           txt="About Me / Education / Skills"
           type="textarea"
           margin="0 0 0 -20px"
           bottomBorder="0.5px solid black"
-          defaultValue="Hello, I am a D3 student. I am really good at managing my time and I will successfully deliver the project you want. Please text me!"
+          defaultValue={aboutMe}
+          onChange={(e) => {
+            setAboutMe(e);
+          }}
         ></InputWithText>
-        <AddPortfolio defaultValue="Digital Design and Development"></AddPortfolio>
+        {/* <AddPortfolio defaultValue="Digital Design and Development"></AddPortfolio> */}
+        <button type="submit"></button>
       </form>
     </Wrapper>
   );
@@ -99,6 +102,17 @@ export async function getServerSideProps(context) {
     context.res,
     authOptions
   );
+  const sessionUser = await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  });
+
+  let sessionObj = JSON.parse(JSON.stringify(session));
+  let sessionUserObj = JSON.parse(JSON.stringify(sessionUser));
+
+  // console.log("SESSION OBJ EDITING", sessionObj);
+  // console.log("SESSION USER OBJ EDITING", sessionUserObj);
 
   if (!session) {
     return {
@@ -108,11 +122,11 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  let sessionObj = JSON.parse(JSON.stringify(session));
 
   return {
     props: {
       sessionObj,
+      sessionUserObj,
     },
   };
 }

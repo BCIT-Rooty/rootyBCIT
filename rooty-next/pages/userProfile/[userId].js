@@ -126,7 +126,7 @@ export async function getServerSideProps(context) {
   });
 
   let sessionUserPostsObj = JSON.parse(JSON.stringify(sessionUserPosts));
-  console.log("sessionUserPostsObj", sessionUserPostsObj);
+  // console.log("sessionUserPostsObj", sessionUserPostsObj);
 
   sessionUserObj.createdAt = sessionUserObj.createdAt / 1000;
 

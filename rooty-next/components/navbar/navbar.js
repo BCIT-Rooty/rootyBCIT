@@ -22,7 +22,7 @@ export default function NavBar({ route, sessionUserObj }) {
 
   useEffect(() => {
     axios.get("/api/session").then((res) => {
-      console.log("from the navbar useeffect", res.data);
+      // console.log("from the navbar useeffect", res.data);
       setSession(res.data);
     });
   }, []);

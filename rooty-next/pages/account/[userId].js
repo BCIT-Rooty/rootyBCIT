@@ -33,7 +33,7 @@ export default function UserProfile({ sessionUserObj }) {
         boxShadow="0px 3px 5px #888888"
       >
         <ImgPlaceholder
-          bgImage="/camera-man.jpg"
+          bgImage={sessionUserObj.image}
           borderRadius="80px"
           width="80px"
           height="80px"

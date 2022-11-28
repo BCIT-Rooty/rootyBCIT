@@ -12,6 +12,7 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
+
         username: { label: "Email", type: "text", placeholder: "ex@gmail.com" },
         password: { label: "Password", type: "password" },
       },
@@ -19,7 +20,7 @@ export const authOptions = {
         // console.log("authorize", credentials);
         const dbUser = await prisma.user.findUnique({
           where: {
-            email: credentials.username,
+            email: credentials.email,
           },
         });
         console.log("DB USERRR AYYYYYYYY", dbUser);
