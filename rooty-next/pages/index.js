@@ -57,7 +57,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  let sessionUserObj = JSON.parse(JSON.stringify(sessionUser));
+  let sessionUserObj = JSON.parse(JSON.stringify(session));
   return {
     props: { session, sessionUserObj },
   };

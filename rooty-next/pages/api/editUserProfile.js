@@ -1,11 +1,10 @@
 import { prisma } from "../../server/db/client";
-// import { unstable_getServerSession } from "next-auth/next";
-// import { authOptions } from "./auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "./auth/[...nextauth]";
 
 export default async function handle(req, res) {
   const { method } = req;
   const session = await unstable_getServerSession(req, res, authOptions);
-  console.log("SESSION BISH", session);
 
   if (!session) {
     res
@@ -17,7 +16,28 @@ export default async function handle(req, res) {
   switch (method) {
     case "POST":
       // get the title and content from the request body
-      const { name, lastname, email, password, aboutMe, category } = req.body;
+      const { firstName, lastName, aboutMe, program } = req.body;
+      console.log("REQ BODY FROM EDIT USER API", req.body);
+      // update the post in the database
+      const changeUserInfo = await prisma.user.update({
+        where: {
+          email: session.user.email,
+        },
+        data: {
+          name: firstName,
+          lastName,
+          aboutMe,
+          program,
+        },
+      });
+      // find updated post in the database
+      const updatedUser = await prisma.user.findUnique({
+        where: {
+          email: changeUserInfo.email,
+        },
+      });
+
+      res.status(200).json(updatedUser);
 
       break;
     case "GET":
