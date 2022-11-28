@@ -37,6 +37,7 @@ export default function userPosts({ parsedItems }) {
             );
           })}
         </div>
+        {/* EDIT WHAT IS CAPITALIZED LETTERS PLEASE */}
         {deleteMessage && 
             <FlexBox position="fixed" width="300px" height="fit-content" borderRadius="16px" bgColor="#FFFFFF" top="30%" left="25%" boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)" justifyContent="start" alignItems="start" dir="column" padding="20px">
             <Text txt={"Are you sure you want to Delete " + "HERE IT SHOULD SAY THE POSTS NAME" + " Post?" }weight="700" size="24px" padding="0 0 30px 0"></Text>

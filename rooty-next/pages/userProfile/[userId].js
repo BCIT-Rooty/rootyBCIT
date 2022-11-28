@@ -44,6 +44,7 @@ export default function UserProfile({ parsedItems }) {
         <FlexBox dir="column" height="fit-content" padding="20px 0 0 0">
             <Text txt="Set Seller Status" width="100vw" padding="40px 0px 15px 35px" weight="600"></Text>
             <FlexBox>
+            {/* STATUS BUTTON HERE */}
             {statusButton.map((button) => (
                     <Button
                       type="button"
