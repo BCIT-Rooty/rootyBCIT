@@ -6,13 +6,15 @@ import { TextInput } from "../inputs";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
-export default function LeaveReview(
-    onClick = () => {},
-    onCancel = () => {}
+export default function LeaveReview({
+    onPublish = () => {},
+    onClose = () => {},
+}
 ){
 
     const [description, setDescription] = useState("");
     const router = useRouter();
+    
     return(
     <FlexBox width="94vw" height="550px" padding="20px" border="grey 0.5px solid" boxShadow="0px 0px 4px 0px #00000040" borderRadius="16px" bgColor="white">
         <FlexBox width="100%" height="100%" dir="column" alignItems="flex-start" justifyContent="center">
@@ -38,8 +40,8 @@ export default function LeaveReview(
             </FlexBox>
 
             <FlexBox width="100%" alignItems="flex-start" margin="10px 0" dir="column">
-            <Button onClick={onClick} width="84vw" margin="5px 0px" type="button" txt="Post Review" bgColor="#4F4DB0" borderRadius="16px"></Button>
-            <Button  onClick={onCancel} width="84vw" margin="5px 0px" type="button" txt="Cancel" color="black" bgColor="#FFFFFF" borderRadius="16px" border="1px solid black"></Button>
+            <Button onClose={onPublish} width="84vw" margin="5px 0px" type="cancel" txt="Post Review" bgColor="#4F4DB0" borderRadius="16px"></Button>
+            <Button onClose={onClose} width="84vw" margin="5px 0px" type="cancel" txt="Cancel" color="black" bgColor="#FFFFFF" borderRadius="16px" border="1px solid black"></Button>
             </FlexBox>
 
         </FlexBox>

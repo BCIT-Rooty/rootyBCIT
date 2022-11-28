@@ -50,7 +50,7 @@ function onPublish() {
     r.push(link)
 }
 
-function onCancel() {
+function onClose() {
     const link = `/categories/${parsedItems[0].postId}`
     router.push(link)
 }
@@ -104,11 +104,12 @@ function onCancel() {
 
                     <AnimatePresence exitBeforeEnter>
                     {showModal === "show" && 
-                    // <FlexBox width="100%" height="100vh" maxWidth="900px" dir="column" alignItems="flex-start" justifyContent="flex-start" position="fixed" overflowY="scroll" top="0px">
                     <FlexBox position="absolute" bottom="-290px" left="0vw" width="100vw">
-                     {/* <motion.div initial={{x: 450}} animate={{x: 0, transition:{duration: 0.4, delay:0}}} exit={{x:450}}> */}
                      <motion.div initial={{y: 900}} animate={{y: 0, transition:{duration: 0.7, delay:0}}} exit={{y:900}}>
-                        <LeaveReview onClick={() => onCancel()}></LeaveReview>
+                        <LeaveReview 
+                        onClose={()=> setShowModal("default")} 
+                        //onPublish use this for a publish function
+                        ></LeaveReview>
                     </motion.div>
                     </FlexBox>}
                     </AnimatePresence>
