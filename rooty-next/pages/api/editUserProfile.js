@@ -1,6 +1,6 @@
 import { prisma } from "../../server/db/client";
-// import { unstable_getServerSession } from "next-auth/next";
-// import { authOptions } from "./auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "./auth/[...nextauth]";
 
 export default async function handle(req, res) {
   const { method } = req;
