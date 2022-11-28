@@ -5,6 +5,7 @@ import Text from "./text";
 import { Icon } from "semantic-ui-react";
 import { Heart } from "./icons/icons";
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import Button from "./button";
 
 export default function Item({ 
   id,
@@ -12,7 +13,9 @@ export default function Item({
   price, 
   rating, 
   compensation, 
-  image, 
+  image,
+  remove="default",
+  heart="show", 
 
   dir="row",
   width="338px",
@@ -23,7 +26,8 @@ export default function Item({
   padding="12px",
   imgBorderRadius="16px 0px 0px 16px",
   onClick=()=>{},
-  margin="20px"
+  margin="20px",
+  onNext=()=>{}
 }) {
 
 
@@ -33,12 +37,12 @@ export default function Item({
          <FlexBox dir="column" height={heightTxtBox} width={widthTxtBox} padding={padding} alignItems="start" justifyContent="space-between">
            <FlexBox alignItems="baseline" justifyContent="space-between" width="100%">
              <Text txt={name} size={nameTxtSize} weight="regular" align="left"></Text>
-             <Heart></Heart>
+             {heart === "show" &&  <Heart></Heart>}
            </FlexBox>
            <FlexBox alignItems="left" justifyContent="space-between" width="100%">
-             <Text txt={rating + "/5"} size="15px" weight="regular"></Text>
+              {remove === "default" &&  <Text txt={rating + "/5"} size="15px" weight="regular"></Text>}
+              {remove === "remove" &&  <Button type="next" onNext={onNext} txt="Delete" size="15px" weight="regular" width="80px" bgColor="#4F4DB0" margin="0" height="20px"></Button>}
              <FlexBox alignItems="flex-end" justifyContent="space-around" width="50%">
-                 {/* <Text txt={compensation} size="15px" weight="bold"></Text> */}
                  <Text txt={"$" + price} size="15px" weight="bold"></Text>
                  <Text txt="or "></Text>
                  <HandshakeIcon></HandshakeIcon>

@@ -44,7 +44,8 @@ export default function Button({
   onNext = () => {},
   onPrev = () => {},
   onClose,
-  registerValue = false
+  registerValue = false,
+  statusValue = false
 }) {
 
 
@@ -64,6 +65,13 @@ export default function Button({
     }
   }
 
+  if (statusValue){
+    if (whatIsTheStateOfTheAppForCategory == value) {
+      bgColor = "#4F4DB0";
+      color = "white";
+      border = "2px solid #4F4DB0"
+    }
+  }
 
     const ButtonClick = styled(FlexBox)`
         color: ${props=>props.color};

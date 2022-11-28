@@ -20,6 +20,11 @@ export default function UserProfile({ parsedItems }) {
     const [showModal, setShowModal] = useState("default")
     const [value, setValue] = useState(4)
     const [logOut, setLogOut] = useState("default")
+    const [statusButton, setStatusButton] = useState([
+        {id:1, title:"Available"},
+        {id:2, title:"Unavailable"}
+    ])
+    const [buttonMain, setButtonMain] = useState("");
 
 
     return (
@@ -37,6 +42,25 @@ export default function UserProfile({ parsedItems }) {
             </FlexBox>
         </FlexBox>
         <FlexBox dir="column" height="fit-content" padding="20px 0 0 0">
+            <Text txt="Set Seller Status" width="100vw" padding="40px 0px 15px 35px" weight="600"></Text>
+            <FlexBox>
+            {statusButton.map((button) => (
+                    <Button
+                      type="button"
+                      onClick={(e) => setButtonMain(e)}
+                      key={button.id}
+                      txt={button.title}
+                      value={button.title}
+                      statusValue={true}
+                      color="#545454"
+                      border="2px solid #545454"
+                      width="fit-content"
+                      padding="20px 5vw"
+                      whatIsTheStateOfTheAppForCategory={buttonMain}
+                      ifThisIsTheCategoriesButtons={true}
+                    />
+                  ))}
+            </FlexBox>
             <Text txt="Account" width="100vw" padding="40px 0px 15px 35px" weight="600"></Text>
             <SettingLine name="edit" txt="My Profile" onClick={()=> {r.push('/editProfile')}}></SettingLine>
             <SettingLine name="heart" txt="Favourites List" onClick={()=> setShowModal("show")}></SettingLine>
