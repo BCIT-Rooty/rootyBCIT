@@ -33,7 +33,7 @@ export default function ACertainChatRoom(props) {
 
     const channel = pusher.subscribe(newChatRoomId);
     channel.bind("send-message", function (data) {
-      setChats((chats) => [...chats, <MyMessage text={data.txt} />]);
+      setChats((chats) => [...chats, <MyMessage key={data.messageId} text={data.txt} />]);
     });
 
     return () => {
@@ -49,7 +49,7 @@ export default function ACertainChatRoom(props) {
           if (m.isItText) {
             return <MyMessage key={m.messageId} text={m.content} />
           } else {
-            return <MyMessage type="messageImage" bgImage={m.content} />
+            return <MyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
           }
         });
         setChats(oldPosts);
@@ -58,15 +58,16 @@ export default function ACertainChatRoom(props) {
   }, []);
 
 
-  async function sendTextToTheBackEnd(inputText) {
-    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true});
+  async function sendTextToTheBackEnd(inputText, messageId) {
+    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true, messageId});
   }
 
   async function handleSendButton(e) {
     e.preventDefault();
     if (message.length) {
-      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId})
-      sendTextToTheBackEnd(message);
+      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId}).then(res => {
+        sendTextToTheBackEnd(message, res.data.messageId);
+      })
       setMessage("");
     }
   }

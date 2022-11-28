@@ -45,7 +45,7 @@ export default function EditProfile() {
       <HorizontalScrollContainer height="fit-content" justifyContent="flex-start" alignItems="flex-start" maxWidth="900px" width="94vw" margin="0px 0px 20px 20px" padding="5px">
         <FlexBox>
           {descript[1].map((o) => (
-            <Item name={o[0]} image={o[1]} rating={o[2]} price={o[3]} width="290px" margin="0 20px 0 0" onClick={()=>setShowModal(o)}></Item>
+            <Item key={descript[1].indexOf(o)} name={o[0]} image={o[1]} rating={o[2]} price={o[3]} width="290px" margin="0 20px 0 0" onClick={()=>setShowModal(o)}></Item>
           ))}
         </FlexBox>
       </HorizontalScrollContainer>
@@ -54,7 +54,7 @@ export default function EditProfile() {
             <Text txt="Report" weight="700" size="24px"></Text>
             <Text txt="Select a reason for reporting this user." weight="500" size="12px" padding="10px 0"></Text>
             {reportButton.map((o)=> (
-              <Button type="next" txt={o} bgColor="#4F4DB0" width="250px" onNext={()=>setShowDownload("active")}></Button>
+              <Button type="next" key={`reportButton_${reportButton.indexOf(o)}`} txt={o} bgColor="#4F4DB0" width="250px" onNext={()=>setShowDownload("active")}></Button>
             ))}
             <Button type="cancel" txt="Cancel" bgColor="#F7F7FC" color="#4F4DB0" border="0.5px solid #545454" width="250px" onClose={()=>showReport(false)}></Button>
         </FlexBox>

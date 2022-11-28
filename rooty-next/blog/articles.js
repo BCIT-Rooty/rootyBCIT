@@ -3,14 +3,14 @@ import Text from "../components/text"
 import styled from "styled-components"
 
 const ListItem = styled.li`
-padding-left:40px;
-padding-right:20px
+    padding-left:40px;
+    padding-right:20px
 `
 export const gradientCard = [
-    ["How to Write the Perfect Freelancing Bio", "/tip1.png", "firstArticle"],
-    ["6 Habits of High Successful Freelancers", "/tip2.jpg", "secondArticle"],
-    ["4 Steps to Complete Your First Gig","/tip3.png", "thirdArticle"],
-    ["5 Ways to Improve Focus and Productivity", "/tip1.png", "fourthArticle"]
+    ["How to Write the Perfect Freelancing Bio", "/grad1.jpg", "firstArticle"],
+    ["6 Habits of High Successful Freelancers", "/grad2.jpg", "secondArticle"],
+    ["4 Steps to Complete Your First Gig","/grad3.jpg", "thirdArticle"],
+    ["5 Ways to Improve Focus and Productivity", "/grad4.jpg", "fourthArticle"]
   ]
 export const popularSearches = [
     ["Broadcast & Media", "/categories/1"],

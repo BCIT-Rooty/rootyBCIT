@@ -26,7 +26,7 @@ export default function Chat({allTheChatsThatUserWasInJson}) {
       >
         <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 9px 40px" margin="0 0 20px 0" minHeight="100px"><Text txt="Chats" size="24px" weight="bold"></Text></FlexBox>
 
-        { allTheChatsThatUserWasInJson.map(m => <DialogBox {...m} userName={m.userTwo.name} onClick={handleClickChat} />)}
+        { allTheChatsThatUserWasInJson.map(m => <DialogBox key={`allChats_${allTheChatsThatUserWasInJson.indexOf(m)}`} {...m} userName={m.userTwo.name} onClick={handleClickChat} />)}
 
       </Wrapper>
     </>
