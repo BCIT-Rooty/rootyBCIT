@@ -34,14 +34,14 @@ async function main() {
   const author = await prisma.user.createMany({
     data: [
       {
-        firstName: "Sohrab",
+        name: "Sohrab",
         lastName: "Radmehr",
         password: "Password!",
         email: "sohrab@gmail.com",
         aboutMe: "I'm cool",
       },
       {
-        firstName: "Sohrab2",
+        name: "Sohrab2",
         lastName: "Radmehr",
         password: "Password!",
         email: "sohrab2@gmail.com",
@@ -56,7 +56,7 @@ async function main() {
     },
   });
 
-  console.log(author)
+  console.log(author);
   // const program = await prisma.program.createMany({
   //   data: [
   //     {
@@ -65,7 +65,6 @@ async function main() {
   //     },
   //   ],
   // });
-
 
   console.log({ categories, author });
 }

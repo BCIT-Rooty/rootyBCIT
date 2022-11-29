@@ -1,31 +1,32 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import styled from 'styled-components';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import HomeIcon from '@mui/icons-material/Home';
-import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/Add';
-import PersonIcon from '@mui/icons-material/Person';
-import Tab from '@mui/material/Tab';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import { prisma } from '@prisma/client';
-// import Button from '@mui/material/Button';
-// import Link from 'next/link'
-// import { NextLinkComposed } from '../src/Link';
-// component={NextLinkComposed}
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import AddIcon from "@mui/icons-material/Add";
+import PersonIcon from "@mui/icons-material/Person";
+import Tab from "@mui/material/Tab";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import axios from "axios";
 
-
-
-export default function NavBar({ route }) {
-  const pages = [
-    "/home", "/categories", "/createPost", "/chat", "/userProfile"
-  ]
-  const index = pages.findIndex(page => route.startsWith(page))
+export default function NavBar({ route, sessionUserObj }) {
+  const [session, setSession] = useState();
+  const pages = ["/home", "/categories", "/createPost", "/chat", "/account"];
+  const index = pages.findIndex((page) => route.startsWith(page));
   const r = useRouter();
   const HandleNavBarIcons = (name, num) => {
     r.push(name);
   };
+
+  useEffect(() => {
+    axios.get("/api/session").then((res) => {
+      // console.log("from the navbar useeffect", res.data);
+      setSession(res.data);
+    });
+  }, []);
+  // make api for the session and useState to set the session and pass it to the navbar
 
   const Navigation = styled(BottomNavigation)`
     min-width: 100%;
@@ -63,7 +64,9 @@ export default function NavBar({ route }) {
         />
         <Tab
           icon={<PersonIcon fontSize="large" />}
-          onClick={() => HandleNavBarIcons("/userProfile/1", 5)}
+          onClick={() => {
+            HandleNavBarIcons(`/account/${session.userId}`, 5);
+          }}
         />
       </Navigation>
     </Boxy>

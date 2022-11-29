@@ -1,19 +1,35 @@
-// import { users, getItemsForUser } from '../../server/database';
-import { prisma } from '../../server/db/client';
-import { Wrapper, FlexBox, ImgPlaceholder } from '../../styles/globals'
-import Text from '../../components/text'
-import SettingLine from '../../components/settingLine';
-import { useRouter } from 'next/router';
-import Button from '../../components/button';
-import Construction from '../../components/construction';
-import { useState } from 'react';
-import { AnimatePresence, motion } from "framer-motion";
-import Rating from '@mui/material/Rating';
-import DownloadPopUp from '../../components/downloadPopUp';
+import {
+  FlexBox,
+  HorizontalScrollContainer,
+  Wrapper,
+} from "../../styles/globals";
+import Text from "../../components/text";
+import React from "react";
+import UserProfile from "../../components/userProfile";
+import TitlePage from "../../components/titlePage";
+import PostProfileDescript from "../../components/postProfileDescript";
+import Item from "../../components/Item";
+import { useRouter } from "next/router";
+import { prisma } from "../../server/db/client";
+import { unstable_ClassNameGenerator } from "@mui/material";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { useState } from "react";
 
-export default function UserProfile({ parsedItems }) {
+const descript = [
+  [
+    "Hello, I am a D3 student. I am really good at managing my time and I will successfully deliver the project you want. Please text me!",
+  ],
+  [
+    ["Architecture", "/face2.jpg", "4", "90"],
+    ["Logo Design", "/face3.jpg", "4.6", "60"],
+    ["Video Editing", "/face4.jpg", "4.4", "100"],
+  ],
+];
 
-    // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
+
+export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
+      // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
     // console.log('THIS IS THE USERNAME', userName)
     let userId = 1
     const r = useRouter()
@@ -27,107 +43,111 @@ export default function UserProfile({ parsedItems }) {
     const [buttonMain, setButtonMain] = useState("");
 
 
-    return (
-        <Wrapper dir="column" justifyContent="start" alignItems="start">
-        <FlexBox bgColor="#4F4DB0" padding="55px 30px " width="100vw" boxShadow="0px 3px 5px #888888">
-            <ImgPlaceholder bgImage="/camera-man.jpg" borderRadius="80px" width="80px" height="80px"></ImgPlaceholder>
-            <FlexBox dir="column" margin="0px 0px 0px 20px" alignItems="start">
-                <Text size="21px" weight="700" txt={parsedItems.firstName + ' ' + parsedItems.lastName} color="white"></Text>
-                <Text size="15px" weight="300" txt={parsedItems.program || "Digital Design and Development"} color="white" padding="5px 0px 20px 0px"></Text>
-                <FlexBox>
-                    <Text size="16px" weight="300" txt="4/5" color="white" padding="0px 20px 0px 0px"></Text>
-                    <Rating name="read-only" value={value} readOnly />
-                </FlexBox>
-                
-            </FlexBox>
-        </FlexBox>
-        <FlexBox dir="column" height="fit-content" padding="20px 0 0 0">
-            <Text txt="Set Seller Status" width="100vw" padding="40px 0px 15px 35px" weight="600"></Text>
-            <FlexBox>
-            {/* STATUS BUTTON HERE */}
-            {statusButton.map((button) => (
-                    <Button
-                      type="button"
-                      onClick={(e) => setButtonMain(e)}
-                      key={button.id}
-                      txt={button.title}
-                      value={button.title}
-                      statusValue={true}
-                      color="#545454"
-                      border="2px solid #545454"
-                      width="fit-content"
-                      padding="20px 5vw"
-                      whatIsTheStateOfTheAppForCategory={buttonMain}
-                      ifThisIsTheCategoriesButtons={true}
-                    />
-                  ))}
-            </FlexBox>
-            <Text txt="Account" width="100vw" padding="40px 0px 15px 35px" weight="600"></Text>
-            <SettingLine name="edit" txt="My Profile" onClick={()=> {r.push('/editProfile')}}></SettingLine>
-            <SettingLine name="heart" txt="Favourites List" onClick={()=> setShowModal("show")}></SettingLine>
-            <SettingLine name="archive" txt="My Posts" onClick={() =>{r.push(`/userPosts/${parsedItems.userId}`)}}></SettingLine>
-            <SettingLine name="star" txt="Reviews Received" onClick={()=> setShowModal("show")}></SettingLine>
-            <Text txt="App Settings" width="100vw" padding="50px 0px 15px 35px" weight="600"></Text>
-            <SettingLine name="bell" txt="Notifications" onClick={()=> setShowModal("show")}></SettingLine>
-            <SettingLine name="universal access" txt="Accessibility" onClick={()=> setShowModal("show")}></SettingLine>
-            <SettingLine name="shield alternate" txt="Security" onClick={()=> setShowModal("show")}></SettingLine>
-        </FlexBox>
-        <FlexBox justifyContent="space-between" width="100vw" padding="30px 35px 80px 35px">
-            <Text txt="Terms of Use" weight="300" size="15px" onClick={()=> setShowModal("show")}></Text>
-            <Button bgColor="#4F4DB0" txt="Log Out" width="100px" fontWeight="600" onClick={()=>setLogOut("active")}></Button>
-            <Text txt="Privacy Policy" weight="300" size="15px" onClick={()=> setShowModal("show")}></Text>
-        </FlexBox>
+  return (
+    <Wrapper
+      dir="column"
+      width="100vw"
+      alignItems="start"
+      height="fit-content"
+      padding="0 0 80px 0"
+    >
+      <FlexBox
+        bgImage="/back.png"
+        onClick={() => {
+          r.push(`/account/${sessionUserObj.userId}`);
+        }}
+        width="30px"
+        height="30px"
+        position="absolute"
+        top="25px"
+        left="20px"
+      ></FlexBox>
+      <TitlePage
+        txt="Profile"
+        type="Edit"
+        onClick={() => {
+          r.push("/userProfile/editing");
+        }}
+      />
+      <UserProfile
+        name={sessionUserObj.name + " " + sessionUserObj.lastName}
+        program={sessionUserObj.program}
+        bgImage={sessionUserObj.image}
+      />
+      <PostProfileDescript
+        headTxt="About Me"
+        descriptTxt={sessionUserObj.aboutMe}
+      ></PostProfileDescript>
+      <PostProfileDescript
+        headTxt="Portfolio"
+        descriptTxt=""
+        type1="image1"
+        type2="image2"
+      ></PostProfileDescript>
 
-        <AnimatePresence exitBeforeEnter>
-            {showModal === "show" && 
-            <FlexBox position="absolute">
-                <motion.div
-                initial={{x: -400}}
-                animate={{x: 0, transition:{duration: 0.7, delay:0}}}
-                exit={{x:-400}}>
-                    <Construction
-                    onClose={()=>setShowModal("default")}/>
-                </motion.div>
-            </FlexBox>}
-            {logOut === "active" && (
-            <FlexBox position="absolute" left="0" zIndex="30">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.2, delay: 0 },
-                }}
-                exit={{ opacity: 0 }}
-              >
-                <DownloadPopUp
-                  height="100vh"
-                  onClose={() => setLogOut(r.push("/"))}
-                  txt="You Logged Out!"
-                  txt2="We hope to see you soon! 🥹"
-                  size2="20px"
-                  padding2="0px 0px 15px 0px"
-                  height2="fit-content"
-                  width2="300px"
-                ></DownloadPopUp>
-              </motion.div>
-            </FlexBox>
-          )}
-
-        </AnimatePresence>
-
+      <Text
+        txt="Services"
+        padding="30px 0px 10px 20px"
+        size="21px"
+        weight="bolder"
+        width="100%"
+        maxWidth="900px"
+        justifyContent="flex-start"
+      ></Text>
+      <HorizontalScrollContainer
+        height="fit-content"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        maxWidth="900px"
+        width="94vw"
+        margin="0px 0px 0px 20px"
+        padding="5px"
+      >
+        <FlexBox>
+          {sessionUserPostsObj.map((posts) => (
+            <Item
+              name={posts.title}
+              image={posts.image}
+              rating={posts.rating}
+              price={posts.price}
+              width="290px"
+              margin="0 20px 0 0"
+              onClick={() => setShowModal(posts)}
+            ></Item>
+          ))}
+        </FlexBox>
+      </HorizontalScrollContainer>
     </Wrapper>
-    )
+  );
 }
 
 export async function getServerSideProps(context) {
-    const userItems = await prisma.user.findUnique({
-        where: {
-            userId: +context.params.userId
-        },
-    })
-    let parsedItems = JSON.parse(JSON.stringify(userItems))
-    // console.log('HERE CUNT', parsedItems)
-    return {
-        props: { parsedItems }
-    }
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  const sessionUserObj = await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  });
+
+  const sessionUserPosts = await prisma.post.findMany({
+    where: {
+      authorId: sessionUserObj.userId,
+    },
+  });
+
+  let sessionUserPostsObj = JSON.parse(JSON.stringify(sessionUserPosts));
+  // console.log("sessionUserPostsObj", sessionUserPostsObj);
+
+  sessionUserObj.createdAt = sessionUserObj.createdAt / 1000;
+
+  return {
+    props: {
+      sessionUserObj,
+      sessionUserPostsObj,
+    },
+  };
 }

@@ -5,19 +5,20 @@ import { grey, purple } from '@mui/material/colors';
 
 export const InputRectangle = styled.input`
   background-color: ;
-  border: ${props => props.border};
-  border-radius: ${props => props.borderRadius};
-  width: ${props => props.width};
-  height: ${props => props.height};
-  margin: ${props => props.margin};
-  padding: ${props => props.padding};
-  cursor = ${props => props.cursor};
-  background: url(${props => props.bgImage}) no-repeat 5px 0px, ${props => props.bgColor || "#F7F7FC"};
+  border: ${(props) => props.border};
+  border-radius: ${(props) => props.borderRadius};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  cursor = ${(props) => props.cursor};
+  background: url(${(props) => props.bgImage}) no-repeat 5px 0px, ${(props) =>
+  props.bgColor || "#F7F7FC"};
   font-family: 'Plus Jakarta Sans', sans-serif;
-  max-width: ${props => props.maxWidth};
-  min-width: ${props => props.minWidth};
+  max-width: ${(props) => props.maxWidth};
+  min-width: ${(props) => props.minWidth};
   box-sizing: border-box;
-  background-size: ${props => props.bgSize};
+  background-size: ${(props) => props.bgSize};
   background-position: 3% 50%;
 `;
 
@@ -25,7 +26,7 @@ const Img = styled.img`
   width: 60px;
   height: 60px;
   margin-left: 20px;
-  border-radius: ${props => props.brImage};
+  border-radius: ${(props) => props.brImage};
 `;
 
 const TextArea = styled.textarea`
@@ -36,9 +37,9 @@ const TextArea = styled.textarea`
   min-height: ${(props) => props.minHeight};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  max-width: ${props=>props.maxWidth};
-  min-width: ${props => props.minWidth}
+  font-family: "Plus Jakarta Sans", sans-serif;
+  max-width: ${(props) => props.maxWidth};
+  min-width: ${(props) => props.minWidth};
 `;
 
 // function found online to make a div, in this case FlexBox, act to make
@@ -60,8 +61,6 @@ function promptFile(multiple) {
     input.click();
   });
 }
-
-
 
 // TODO THIS FUNCTION IS FOR THE PRICE INPUT SO THAT ANYTIME A NUMBER IS WRITTEN, IT WILL ALWAYS START WITH THE $ SIGN
 // function addHash(elem) {
@@ -86,15 +85,14 @@ export default function Input({
   value,
   onChangingTheText = () => {},
   onInsertPhotoInsideS3 = () => {},
-  cursor="pointer",
-  bgImage="",
-  brImage="10px",
+  cursor = "pointer",
+  bgImage = "",
+  brImage = "10px",
   maxWidth,
   minWidth,
   justifyContent,
   bgSize,
 }) {
-
   function promptFilename() {
     promptFile().then(function (file) {
       onInsertPhotoInsideS3(file).then((result) => {
@@ -104,10 +102,14 @@ export default function Input({
   }
 
   return (
-    <FlexBox flexWrap="wrap" maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
+    <FlexBox
+      flexWrap="wrap"
+      maxWidth={maxWidth}
+      minWidth={minWidth}
+      justifyContent={justifyContent}
+    >
       {type === "file" && (
-        <FlexBox
-        margin={margin}>
+        <FlexBox margin={margin}>
           <FlexBox
             width="70px"
             height="70px"
@@ -147,7 +149,7 @@ export default function Input({
 
       {type !== "file" && chatPhoto!=="file" && (
         <InputRectangle
-          value={value}  
+          value={value}
           onChange={(e) => {
             onChangingTheText(e.target.value);
           }}
@@ -181,13 +183,18 @@ export function TextInput({
   placeholder = "Enter Text Here",
   padding = "15px",
   onChangingTheText = () => {},
-  maxWidth ="800px",
+  maxWidth = "800px",
   minWidth,
   justifyContent,
-  defaultValue
+  defaultValue,
 }) {
   return (
-    <FlexBox flexWrap="wrap"  maxWidth={maxWidth} minWidth={minWidth} justifyContent={justifyContent}>
+    <FlexBox
+      flexWrap="wrap"
+      maxWidth={maxWidth}
+      minWidth={minWidth}
+      justifyContent={justifyContent}
+    >
       {type === "textarea" && (
         <TextArea
           onChange={(e) => {
@@ -204,9 +211,8 @@ export function TextInput({
           padding={padding}
           maxWidth={maxWidth}
           minWidth={minWidth}
-        >
-          {}
-        </TextArea>
+          defaultValue={defaultValue}
+        ></TextArea>
       )}
     </FlexBox>
   );

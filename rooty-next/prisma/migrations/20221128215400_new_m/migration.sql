@@ -5,9 +5,10 @@ CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 CREATE TABLE "User" (
     "userId" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "firstName" TEXT,
+    "name" TEXT,
     "lastName" TEXT,
     "password" TEXT NOT NULL,
+    "image" TEXT,
     "email" TEXT NOT NULL,
     "aboutMe" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',

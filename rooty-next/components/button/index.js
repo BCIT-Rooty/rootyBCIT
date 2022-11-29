@@ -131,7 +131,11 @@ export default function Button({
           maxWidth={maxWidth}
         >
           {txt}
-          <Icons name="close" buttonMargin={buttonMargin} onClick={(e) => onRemoveKeyword(txt)}></Icons>
+          <Icons
+            name="close"
+            buttonMargin={buttonMargin}
+            onClick={(e) => onRemoveKeyword(txt)}
+          ></Icons>
         </ButtonClick>
       )}
 

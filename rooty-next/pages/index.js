@@ -2,21 +2,13 @@ import Head from "next/head";
 import { FlexBox, Wrapper, ImgPlaceholder } from "../styles/globals";
 import Button from "../components/button";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 
 export default function Home() {
-
-  const router = useRouter()
-
-  async function handleClickRegister(e) {
-    router.push("/register")
-  }
-  async function handleClickLogin(e) {
-    router.push("/login")
-  }
-  
-
-
+  const r = useRouter();
   return (
     <Wrapper
       dir="column"
@@ -29,14 +21,44 @@ export default function Home() {
       </Head>
 
       <FlexBox>
-        
-          <Button onClick={handleClickRegister} txt="Register" bgColor="#4F4DB0"></Button>
-       
+        <Button
+          txt="Register"
+          onClick={() => {
+            r.push("/register");
+          }}
+          bgColor="#4F4DB0"
+        ></Button>
 
-        
-          <Button onClick={handleClickLogin} txt="Log In" bgColor="#4F4DB0"></Button>
-        
+        <Button
+          txt="Log In"
+          onClick={() => {
+            signIn();
+          }}
+          bgColor="#4F4DB0"
+        ></Button>
       </FlexBox>
     </Wrapper>
   );
+}
+
+export async function getServerSideProps(context) {
+  // const session = await getSession(context);
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/home",
+        permanent: false,
+      },
+    };
+  }
+  let sessionUserObj = JSON.parse(JSON.stringify(session));
+  return {
+    props: { session, sessionUserObj },
+  };
 }
