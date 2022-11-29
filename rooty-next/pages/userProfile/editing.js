@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { prisma } from "../../server/db/client";
+import Button from "../../components/button";
 
 export default function EditProfile({ sessionUserObj }) {
   const [firstName, setFirstName] = useState(sessionUserObj.name);
@@ -18,9 +19,8 @@ export default function EditProfile({ sessionUserObj }) {
 
   const r = useRouter();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    axios.post("/api/editUserProfile", {
+  async function handleSubmit() {
+    await axios.post("/api/editUserProfile", {
       firstName,
       lastName,
       program,
@@ -37,7 +37,6 @@ export default function EditProfile({ sessionUserObj }) {
       height="fit-content"
       padding="0 0 80px 20px"
     >
-      <form onSubmit={handleSubmit}>
         <TitlePage
           txt="Edit Profile"
           type="Done"
@@ -90,8 +89,8 @@ export default function EditProfile({ sessionUserObj }) {
           }}
         ></InputWithText>
         {/* <AddPortfolio defaultValue="Digital Design and Development"></AddPortfolio> */}
-        <button type="submit"></button>
-      </form>
+        <Button bgColor="#4F4DB0" txt={"Submit"} height="30px" width="70px" margin="20px 20px 0 0" onClick={() => {handleSubmit()}}/>
+
     </Wrapper>
   );
 }

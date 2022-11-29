@@ -23,6 +23,11 @@ export default function UserProfile({ sessionUserObj }) {
   const [showModal, setShowModal] = useState("default");
   const [value, setValue] = useState(4);
   const [logOut, setLogOut] = useState("default");
+  const [statusButton, setStatusButton] = useState([
+    {id:1, title:"Available"},
+    {id:2, title:"Unavailable"}
+])
+const [buttonMain, setButtonMain] = useState("");
 
   return (
     <Wrapper dir="column" justifyContent="start" alignItems="start">
@@ -44,7 +49,8 @@ export default function UserProfile({ sessionUserObj }) {
             weight="700"
             txt={sessionUserObj.name + " " + sessionUserObj.lastName}
             color="white"
-          ></Text>
+            ></Text>
+
           <Text
             size="15px"
             weight="300"
@@ -65,6 +71,26 @@ export default function UserProfile({ sessionUserObj }) {
         </FlexBox>
       </FlexBox>
       <FlexBox dir="column" height="fit-content" padding="20px 0 0 0">
+      <Text txt="Set Seller Status" width="100vw" padding="40px 0px 15px 35px" weight="600"></Text>
+            <FlexBox>
+            {/* STATUS BUTTON HERE */}
+            {statusButton.map((button) => (
+                    <Button
+                      type="button"
+                      onClick={(e) => setButtonMain(e)}
+                      key={button.id}
+                      txt={button.title}
+                      value={button.title}
+                      statusValue={true}
+                      color="#545454"
+                      border="2px solid #545454"
+                      width="fit-content"
+                      padding="20px 5vw"
+                      whatIsTheStateOfTheAppForCategory={buttonMain}
+                      ifThisIsTheCategoriesButtons={true}
+                    />
+                  ))}
+            </FlexBox>
         <Text
           txt="Account"
           width="100vw"

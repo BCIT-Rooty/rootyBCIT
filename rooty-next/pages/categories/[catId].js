@@ -47,7 +47,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
           ></CardWithSearch>
         </FlexBox>
         <div>
-          {parsedItems.map((item) => {
+          {items.map((item) => {
             return (
               <div key={item.postId}>
                 <Item
