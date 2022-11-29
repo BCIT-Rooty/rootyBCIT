@@ -66,7 +66,7 @@ export default function EditProfile({ sessionUserObj }) {
           type="textarea"
           margin="0 0 0 -20px"
           defaultValue={lastName}
-          onChange={(e) => {
+          onChangingTheText={(e) => {
             setLastName(e);
           }}
         ></InputWithText>
@@ -75,7 +75,7 @@ export default function EditProfile({ sessionUserObj }) {
           type="textarea"
           margin="0 0 0 -20px"
           defaultValue={program}
-          onChange={(e) => {
+          onChangingTheText={(e) => {
             setProgram(e);
           }}
         ></InputWithText>
@@ -85,7 +85,7 @@ export default function EditProfile({ sessionUserObj }) {
           margin="0 0 0 -20px"
           bottomBorder="0.5px solid black"
           defaultValue={aboutMe}
-          onChange={(e) => {
+          onChangingTheText={(e) => {
             setAboutMe(e);
           }}
         ></InputWithText>
