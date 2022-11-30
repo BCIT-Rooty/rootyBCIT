@@ -9,6 +9,7 @@ CREATE TABLE "User" (
     "lastName" TEXT,
     "password" TEXT NOT NULL,
     "image" TEXT,
+    "status" TEXT DEFAULT 'available',
     "email" TEXT NOT NULL,
     "aboutMe" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',

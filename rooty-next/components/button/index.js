@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { FlexBox } from "../../styles/globals";
 import { Icon } from "semantic-ui-react";
 import { useState } from "react";
+import axios from "axios";
 
 export const Icons = styled(Icon)`
   padding: ${(props) => props.buttonMargin};
@@ -31,7 +32,7 @@ export default function Button({
   fontWeight = "600",
   value = "nothing",
   border = "none",
-  iconName="add",
+  iconName = "add",
   ifThisIsTheCategoriesButtons = "false",
   onClick = () => {},
   onKeywordWantToRemove = () => {},
@@ -45,15 +46,15 @@ export default function Button({
   onPrev = () => {},
   onClose,
   registerValue = false,
-  statusValue = false
+  statusValue = false,
 }) {
-
-
   if (ifThisIsTheCategoriesButtons && !registerValue) {
     if (whatIsTheStateOfTheAppForCategory == value) {
       bgColor = "#4F4DB0";
       color = "white";
-      border = "2px solid white"
+      border = "2px solid white";
+      console.log("BRUh AV", value);
+      axios.post("/api/setSellerStatus", { value });
     }
   }
 
@@ -61,27 +62,29 @@ export default function Button({
     if (whatIsTheStateOfTheAppForCategory == value) {
       bgColor = "white";
       color = "#4F4DB0";
-      border = "2px solid #4F4DB0"
+      border = "2px solid #4F4DB0";
+      console.log("BRUh UNAV", value);
+      axios.post("/api/setSellerStatus", { value });
     }
   }
 
-  if (statusValue){
+  if (statusValue) {
     if (whatIsTheStateOfTheAppForCategory == value) {
       bgColor = "#4F4DB0";
       color = "white";
-      border = "2px solid #4F4DB0"
+      border = "2px solid #4F4DB0";
     }
   }
 
-    const ButtonClick = styled(FlexBox)`
-        color: ${props=>props.color};
-        text-align: ${props=>props.textAlign};
-        font-weight: ${props=>props.fontWeight};
-        border: ${props=>props.border};
-        font-size: ${props=>props.fzsize};
-        max-width: ${(props) => props.maxWidth};
-        min-width: ${(props) => props.minWidth};
-    `
+  const ButtonClick = styled(FlexBox)`
+    color: ${(props) => props.color};
+    text-align: ${(props) => props.textAlign};
+    font-weight: ${(props) => props.fontWeight};
+    border: ${(props) => props.border};
+    font-size: ${(props) => props.fzsize};
+    max-width: ${(props) => props.maxWidth};
+    min-width: ${(props) => props.minWidth};
+  `;
 
   return (
     <FlexBox>
@@ -160,7 +163,11 @@ export default function Button({
           minWidth={minWidth}
           maxWidth={maxWidth}
         >
-          <Icons name={iconName} color="#ffffff" buttonMargin={buttonMargin}></Icons>
+          <Icons
+            name={iconName}
+            color="#ffffff"
+            buttonMargin={buttonMargin}
+          ></Icons>
           {txt}
         </ButtonClick>
       )}
@@ -211,3 +218,17 @@ export default function Button({
     </FlexBox>
   );
 }
+
+// export async function getServerSideProps(context) {
+//   let session = await unstable_getServerSession(
+//     context.req,
+//     context.res
+// authOptions
+// );
+
+//   let user = await prisma.user.findUnique({
+//     where: {
+//       email: session.user.email,
+//     },
+//   });
+// }

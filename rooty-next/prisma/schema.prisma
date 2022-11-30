@@ -15,6 +15,7 @@ model User {
   lastName   String?
   password   String
   image      String?
+  status     String?       @default("available")
   email      String        @unique
   aboutMe    String?       @db.Text
   role       Role          @default(USER)
@@ -173,7 +174,7 @@ model Message {
   author     User     @relation(fields: [userId], references: [userId])
   userId     Int
   chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [chatRoomId])
-  chatRoomId Int      
+  chatRoomId Int
 }
 
 enum Role {
