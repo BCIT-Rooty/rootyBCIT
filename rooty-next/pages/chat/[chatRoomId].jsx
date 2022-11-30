@@ -1,7 +1,5 @@
 // for making it work check the user id with the id we have here and if there were not the same it will be the other person sending chat not us
 
-
-
 import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 import ChatNavBar from "../../components/chat/chatNavBar";
@@ -14,24 +12,26 @@ import Pusher from "pusher-js";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { prisma } from "../../server/db/client";
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
-TimeAgo.addDefaultLocale(en)
-const timeAgo = new TimeAgo('en-US')
-
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+TimeAgo.addDefaultLocale(en);
+const timeAgo = new TimeAgo("en-US");
 
 export default function ACertainChatRoom(props) {
   const theChatRoomId = props.theId;
-  const newChatRoomId = `${props.theId}`
+  const newChatRoomId = `${props.theId}`;
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
   const [userId, setUserId] = useState("");
 
-  const scrollContainer = useRef()
+  const scrollContainer = useRef();
 
   useEffect(() => {
-    scrollContainer.current.scrollTo({top: Number.MAX_SAFE_INTEGER, behavior: "smooth"})
-  }, [chats])
+    scrollContainer.current.scrollTo({
+      top: Number.MAX_SAFE_INTEGER,
+      behavior: "smooth",
+    });
+  }, [chats]);
 
   useEffect(() => {
     const pusher = new Pusher("70d9960be5691b5baa3a", {
@@ -43,9 +43,23 @@ export default function ACertainChatRoom(props) {
     channel.bind("send-message", function (data) {
       if (data.thisUser == props.thisUserId) {
         // console.log(data);
-        setChats((chats) => [...chats, <MyMessage key={data.messageId} time={formatTimeAgo(data.time)} text={data.txt} />]);
+        setChats((chats) => [
+          ...chats,
+          <MyMessage
+            key={data.messageId}
+            time={formatTimeAgo(data.time)}
+            text={data.txt}
+          />,
+        ]);
       } else {
-        setChats((chats) => [...chats, <NotMyMessage key={data.messageId} time={formatTimeAgo(data.time)} text={data.txt} />]);
+        setChats((chats) => [
+          ...chats,
+          <NotMyMessage
+            key={data.messageId}
+            time={formatTimeAgo(data.time)}
+            text={data.txt}
+          />,
+        ]);
       }
     });
 
@@ -63,15 +77,41 @@ export default function ACertainChatRoom(props) {
           // console.log(m.author);
           if (m.isItText) {
             if (m.author.userId == props.thisUserId) {
-              return <MyMessage key={m.messageId} time={formatTimeAgo(m.createdAt)} text={m.content} />
+              return (
+                <MyMessage
+                  key={m.messageId}
+                  time={formatTimeAgo(m.createdAt)}
+                  text={m.content}
+                />
+              );
             } else {
-              return <NotMyMessage key={m.messageId} time={formatTimeAgo(m.createdAt)} text={m.content} />
+              return (
+                <NotMyMessage
+                  key={m.messageId}
+                  time={formatTimeAgo(m.createdAt)}
+                  text={m.content}
+                />
+              );
             }
           } else {
             if (m.userId == props.thisUserId) {
-            return <MyMessage key={m.messageId} time={formatTimeAgo(m.createdAt)} type="messageImage" bgImage={m.content} />
-          } else {
-            return <NotMyMessage key={m.messageId} time={formatTimeAgo(m.createdAt)} type="messageImage" bgImage={m.content} />
+              return (
+                <MyMessage
+                  key={m.messageId}
+                  time={formatTimeAgo(m.createdAt)}
+                  type="messageImage"
+                  bgImage={m.content}
+                />
+              );
+            } else {
+              return (
+                <NotMyMessage
+                  key={m.messageId}
+                  time={formatTimeAgo(m.createdAt)}
+                  type="messageImage"
+                  bgImage={m.content}
+                />
+              );
             }
           }
         });
@@ -80,17 +120,29 @@ export default function ACertainChatRoom(props) {
     })();
   }, []);
 
-
   async function sendTextToTheBackEnd(inputText, messageId, time) {
-    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true, messageId, thisUser: props.thisUserId, time});
+    await axios.post("/api/socketio", {
+      txt: inputText,
+      id: newChatRoomId,
+      isItText: true,
+      messageId,
+      thisUser: props.thisUserId,
+      time,
+    });
   }
 
   async function handleSendButton(e) {
     e.preventDefault();
     if (message.length) {
-      await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId, thisUserId: props.thisUserId}).then(res => {
-        sendTextToTheBackEnd(message, res.data.messageId, res.data.createdAt);
-      })
+      await axios
+        .post("/api/allChat/makeOneChat", {
+          data: message,
+          room: newChatRoomId,
+          thisUserId: props.thisUserId,
+        })
+        .then((res) => {
+          sendTextToTheBackEnd(message, res.data.messageId, res.data.createdAt);
+        });
       setMessage("");
     }
   }
@@ -100,20 +152,23 @@ export default function ACertainChatRoom(props) {
   }
 
   function formatTimeAgo(time) {
-      
-
     if (!time) {
-      return ''
+      return "";
     }
-    if (typeof time === 'string') {
-      time = new Date(time)
+    if (typeof time === "string") {
+      time = new Date(time);
     }
-    return timeAgo.format(time)
+    return timeAgo.format(time);
   }
 
   return (
     <>
-    <ChatHeader userName={props.userName} margin="0px 9px 20px 0px" position="fixed"/>
+      <ChatHeader
+        margin="0px 9px 20px 0px"
+        position="fixed"
+        postTitle={props.theChatRoom2.PostId.title}
+        userName={props.theOtherUser.name + " " + props.theOtherUser.lastName}
+      />
       <Wrapper
         // justifyContent="flex-start"
         alignItems="flex-start"
@@ -121,6 +176,7 @@ export default function ACertainChatRoom(props) {
         padding="0 0 80px 0"
         // dir="column-reverse"
       >
+
             <FlexBox
               dir="column"
               justifyContent="flex-end"
@@ -141,6 +197,7 @@ export default function ACertainChatRoom(props) {
                 onSubmitButtonClicked={handleSendButton}
               />
             </FlexBox>
+
       </Wrapper>
     </>
   );
@@ -162,15 +219,77 @@ export async function getServerSideProps(context) {
     };
   }
 
-  console.log(session);
+  const theChatRoom = await prisma.chatRoom.findUnique({
+    where: {
+      chatRoomId: +context.params.chatRoomId,
+    },
+    include: {
+      PostId: true,
+    },
+  });
+
+  console.log(theChatRoom);
+
   const theUserSignIn = await prisma.user.findUnique({
     where: {
-      email: session.user.email
+      email: session.user.email,
+    },
+  });
+
+  
+
+  if (theChatRoom.userOneId == theUserSignIn.userId) {
+    const theSecondUser = await prisma.user.findUnique({
+      where: {
+        userId: theChatRoom.userTwoId,
+      },
+    });
+    if (
+      theUserSignIn.userId == theChatRoom.userOneId ||
+      theUserSignIn.userId == theChatRoom.userTwoId
+    ) {
+      const theId = +context.params.chatRoomId;
+      const thisUserId = JSON.parse(JSON.stringify(theUserSignIn.userId));
+      const theOtherUser = JSON.parse(JSON.stringify(theSecondUser));
+      const theChatRoom2 = JSON.parse(JSON.stringify(theChatRoom));
+      // console.log(theOtherUser)
+      return {
+        props: { theId, thisUserId, theOtherUser, theChatRoom2 },
+      };
+    } else {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
     }
-  })
-  const theId = +context.params.chatRoomId;
-  const thisUserId = JSON.parse(JSON.stringify(theUserSignIn.userId))
-  return {
-    props: { theId, thisUserId },
-  };
+  } else {
+    const theSecondUser = await prisma.user.findUnique({
+      where: {
+        userId: theChatRoom.userOneId,
+      },
+    });
+    if (
+      theUserSignIn.userId == theChatRoom.userOneId ||
+      theUserSignIn.userId == theChatRoom.userTwoId
+    ) {
+      const theId = +context.params.chatRoomId;
+      const thisUserId = JSON.parse(JSON.stringify(theUserSignIn.userId));
+      const theOtherUser = JSON.parse(JSON.stringify(theSecondUser));
+      const theChatRoom2 = JSON.parse(JSON.stringify(theChatRoom));
+
+      // console.log(theOtherUser)
+      return {
+        props: { theId, thisUserId, theOtherUser, theChatRoom2 },
+      };
+    } else {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  }
 }
