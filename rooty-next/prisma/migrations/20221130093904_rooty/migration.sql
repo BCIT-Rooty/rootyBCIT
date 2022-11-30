@@ -38,6 +38,17 @@ CREATE TABLE "Post" (
 );
 
 -- CreateTable
+CREATE TABLE "Favorite" (
+    "favoriteId" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "postId" INTEGER NOT NULL,
+
+    CONSTRAINT "Favorite_pkey" PRIMARY KEY ("favoriteId")
+);
+
+-- CreateTable
 CREATE TABLE "Skill" (
     "skillId" SERIAL NOT NULL,
     "skillName" VARCHAR(30) NOT NULL,
@@ -128,6 +139,12 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") 
 
 -- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("categoryId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Favorite" ADD CONSTRAINT "Favorite_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Favorite" ADD CONSTRAINT "Favorite_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("postId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SkillOnUser" ADD CONSTRAINT "SkillOnUser_sKillId_fkey" FOREIGN KEY ("sKillId") REFERENCES "Skill"("skillId") ON DELETE RESTRICT ON UPDATE CASCADE;

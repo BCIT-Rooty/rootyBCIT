@@ -3,10 +3,13 @@ import {
   HorizontalScrollContainer,
   Wrapper,
 } from "../../styles/globals";
+import SettingLine from "../../components/settingLine";
+import Button from "../../components/button";
 import Text from "../../components/text";
 import React from "react";
 import UserProfile from "../../components/userProfile";
 import TitlePage from "../../components/titlePage";
+import { AnimatePresence, motion } from "framer-motion";
 import PostProfileDescript from "../../components/postProfileDescript";
 import Item from "../../components/Item";
 import { useRouter } from "next/router";
@@ -27,21 +30,19 @@ const descript = [
   ],
 ];
 
-
 export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
-      // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
-    // console.log('THIS IS THE USERNAME', userName)
-    let userId = 1
-    const r = useRouter()
-    const [showModal, setShowModal] = useState("default")
-    const [value, setValue] = useState(4)
-    const [logOut, setLogOut] = useState("default")
-    const [statusButton, setStatusButton] = useState([
-        {id:1, title:"Available"},
-        {id:2, title:"Unavailable"}
-    ])
-    const [buttonMain, setButtonMain] = useState("");
-
+  // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
+  // console.log('THIS IS THE USERNAME', userName)
+  let userId = 1;
+  const r = useRouter();
+  const [showModal, setShowModal] = useState("default");
+  const [value, setValue] = useState(4);
+  const [logOut, setLogOut] = useState("default");
+  const [statusButton, setStatusButton] = useState([
+    { id: 1, title: "Available" },
+    { id: 2, title: "Unavailable" },
+  ]);
+  const [buttonMain, setButtonMain] = useState("");
 
   return (
     <Wrapper
@@ -102,21 +103,131 @@ export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
         width="94vw"
         margin="0px 0px 0px 20px"
         padding="5px"
-      >
-        <FlexBox>
-          {sessionUserPostsObj.map((posts) => (
-            <Item
-              name={posts.title}
-              image={posts.image}
-              rating={posts.rating}
-              price={posts.price}
-              width="290px"
-              margin="0 20px 0 0"
-              onClick={() => setShowModal(posts)}
-            ></Item>
-          ))}
-        </FlexBox>
-      </HorizontalScrollContainer>
+      />
+      <FlexBox>
+        {sessionUserPostsObj.map((posts) => (
+          <Item
+            name={posts.title}
+            image={posts.image}
+            rating={posts.rating}
+            price={posts.price}
+            width="290px"
+            margin="0 20px 0 0"
+            onClick={() => setShowModal(posts)}
+          ></Item>
+        ))}
+      </FlexBox>
+      <FlexBox dir="column">
+        <Text
+          txt="Account"
+          width="100vw"
+          padding="40px 0px 15px 35px"
+          weight="600"
+        ></Text>
+        <SettingLine
+          name="edit"
+          txt="My Profile"
+          onClick={() => setShowModal("show")}
+        ></SettingLine>
+        <SettingLine
+          name="heart"
+          txt="Favourites List"
+          onClick={() => {
+            r.push(`/favourites/${parsedItems.userId}`);
+          }}
+        ></SettingLine>
+        <SettingLine
+          name="archive"
+          txt="My Posts"
+          onClick={() => {
+            r.push(`/userPosts/${parsedItems.userId}`);
+          }}
+        ></SettingLine>
+        <SettingLine
+          name="star"
+          txt="Reviews Received"
+          onClick={() => setShowModal("show")}
+        ></SettingLine>
+        <Text
+          txt="App Settings"
+          width="100vw"
+          padding="50px 0px 15px 35px"
+          weight="600"
+        ></Text>
+        <SettingLine
+          name="bell"
+          txt="Notifications"
+          onClick={() => setShowModal("show")}
+        ></SettingLine>
+        <SettingLine
+          name="universal access"
+          txt="Accessibility"
+          onClick={() => setShowModal("show")}
+        ></SettingLine>
+        <SettingLine
+          name="shield alternate"
+          txt="Security"
+          onClick={() => setShowModal("show")}
+        ></SettingLine>
+      </FlexBox>
+      <FlexBox justifyContent="space-between" width="100vw" padding="30px 35px">
+        <Text
+          txt="Terms of Use"
+          weight="300"
+          size="15px"
+          onClick={() => setShowModal("show")}
+        ></Text>
+        <Button
+          bgColor="#4F4DB0"
+          txt="Log Out"
+          width="100px"
+          fontWeight="600"
+          onClick={() => setLogOut("active")}
+        ></Button>
+        <Text
+          txt="Privacy Policy"
+          weight="300"
+          size="15px"
+          onClick={() => setShowModal("show")}
+        ></Text>
+      </FlexBox>
+
+      <AnimatePresence exitBeforeEnter>
+        {showModal === "show" && (
+          <FlexBox position="absolute">
+            <motion.div
+              initial={{ x: -400 }}
+              animate={{ x: 0, transition: { duration: 0.7, delay: 0 } }}
+              exit={{ x: -400 }}
+            >
+              <Construction onClose={() => setShowModal("default")} />
+            </motion.div>
+          </FlexBox>
+        )}
+        {logOut === "active" && (
+          <FlexBox position="absolute" left="0" zIndex="30">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.2, delay: 0 },
+              }}
+              exit={{ opacity: 0 }}
+            >
+              <DownloadPopUp
+                height="100vh"
+                onClose={() => setLogOut("default")}
+                txt="You Logged Out!"
+                txt2="We hope to see you soon! 🥹"
+                size2="20px"
+                padding2="0px 0px 15px 0px"
+                height2="fit-content"
+                width2="300px"
+              ></DownloadPopUp>
+            </motion.div>
+          </FlexBox>
+        )}
+      </AnimatePresence>
     </Wrapper>
   );
 }

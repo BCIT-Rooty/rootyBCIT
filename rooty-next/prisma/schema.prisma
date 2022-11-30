@@ -25,7 +25,7 @@ model User {
   ChatRooms1 ChatRoom[]    @relation("UserNumberOne")
   ChatRooms2 ChatRoom[]    @relation("UserNumberTwo")
   Message    Message[]
-  // Program    Program?
+  favorites  Favorite[]
 }
 
 // model Account {
@@ -89,6 +89,17 @@ model Post {
   image              String?          @default("")
   Photos             Photo[]
   Keywords           PostOnKeywords[]
+  favorites          Favorite[]
+}
+
+model Favorite {
+  favoriteId Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [userId])
+  userId     Int
+  post       Post     @relation(fields: [postId], references: [postId])
+  postId     Int
 }
 
 // Relationship with the User works now

@@ -112,7 +112,9 @@ export default function UserProfile({ sessionUserObj }) {
         <SettingLine
           name="heart"
           txt="Favourites List"
-          onClick={() => setShowModal("show")}
+          onClick={() => {
+            r.push(`/favourites/${sessionUserObj.userId}`);
+          }}
         ></SettingLine>
         <SettingLine
           name="archive"
