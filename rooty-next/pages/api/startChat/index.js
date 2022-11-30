@@ -44,7 +44,7 @@ export default async function handler(req, res) {
 
 
         if (ifThereIsAChat.length === 0) {
-            if (Math.abs(thisUser.userId - author.userId) < Number.EPSILON) {
+            if (author.userId > thisUser.userId) {
                 const createAChat = await prisma.chatRoom.create({
                     data: {
                         userOneId: thisUser.userId,

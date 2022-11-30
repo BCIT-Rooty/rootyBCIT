@@ -169,9 +169,15 @@ export async function getServerSideProps(context) {
     }
   })
   
+  // if (Math.abs(theUserSignIn.userId - ) < Number.EPSILON) {
+    
+  // }
+
   // const theChatRoom = await prisma.chatRoom.findUnique({
   //   where: {
-  //     emailOnlyOneChatRoom: session.user.email
+  //     emailOnlyOneChatRoom: {
+
+  //     }
   //   }
   // })
 
