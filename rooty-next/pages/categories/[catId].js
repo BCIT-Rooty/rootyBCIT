@@ -45,10 +45,10 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
           ></ArrowBackIosIcon>
         </FlexBox>
         <FlexBox width="100%" dir="column">
-          <CardWithSearch bgImage={image} txt={categoryName}></CardWithSearch>
+          <CardWithSearch onChangingTheText={setQuery} bgImage={image} txt={categoryName}></CardWithSearch>
         </FlexBox>
         <div>
-          {parsedItems.map((item) => {
+          {items.map((item) => {
             return (
               <div id={item.postId} key={item.postId}>
                 <Item
