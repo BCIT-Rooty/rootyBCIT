@@ -3,7 +3,7 @@ import {prisma} from "../../../server/db/client"
 
 export default async function handler(req, res) {
 
-    const {author, thisUserEmail} = req.body
+    const {author, thisUserEmail, postId} = req.body
     // console.log(author, thisUserEmail)
 
     const thisUser = await prisma.user.findUnique({
@@ -48,6 +48,7 @@ export default async function handler(req, res) {
                 data: {
                     userOneId: thisUser.userId,
                     userTwoId: author.userId,
+                    postId: postId
                 }
             })
             res.status(200).json({  theChat: createAChat.chatRoomId })
