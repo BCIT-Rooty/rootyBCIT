@@ -134,8 +134,8 @@ export default function Home() {
 
   const goBack = (newStep) => {
     setSteps(newStep);
-    if(steps === 1){
-      r.push("/")
+    if (steps === 1) {
+      r.push("/");
     }
   };
 
@@ -180,9 +180,9 @@ export default function Home() {
         <AnimatePresence exitBeforeEnter>
           <motion.div
             key={headerImage}
-            initial={{x: 1000}} 
-            animate={{x: 0, transition:{duration: 0.4, delay:0}}} 
-            exit={{x:-1000}}
+            initial={{ x: 1000 }}
+            animate={{ x: 0, transition: { duration: 0.4, delay: 0 } }}
+            exit={{ x: -1000 }}
           >
             <ImgPlaceholder
               width="250px"
@@ -205,9 +205,9 @@ export default function Home() {
         <AnimatePresence exitBeforeEnter>
           <motion.div
             key={headerText}
-            initial={{x: 1000}} 
-            animate={{x: 0, transition:{duration: 0.4, delay:0}}} 
-            exit={{x:-1000}}
+            initial={{ x: 1000 }}
+            animate={{ x: 0, transition: { duration: 0.4, delay: 0 } }}
+            exit={{ x: -1000 }}
           >
             <Text
               padding="60px 20px 0px 20px"
@@ -423,42 +423,59 @@ export default function Home() {
                     onClick={handleKeywordsButtonClick}
                   />
                 </FlexBox>
-                <FlexBox width="100%" maxWidth="850px" padding="25px 20px 10px 20px" flexWrap="wrap">
-            {areThereKeywords ? (
-              keywords.map((m) => (
-                <Button
-                  key={m}
-                  txt={m}
-                  width="fit-content"
-                  height="30px"
-                  type="keyword"
-                  padding="10px 10px"
-                  fontWeight="300"
-                  buttonMargin="0px 0px 0px 10px"
-                  border="solid 1px #545454"
-                  color="#545454"
-                  onRemoveKeyword={removeKeyWordXButton}
-                ></Button>
-                  ))
+                <FlexBox
+                  width="100%"
+                  maxWidth="850px"
+                  padding="25px 20px 10px 20px"
+                  flexWrap="wrap"
+                >
+                  {areThereKeywords ? (
+                    keywords.map((m) => (
+                      <Button
+                        key={m}
+                        txt={m}
+                        width="fit-content"
+                        height="30px"
+                        type="keyword"
+                        padding="10px 10px"
+                        fontWeight="300"
+                        buttonMargin="0px 0px 0px 10px"
+                        border="solid 1px #545454"
+                        color="#545454"
+                        onRemoveKeyword={removeKeyWordXButton}
+                      ></Button>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </FlexBox>
+                {errorStateForEmptyInputKeyWord ? (
+                  <Toaster
+                    txt="You must insert atleast one keyword"
+                    maxWidth="900px"
+                    margin="15px 0px 15px 0px"
+                  ></Toaster>
                 ) : (
                   <></>
                 )}
-              </FlexBox>
-                  {errorStateForEmptyInputKeyWord ? (
-                    <Toaster txt="You must insert atleast one keyword" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
-                  ) : (
-                    <></>
-                  )}
-                  {errorThatKeywordAlreadyExists ? (
-                    <Toaster txt="This keyword is already being used" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
-                  ) : (
-                    <></>
-                  )}
-                  {noKeywords ? (
-                    <Toaster txt="You need at least one Keyword"maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
-                  ) : (
-                    <></>
-                  )}
+                {errorThatKeywordAlreadyExists ? (
+                  <Toaster
+                    txt="This keyword is already being used"
+                    maxWidth="900px"
+                    margin="15px 0px 15px 0px"
+                  ></Toaster>
+                ) : (
+                  <></>
+                )}
+                {noKeywords ? (
+                  <Toaster
+                    txt="You need at least one Keyword"
+                    maxWidth="900px"
+                    margin="15px 0px 15px 0px"
+                  ></Toaster>
+                ) : (
+                  <></>
+                )}
               </motion.div>
             </FlexBox>
           )}

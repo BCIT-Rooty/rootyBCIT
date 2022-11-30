@@ -37,60 +37,68 @@ export default function EditProfile({ sessionUserObj }) {
       height="fit-content"
       padding="0 0 80px 20px"
     >
-        <TitlePage
-          txt="Edit Profile"
-          type="Cancel"
-          margin="0 0 0 -20px"
-          onClick={() => {
-            r.push(`/account/userProfile/${sessionUserObj.userId}`);
-          }}
-        />
-        <InputWithText
-          txt="Profile Image"
-          type="file"
-          bgImage="/face2.jpg"
-          margin="0 0 0 -20px"
-        ></InputWithText>
-        <InputWithText
-          txt="First name"
-          type="textarea"
-          margin="0 0 0 -20px"
-          defaultValue={firstName}
-          onChangingTheText={(e) => {
-            setFirstName(e);
-          }}
-        ></InputWithText>
-        <InputWithText
-          txt="Last name"
-          type="textarea"
-          margin="0 0 0 -20px"
-          defaultValue={lastName}
-          onChangingTheText={(e) => {
-            setLastName(e);
-          }}
-        ></InputWithText>
-        <InputWithText
-          txt="Program"
-          type="textarea"
-          margin="0 0 0 -20px"
-          defaultValue={program}
-          onChangingTheText={(e) => {
-            setProgram(e);
-          }}
-        ></InputWithText>
-        <InputWithText
-          txt="About Me / Education / Skills"
-          type="textarea"
-          margin="0 0 0 -20px"
-          bottomBorder="0.5px solid black"
-          defaultValue={aboutMe}
-          onChangingTheText={(e) => {
-            setAboutMe(e);
-          }}
-        ></InputWithText>
-        {/* <AddPortfolio defaultValue="Digital Design and Development"></AddPortfolio> */}
-        <Button bgColor="#4F4DB0" txt={"Submit"} height="30px" width="70px" margin="20px 20px 0 0" onClick={() => {handleSubmit()}}/>
-
+      <TitlePage
+        txt="Edit Profile"
+        type="Cancel"
+        margin="0 0 0 -20px"
+        onClick={() => {
+          r.push(`/account/userProfile/${sessionUserObj.userId}`);
+        }}
+      />
+      <InputWithText
+        txt="Profile Image"
+        type="file"
+        bgImage="/face2.jpg"
+        margin="0 0 0 -20px"
+      ></InputWithText>
+      <InputWithText
+        txt="First name"
+        type="textarea"
+        margin="0 0 0 -20px"
+        defaultValue={firstName}
+        onChangingTheText={(e) => {
+          setFirstName(e);
+        }}
+      ></InputWithText>
+      <InputWithText
+        txt="Last name"
+        type="textarea"
+        margin="0 0 0 -20px"
+        defaultValue={lastName}
+        onChangingTheText={(e) => {
+          setLastName(e);
+        }}
+      ></InputWithText>
+      <InputWithText
+        txt="Program"
+        type="textarea"
+        margin="0 0 0 -20px"
+        defaultValue={program}
+        onChangingTheText={(e) => {
+          setProgram(e);
+        }}
+      ></InputWithText>
+      <InputWithText
+        txt="About Me / Education / Skills"
+        type="textarea"
+        margin="0 0 0 -20px"
+        bottomBorder="0.5px solid black"
+        defaultValue={aboutMe}
+        onChangingTheText={(e) => {
+          setAboutMe(e);
+        }}
+      ></InputWithText>
+      {/* <AddPortfolio defaultValue="Digital Design and Development"></AddPortfolio> */}
+      <Button
+        bgColor="#4F4DB0"
+        txt={"Submit"}
+        height="30px"
+        width="70px"
+        margin="20px 20px 0 0"
+        onClick={() => {
+          handleSubmit();
+        }}
+      />
     </Wrapper>
   );
 }

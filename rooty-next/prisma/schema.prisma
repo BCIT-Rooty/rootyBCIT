@@ -15,6 +15,7 @@ model User {
   lastName   String?
   password   String
   image      String?
+  status     String?       @default("available")
   email      String        @unique
   aboutMe    String?       @db.Text
   role       Role          @default(USER)
@@ -24,7 +25,7 @@ model User {
   ChatRooms1 ChatRoom[]    @relation("UserNumberOne")
   ChatRooms2 ChatRoom[]    @relation("UserNumberTwo")
   Message    Message[]
-  // Program    Program?
+  favorites  Favorite[]
 }
 
 // model Account {
@@ -89,6 +90,17 @@ model Post {
   Photos             Photo[]
   Keywords           PostOnKeywords[]
   chatRooms          ChatRoom[]
+  favorites          Favorite[]
+}
+
+model Favorite {
+  favoriteId Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [userId])
+  userId     Int
+  post       Post     @relation(fields: [postId], references: [postId])
+  postId     Int
 }
 
 // Relationship with the User works now
@@ -166,6 +178,7 @@ model ChatRoom {
   Message    Message[]
   PostId     Post      @relation(fields: [postId], references: [postId])
   postId     Int
+
   @@unique([userOneId, userTwoId], name: "OnlyOneChatRoom")
 }
 

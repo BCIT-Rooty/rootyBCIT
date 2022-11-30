@@ -13,7 +13,7 @@ export default function InputWithText({
   defaultValue,
   bottomBorder,
   topBorder = "0.5px solid black",
-  onChangingTheText=() => {}
+  onChangingTheText = () => {},
 }) {
   return (
     <FlexBox
@@ -43,6 +43,7 @@ export default function InputWithText({
             bgImage={bgImage}
             defaultValue={defaultValue}
             value={value}
+            onChangingTheText={onChangingTheText}
           ></Input>
         </FlexBox>
       )}
