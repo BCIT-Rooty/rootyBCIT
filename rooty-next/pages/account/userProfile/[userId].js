@@ -107,6 +107,7 @@ export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
       <FlexBox>
         {sessionUserPostsObj.map((posts) => (
           <Item
+            key={posts.postId}
             name={posts.title}
             image={posts.image}
             rating={posts.rating}
