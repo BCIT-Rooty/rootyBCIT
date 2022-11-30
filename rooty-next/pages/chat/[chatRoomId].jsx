@@ -176,33 +176,28 @@ export default function ACertainChatRoom(props) {
         padding="0 0 80px 0"
         // dir="column-reverse"
       >
-        <FlexBox
-          dir="column"
-          justifyContent="flex-end"
-          alignItems="flex-start"
-          width="100%"
-          height="fit-content"
-        >
-          <FlexBox
-            ref={scrollContainer}
-            justifyContent="flex-end"
-            width="100%"
-            minHeight="50vh"
-            height="77vh"
-            position="absolute"
-            bottom="70px"
-            overflowY="scroll"
-          >
-            <FlexBox dir="column">{chats.map((m) => m)}</FlexBox>
-          </FlexBox>
-          <ChatNavBar
-            position="fixed"
-            margin="30px 0 0 0"
-            value={message}
-            onChangingTheTextForChat={handleChangeText}
-            onSubmitButtonClicked={handleSendButton}
-          />
-        </FlexBox>
+
+            <FlexBox
+              dir="column"
+              justifyContent="flex-end"
+              alignItems="flex-start"
+              width="100%"
+              height="fit-content"
+            >
+              <FlexBox ref={scrollContainer} justifyContent="flex-end" width="100%" minHeight="50vh" height="92vh" bottom="70px" overflowY="scroll" overflowX="hidden">
+                <FlexBox dir="column" width="100%">
+                  {chats.map((m) => m)}
+                </FlexBox>
+              </FlexBox>
+              <ChatNavBar
+                position="fixed"
+                margin="30px 0 0 0"
+                value={message}
+                onChangingTheTextForChat={handleChangeText}
+                onSubmitButtonClicked={handleSendButton}
+              />
+            </FlexBox>
+
       </Wrapper>
     </>
   );
