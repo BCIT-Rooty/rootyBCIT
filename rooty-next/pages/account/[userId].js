@@ -30,7 +30,7 @@ export default function UserProfile({ sessionUserObj }) {
 const [buttonMain, setButtonMain] = useState("");
 
   return (
-    <Wrapper dir="column" justifyContent="start" alignItems="start">
+    <Wrapper dir="column" justifyContent="start" alignItems="center">
       <FlexBox
         bgColor="#4F4DB0"
         padding="55px 30px "
@@ -89,7 +89,7 @@ const [buttonMain, setButtonMain] = useState("");
                       whatIsTheStateOfTheAppForCategory={buttonMain}
                       ifThisIsTheCategoriesButtons={true}
                     />
-                  ))}
+              ))}
             </FlexBox>
         <Text
           txt="Account"
@@ -101,7 +101,7 @@ const [buttonMain, setButtonMain] = useState("");
           name="edit"
           txt="My Profile"
           onClick={() => {
-            r.push(`/userProfile/${sessionUserObj.userId}`);
+            r.push(`/account/userProfile/${sessionUserObj.userId}`);
           }}
         ></SettingLine>
         <SettingLine
@@ -113,7 +113,7 @@ const [buttonMain, setButtonMain] = useState("");
           name="archive"
           txt="My Posts"
           onClick={() => {
-            r.push(`/userPosts/${sessionUserObj.userId}`);
+            r.push(`/account/userPosts/${sessionUserObj.userId}`);
           }}
         ></SettingLine>
         <SettingLine
@@ -147,6 +147,7 @@ const [buttonMain, setButtonMain] = useState("");
         justifyContent="space-between"
         width="100vw"
         padding="30px 35px 60px 35px"
+        maxWidth="900px"
       >
         <Text
           txt="Terms of Use"
@@ -171,7 +172,7 @@ const [buttonMain, setButtonMain] = useState("");
 
       <AnimatePresence exitBeforeEnter>
         {showModal === "show" && (
-          <FlexBox position="absolute">
+          <FlexBox position="fixed">
             <motion.div
               initial={{ x: -400 }}
               animate={{ x: 0, transition: { duration: 0.7, delay: 0 } }}

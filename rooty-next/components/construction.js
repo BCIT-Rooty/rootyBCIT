@@ -16,7 +16,7 @@ export default function Construction({
     return(
         <Wrapper bgColor="white">
             <BackIcon fontSize='large' onClick={onClose}></BackIcon>
-            <FlexBox bgImage="/construction.png" width="100vw" height="700px"></FlexBox>
+            <FlexBox bgImage="/construction.png" width="100vw" maxWidth="900px" height="700px" bgSize="contain" bgRepeat="no-repeat"></FlexBox>
         </Wrapper>
     )
 }

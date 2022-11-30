@@ -1,15 +1,15 @@
-import { Wrapper } from "../../styles/globals";
-import TitlePage from "../../components/titlePage";
+import { Wrapper } from "../../../styles/globals";
+import TitlePage from "../../../components/titlePage";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import InputWithText from "../../components/inputWithText";
-import AddPortfolio from "../../components/addPortfolio";
+import InputWithText from "../../../components/inputWithText";
+import AddPortfolio from "../../../components/addPortfolio";
 import axios from "axios";
 import { useEffect } from "react";
 import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]";
-import { prisma } from "../../server/db/client";
-import Button from "../../components/button";
+import { authOptions } from "../../api/auth/[...nextauth]";
+import { prisma } from "../../../server/db/client";
+import Button from "../../../components/button";
 
 export default function EditProfile({ sessionUserObj }) {
   const [firstName, setFirstName] = useState(sessionUserObj.name);
@@ -26,7 +26,7 @@ export default function EditProfile({ sessionUserObj }) {
       program,
       aboutMe,
     });
-    r.push(`/userProfile/${sessionUserObj.userId}`);
+    r.push(`/account/userProfile/${sessionUserObj.userId}`);
   }
 
   return (
@@ -39,10 +39,10 @@ export default function EditProfile({ sessionUserObj }) {
     >
         <TitlePage
           txt="Edit Profile"
-          type="Done"
+          type="Cancel"
           margin="0 0 0 -20px"
           onClick={() => {
-            r.push(`/userProfile/${sessionUserObj.userId}`);
+            r.push(`/account/userProfile/${sessionUserObj.userId}`);
           }}
         />
         <InputWithText
