@@ -184,7 +184,7 @@ model ChatRoom {
 
 model Message {
   messageId  Int      @id @default(autoincrement())
-  content    String   @db.VarChar(500)
+  content    String   @db.Text
   createdAt  DateTime @default(now())
   isItText   Boolean? @default(true)
   author     User     @relation(fields: [userId], references: [userId])
