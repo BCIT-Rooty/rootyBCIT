@@ -29,11 +29,10 @@ export default async function handler(req, res) {
                     userTwoId: author.userId,
                 }
             })
-            res.status(200).json({ createAChat })
+            res.status(200).json({  theChat: createAChat.chatRoomId })
         } else {
-            res.status(200).json({ ifThereIsAChat })
+            res.status(200).json({ theChat: ifThereIsAChat[0].chatRoomId})
         }
-        res.status(200).json({ name: 'John Doe' })
     } else {
         res.status(200).json({ name: 'John Doe' })
     }

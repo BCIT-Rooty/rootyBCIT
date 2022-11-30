@@ -41,9 +41,12 @@ export default function ItemDescript({ parsedItems, thisSession }) {
     router.push(link);
   }
   async function startChat() {
-    await axios.post("/api/startChat", {author: parsedItems[0].author, thisUserEmail: thisSession.user.email })
-    // const link = `/chat`;
-    // router.push(link);
+    await axios.post("/api/startChat", {author: parsedItems[0].author, thisUserEmail: thisSession.user.email }).then(result => {
+      console.log(result.data)
+      const link = `/chat/${result.data.theChat}`;
+      router.push(link);
+    })
+    return
   }
   const [value, setValue] = useState(4);
   const [showModal, setShowModal] = useState("default");
