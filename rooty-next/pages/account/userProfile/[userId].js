@@ -2,18 +2,18 @@ import {
   FlexBox,
   HorizontalScrollContainer,
   Wrapper,
-} from "../../styles/globals";
-import Text from "../../components/text";
+} from "../../../styles/globals";
+import Text from "../../../components/text";
 import React from "react";
-import UserProfile from "../../components/userProfile";
-import TitlePage from "../../components/titlePage";
-import PostProfileDescript from "../../components/postProfileDescript";
-import Item from "../../components/Item";
+import UserProfile from "../../../components/userProfile";
+import TitlePage from "../../../components/titlePage";
+import PostProfileDescript from "../../../components/postProfileDescript";
+import Item from "../../../components/Item";
 import { useRouter } from "next/router";
-import { prisma } from "../../server/db/client";
+import { prisma } from "../../../server/db/client";
 import { unstable_ClassNameGenerator } from "@mui/material";
 import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]";
+import { authOptions } from "../../api/auth/[...nextauth]";
 import { useState } from "react";
 
 const descript = [
@@ -66,7 +66,7 @@ export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
         txt="Profile"
         type="Edit"
         onClick={() => {
-          r.push("/userProfile/editing");
+          r.push("/account/userProfile/editing");
         }}
       />
       <UserProfile

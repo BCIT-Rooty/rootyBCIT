@@ -19,6 +19,10 @@ export default function TitlePage({
                 <Button bgColor="#4F4DB0" txt={type} height="30px" width="70px" margin="0 20px 0 0" onClick={onClick}></Button>
             </FlexBox>
         }
+        {type === "Cancel" && <FlexBox>
+                <Button bgColor="#4F4DB0" txt={type} height="30px" width="70px" margin="0 20px 0 0" onClick={onClick}></Button>
+            </FlexBox>
+        }
       </FlexBox>
     )
 }

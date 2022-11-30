@@ -16,6 +16,7 @@ export const FlexBox = styled.div`
     background-image: ${props=>props.linearGradient || "none"}, url(${props=>props.bgImage});
     background-position: ${props=>props.bgPosition || "center"};
     background-size: ${props=>props.bgSize || "cover"};
+    background-repeat: ${props=>props.bgRepeat};
     border-radius:${props=>props.borderRadius};
     filter: ${props=>props.filter};
     border: ${props=>props.border};

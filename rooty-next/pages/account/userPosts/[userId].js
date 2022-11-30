@@ -1,18 +1,32 @@
-import Item from "../../components/Item";
+import Item from "../../../components/Item";
 // import { getItemsForUser } from '../../../server/database.js'
-import { prisma } from "../../server/db/client";
-import { FlexBox, Wrapper } from "../../styles/globals";
+import { prisma } from "../../../server/db/client";
+import { FlexBox, Wrapper } from "../../../styles/globals";
 import {useState} from "react"
 import { AnimatePresence, motion } from "framer-motion";
-import Text from "../../components/text";
-import Button from "../../components/button";
+import Text from "../../../components/text";
+import Button from "../../../components/button";
+import { useRouter } from "next/router";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]";
 
-export default function userPosts({ parsedItems }) {
-
+export default function userPosts({ parsedItems, sessionUserObj }) {
+  const r = useRouter()
   const [deleteMessage, setDeleteMessage] = useState("")
 
   return (
       <Wrapper padding="50px 0 0 0" height="fit-content" dir="column">
+        <FlexBox
+        bgImage="/back.png"
+        onClick={() => {
+          r.push(`/account/${sessionUserObj.userId}`);
+        }}
+        width="30px"
+        height="30px"
+        position="absolute"
+        top="25px"
+        left="20px"
+      ></FlexBox>
       <h1>My Posts</h1>
         <br></br>
         <br></br>
@@ -62,8 +76,28 @@ export async function getServerSideProps(context) {
   });
   let parsedItems = JSON.parse(JSON.stringify(userItems));
   // console.log("LOOK HERE",userItems)
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  const sessionUserObj = await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  });
 
+  const sessionUserPosts = await prisma.post.findMany({
+    where: {
+      authorId: sessionUserObj.userId,
+    },
+  });
+
+  let sessionUserPostsObj = JSON.parse(JSON.stringify(sessionUserPosts));
+  // console.log("sessionUserPostsObj", sessionUserPostsObj);
+
+  sessionUserObj.createdAt = sessionUserObj.createdAt / 1000;
   return {
-    props: { parsedItems },
+    props: { parsedItems, sessionUserObj },
   };
 }

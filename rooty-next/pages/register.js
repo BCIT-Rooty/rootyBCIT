@@ -127,8 +127,8 @@ export default function Home() {
   const handleSteps = (newStep) => {
     setSteps(newStep);
     if (steps >= 5) {
-      // r.push("/home");
       registerUser();
+      r.push("/home");
     }
   };
 

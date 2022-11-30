@@ -1,10 +1,10 @@
-import { FlexBox, HorizontalScrollContainer, Wrapper } from "../../styles/globals";
-import Text from "../../components/text";
+import { FlexBox, HorizontalScrollContainer, Wrapper } from "../../../styles/globals";
+import Text from "../../../components/text";
 import React from 'react';
-import UserProfile from "../../components/userProfile";
-import TitlePage from "../../components/titlePage";
-import PostProfileDescript from "../../components/postProfileDescript";
-import Item from "../../components/Item";
+import UserProfile from "../../../components/userProfile";
+import TitlePage from "../../../components/titlePage";
+import PostProfileDescript from "../../../components/postProfileDescript";
+import Item from "../../../components/Item";
 import {useRouter} from 'next/router'
 
 const descript = [

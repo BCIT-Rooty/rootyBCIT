@@ -20,7 +20,7 @@ export const authOptions = {
         // console.log("authorize", credentials);
         const dbUser = await prisma.user.findUnique({
           where: {
-            email: credentials.email,
+            email: credentials.username,
           },
         });
         console.log("DB USERRR AYYYYYYYY", dbUser);
