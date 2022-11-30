@@ -44,14 +44,25 @@ export default async function handler(req, res) {
 
 
         if (ifThereIsAChat.length === 0) {
-            const createAChat = await prisma.chatRoom.create({
-                data: {
-                    userOneId: thisUser.userId,
-                    userTwoId: author.userId,
-                    postId: postId
-                }
-            })
-            res.status(200).json({  theChat: createAChat.chatRoomId })
+            if (Math.abs(thisUser.userId - author.userId) < Number.EPSILON) {
+                const createAChat = await prisma.chatRoom.create({
+                    data: {
+                        userOneId: thisUser.userId,
+                        userTwoId: author.userId,
+                        postId: postId
+                    }
+                })
+                res.status(200).json({  theChat: createAChat.chatRoomId })
+            } else {
+                const createAChat = await prisma.chatRoom.create({
+                    data: {
+                        userOneId: author.userId,
+                        userTwoId: thisUser.userId,
+                        postId: postId
+                    }
+                })
+                res.status(200).json({  theChat: createAChat.chatRoomId })
+            }
         } else {
             res.status(200).json({ theChat: ifThereIsAChat[0].chatRoomId})
         }

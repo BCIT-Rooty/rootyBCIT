@@ -168,6 +168,13 @@ export async function getServerSideProps(context) {
       email: session.user.email
     }
   })
+  
+  // const theChatRoom = await prisma.chatRoom.findUnique({
+  //   where: {
+  //     emailOnlyOneChatRoom: session.user.email
+  //   }
+  // })
+
   const theId = +context.params.chatRoomId;
   const thisUserId = JSON.parse(JSON.stringify(theUserSignIn.userId))
   return {
