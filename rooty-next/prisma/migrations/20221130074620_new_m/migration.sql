@@ -94,6 +94,7 @@ CREATE TABLE "ChatRoom" (
     "userOneId" INTEGER NOT NULL,
     "userTwoId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "postId" INTEGER NOT NULL,
 
     CONSTRAINT "ChatRoom_pkey" PRIMARY KEY ("chatRoomId")
 );
@@ -151,6 +152,9 @@ ALTER TABLE "ChatRoom" ADD CONSTRAINT "ChatRoom_userOneId_fkey" FOREIGN KEY ("us
 
 -- AddForeignKey
 ALTER TABLE "ChatRoom" ADD CONSTRAINT "ChatRoom_userTwoId_fkey" FOREIGN KEY ("userTwoId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ChatRoom" ADD CONSTRAINT "ChatRoom_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("postId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Message" ADD CONSTRAINT "Message_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;

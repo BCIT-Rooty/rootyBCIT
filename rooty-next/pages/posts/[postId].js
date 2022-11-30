@@ -41,7 +41,7 @@ export default function ItemDescript({ parsedItems, thisSession }) {
     router.push(link);
   }
   async function startChat() {
-    await axios.post("/api/startChat", {author: parsedItems[0].author, thisUserEmail: thisSession.user.email }).then(result => {
+    await axios.post("/api/startChat", {author: parsedItems[0].author, thisUserEmail: thisSession.user.email, postId: parsedItems[0].postId }).then(result => {
       if (result.data.name) {
         return
       }
@@ -235,7 +235,7 @@ export async function getServerSideProps(context) {
 
   let parsedItems = JSON.parse(JSON.stringify(items));
   let thisSession = JSON.parse(JSON.stringify(session));
-  // console.log("look at this" ,parsedItems);
+  console.log("look at this" ,parsedItems);
   // console.log("look at this" ,thisSession);
   return {
     props: { parsedItems, thisSession },

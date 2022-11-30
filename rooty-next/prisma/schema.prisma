@@ -88,6 +88,7 @@ model Post {
   image              String?          @default("")
   Photos             Photo[]
   Keywords           PostOnKeywords[]
+  chatRooms          ChatRoom[]
 }
 
 // Relationship with the User works now
@@ -161,9 +162,11 @@ model ChatRoom {
   userOneId  Int
   userTwo    User      @relation("UserNumberTwo", fields: [userTwoId], references: [userId])
   userTwoId  Int
-  createdAt  DateTime?  @default(now())
+  createdAt  DateTime? @default(now())
   Message    Message[]
-   @@unique([userOneId, userTwoId], name: "OnlyOneChatRoom")
+  PostId     Post      @relation(fields: [postId], references: [postId])
+  postId     Int
+  @@unique([userOneId, userTwoId], name: "OnlyOneChatRoom")
 }
 
 model Message {
@@ -174,7 +177,7 @@ model Message {
   author     User     @relation(fields: [userId], references: [userId])
   userId     Int
   chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [chatRoomId])
-  chatRoomId Int      
+  chatRoomId Int
 }
 
 enum Role {
