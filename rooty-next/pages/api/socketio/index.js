@@ -7,7 +7,7 @@ export default async function ioHandler(req, res) {
       res.status(200).json({ name: "John Doe" });
       break;
     case "POST":
-      const { txt, id, messageId, thisUser } = req.body;
+      const { txt, id, messageId, thisUser, time } = req.body;
       const pusher = new Pusher({
         appId: process.env.appId,
         key: process.env.key,
@@ -18,7 +18,8 @@ export default async function ioHandler(req, res) {
       await pusher.trigger(id, "send-message", {
         txt,
         messageId,
-        thisUser
+        thisUser,
+        time
       });
 
       res.status(200).json({ txt });

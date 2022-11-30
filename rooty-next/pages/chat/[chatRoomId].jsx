@@ -42,9 +42,10 @@ export default function ACertainChatRoom(props) {
     const channel = pusher.subscribe(newChatRoomId);
     channel.bind("send-message", function (data) {
       if (data.thisUser == props.thisUserId) {
-        setChats((chats) => [...chats, <MyMessage key={data.messageId} text={data.txt} />]);
+        console.log(data);
+        setChats((chats) => [...chats, <MyMessage key={data.messageId} time={formatTimeAgo(data.time)} text={data.txt} />]);
       } else {
-        setChats((chats) => [...chats, <NotMyMessage key={data.messageId} text={data.txt} />]);
+        setChats((chats) => [...chats, <NotMyMessage key={data.messageId} time={formatTimeAgo(data.time)} text={data.txt} />]);
       }
     });
 
@@ -58,19 +59,19 @@ export default function ACertainChatRoom(props) {
     (async function yo() {
       await axios.post("/api/allChat", { userId: props.theId }).then((res) => {
         const oldPosts = res.data.map((m) => {
-          console.log(formatTimeAgo(m.createdAt))
-          console.log(m.author);
+          // console.log(formatTimeAgo(m.createdAt))
+          // console.log(m.author);
           if (m.isItText) {
             if (m.author.userId == props.thisUserId) {
-              return <MyMessage key={m.messageId} text={m.content} />
+              return <MyMessage key={m.messageId} time={formatTimeAgo(m.createdAt)} text={m.content} />
             } else {
-              return <NotMyMessage key={m.messageId} text={m.content} />
+              return <NotMyMessage key={m.messageId} time={formatTimeAgo(m.createdAt)} text={m.content} />
             }
           } else {
             if (m.userId == props.thisUserId) {
-            return <MyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
+            return <MyMessage key={m.messageId} time={formatTimeAgo(m.createdAt)} type="messageImage" bgImage={m.content} />
           } else {
-            return <NotMyMessage key={m.messageId} type="messageImage" bgImage={m.content} />
+            return <NotMyMessage key={m.messageId} time={formatTimeAgo(m.createdAt)} type="messageImage" bgImage={m.content} />
             }
           }
         });
@@ -80,15 +81,15 @@ export default function ACertainChatRoom(props) {
   }, []);
 
 
-  async function sendTextToTheBackEnd(inputText, messageId) {
-    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true, messageId, thisUser: props.thisUserId});
+  async function sendTextToTheBackEnd(inputText, messageId, time) {
+    await axios.post("/api/socketio", { txt: inputText, id: newChatRoomId , isItText: true, messageId, thisUser: props.thisUserId, time});
   }
 
   async function handleSendButton(e) {
     e.preventDefault();
     if (message.length) {
       await axios.post("/api/allChat/makeOneChat", {data: message, room: newChatRoomId, thisUserId: props.thisUserId}).then(res => {
-        sendTextToTheBackEnd(message, res.data.messageId);
+        sendTextToTheBackEnd(message, res.data.messageId, res.data.createdAt);
       })
       setMessage("");
     }
