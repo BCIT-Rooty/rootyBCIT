@@ -161,25 +161,34 @@ export async function getServerSideProps(context) {
       },
     };
   }
+  
 
-  console.log(session);
+  const theChatRoom = await prisma.chatRoom.findUnique({
+    where: {
+      chatRoomId: +context.params.chatRoomId,
+    }
+  })
+
+
+  
   const theUserSignIn = await prisma.user.findUnique({
     where: {
       email: session.user.email
     }
   })
   
-  // if (Math.abs(theUserSignIn.userId - ) < Number.EPSILON) {
-    
-  // }
+    if (theUserSignIn.userId == theChatRoom.userOneId || theUserSignIn.userId == theChatRoom.userTwoId ) {
+  
+    } else {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  
 
-  // const theChatRoom = await prisma.chatRoom.findUnique({
-  //   where: {
-  //     emailOnlyOneChatRoom: {
-
-  //     }
-  //   }
-  // })
 
   const theId = +context.params.chatRoomId;
   const thisUserId = JSON.parse(JSON.stringify(theUserSignIn.userId))
