@@ -42,6 +42,9 @@ export default function ItemDescript({ parsedItems, thisSession }) {
   }
   async function startChat() {
     await axios.post("/api/startChat", {author: parsedItems[0].author, thisUserEmail: thisSession.user.email }).then(result => {
+      if (result.data.name) {
+        return
+      }
       console.log(result.data)
       const link = `/chat/${result.data.theChat}`;
       router.push(link);
