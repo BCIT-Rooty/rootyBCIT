@@ -68,7 +68,26 @@ export async function getServerSideProps(context) {
     }
   })
 
+  const allChatsForThisUser2 = await prisma.chatRoom.findMany({
+    where:{
+      userTwoId: userWeAre.userId
+    }, 
+    include: {
+      userTwo: true
+    }
+  })
 
+  function allNewChats() {
+    allChatsForThisUser2.map(m => {
+      if(allChatsForThisUser.indexOf(m) !== -1 ){
+        return
+      } else {
+        allChatsForThisUser.push(m)
+      }
+    })
+  }
+
+  allNewChats()
   // let sessionObj = JSON.parse(JSON.stringify(session));
 
   const allTheChatsThatUserWasInJson = JSON.parse(JSON.stringify(allChatsForThisUser))

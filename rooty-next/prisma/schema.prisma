@@ -163,6 +163,7 @@ model ChatRoom {
   userTwoId  Int
   createdAt  DateTime?  @default(now())
   Message    Message[]
+   @@unique([userOneId, userTwoId], name: "OnlyOneChatRoom")
 }
 
 model Message {

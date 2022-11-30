@@ -113,7 +113,7 @@ export default function ACertainChatRoom(props) {
 
   return (
     <>
-    <ChatHeader margin="0px 9px 20px 0px" position="fixed"/>
+    <ChatHeader userName={props.userName} margin="0px 9px 20px 0px" position="fixed"/>
       <Wrapper
         // justifyContent="flex-start"
         alignItems="flex-start"

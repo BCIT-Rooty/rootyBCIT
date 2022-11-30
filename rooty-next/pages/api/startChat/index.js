@@ -21,7 +21,28 @@ export default async function handler(req, res) {
                 userTwoId: author.userId
             }
         })
+
+        const ifThereIsAChat2 = await prisma.chatRoom.findMany({
+            where: {
+                userTwoId: thisUser.userId,
+                userOneId: author.userId
+            }
+        })
         
+        
+        function allNewChats() {
+            ifThereIsAChat2.map(m => {
+            if(ifThereIsAChat.indexOf(m) !== -1 ){
+                return
+            } else {
+                ifThereIsAChat.push(m)
+            }
+            })
+        }
+
+        allNewChats()
+
+
         if (ifThereIsAChat.length === 0) {
             const createAChat = await prisma.chatRoom.create({
                 data: {
