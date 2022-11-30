@@ -192,7 +192,7 @@ export default function CreatePost(props) {
     } else {
       setNoKeywords(false);
     }
-
+    console.log(props)
     const axiosRequest = await axios
       .post("/api/createPost", {
         photoUrl: "/camera-man.jpg",
@@ -204,6 +204,7 @@ export default function CreatePost(props) {
         price,
         isNegotiableActive,
         count,
+        userEmail: props.thisSession
       })
       .then((result) => {
         console.log(result);

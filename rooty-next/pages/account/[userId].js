@@ -217,20 +217,20 @@ export async function getServerSideProps(context) {
     context.res,
     authOptions
   );
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   let sessionUser = await prisma.user.findUnique({
     where: {
       email: session.user.email,
     },
   });
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
   let sessionUserObj = JSON.parse(JSON.stringify(sessionUser));
   return {
     props: { session, sessionUserObj },

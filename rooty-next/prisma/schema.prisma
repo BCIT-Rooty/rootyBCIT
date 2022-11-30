@@ -161,7 +161,7 @@ model ChatRoom {
   userOneId  Int
   userTwo    User      @relation("UserNumberTwo", fields: [userTwoId], references: [userId])
   userTwoId  Int
-  createdAt  DateTime  @default(now())
+  createdAt  DateTime?  @default(now())
   Message    Message[]
 }
 

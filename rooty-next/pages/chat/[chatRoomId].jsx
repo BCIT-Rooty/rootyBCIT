@@ -42,7 +42,7 @@ export default function ACertainChatRoom(props) {
     const channel = pusher.subscribe(newChatRoomId);
     channel.bind("send-message", function (data) {
       if (data.thisUser == props.thisUserId) {
-        console.log(data);
+        // console.log(data);
         setChats((chats) => [...chats, <MyMessage key={data.messageId} time={formatTimeAgo(data.time)} text={data.txt} />]);
       } else {
         setChats((chats) => [...chats, <NotMyMessage key={data.messageId} time={formatTimeAgo(data.time)} text={data.txt} />]);

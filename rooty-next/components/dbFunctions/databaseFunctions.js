@@ -12,8 +12,10 @@ export async function createPost({
   price,
   isNegotiableActive,
   count,
+  userEmail
 }) {
 
+  console.log(userEmail)
   try {
     const category = await prisma.category.findUnique({
       where: {
@@ -23,7 +25,7 @@ export async function createPost({
   
     const author = await prisma.user.findUnique({
       where: {
-        userId: 1,
+        email: userEmail,
       },
     });
   

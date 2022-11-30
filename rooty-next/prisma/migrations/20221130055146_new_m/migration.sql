@@ -93,7 +93,7 @@ CREATE TABLE "ChatRoom" (
     "chatRoomId" SERIAL NOT NULL,
     "userOneId" INTEGER NOT NULL,
     "userTwoId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ChatRoom_pkey" PRIMARY KEY ("chatRoomId")
 );
