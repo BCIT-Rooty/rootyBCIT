@@ -16,7 +16,7 @@ export default async function handle(req, res) {
   switch (method) {
     case "POST":
       // get the title and content from the request body
-      const { firstName, lastName, aboutMe, program } = req.body;
+      const { firstName, lastName, aboutMe, program, photoUrl } = req.body;
       console.log("REQ BODY FROM EDIT USER API", req.body);
       // update the post in the database
       const changeUserInfo = await prisma.user.update({
@@ -28,6 +28,7 @@ export default async function handle(req, res) {
           lastName,
           aboutMe,
           program,
+          image: photoUrl
         },
       });
       // find updated post in the database

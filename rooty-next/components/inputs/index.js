@@ -148,7 +148,32 @@ export default function Input({
       )}
 
 
-      {type !== "file" && chatPhoto!=="file" && (
+      {type === "number" && (
+        <InputRectangle
+          value={value}
+          onChange={(e) => {
+            onChangingTheText(e.target.value);
+          }}
+          type="number"
+          max={10000}
+          min={0}
+          placeholder={placeholder}
+          bgColor={bgColor}
+          border={border}
+          borderRadius={borderRadius}
+          width={width}
+          height={height}
+          margin={margin}
+          padding={padding}
+          bgImage={bgImage}
+          bgSize={bgSize}
+          disabled={stopInput}
+          justifyContent="center"
+          alignItems="center"
+        ></InputRectangle>
+      )}
+
+      {type !== "file" && chatPhoto!=="file"&& type!=="number" && (
         <InputRectangle
           value={value}
           onChange={(e) => {
