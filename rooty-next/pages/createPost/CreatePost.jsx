@@ -460,6 +460,8 @@ export default function CreatePost(props) {
               placeholder="$"
               width="70px"
               onChangingTheText={setPrice}
+              min="0"
+              max="500"
             ></Input>
           </FlexBox>
 
