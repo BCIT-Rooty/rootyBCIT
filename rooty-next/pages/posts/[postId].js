@@ -16,10 +16,13 @@ import { useState } from "react";
 import Button from "../../components/button";
 import LeaveReview from "../../components/reviews/leaveReview";
 import { AnimatePresence, motion } from "framer-motion";
+import axios from "axios";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-export default function ItemDescript({ parsedItems }) {
+export default function ItemDescript({ parsedItems, thisSession }) {
   let userName =
-    parsedItems[0].author.firstName + " " + parsedItems[0].author.lastName;
+    parsedItems[0].author.name + " " + parsedItems[0].author.lastName;
   let description = parsedItems[0].description;
   let title = parsedItems[0].title;
   let image = parsedItems[0].image;
@@ -37,9 +40,16 @@ export default function ItemDescript({ parsedItems }) {
     const link = `/categories/${parsedItems[0].categoryId}`;
     router.push(link);
   }
-  function startChat() {
-    const link = `/chat`;
-    router.push(link);
+  async function startChat() {
+    await axios.post("/api/startChat", {author: parsedItems[0].author, thisUserEmail: thisSession.user.email, postId: parsedItems[0].postId }).then(result => {
+      if (result.data.name) {
+        return
+      }
+      console.log(result.data)
+      const link = `/chat/${result.data.theChat}`;
+      router.push(link);
+    })
+    return
   }
   const [value, setValue] = useState(4);
   const [showModal, setShowModal] = useState("default");
@@ -197,6 +207,21 @@ export default function ItemDescript({ parsedItems }) {
 }
 
 export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   let items = await prisma.post.findMany({
     where: {
       postId: +context.params.postId,
@@ -209,8 +234,10 @@ export async function getServerSideProps(context) {
   });
 
   let parsedItems = JSON.parse(JSON.stringify(items));
-  console.log(parsedItems);
+  let thisSession = JSON.parse(JSON.stringify(session));
+  console.log("look at this" ,parsedItems);
+  // console.log("look at this" ,thisSession);
   return {
-    props: { parsedItems },
+    props: { parsedItems, thisSession },
   };
 }

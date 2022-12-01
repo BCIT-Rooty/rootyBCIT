@@ -2,7 +2,7 @@ import Item from "../../../components/Item";
 // import { getItemsForUser } from '../../../server/database.js'
 import { prisma } from "../../../server/db/client";
 import { FlexBox, Wrapper } from "../../../styles/globals";
-import {useState} from "react"
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Text from "../../../components/text";
 import Button from "../../../components/button";
@@ -10,13 +10,13 @@ import { useRouter } from "next/router";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
 
-export default function userPosts({ parsedItems, sessionUserObj }) {
-  const r = useRouter()
-  const [deleteMessage, setDeleteMessage] = useState("")
+export default function UserPosts({ parsedItems, sessionUserObj }) {
+  const r = useRouter();
+  const [deleteMessage, setDeleteMessage] = useState("");
 
   return (
-      <Wrapper padding="50px 0 0 0" height="fit-content" dir="column">
-        <FlexBox
+    <Wrapper padding="50px 0 0 0" height="fit-content" dir="column">
+      <FlexBox
         bgImage="/back.png"
         onClick={() => {
           r.push(`/account/${sessionUserObj.userId}`);
@@ -28,37 +28,81 @@ export default function userPosts({ parsedItems, sessionUserObj }) {
         left="20px"
       ></FlexBox>
       <Text size="24px" weight="700" txt="My Posts"></Text>
-        <br></br>
-        <br></br>
-        <div>
-          {parsedItems.map((item) => {
-            return (
-              <div key={item.postId}>
-                <div key={item.id}>
-                  <Item
-                    key={item.id}
-                    name={item.title}
-                    price={item.price}
-                    rating={item.rating}
-                    remove="remove"
-                    description={item.description}
-                    image={item.Photos[0].postPhotoUrl}
-                    heart="false"
-                    onNext={()=>{setDeleteMessage(true)}}
-                  />
-                </div>
+      <br></br>
+      <br></br>
+      <div>
+        {parsedItems.map((item) => {
+          return (
+            <div key={item.postId}>
+              <div key={item.id}>
+                <Item
+                  key={item.id}
+                  name={item.title}
+                  price={item.price}
+                  rating={item.rating}
+                  remove="remove"
+                  description={item.description}
+                  image={item.Photos[0].postPhotoUrl}
+                  heart="false"
+                  onNext={() => {
+                    setDeleteMessage(true);
+                  }}
+                />
               </div>
-            );
-          })}
-        </div>
-        {/* EDIT WHAT IS CAPITALIZED LETTERS PLEASE */}
-        {deleteMessage && 
-            <FlexBox position="fixed" width="300px" height="fit-content" borderRadius="16px" bgColor="#FFFFFF" top="30%" left="25%" boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)" justifyContent="start" alignItems="start" dir="column" padding="20px">
-            <Text txt={"Are you sure you want to Delete " + "HERE IT SHOULD SAY THE POSTS NAME" + " Post?" }weight="700" size="24px" padding="0 0 30px 0"></Text>
-            <Button type="cancel" txt="Delete this Post" bgColor="#F7F7FC" color="#4F4DB0" border="0.5px solid #545454" width="250px" onClose={()=>{DELETETHISPOST}}></Button>
-            <Button type="cancel" txt="Cancel" color="#F7F7FC" bgColor="#4F4DB0" border="0.5px solid #545454" width="250px" onClose={()=>{setDeleteMessage(false)}}></Button>
+            </div>
+          );
+        })}
+      </div>
+      {/* EDIT WHAT IS CAPITALIZED LETTERS PLEASE */}
+      {deleteMessage && (
+        <FlexBox
+          position="fixed"
+          width="300px"
+          height="fit-content"
+          borderRadius="16px"
+          bgColor="#FFFFFF"
+          top="30%"
+          left="25%"
+          boxShadow="0px 0px 8px rgba(0, 0, 0, 0.25)"
+          justifyContent="start"
+          alignItems="start"
+          dir="column"
+          padding="20px"
+        >
+          <Text
+            txt={
+              "Are you sure you want to Delete " +
+              "HERE IT SHOULD SAY THE POSTS NAME" +
+              " Post?"
+            }
+            weight="700"
+            size="24px"
+            padding="0 0 30px 0"
+          ></Text>
+          <Button
+            type="cancel"
+            txt="Delete this Post"
+            bgColor="#F7F7FC"
+            color="#4F4DB0"
+            border="0.5px solid #545454"
+            width="250px"
+            onClose={() => {
+              DELETETHISPOST;
+            }}
+          ></Button>
+          <Button
+            type="cancel"
+            txt="Cancel"
+            color="#F7F7FC"
+            bgColor="#4F4DB0"
+            border="0.5px solid #545454"
+            width="250px"
+            onClose={() => {
+              setDeleteMessage(false);
+            }}
+          ></Button>
         </FlexBox>
-        }
+      )}
     </Wrapper>
   );
 }

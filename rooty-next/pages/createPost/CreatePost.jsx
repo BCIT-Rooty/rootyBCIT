@@ -114,11 +114,11 @@ export default function CreatePost(props) {
 
   async function createPost() {
 
-    // if(photoUrl == "") {
-    //   setNoPhotoError(true)
-    // } else {
-    //   setNoPhotoError(false)
-    // }
+    if(photoUrl == "") {
+      setNoPhotoError(true)
+    } else {
+      setNoPhotoError(false)
+    }
 
     if (whatIsTheCategoryOfThisPost === "") {
       setNoCategory(true);
@@ -151,12 +151,12 @@ export default function CreatePost(props) {
     }
 
 
-    // if(photoUrl == "") {
-    //   setNoPhotoError(true)
-    //   return
-    // } else {
-    //   setNoPhotoError(false)
-    // }
+    if(photoUrl == "") {
+      setNoPhotoError(true)
+      return
+    } else {
+      setNoPhotoError(false)
+    }
 
 
     if (title === "" || title.trim() === "") {
@@ -192,10 +192,10 @@ export default function CreatePost(props) {
     } else {
       setNoKeywords(false);
     }
-
+    console.log(props)
     const axiosRequest = await axios
       .post("/api/createPost", {
-        photoUrl: "/camera-man.jpg",
+        photoUrl,
         whatIsTheCategoryOfThisPost,
         keywords,
         title,
@@ -204,6 +204,7 @@ export default function CreatePost(props) {
         price,
         isNegotiableActive,
         count,
+        userEmail: props.thisSession
       })
       .then((result) => {
         console.log(result);

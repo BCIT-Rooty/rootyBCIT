@@ -9,6 +9,9 @@ import UserProfile from "../../../components/userProfile";
 import TitlePage from "../../../components/titlePage";
 import PostProfileDescript from "../../../components/postProfileDescript";
 import Item from "../../../components/Item";
+import SettingLine from "../../../components/settingLine";
+import Button from "../../../components/button";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { prisma } from "../../../server/db/client";
 import { unstable_ClassNameGenerator } from "@mui/material";
@@ -27,21 +30,19 @@ const descript = [
   ],
 ];
 
-
 export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
-      // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
-    // console.log('THIS IS THE USERNAME', userName)
-    let userId = 1
-    const r = useRouter()
-    const [showModal, setShowModal] = useState("default")
-    const [value, setValue] = useState(4)
-    const [logOut, setLogOut] = useState("default")
-    const [statusButton, setStatusButton] = useState([
-        {id:1, title:"Available"},
-        {id:2, title:"Unavailable"}
-    ])
-    const [buttonMain, setButtonMain] = useState("");
-
+  // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
+  // console.log('THIS IS THE USERNAME', userName)
+  let userId = 1;
+  const r = useRouter();
+  const [showModal, setShowModal] = useState("default");
+  const [value, setValue] = useState(4);
+  const [logOut, setLogOut] = useState("default");
+  const [statusButton, setStatusButton] = useState([
+    { id: 1, title: "Available" },
+    { id: 2, title: "Unavailable" },
+  ]);
+  const [buttonMain, setButtonMain] = useState("");
 
   return (
     <Wrapper
@@ -102,21 +103,21 @@ export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
         width="94vw"
         margin="0px 0px 0px 20px"
         padding="5px"
-      >
-        <FlexBox>
-          {sessionUserPostsObj.map((posts) => (
-            <Item
-              name={posts.title}
-              image={posts.image}
-              rating={posts.rating}
-              price={posts.price}
-              width="290px"
-              margin="0 20px 0 0"
-              onClick={() => setShowModal(posts)}
-            ></Item>
-          ))}
-        </FlexBox>
-      </HorizontalScrollContainer>
+      />
+      <FlexBox>
+        {sessionUserPostsObj.map((posts) => (
+          <Item
+            key={posts.postId}
+            name={posts.title}
+            image={posts.image}
+            rating={posts.rating}
+            price={posts.price}
+            width="290px"
+            margin="0 20px 0 0"
+            onClick={() => setShowModal(posts)}
+          ></Item>
+        ))}
+      </FlexBox>
     </Wrapper>
   );
 }

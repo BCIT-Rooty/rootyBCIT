@@ -35,7 +35,8 @@ export const FlexBox = styled.div`
     max-width: ${props=>props.maxWidth};
     min-width: ${props=>props.minWidth};
     overflow-y: ${props=>props.overflowY};
-    overflow-anchor: ${props=>props.overflowA}
+    overflow-anchor: ${props=>props.overflowA};
+    overflow-x: ${props=>props.overflowX};
 `
 
 export const Wrapper = styled(FlexBox) `
