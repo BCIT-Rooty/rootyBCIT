@@ -27,7 +27,7 @@ export default function UserPosts({ parsedItems, sessionUserObj }) {
         top="25px"
         left="20px"
       ></FlexBox>
-      <h1>My Posts</h1>
+      <Text size="24px" weight="700" txt="My Posts"></Text>
       <br></br>
       <br></br>
       <div>
