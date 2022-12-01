@@ -155,8 +155,6 @@ export default function Input({
             onChangingTheText(e.target.value);
           }}
           type="number"
-          max={10000}
-          min={0}
           placeholder={placeholder}
           bgColor={bgColor}
           border={border}

@@ -103,7 +103,8 @@ export default function CreatePost(props) {
       if (errorThatKeywordAlreadyExists) {
         setErrorThatKeywordAlreadyExists(false);
       }
-      setErrorStateForEmptyInputKeyWord(true);
+      enoughKeyWords ? setErrorStateForEmptyInputKeyWord(false) : setErrorStateForEmptyInputKeyWord(true)   
+      
       return;
     } else if (keywordButtonStateValue !== "" && keywordWithoutSpaces !== "") {
       setErrorStateForEmptyInputKeyWord(false);

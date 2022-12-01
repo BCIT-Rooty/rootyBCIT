@@ -23,6 +23,16 @@ export default function ACertainChatRoom(props) {
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
   const [userId, setUserId] = useState("");
+  const [theTextIsLong, setTheTextIsLong] = useState(false)
+
+  useEffect(() => {
+    if (message.length > 500) {
+      setTheTextIsLong(true)
+    } else {
+      setTheTextIsLong(false)
+    }
+  }, [message])
+
 
   const scrollContainer = useRef();
 
@@ -195,6 +205,7 @@ export default function ACertainChatRoom(props) {
                 value={message}
                 onChangingTheTextForChat={handleChangeText}
                 onSubmitButtonClicked={handleSendButton}
+                stopInput={theTextIsLong}
               />
             </FlexBox>
 
