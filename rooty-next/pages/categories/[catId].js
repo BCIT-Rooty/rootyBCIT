@@ -49,6 +49,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
         </FlexBox>
         <div>
           {items.map((item) => {
+            console.log(item)
             return (
               <div id={item.postId} key={item.postId}>
                 <Item
@@ -62,6 +63,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
                   price={item.price}
                   description={item.description}
                   compensation={item.compensation}
+                  isNegotiable={item.isNegotiableActive}
                   image={item.Photos[0].postPhotoUrl}
                 />
               </div>
