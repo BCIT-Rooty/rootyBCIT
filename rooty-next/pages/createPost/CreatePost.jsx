@@ -246,7 +246,7 @@ export default function CreatePost(props) {
         >
           <Text
             txt="Choose a Category"
-            size="16px"
+            size="18px"
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
@@ -288,7 +288,7 @@ export default function CreatePost(props) {
         >
           <Text
             txt="Post Title"
-            size="16px"
+            size="18px"
             weight="bold"
             padding="15px 0px 20px 20px"
             width="100%" maxWidth="900px"
@@ -317,7 +317,7 @@ export default function CreatePost(props) {
         >
           <Text
             txt="Type Keywords"
-            size="16px"
+            size="18px"
             weight="bold"
             padding="15px 0px 20px 20px"
             width="100%" maxWidth="900px"
@@ -392,7 +392,7 @@ export default function CreatePost(props) {
         >
           <Text
             txt="Describe your Service"
-            size="16px"
+            size="18px"
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
@@ -421,7 +421,7 @@ export default function CreatePost(props) {
         >
           <Text
             txt="Barter Service Needs - Optional"
-            size="16px"
+            size="18px"
             weight="bold"
             padding="15px 0px 20px 20px"
           ></Text>
@@ -445,7 +445,7 @@ export default function CreatePost(props) {
           <FlexBox>
             <Text
               txt="Price"
-              size="16px"
+              size="18px"
               weight="bold"
               padding="15px 0px 20px 20px"
               width="100%"
@@ -486,7 +486,7 @@ export default function CreatePost(props) {
         >
           <Text
             txt="Revision"
-            size="16px"
+            size="18px"
             weight="bold"
             padding="15px 0px 20px 20px"
             width="100%"
