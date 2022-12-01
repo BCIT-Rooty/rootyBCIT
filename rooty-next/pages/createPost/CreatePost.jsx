@@ -90,6 +90,13 @@ export default function CreatePost(props) {
     return theUrlToReturn;
   }
 
+  async function handleNumberPriceChange(input) {
+    const min = 0;
+    const max = 10000;
+    const value = Math.max(min, Math.min(max, Number(input)));
+    setPrice(value);
+  };
+
   function handleKeywordsButtonClick() {
     const keywordWithoutSpaces = keywordButtonStateValue.trim();
     if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
@@ -485,7 +492,7 @@ export default function CreatePost(props) {
               value={price}
               placeholder="$"
               width="70px"
-              onChangingTheText={setPrice}
+              onChangingTheText={handleNumberPriceChange}
               min="0"
               max="500"
             ></Input>
