@@ -9,13 +9,14 @@ import Button from "../../../components/button";
 import { useRouter } from "next/router";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
+import TitlePage from "../../../components/titlePage";
 
 export default function UserPosts({ parsedItems, sessionUserObj }) {
   const r = useRouter();
   const [deleteMessage, setDeleteMessage] = useState("");
 
   return (
-    <Wrapper padding="50px 0 0 0" height="fit-content" dir="column">
+    <Wrapper height="fit-content" dir="column">
       <FlexBox
         bgImage="/back.png"
         onClick={() => {
@@ -27,7 +28,7 @@ export default function UserPosts({ parsedItems, sessionUserObj }) {
         top="25px"
         left="20px"
       ></FlexBox>
-      <Text size="24px" weight="700" txt="My Posts"></Text>
+      <TitlePage txt="My Posts"/>
       <br></br>
       <br></br>
       <div>

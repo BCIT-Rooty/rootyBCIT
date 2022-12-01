@@ -26,13 +26,9 @@ export default function CardWithSearch({
 
 
   return(
-    <FlexBox bgImage={bgImage} height={height} borderRadius="0px" margin="0px" alignItems="flex-end" linearGradient={linearGradient}>
-          <FlexBox position="relative" top="-260px" left="55px">
-              <ArrowBackIosIcon fontSize="large" onClick={onClick}></ArrowBackIosIcon>
-          </FlexBox>
-        <FlexBox dir="column" margin="20px">
-        <Text txt={txt} size={size} align={align} color={color} weight={weight} padding={padding}></Text>
-        <FlexBox margin="12px">
+    <FlexBox bgImage={bgImage} height={height} borderRadius="0px" margin="0px" dir="column" width="100vw" linearGradient={linearGradient} justifyContent="flex-end" padding="0 0 30px 0">
+          <Text txt={txt} size={size} align={align} color={color} weight={weight} padding={padding}></Text>
+          <Input bgImage="/icons8-search-48.png" onChangingTheText={(e) => onChangingTheText(e)} bgSize="30px" type="email" placeholder='Search services' padding='0 0 0 55px' width="85vw" maxWidth="900px" justifyContent="flex-start"></Input>
           {/* <Search size="large"
                         placeholder='Search services'
                         onSearchChange={(e, data) => {
@@ -41,9 +37,6 @@ export default function CardWithSearch({
                         onResultSelect={(e, data) =>
                         dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })}/> */}
                         {/* <Input type="search" bgImage="/face4.jpg" padding="0 0 0 45px"></Input> */}
-                        <Input bgImage="/icons8-search-48.png" onChangingTheText={(e) => onChangingTheText(e)} bgSize="30px" type="email" placeholder='Search services' padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
-                        </FlexBox>
-        </FlexBox>
     </FlexBox>
   )
 }

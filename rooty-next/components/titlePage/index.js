@@ -9,7 +9,7 @@ export default function TitlePage({
     onClick
 }){
     return(
-        <FlexBox width="100vw" justifyContent="space-between" alignItems="flex-end" bottomBorder="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 20px" minHeight="105px" margin={margin}>
+        <FlexBox width="100vw" justifyContent="space-between" alignItems="flex-end" bottomBorder="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 5px 20px" minHeight="100px" margin={margin}>
         <Text txt={txt} size="24px" weight="bold"></Text>
         {type === "Edit" && <FlexBox>
                 <Button bgColor="#4F4DB0" txt={type} height="30px" width="70px" margin="0 20px 0 0" onClick={onClick}></Button>

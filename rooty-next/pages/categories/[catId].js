@@ -36,15 +36,15 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
   }, [query]);
 
   return (
-    <Wrapper alignItems="start" height="fit-content">
-      <FlexBox dir="column" width="100%">
-        <FlexBox position="relative" top="40px" left="-140px">
+    <Wrapper alignItems="start" height="fit-content" padding="0 0 70px 0">
+      <FlexBox dir="column" width="100vw">
+        <FlexBox position="absolute" top="40px" left="30px">
           <ArrowBackIosIcon
             fontSize="large"
             onClick={() => handleLinkClick()}
           ></ArrowBackIosIcon>
         </FlexBox>
-        <FlexBox width="100%" dir="column">
+        <FlexBox width="100vw" dir="column">
           <CardWithSearch onChangingTheText={setQuery} bgImage={image} txt={categoryName}></CardWithSearch>
         </FlexBox>
         <div>

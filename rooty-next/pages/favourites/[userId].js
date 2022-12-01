@@ -2,11 +2,23 @@ import Item from "../../components/Item";
 // import { getItemsForUser } from '../../../server/database.js'
 import { prisma } from "../../server/db/client";
 import { Wrapper } from "../../styles/globals";
+import TitlePage from "../../components/titlePage";
 
 export default function userPosts({ parsedItems }) {
     return (
         <Wrapper padding="50px 0 0 0" height="fit-content" dir="column">
-            <h1>My Favourites</h1>
+            <FlexBox
+                bgImage="/back.png"
+                onClick={() => {
+                r.push(`/account/${sessionUserObj.userId}`);
+                }}
+                width="30px"
+                height="30px"
+                position="absolute"
+                top="25px"
+                left="20px"
+            ></FlexBox>
+            <TitlePage txt="Favourites List"/>
             <br></br>
             <br></br>
             <div>

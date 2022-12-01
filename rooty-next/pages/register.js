@@ -81,19 +81,19 @@ export default function Home() {
       setHeaderImage("/register1.png");
     }
     if (steps === 2) {
-      setHeaderText("Set up your Profile");
+      setHeaderText("Set up your profile");
       setHeaderImage("/register2.png");
     }
     if (steps === 3) {
-      setHeaderText("What Program are you in?");
+      setHeaderText("What program are you in?");
       setHeaderImage("/register3.png");
     }
     if (steps === 4) {
-      setHeaderText("What Skills do you Offer?");
+      setHeaderText("What skills do you offer?");
       setHeaderImage("/register4.png");
     }
     if (steps === 5) {
-      setHeaderText("Create Profile");
+      setHeaderText("Create profile");
       setHeaderImage("/register5.png");
     }
   }, [steps]);
@@ -278,7 +278,7 @@ export default function Home() {
                   justifyContent="flex-start"
                   required
                 ></Input>
-                <Text
+                {/* <Text
                   padding="10px 20px 10px 20px"
                   size="14px"
                   weight="500"
@@ -287,7 +287,7 @@ export default function Home() {
                   textDecor="underline"
                   justifyContent="flex-end"
                   width="100vw"
-                ></Text>
+                ></Text> */}
               </motion.div>
             </FlexBox>
           )}

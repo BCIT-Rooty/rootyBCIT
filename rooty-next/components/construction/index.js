@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import { Wrapper, ImgPlaceholder, FlexBox } from "../styles/globals";
+import { Wrapper, ImgPlaceholder, FlexBox } from "../../styles/globals";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 const BackIcon = styled(ArrowBackIosNewIcon)`
     position: absolute;
-    left: 15px;
-    top: 15px;
+    left: 25px;
+    top: 35px;
     cursor: pointer
 `
 
