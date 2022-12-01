@@ -92,6 +92,7 @@ export default function Input({
   minWidth,
   justifyContent,
   bgSize,
+  stopInput,
 }) {
   function promptFilename() {
     promptFile().then(function (file) {
@@ -164,6 +165,7 @@ export default function Input({
           padding={padding}
           bgImage={bgImage}
           bgSize={bgSize}
+          disabled={stopInput}
           justifyContent="center"
           alignItems="center"
         ></InputRectangle>

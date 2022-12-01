@@ -48,10 +48,25 @@ export default function CreatePost(props) {
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [isNegotiableActive, setIsNegotiableActive] = useState(false);
+  const [tooManyKeywordsError, setTooManyKeywordsError] = useState(false);
+  const [enoughKeyWords, setEnoughKeyWords] = useState(false);
   const router = useRouter();
   const handleNegotiableButton = () => {
     setIsNegotiableActive((current) => !current);
   };
+
+  useEffect(() => {
+    if (keywords.length > 5) {
+      setTooManyKeywordsError(true)
+    } else {
+      setTooManyKeywordsError(false)
+    }
+    if (keywords.length === 5) {
+      setEnoughKeyWords(true)
+    } else if (keywords.length < 5) {
+      setEnoughKeyWords(false)
+    }
+  }, [keywords])
 
   async function uploadThePhotoToS3(inputFile) {
     // if (photoInput == false) {
@@ -330,6 +345,7 @@ export default function CreatePost(props) {
               value={keywordButtonStateValue}
               border="solid 1px #545454"
               onChangingTheText={setKeywordButtonStateValue}
+              stopInput={enoughKeyWords}
               width="67vw" maxWidth="760px"
             ></Input>
             <Button
@@ -345,6 +361,16 @@ export default function CreatePost(props) {
               onClick={handleKeywordsButtonClick}
             />
           </FlexBox>
+            {enoughKeyWords ? (
+            <Toaster txt="You are only allowed 5 keywords!" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+          ) : (
+            <></>
+          )}
+            {tooManyKeywordsError ? (
+            <Toaster txt="You have more then 5 keywords!" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+          ) : (
+            <></>
+          )}
           <FlexBox width="100%" maxWidth="850px" padding="25px 20px 10px 20px" flexWrap="wrap">
             {areThereKeywords ? (
               keywords.map((m) => (
