@@ -23,6 +23,7 @@ import { useRouter } from "next/router";
 import { prisma } from "../../server/db/client";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import TitlePage from "../../components/titlePage";
 
 export default function Home({ sessionUserObj }) {
   const [showModal, setShowModal] = useState("default");
@@ -33,16 +34,7 @@ export default function Home({ sessionUserObj }) {
 
   return (
     <Wrapper dir="column" height="fit-content" padding="0 0 80px 0">
-      <Text
-        txt={"Welcome, " + sessionUserObj?.name + "!"}
-        padding="70px 0px 0px 20px"
-        size="24px"
-        weight="bolder"
-        width="100%"
-        maxWidth="900px"
-        justifyContent="flex-start"
-      ></Text>
-
+      <TitlePage txt={"Welcome, " + sessionUserObj?.name + "!"}/>
       <Text
         txt="Insights & Tips"
         padding="30px 0px 10px 20px"
@@ -136,7 +128,7 @@ export default function Home({ sessionUserObj }) {
                 article={Article1()}
                 onClick={() => setShowModal("default")}
                 txt="How to Write the Perfect Freelancing Bio"
-                bgImage="/tip1.png"
+                bgImage="/grad1.jpg"
               />
             </motion.div>
           </FlexBox>
@@ -152,7 +144,7 @@ export default function Home({ sessionUserObj }) {
                 article={Article2()}
                 onClick={() => setShowModal("default")}
                 txt="6 Habits of High Successful Freelancers"
-                bgImage="/tip2.jpg"
+                bgImage="/grad2.jpg"
               />
             </motion.div>
           </FlexBox>
@@ -168,7 +160,7 @@ export default function Home({ sessionUserObj }) {
                 article={Article3()}
                 onClick={() => setShowModal("default")}
                 txt="4 Steps to Complete Your First Gig"
-                bgImage="/tip3.png"
+                bgImage="/grad3.jpg"
               />
             </motion.div>
           </FlexBox>
@@ -184,7 +176,7 @@ export default function Home({ sessionUserObj }) {
                 article={Article4()}
                 onClick={() => setShowModal("default")}
                 txt="5 Ways to Improve Focus and Productivity"
-                bgImage="/tip4.png"
+                bgImage="/grad4.jpg"
               />
             </motion.div>
           </FlexBox>

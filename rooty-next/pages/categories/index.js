@@ -13,6 +13,7 @@ import { prisma } from "../../server/db/client";
 import Input from "../../components/inputs";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import TitlePage from "../../components/titlePage";
 
 
 export default function Categories({ jsonCategories }) {
@@ -55,10 +56,7 @@ export default function Categories({ jsonCategories }) {
       exit={{opacity: 0}}
       >
         <FlexBox dir="column" width="100%" padding="0 0 70px 0">
-          <FlexBox width="100%" justifyContent="start" alignItems="flex-end" border="0.5px solid rgba(191, 191, 191, 1)" padding="0 0 7px 40px" minHeight="100px">
-            <Text txt="Search" size="24px" weight="bold"></Text>
-          </FlexBox>
-          <FlexBox padding="30px 0px 13px 0px">
+          <TitlePage txt="Search"/>
             {/* <Search size="big"
               placeholder='Search...'
               onSearchChange={(e, data) => {
@@ -67,8 +65,7 @@ export default function Categories({ jsonCategories }) {
               onResultSelect={(e, data) => 
                 dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })} /> */}
                 {/* delete the input if anything wrong */}
-          <Input bgImage="/icons8-search-48.png" bgSize="30px" onChangingTheText={(e) => setQuery(e)} type="email" placeholder='Search services' margin="0px 20px 0px 20px" padding='0 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
-          </FlexBox>
+          <Input bgImage="/icons8-search-48.png" bgSize="30px" onChangingTheText={(e) => setQuery(e)} type="email" placeholder='Search services' margin="20px" padding='0px 0 0 55px' width="90vw" maxWidth="900px" justifyContent="flex-start"></Input>
           <FlexBox
             flexWrap="wrap"
             filter="drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.2))"

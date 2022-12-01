@@ -33,7 +33,7 @@ export default function Article({
                 <GradientCard txt={txt} bgImage={bgImage} width="100vw" maxWidth="900px" height="240px" borderRadius='10px 10px 0px 0px' size="24px" margin='0px' padding="0px 0px 15px 25px"></GradientCard>
                 {article}
                 {contest === "yes" && 
-                    <FlexBox width="100vw" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  padding="0px 15px 20px 15px">
+                    <FlexBox width="100vw" maxWidth="900px" height="fit-content" bgColor="#F8F8F8" alignItems="flex-start" dir="column"  padding="0px 15px 20px 15px">
                         <IconText onDownload={()=> setShowDownload("active")} txt="bcitBigInfo.zip" textDecor="underline" color="blue" onClick=""></IconText>
                         <Text padding="10px 20px" txt="Inspiration for what we're looking forward" size="16px" weight="bold"></Text>
                         <ImgPlaceholder bgImage="/contestInspo.png" width="100px" height="180px" margin="20px"></ImgPlaceholder>
