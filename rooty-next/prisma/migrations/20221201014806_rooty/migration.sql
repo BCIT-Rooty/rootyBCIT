@@ -8,7 +8,7 @@ CREATE TABLE "User" (
     "name" TEXT,
     "lastName" TEXT,
     "password" TEXT NOT NULL,
-    "image" TEXT,
+    "image" TEXT DEFAULT 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',
     "status" TEXT DEFAULT 'available',
     "email" TEXT NOT NULL,
     "aboutMe" TEXT,
@@ -114,7 +114,7 @@ CREATE TABLE "ChatRoom" (
 -- CreateTable
 CREATE TABLE "Message" (
     "messageId" SERIAL NOT NULL,
-    "content" VARCHAR(500) NOT NULL,
+    "content" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "isItText" BOOLEAN DEFAULT true,
     "userId" INTEGER NOT NULL,

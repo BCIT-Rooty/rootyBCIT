@@ -10,6 +10,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { Email } from "@mui/icons-material";
 import Toaster from "../components/toaster";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
   const r = useRouter();
@@ -128,6 +129,7 @@ export default function Home() {
     setSteps(newStep);
     if (steps >= 5) {
       registerUser();
+      signIn();
       r.push("/home");
     }
   };

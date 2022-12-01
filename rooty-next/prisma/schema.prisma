@@ -14,7 +14,7 @@ model User {
   name       String?
   lastName   String?
   password   String
-  image      String?
+  image      String?       @default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y")
   status     String?       @default("available")
   email      String        @unique
   aboutMe    String?       @db.Text

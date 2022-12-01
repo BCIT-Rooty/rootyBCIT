@@ -202,7 +202,7 @@ export default function UserProfile({ sessionUserObj }) {
               <DownloadPopUp
                 height="100vh"
                 onClose={() => setLogOut(r.push("/"))}
-                onClick={() => signOut()}
+                onClick={signOut()}
                 txt="You Logged Out!"
                 txt2="We hope to see you soon! 🥹"
                 size2="20px"
