@@ -7,10 +7,10 @@ const ListItem = styled.li`
     padding-right:20px
 `
 export const gradientCard = [
-    ["How to Write the Perfect Freelancing Bio", "/grad1.jpg", "firstArticle"],
-    ["6 Habits of High Successful Freelancers", "/grad2.jpg", "secondArticle"],
-    ["4 Steps to Complete Your First Gig","/grad3.jpg", "thirdArticle"],
-    ["5 Ways to Improve Focus and Productivity", "/grad4.jpg", "fourthArticle"]
+    ["How to Write the Perfect Freelancing Bio", "/Howtowriteperfect.png", "firstArticle"],
+    ["6 Habits of High Successful Freelancers", "/6habitsofsuccessful.png", "secondArticle"],
+    ["4 Steps to Complete Your First Gig","/4waystocomplete.png", "thirdArticle"],
+    ["5 Ways to Improve Focus and Productivity", "/5waystoimprove.png", "fourthArticle"]
   ]
 export const popularSearches = [
     ["Broadcast & Media", "/categories/1"],

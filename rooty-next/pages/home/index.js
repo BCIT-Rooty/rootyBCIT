@@ -34,7 +34,7 @@ export default function Home({ sessionUserObj }) {
 
   return (
     <Wrapper dir="column" height="fit-content" padding="0 0 80px 0">
-      <TitlePage txt={"Welcome, " + sessionUserObj?.name + "!"}/>
+      <TitlePage type="Welcome" type2="false" txt={"Welcome"} txt2={sessionUserObj?.name + "!"}/>
       <Text
         txt="Insights & Tips"
         padding="30px 0px 10px 20px"
@@ -108,7 +108,7 @@ export default function Home({ sessionUserObj }) {
       >
         <GradientCard
           txt="Redesign our 'Big Info Poster' - $500"
-          bgImage="/bigInfo.jpg"
+          bgImage="/Contest.png"
           height="130px"
           onClick={() => setShowModal("contest")}
           width="95vw"
@@ -128,7 +128,7 @@ export default function Home({ sessionUserObj }) {
                 article={Article1()}
                 onClick={() => setShowModal("default")}
                 txt="How to Write the Perfect Freelancing Bio"
-                bgImage="/grad1.jpg"
+                bgImage="/Howtowriteperfect.png"
               />
             </motion.div>
           </FlexBox>
@@ -144,7 +144,7 @@ export default function Home({ sessionUserObj }) {
                 article={Article2()}
                 onClick={() => setShowModal("default")}
                 txt="6 Habits of High Successful Freelancers"
-                bgImage="/grad2.jpg"
+                bgImage="/6habitsofsuccessful.png"
               />
             </motion.div>
           </FlexBox>
@@ -160,7 +160,7 @@ export default function Home({ sessionUserObj }) {
                 article={Article3()}
                 onClick={() => setShowModal("default")}
                 txt="4 Steps to Complete Your First Gig"
-                bgImage="/grad3.jpg"
+                bgImage="/4waystocomplete.png"
               />
             </motion.div>
           </FlexBox>
@@ -176,7 +176,7 @@ export default function Home({ sessionUserObj }) {
                 article={Article4()}
                 onClick={() => setShowModal("default")}
                 txt="5 Ways to Improve Focus and Productivity"
-                bgImage="/grad4.jpg"
+                bgImage="/5waystoimprove.png"
               />
             </motion.div>
           </FlexBox>
@@ -193,7 +193,7 @@ export default function Home({ sessionUserObj }) {
                 contest="yes"
                 onClick={() => setShowModal("default")}
                 txt="Redesign our 'Big Info Poster' - $500"
-                bgImage="/bigInfo.jpg"
+                bgImage="/Contest.png"
               />
             </motion.div>
           </FlexBox>
