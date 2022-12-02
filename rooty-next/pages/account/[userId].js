@@ -123,7 +123,7 @@ export default function UserProfile({ sessionUserObj }) {
           name="heart"
           txt="Favourites List"
           onClick={() => {
-            r.push(`/favourites/${sessionUserObj.userId}`);
+            r.push(`/account/favourites/${sessionUserObj.userId}`);
           }}
         ></SettingLine>
         <SettingLine
