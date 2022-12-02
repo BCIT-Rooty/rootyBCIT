@@ -28,7 +28,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
     router.push(link);
   }
   useEffect(() => {
-    console.log(parsedItems);
+    // console.log(parsedItems);
     const newParsedItems = parsedItems.filter((item) => {
       return item.title.toLowerCase().includes(query.toLocaleLowerCase());
     });
@@ -49,7 +49,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
         </FlexBox>
         <div>
           {items.map((item) => {
-            console.log(item)
+            // console.log(item)
             return (
               <div id={item.postId} key={item.postId}>
                 <Item
@@ -133,7 +133,7 @@ export async function getServerSideProps(context) {
 
   let parsedItems = JSON.parse(JSON.stringify(categoryItems));
   let parsedCategoryName = JSON.parse(JSON.stringify(categoryName));
-  console.log("parsdedName", parsedItems);
+  // console.log("parsdedName", parsedItems);
   return {
     props: { parsedItems, parsedCategoryName },
   };

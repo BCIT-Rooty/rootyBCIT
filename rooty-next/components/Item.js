@@ -27,7 +27,8 @@ export default function Item({
   imgBorderRadius="16px 0px 0px 16px",
   onClick=()=>{},
   margin="20px",
-  onNext=()=>{}
+  onNext=()=>{},
+  isNegotiable
 }) {
 
 
@@ -45,7 +46,7 @@ export default function Item({
              <FlexBox alignItems="flex-end" justifyContent="space-around" width="50%">
              {price == 0 ?<Text txt={"free"} size="15px" weight="bold"></Text>:<Text txt={"$" + price} size="15px" weight="bold"></Text> }
             
-            {(!isItNegotiable && price !== 0 ) ? <><Text txt="or " size="15px" ></Text>
+            {(isNegotiable && price !== 0 ) ? <><Text txt="or " size="15px" ></Text>
              <HandshakeIcon></HandshakeIcon></> : <></>}
              
              </FlexBox>
