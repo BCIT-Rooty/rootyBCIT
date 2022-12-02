@@ -5,7 +5,7 @@ async function main() {
   const categories = await prisma.category.createMany({
     data: [
       {
-        categoryName: "Broadcast & Media",
+        categoryName: "Video and Animation",
         image: "/broadcast.png",
       },
       {

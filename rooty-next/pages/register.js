@@ -105,6 +105,7 @@ export default function Home() {
   const registerUser = async (e) => {
     e?.preventDefault();
     const data = {
+      imageInput: profileImage,
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -151,7 +152,7 @@ export default function Home() {
         data: inputFile,
       }).then(() => {
         const [photoUrlRet] = theUrlData.split("?");
-        setPhotoUrl(photoUrlRet);
+        setProfileImage(photoUrlRet);
         theUrlToReturn = photoUrlRet;
       });
     });

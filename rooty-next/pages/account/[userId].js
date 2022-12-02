@@ -21,11 +21,11 @@ export default function UserProfile({ sessionUserObj }) {
   const [value, setValue] = useState(4);
   const [logOut, setLogOut] = useState("default");
   // const [theFinalStatus, setTheFinalStatus] = useState("")
+  const [buttonMain, setButtonMain] = useState(sessionUserObj.status);
   const [statusButton, setStatusButton] = useState([
     { id: 1, title: "Available" },
     { id: 2, title: "Unavailable" },
   ]);
-  const [buttonMain, setButtonMain] = useState("");
 
   useEffect(() => {
     console.log(sessionUserObj);

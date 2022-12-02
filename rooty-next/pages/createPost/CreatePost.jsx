@@ -13,6 +13,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Counter from "../../components/counter";
 import { useRouter } from "next/router";
 import TitlePage from "../../components/titlePage";
+import Lottie from "lottie-react";
+import LoadingAnimation from "../../public/loading.json"
 
 
 export default function CreatePost(props) {
@@ -30,6 +32,7 @@ export default function CreatePost(props) {
   const [noCategory, setNoCategory] = useState(false);
   const [noPriceError, setNoPriceError] = useState(false);
   const [keywordButtonStateValue, setKeywordButtonStateValue] = useState("");
+  const [loading, setLoading] = useState(false)
   // const [stateTrackerToRemoveText, setStateTrackerToRemoveText] =
   //   useState(false);
   const [errorStateForEmptyInputKeyWord, setErrorStateForEmptyInputKeyWord] =
@@ -234,7 +237,9 @@ export default function CreatePost(props) {
         console.log(result);
       })
       .then(() => {
+        setLoading(true);
         router.push("/categories");
+        setLoading(false);
       });
     // setShowDownload("active");
   }
@@ -501,7 +506,7 @@ export default function CreatePost(props) {
           </FlexBox>
 
           <Button
-            txt="Negotiable"
+            txt="Barter"
             margin="5px 0px 0px 0px"
             border={
               isNegotiableActive ? "solid 2px #4F4DB0" : "solid 2px #545454"
@@ -562,8 +567,13 @@ export default function CreatePost(props) {
             bgColor="#4F4DB0"
           ></Button>
         </FlexBox>
+        {loading === true && (
+              <Wrapper position="fixed" bgColor="rgba(0, 0, 0, 0.6)" top="0" left="0">
+                <Lottie style={{width:300, height:300}} animationData={LoadingAnimation} loop={true}></Lottie>
+              </Wrapper>
+          )}
         <AnimatePresence exitBeforeEnter>
-          {showDownload === "active" && (
+          {/* {showDownload === "active" && (
             <FlexBox position="absolute" left="0" zIndex="30">
               <motion.div
                 initial={{ opacity: 0 }}
@@ -580,7 +590,7 @@ export default function CreatePost(props) {
                 ></DownloadPopUp>
               </motion.div>
             </FlexBox>
-          )}
+          )} */}
         </AnimatePresence>
       </Wrapper>
     </>

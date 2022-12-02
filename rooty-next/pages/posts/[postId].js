@@ -29,7 +29,7 @@ export default function ItemDescript({ parsedItems, thisSession }) {
     parsedItems[0].author.name + " " + parsedItems[0].author.lastName;
   let description = parsedItems[0].description;
   let title = parsedItems[0].title;
-  let image = parsedItems[0].image;
+  let image = parsedItems[0].author.image;
   let rating = parsedItems[0].rating;
   let compensation = parsedItems[0].compensation;
   let authorImage = parsedItems[0].author.image;
@@ -93,11 +93,12 @@ export default function ItemDescript({ parsedItems, thisSession }) {
       <FlexBox width="100%" dir="column">
         <ReviewActiveStars
           name={userName}
+          image={image}
           nameSize="20px"
           comment=""
           program=""
           boxWidth="73px"
-          image="/camera-man.jpg"
+          // image="/camera-man.jpg"
         ></ReviewActiveStars>
         <FlexBox
           dir="column"
