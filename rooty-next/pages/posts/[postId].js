@@ -19,6 +19,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
+import IconText from "/components/iconText";
+import DownloadPopUp from "/components/downloadPopUp";
 
 export default function ItemDescript({ parsedItems, thisSession }) {
   const [shouldBeAbleToChat, setShouldBeAbleToChat] = useState(parsedItems[0].author.email === thisSession.user.email)
@@ -67,6 +69,9 @@ export default function ItemDescript({ parsedItems, thisSession }) {
     const link = `/categories/${parsedItems[0].postId}`;
     router.push(link);
   }
+
+  const [showDownload, setShowDownload] = useState("default")
+
   return (
     <Wrapper
       alignItems="flex-start"
@@ -171,6 +176,7 @@ export default function ItemDescript({ parsedItems, thisSession }) {
       <FlexBox width="100%" margin="0 0 30px 0px" dir="column">
         <Button
           onClick={() => setShowModal("show")}
+          onDownload={()=> setShowDownload("active")}
           width="fit-content"
           padding="0px 20px"
           type="add"
@@ -180,6 +186,7 @@ export default function ItemDescript({ parsedItems, thisSession }) {
           borderRadius="16px"
           border="2px solid #232323"
         ></Button>
+        {/* <IconText onDownload={()=> setShowDownload("active")} txt="bcitBigInfo.zip" textDecor="underline" color="blue" onClick=""></IconText> */}
       </FlexBox>
 
       <AnimatePresence exitBeforeEnter>
@@ -191,13 +198,22 @@ export default function ItemDescript({ parsedItems, thisSession }) {
               exit={{ y: 900 }}
             >
               <LeaveReview
-                onClose={() => setShowModal("default")}
+                onClose={() => setShowModal("default")} onPublish={() => setShowDownload("active")}
                 //onPublish use this for a publish function
               ></LeaveReview>
             </motion.div>
           </FlexBox>
         )}
       </AnimatePresence>
+
+      <AnimatePresence exitBeforeEnter>
+                            {showDownload === "active" && <FlexBox position="absolute" left="0" top="0" zIndex="30">
+                                <motion.div initial={{opacity: 0}} animate={{opacity: 1, transition:{duration: 0.2, delay:0}}} exit={{opacity:0}}>
+                                    <DownloadPopUp onClose={()=>setShowDownload("default")} txt="Thank you for your feedback! Your review is under proccesing 😁"></DownloadPopUp>
+                                </motion.div>
+                            </FlexBox>
+                            }
+                        </AnimatePresence>
 
       <ItemDescNavbar
         priceOfTheService={parsedItems[0].price}

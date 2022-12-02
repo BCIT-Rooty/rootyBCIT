@@ -37,6 +37,7 @@ export default function Button({
   onClick = () => {},
   onKeywordWantToRemove = () => {},
   onRemoveKeyword = () => {},
+  onDownload = () => {},
   type = "button",
   buttonMargin = "0px",
   cursor = "pointer",
