@@ -31,6 +31,7 @@ export default function NavBar({ route, sessionUserObj }) {
   const Navigation = styled(BottomNavigation)`
     min-width: 100%;
     margin: 0;
+    min-height: 65px
   `;
   const Boxy = styled(Box)`
     width: 100vw;
@@ -43,26 +44,31 @@ export default function NavBar({ route, sessionUserObj }) {
     border-top: 0.1px solid #545454;
   `;
 
+  const Taby = styled(Tab)`
+    min-width: 75px !important;
+    max-width: 75px !important;
+  `
+
   return (
     <Boxy>
       <Navigation value={index}>
-        <Tab
+        <Taby
           icon={<HomeIcon fontSize="large" />}
           onClick={() => HandleNavBarIcons("/home", 1)}
         />
-        <Tab
+        <Taby
           icon={<SearchIcon fontSize="large" />}
           onClick={() => HandleNavBarIcons("/categories", 2)}
         />
-        <Tab
+        <Taby
           icon={<AddIcon fontSize="large" />}
           onClick={() => HandleNavBarIcons("/createPost", 3)}
         />
-        <Tab
+        <Taby
           icon={<ChatBubbleOutlineIcon fontSize="large" />}
           onClick={() => HandleNavBarIcons("/chat", 4)}
         />
-        <Tab
+        <Taby
           icon={<PersonIcon fontSize="large" />}
           onClick={() => {
             HandleNavBarIcons(`/account/${session.userId}`, 5);

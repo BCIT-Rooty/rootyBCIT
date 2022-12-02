@@ -83,7 +83,7 @@ export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
         headTxt="Portfolio"
         descriptTxt=""
         type1="image1"
-        type2="image2"
+        // type2="image2"
       ></PostProfileDescript>
 
       <Text
@@ -103,21 +103,22 @@ export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
         width="94vw"
         margin="0px 0px 0px 20px"
         padding="5px"
-      />
-      <FlexBox>
-        {sessionUserPostsObj.map((posts) => (
-          <Item
-            key={posts.postId}
-            name={posts.title}
-            image={posts.Photos[0].postPhotoUrl}
-            rating={posts.rating}
-            price={posts.price}
-            width="290px"
-            margin="0 20px 0 0"
-            onClick={() => setShowModal(posts)}
-          ></Item>
-        ))}
-      </FlexBox>
+      >
+        <FlexBox>
+          {sessionUserPostsObj.map((posts) => (
+            <Item
+              key={posts.postId}
+              name={posts.title}
+              image={posts.image}
+              rating={posts.rating}
+              price={posts.price}
+              width="290px"
+              margin="0 20px 0 0"
+              onClick={() => setShowModal(posts)}
+            ></Item>
+          ))}
+        </FlexBox>
+      </HorizontalScrollContainer>
     </Wrapper>
   );
 }
