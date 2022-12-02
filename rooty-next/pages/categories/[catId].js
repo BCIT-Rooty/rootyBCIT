@@ -47,7 +47,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
         <FlexBox width="100vw" dir="column">
           <CardWithSearch onChangingTheText={setQuery} bgImage={image} txt={categoryName}></CardWithSearch>
         </FlexBox>
-        <div>
+        <FlexBox dir="column-reverse">
           {items.map((item) => {
             console.log(item)
             return (
@@ -69,7 +69,7 @@ export default function OneCategory({ parsedItems, parsedCategoryName }) {
               </div>
             );
           })}
-        </div>
+        </FlexBox>
       </FlexBox>
     </Wrapper>
   );
