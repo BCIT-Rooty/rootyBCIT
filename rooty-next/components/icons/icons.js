@@ -22,7 +22,7 @@ function HandleHeartClick(e) {
       heart,
     })
     .then((res) => {
-      console.log("RES MFF", res);
+      console.log("HOILA", res);
     })
     .catch((err) => {
       console.log("ERR MF", err);

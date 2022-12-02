@@ -16,7 +16,7 @@ export default function EditProfile({ sessionUserObj }) {
   const [lastName, setLastName] = useState(sessionUserObj.lastName);
   const [program, setProgram] = useState(sessionUserObj.program);
   const [aboutMe, setAboutMe] = useState(sessionUserObj.aboutMe);
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [photoUrl, setPhotoUrl] = useState(sessionUserObj.image);
 
   const r = useRouter();
 
@@ -26,7 +26,7 @@ export default function EditProfile({ sessionUserObj }) {
       lastName,
       program,
       aboutMe,
-      photoUrl
+      photoUrl,
     });
     r.push(`/account/userProfile/${sessionUserObj.userId}`);
   }
@@ -52,7 +52,6 @@ export default function EditProfile({ sessionUserObj }) {
     console.log(theUrlToReturn);
     return theUrlToReturn;
   }
-
 
   return (
     <Wrapper
@@ -143,7 +142,7 @@ export async function getServerSideProps(context) {
 
   let sessionObj = JSON.parse(JSON.stringify(session));
   let sessionUserObj = JSON.parse(JSON.stringify(sessionUser));
-
+  console.log("sessionUserObj", sessionUserObj);
   // console.log("SESSION OBJ EDITING", sessionObj);
   // console.log("SESSION USER OBJ EDITING", sessionUserObj);
 
