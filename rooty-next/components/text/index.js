@@ -18,6 +18,9 @@ export const TextContain = styled.div`
     max-width: ${props=>props.maxWidth}
 `
 
+export const TextSpan = styled.span`
+`
+
 export default function Text({
     txt='Text Here',
     size="16px",
