@@ -194,7 +194,7 @@ export default function ACertainChatRoom(props) {
               width="100%"
               height="fit-content"
             >
-              <FlexBox ref={scrollContainer} justifyContent="flex-end" alignItems="flex-end" flexWrap="wrap" width="100%" minHeight="50vh" height="92vh" bottom="70px" overflowY="scroll" overflowX="hidden">
+              <FlexBox ref={scrollContainer} justifyContent="flex-end" alignItems="flex-end" width="100%" minHeight="50vh" height="92vh" bottom="70px" overflowY="scroll" overflowX="hidden">
                 <FlexBox dir="column" width="100%">
                   {chats.map((m) => m)}
                 </FlexBox>

@@ -16,6 +16,7 @@ export default function EditProfile({ sessionUserObj }) {
   const [lastName, setLastName] = useState(sessionUserObj.lastName);
   const [program, setProgram] = useState(sessionUserObj.program);
   const [aboutMe, setAboutMe] = useState(sessionUserObj.aboutMe);
+  const [photoUrl, setPhotoUrl] = useState(sessionUserObj.image);
 
   const r = useRouter();
 
@@ -25,8 +26,31 @@ export default function EditProfile({ sessionUserObj }) {
       lastName,
       program,
       aboutMe,
+      photoUrl,
     });
     r.push(`/account/userProfile/${sessionUserObj.userId}`);
+  }
+
+  async function uploadThePhotoToS3(inputFile) {
+    // if (photoInput == false) {
+    //   let theUrlToReturn = "no Url bro";
+    //   return theUrlToReturn;
+    // }
+    let theUrlToReturn;
+    await axios.get("/api/s3").then(async (res) => {
+      const theUrlData = res.data.url;
+      await axios({
+        method: "PUT",
+        url: theUrlData,
+        data: inputFile,
+      }).then(() => {
+        const [photoUrlRet] = theUrlData.split("?");
+        setPhotoUrl(photoUrlRet);
+        theUrlToReturn = photoUrlRet;
+      });
+    });
+    console.log(theUrlToReturn);
+    return theUrlToReturn;
   }
 
   return (
@@ -50,6 +74,7 @@ export default function EditProfile({ sessionUserObj }) {
         type="file"
         bgImage="/face2.jpg"
         margin="0 0 0 -20px"
+        onChangingTheText={uploadThePhotoToS3}
       ></InputWithText>
       <InputWithText
         txt="First name"
@@ -117,7 +142,7 @@ export async function getServerSideProps(context) {
 
   let sessionObj = JSON.parse(JSON.stringify(session));
   let sessionUserObj = JSON.parse(JSON.stringify(sessionUser));
-
+  console.log("sessionUserObj", sessionUserObj);
   // console.log("SESSION OBJ EDITING", sessionObj);
   // console.log("SESSION USER OBJ EDITING", sessionUserObj);
 

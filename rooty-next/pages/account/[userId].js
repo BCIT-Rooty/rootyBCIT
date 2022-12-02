@@ -1,4 +1,3 @@
-// import { users, getItemsForUser } from '../../server/database';
 import { prisma } from "../../server/db/client";
 import { Wrapper, FlexBox, ImgPlaceholder } from "../../styles/globals";
 import Text from "../../components/text";
@@ -6,28 +5,39 @@ import SettingLine from "../../components/settingLine";
 import { useRouter } from "next/router";
 import Button from "../../components/button";
 import Construction from "../../components/construction";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Rating from "@mui/material/Rating";
 import DownloadPopUp from "../../components/downloadPopUp";
 import { signOut } from "next-auth/react";
+import axios from "axios";
 // import { getSession } from "next-auth/react";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function UserProfile({ sessionUserObj }) {
-  // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
-  // console.log('THIS IS THE USERNAME', userName)
-  let userId = 1;
   const r = useRouter();
   const [showModal, setShowModal] = useState("default");
   const [value, setValue] = useState(4);
   const [logOut, setLogOut] = useState("default");
+  // const [theFinalStatus, setTheFinalStatus] = useState("")
   const [statusButton, setStatusButton] = useState([
     { id: 1, title: "Available" },
     { id: 2, title: "Unavailable" },
   ]);
   const [buttonMain, setButtonMain] = useState("");
+
+  useEffect(() => {
+    console.log(sessionUserObj);
+    sendStatus(buttonMain);
+  }, [buttonMain]);
+
+  async function sendStatus(input) {
+    await axios.put("/api/updateAvailability", {
+      availability: input,
+      email: sessionUserObj.email,
+    });
+  }
 
   return (
     <Wrapper dir="column" justifyContent="start" alignItems="center">
@@ -113,7 +123,7 @@ export default function UserProfile({ sessionUserObj }) {
           name="heart"
           txt="Favourites List"
           onClick={() => {
-            r.push(`/favourites/${sessionUserObj.userId}`);
+            r.push(`/account/favourites/${sessionUserObj.userId}`);
           }}
         ></SettingLine>
         <SettingLine
@@ -167,7 +177,10 @@ export default function UserProfile({ sessionUserObj }) {
           txt="Log Out"
           width="100px"
           fontWeight="600"
-          onClick={() => setLogOut("active")}
+          onClick={() => {
+            setLogOut("active");
+            signOut();
+          }}
         ></Button>
         <Text
           txt="Privacy Policy"
@@ -202,7 +215,6 @@ export default function UserProfile({ sessionUserObj }) {
               <DownloadPopUp
                 height="100vh"
                 onClose={() => setLogOut(r.push("/"))}
-                onClick={signOut()}
                 txt="You Logged Out!"
                 txt2="We hope to see you soon! 🥹"
                 size2="20px"
@@ -217,9 +229,7 @@ export default function UserProfile({ sessionUserObj }) {
     </Wrapper>
   );
 }
-
 export async function getServerSideProps(context) {
-  // const session = await getSession(context);
   const session = await unstable_getServerSession(
     context.req,
     context.res,

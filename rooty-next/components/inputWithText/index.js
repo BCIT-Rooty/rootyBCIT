@@ -44,6 +44,7 @@ export default function InputWithText({
             defaultValue={defaultValue}
             value={value}
             onChangingTheText={onChangingTheText}
+            onInsertPhotoInsideS3={onChangingTheText}
           ></Input>
         </FlexBox>
       )}

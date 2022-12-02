@@ -139,10 +139,12 @@ export async function getServerSideProps(context) {
     where: {
       authorId: sessionUserObj.userId,
     },
+    include: {
+      Photos: true,
+    },
   });
 
   let sessionUserPostsObj = JSON.parse(JSON.stringify(sessionUserPosts));
-  // console.log("sessionUserPostsObj", sessionUserPostsObj);
 
   sessionUserObj.createdAt = sessionUserObj.createdAt / 1000;
 

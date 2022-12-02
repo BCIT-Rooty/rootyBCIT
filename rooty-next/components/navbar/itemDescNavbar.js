@@ -9,6 +9,7 @@ export default function ItemDescNavbar({
     onClick = () => {},
     priceOfTheService,
     isItNegotiable,
+    shouldChat
 }){
     console.log(priceOfTheService, isItNegotiable)
     return(
@@ -23,7 +24,7 @@ export default function ItemDescNavbar({
         <FlexBox>
         <FlexBox>
         {(isItNegotiable && priceOfTheService !== 0 ) ?  <Text txt="Price Negotiable" size="15px" color="#6D6D6D" padding="8px"></Text> : <></>}
-            <Button
+            {shouldChat? <></> :<Button
                 onClick={onClick}
                         txt="Chat"
                         size="20px"
@@ -33,7 +34,7 @@ export default function ItemDescNavbar({
                         margin="0px"
                         border="solid 1px #545454"
                         bgColor="#4F4DB0"
-                ></Button>
+                ></Button>}
             </FlexBox>
         </FlexBox>
     </FlexBox>

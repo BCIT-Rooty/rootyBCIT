@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import ItemDescNavbar from "../../components/navbar/itemDescNavbar";
 import ReviewActiveStars from "../../components/reviews/reviewActiveStars";
 import Rating from "@mui/material/Rating";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../components/button";
 import LeaveReview from "../../components/reviews/leaveReview";
 import { AnimatePresence, motion } from "framer-motion";
@@ -21,6 +21,10 @@ import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function ItemDescript({ parsedItems, thisSession }) {
+  const [shouldBeAbleToChat, setShouldBeAbleToChat] = useState(parsedItems[0].author.email === thisSession.user.email)
+  useEffect(() => {
+    console.log(shouldBeAbleToChat)
+  }, [])
   let userName =
     parsedItems[0].author.name + " " + parsedItems[0].author.lastName;
   let description = parsedItems[0].description;
@@ -200,6 +204,7 @@ export default function ItemDescript({ parsedItems, thisSession }) {
         isItNegotiable={parsedItems[0].isNegotiableActive}
         position="fixed"
         top="92vh"
+        shouldChat={shouldBeAbleToChat}
         onClick={() => startChat()}
       ></ItemDescNavbar>
     </Wrapper>

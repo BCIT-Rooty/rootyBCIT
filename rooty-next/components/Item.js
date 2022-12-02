@@ -16,7 +16,7 @@ export default function Item({
   image,
   remove="default",
   heart="show", 
-
+  isItNegotiable,
   dir="row",
   width="338px",
   height="154px",
@@ -27,7 +27,8 @@ export default function Item({
   imgBorderRadius="16px 0px 0px 16px",
   onClick=()=>{},
   margin="20px",
-  onNext=()=>{}
+  onNext=()=>{},
+  isNegotiable
 }) {
 
 
@@ -43,9 +44,11 @@ export default function Item({
               {remove === "default" &&  <Text txt={rating + "/5"} size="15px" weight="regular"></Text>}
               {remove === "remove" &&  <Button type="next" onNext={onNext} txt="Delete" size="15px" weight="regular" width="80px" bgColor="#4F4DB0" margin="0" height="20px"></Button>}
              <FlexBox alignItems="flex-end" justifyContent="space-around" width="50%">
-                 <Text txt={"$" + price} size="15px" weight="bold"></Text>
-                 <Text txt="or "></Text>
-                 <HandshakeIcon></HandshakeIcon>
+             {price == 0 ?<Text txt={"free"} size="15px" weight="bold"></Text>:<Text txt={"$" + price} size="15px" weight="bold"></Text> }
+            
+            {(isNegotiable && price !== 0 ) ? <><Text txt="or " size="15px" ></Text>
+             <HandshakeIcon></HandshakeIcon></> : <></>}
+             
              </FlexBox>
            </FlexBox>
            

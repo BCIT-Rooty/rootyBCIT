@@ -15,6 +15,7 @@ onChangingTheTextForChat= () => {},
 onSubmitButtonClicked= () => {},
 value,
 position="fixed",
+stopInput=false
 }){
     const [photoUrl, setPhotoUrl] = useState("");
 
@@ -49,7 +50,7 @@ position="fixed",
        {/* <AddIcon onClick={(e) => onSubmitButtonClicked(e)} fontSize="large" sx={{ color: grey[500] }} /> */}
        <Input chatPhoto="file" onInsertPhotoInsideS3={uploadThePhotoToS3}></Input>
         <FlexBox>
-            <Input value={value} onChangingTheText={newFunction} placeholder="Type a Message Here" width="75vw" />
+            <Input value={value} stopInput={stopInput} onChangingTheText={newFunction} placeholder="Type a Message Here" width="75vw" />
         </FlexBox>
        <TelegramIcon onClick={(e) => onSubmitButtonClicked(e)} fontSize="large" sx={{ color: purple[900] }}/>
     </FlexBox>

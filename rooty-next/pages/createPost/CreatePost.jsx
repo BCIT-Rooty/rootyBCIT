@@ -51,10 +51,25 @@ export default function CreatePost(props) {
     useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [isNegotiableActive, setIsNegotiableActive] = useState(false);
+  const [tooManyKeywordsError, setTooManyKeywordsError] = useState(false);
+  const [enoughKeyWords, setEnoughKeyWords] = useState(false);
   const router = useRouter();
   const handleNegotiableButton = () => {
     setIsNegotiableActive((current) => !current);
   };
+
+  useEffect(() => {
+    if (keywords.length > 5) {
+      setTooManyKeywordsError(true)
+    } else {
+      setTooManyKeywordsError(false)
+    }
+    if (keywords.length === 5) {
+      setEnoughKeyWords(true)
+    } else if (keywords.length < 5) {
+      setEnoughKeyWords(false)
+    }
+  }, [keywords])
 
   async function uploadThePhotoToS3(inputFile) {
     // if (photoInput == false) {
@@ -78,13 +93,22 @@ export default function CreatePost(props) {
     return theUrlToReturn;
   }
 
+  async function handleNumberPriceChange(input) {
+    const min = 0;
+    const max = 10000;
+    const value = Math.max(min, Math.min(max, Number(input)));
+    console.log(value)
+    setPrice(value);
+  };
+
   function handleKeywordsButtonClick() {
     const keywordWithoutSpaces = keywordButtonStateValue.trim();
     if (keywordButtonStateValue == "" || keywordWithoutSpaces == "") {
       if (errorThatKeywordAlreadyExists) {
         setErrorThatKeywordAlreadyExists(false);
       }
-      setErrorStateForEmptyInputKeyWord(true);
+      enoughKeyWords ? setErrorStateForEmptyInputKeyWord(false) : setErrorStateForEmptyInputKeyWord(true)   
+      
       return;
     } else if (keywordButtonStateValue !== "" && keywordWithoutSpaces !== "") {
       setErrorStateForEmptyInputKeyWord(false);
@@ -147,7 +171,7 @@ export default function CreatePost(props) {
       setNoServiceError(false);
     }
 
-    if (price === 0 || price === "") {
+    if (price < 0 || price === "") {
       setNoPriceError(true);
     } else {
       setNoPriceError(false);
@@ -176,7 +200,7 @@ export default function CreatePost(props) {
       setNoServiceError(false);
     }
 
-    if (price === 0 || price === "") {
+    if (price < 0 || price === "") {
       setNoPriceError(true);
       return;
     } else {
@@ -335,6 +359,7 @@ export default function CreatePost(props) {
               value={keywordButtonStateValue}
               border="solid 1px #545454"
               onChangingTheText={setKeywordButtonStateValue}
+              stopInput={enoughKeyWords}
               width="67vw" maxWidth="760px"
             ></Input>
             <Button
@@ -350,6 +375,16 @@ export default function CreatePost(props) {
               onClick={handleKeywordsButtonClick}
             />
           </FlexBox>
+            {enoughKeyWords ? (
+            <Toaster txt="You are only allowed 5 keywords!" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+          ) : (
+            <></>
+          )}
+            {tooManyKeywordsError ? (
+            <Toaster txt="You have more then 5 keywords!" maxWidth="900px" margin="15px 0px 15px 0px"></Toaster>
+          ) : (
+            <></>
+          )}
           <FlexBox width="100%" maxWidth="850px" padding="25px 20px 10px 20px" flexWrap="wrap">
             {areThereKeywords ? (
               keywords.map((m) => (
@@ -464,7 +499,7 @@ export default function CreatePost(props) {
               value={price}
               placeholder="$"
               width="70px"
-              onChangingTheText={setPrice}
+              onChangingTheText={handleNumberPriceChange}
               min="0"
               max="500"
             ></Input>
