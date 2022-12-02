@@ -11,6 +11,8 @@ import styled from "styled-components";
 import { Email } from "@mui/icons-material";
 import Toaster from "../components/toaster";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
 
 export default function Home() {
   const r = useRouter();
@@ -18,7 +20,7 @@ export default function Home() {
   const [headerText, setHeaderText] = useState("");
   const [headerImage, setHeaderImage] = useState("");
   const [listOfCategories, setListOfCategories] = useState([
-    { id: 1, name: "Broadcast & Media" },
+    { id: 1, name: "Video and Animation" },
     { id: 2, name: "Computing" },
     { id: 3, name: "Marketing" },
     { id: 4, name: "Business & Finance" },
@@ -555,4 +557,25 @@ export default function Home() {
       </FlexBox>
     </Wrapper>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  if (session) {
+    return {
+      redirect: {
+        destination: "/home",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
 }
