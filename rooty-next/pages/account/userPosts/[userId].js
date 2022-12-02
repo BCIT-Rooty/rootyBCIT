@@ -14,6 +14,8 @@ export default function UserPosts({ parsedItems, sessionUserObj }) {
   const r = useRouter();
   const [deleteMessage, setDeleteMessage] = useState("");
 
+  function deletePost() {}
+
   return (
     <Wrapper padding="50px 0 0 0" height="fit-content" dir="column">
       <FlexBox
