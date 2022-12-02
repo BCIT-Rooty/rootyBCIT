@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-export default function userPosts({ parsedItems, sessionUserObj }) {
+export default function FavouritePosts({ parsedItems, sessionUserObj }) {
   const r = useRouter();
   return (
     <Wrapper padding="50px 0 0 0" height="fit-content" dir="column">
