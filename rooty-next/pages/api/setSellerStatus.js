@@ -10,7 +10,6 @@ export default async function handle(req, res) {
       email: session.user.email,
     },
   });
-  console.log("SESSION BISH", session);
 
   switch (method) {
     case "POST":

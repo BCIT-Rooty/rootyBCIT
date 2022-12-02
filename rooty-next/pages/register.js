@@ -130,7 +130,7 @@ export default function Home() {
     if (steps >= 5) {
       registerUser();
       signIn();
-      r.push("/home");
+      // r.push("/home");
     }
   };
 
