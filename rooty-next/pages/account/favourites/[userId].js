@@ -1,12 +1,12 @@
-import Item from "../../components/Item";
+import Item from "../../../components/Item";
 // import { getItemsForUser } from '../../../server/database.js'
-import { prisma } from "../../server/db/client";
-import { Wrapper } from "../../styles/globals";
-import TitlePage from "../../components/titlePage";
-import { FlexBox } from "../../styles/globals";
+import { prisma } from "../../../server/db/client";
+import { Wrapper } from "../../../styles/globals";
+import TitlePage from "../../../components/titlePage";
+import { FlexBox } from "../../../styles/globals";
 import { useRouter } from "next/router";
 import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]";
+import { authOptions } from "../../api/auth/[...nextauth]";
 
 export default function FavouritePosts({ parsedItems, sessionUserObj }) {
   const r = useRouter();
