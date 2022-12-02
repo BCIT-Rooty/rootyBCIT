@@ -1,4 +1,3 @@
-// import { users, getItemsForUser } from '../../server/database';
 import { prisma } from "../../server/db/client";
 import { Wrapper, FlexBox, ImgPlaceholder } from "../../styles/globals";
 import Text from "../../components/text";
@@ -17,9 +16,6 @@ import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function UserProfile({ sessionUserObj }) {
-  // let userName = parsedItems.map(user => user.name + ' ' + user.lastName);
-  // console.log('THIS IS THE USERNAME', userName)
-  let userId = 1;
   const r = useRouter();
   const [showModal, setShowModal] = useState("default");
   const [value, setValue] = useState(4);
@@ -31,13 +27,16 @@ export default function UserProfile({ sessionUserObj }) {
   ]);
   const [buttonMain, setButtonMain] = useState("");
 
-  useEffect(()=> {
-    console.log(sessionUserObj)
-    sendStatus(buttonMain)
-  }, [buttonMain])
+  useEffect(() => {
+    console.log(sessionUserObj);
+    sendStatus(buttonMain);
+  }, [buttonMain]);
 
   async function sendStatus(input) {
-    await axios.put("/api/updateAvailability", {availability: input, email: sessionUserObj.email })
+    await axios.put("/api/updateAvailability", {
+      availability: input,
+      email: sessionUserObj.email,
+    });
   }
 
   return (
@@ -228,9 +227,7 @@ export default function UserProfile({ sessionUserObj }) {
     </Wrapper>
   );
 }
-
 export async function getServerSideProps(context) {
-  // const session = await getSession(context);
   const session = await unstable_getServerSession(
     context.req,
     context.res,

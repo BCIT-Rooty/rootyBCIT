@@ -15,6 +15,8 @@ export default function UserPosts({ parsedItems, sessionUserObj }) {
   const r = useRouter();
   const [deleteMessage, setDeleteMessage] = useState("");
 
+  function deletePost() {}
+
   return (
     <Wrapper height="fit-content" dir="column">
       <FlexBox
@@ -88,7 +90,7 @@ export default function UserPosts({ parsedItems, sessionUserObj }) {
             border="0.5px solid #545454"
             width="250px"
             onClose={() => {
-              DELETETHISPOST;
+              console.log("delete");
             }}
           ></Button>
           <Button

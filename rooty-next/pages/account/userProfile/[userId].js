@@ -109,7 +109,7 @@ export default function EditProfile({ sessionUserObj, sessionUserPostsObj }) {
           <Item
             key={posts.postId}
             name={posts.title}
-            image={posts.image}
+            image={posts.Photos[0].postPhotoUrl}
             rating={posts.rating}
             price={posts.price}
             width="290px"
@@ -138,10 +138,12 @@ export async function getServerSideProps(context) {
     where: {
       authorId: sessionUserObj.userId,
     },
+    include: {
+      Photos: true,
+    },
   });
 
   let sessionUserPostsObj = JSON.parse(JSON.stringify(sessionUserPosts));
-  // console.log("sessionUserPostsObj", sessionUserPostsObj);
 
   sessionUserObj.createdAt = sessionUserObj.createdAt / 1000;
 
