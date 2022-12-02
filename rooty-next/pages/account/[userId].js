@@ -201,7 +201,7 @@ export default function UserProfile({ sessionUserObj }) {
             >
               <DownloadPopUp
                 height="100vh"
-                onClose={() => setLogOut(r.push("/"))}
+                // onClose={() => setLogOut(r.push("/"))}
                 onClick={signOut()}
                 txt="You Logged Out!"
                 txt2="We hope to see you soon! 🥹"
@@ -217,7 +217,6 @@ export default function UserProfile({ sessionUserObj }) {
     </Wrapper>
   );
 }
-
 export async function getServerSideProps(context) {
   // const session = await getSession(context);
   const session = await unstable_getServerSession(

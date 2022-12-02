@@ -87,7 +87,7 @@ export default function UserPosts({ parsedItems, sessionUserObj }) {
             border="0.5px solid #545454"
             width="250px"
             onClose={() => {
-              DELETETHISPOST;
+              console.log("delete");
             }}
           ></Button>
           <Button

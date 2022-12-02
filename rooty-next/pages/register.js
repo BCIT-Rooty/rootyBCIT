@@ -137,7 +137,7 @@ export default function Home() {
   const goBack = (newStep) => {
     setSteps(newStep);
     if (steps === 1) {
-      r.push("/");
+      // r.push("/");
     }
   };
 
@@ -282,7 +282,7 @@ export default function Home() {
                   padding="10px 20px 10px 20px"
                   size="14px"
                   weight="500"
-                  txt="Forgot Password?"
+                  txt=""
                   color="white"
                   textDecor="underline"
                   justifyContent="flex-end"
