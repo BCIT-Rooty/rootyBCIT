@@ -53,7 +53,6 @@ export default function Button({
       bgColor = "#4F4DB0";
       color = "white";
       border = "2px solid white";
-      console.log("BRUh AV", value);
       axios.post("/api/setSellerStatus", { value });
     }
   }
@@ -63,7 +62,6 @@ export default function Button({
       bgColor = "white";
       color = "#4F4DB0";
       border = "2px solid #4F4DB0";
-      console.log("BRUh UNAV", value);
       axios.post("/api/setSellerStatus", { value });
     }
   }
