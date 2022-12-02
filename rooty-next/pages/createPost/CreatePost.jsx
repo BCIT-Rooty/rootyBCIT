@@ -94,6 +94,7 @@ export default function CreatePost(props) {
     const min = 0;
     const max = 10000;
     const value = Math.max(min, Math.min(max, Number(input)));
+    console.log(value)
     setPrice(value);
   };
 
@@ -167,7 +168,7 @@ export default function CreatePost(props) {
       setNoServiceError(false);
     }
 
-    if (price === 0 || price === "") {
+    if (price < 0 || price === "") {
       setNoPriceError(true);
     } else {
       setNoPriceError(false);
@@ -196,7 +197,7 @@ export default function CreatePost(props) {
       setNoServiceError(false);
     }
 
-    if (price === 0 || price === "") {
+    if (price < 0 || price === "") {
       setNoPriceError(true);
       return;
     } else {
