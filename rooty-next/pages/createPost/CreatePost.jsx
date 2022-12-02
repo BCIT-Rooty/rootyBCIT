@@ -213,9 +213,9 @@ export default function CreatePost(props) {
         console.log(result);
       })
       .then(() => {
-        setLoading(true)
+        setLoading(true);
         router.push("/categories");
-        setLoading(false)
+        setLoading(false);
       });
     // setShowDownload("active");
   }
@@ -532,6 +532,11 @@ export default function CreatePost(props) {
             bgColor="#4F4DB0"
           ></Button>
         </FlexBox>
+        {loading === true && (
+              <Wrapper position="fixed" bgColor="rgba(0, 0, 0, 0.6)" top="0" left="0">
+                <Lottie style={{width:300, height:300}} animationData={LoadingAnimation} loop={true}></Lottie>
+              </Wrapper>
+          )}
         <AnimatePresence exitBeforeEnter>
           {/* {showDownload === "active" && (
             <FlexBox position="absolute" left="0" zIndex="30">
@@ -551,13 +556,6 @@ export default function CreatePost(props) {
               </motion.div>
             </FlexBox>
           )} */}
-          {loading === "active" && (
-            <FlexBox position="absolute" left="0" zIndex="30">
-              <Wrapper onClick={onClose} height={height} position="fixed" bgColor="rgba(0, 0, 0, 0.6)">
-                <Lottie style={{width:200, height:200}} animationData={LoadingAnimation} loop={true}></Lottie>
-              </Wrapper>
-            </FlexBox>
-          )}
         </AnimatePresence>
       </Wrapper>
     </>
