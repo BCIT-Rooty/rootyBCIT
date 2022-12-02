@@ -177,7 +177,10 @@ export default function UserProfile({ sessionUserObj }) {
           txt="Log Out"
           width="100px"
           fontWeight="600"
-          onClick={() => setLogOut("active")}
+          onClick={() => {
+            setLogOut("active");
+            signOut();
+          }}
         ></Button>
         <Text
           txt="Privacy Policy"
@@ -212,7 +215,6 @@ export default function UserProfile({ sessionUserObj }) {
               <DownloadPopUp
                 height="100vh"
                 onClose={() => setLogOut(r.push("/"))}
-                onClick={async () => await signOut()}
                 txt="You Logged Out!"
                 txt2="We hope to see you soon! 🥹"
                 size2="20px"
