@@ -11,8 +11,8 @@ import styled from "styled-components";
 import { Email } from "@mui/icons-material";
 import Toaster from "../components/toaster";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "../pages/api/auth/[...nextauth]";
+// import { unstable_getServerSession } from "next-auth";
+// import { authOptions } from "../pages/api/auth/[...nextauth]";
 
 export default function Home() {
   const r = useRouter();
