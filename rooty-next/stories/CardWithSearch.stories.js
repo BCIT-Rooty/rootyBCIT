@@ -25,7 +25,7 @@ const Template = args => <CardWithSearch {...args} />;
 
 export const Default = Template.bind();
 Default.args = {
-    txt: "BROADCAST & MEDIA"
+    txt: "Video and Animation"
 };
 
 

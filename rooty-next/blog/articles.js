@@ -13,7 +13,7 @@ export const gradientCard = [
     ["5 Ways to Improve Focus and Productivity", "/5waystoimprove.png", "fourthArticle"]
   ]
 export const popularSearches = [
-    ["Broadcast & Media", "/categories/1"],
+    ["Video and Animation", "/categories/1"],
     ["Digital Arts & Design", "/categories/2"],
     ["Business & Finance","/categories/3"],
     ["Marketing", "/categories/4"],

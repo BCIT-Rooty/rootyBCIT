@@ -40,7 +40,7 @@ export default function CreatePost(props) {
   const [errorThatKeywordAlreadyExists, setErrorThatKeywordAlreadyExists] =
     useState(false);
   const [listOfCategories, setListOfCategories] = useState([
-    "Broadcast & Media",
+    "Video and Animation",
     "Computing",
     "Marketing",
     "Business & Finance",

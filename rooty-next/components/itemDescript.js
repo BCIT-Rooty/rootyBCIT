@@ -14,7 +14,7 @@ export default function ItemDescription({img="/vector-drawing.jpg"}) {
   return (
     <FlexBox dir="column" width="100%" padding="0">
     <ImgPlaceholder bgImage={img} width="100%" height="328px"></ImgPlaceholder>
-    <Review name="Joyce" nameSize="21px" comment="" program="Broadcast & Media" boxWidth="73px" image="/2205_w037_n003_408b_p1_408.jpg"></Review> 
+    <Review name="Joyce" nameSize="21px" comment="" program="Video and Animation" boxWidth="73px" image="/2205_w037_n003_408b_p1_408.jpg"></Review> 
     <FlexBox  dir="column" alignItems="left" width="100%" padding="0 30px 0 30px" minHeight="90px" border="0.5px solid rgba(191, 191, 191, 1)">
         <Text txt='1-2 minute Motion Graphic editor' size="21px"></Text>
         <Text txt='Digital Arts and Design' color="grey"></Text>
