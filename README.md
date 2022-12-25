@@ -8,19 +8,18 @@ Rooty was developed by a team of students from the Full-Stack Web Development an
 
 1. Clone the repository:
 
-<code>
+```
   git clone https://github.com/[YOUR_USERNAME]/Rooty.git
-</code>
+```
 
 2. Install the dependencies:
 
-<code>
+```
  yarn
-</code>
+```
 
 and finally, 
 
-<code>
+```
     yarn dev
-</code>
-
+```
