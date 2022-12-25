@@ -18,7 +18,7 @@ Rooty was developed by a team of students from the Full-Stack Web Development an
   yarn
 ```
 
-and finally, 
+3. Start the development server:
 
 ```
   yarn dev
