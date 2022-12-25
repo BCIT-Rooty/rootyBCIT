@@ -15,13 +15,13 @@ Rooty was developed by a team of students from the Full-Stack Web Development an
 2. Install the dependencies:
 
 ```
- yarn
+  yarn
 ```
 
 and finally, 
 
 ```
-    yarn dev
+  yarn dev
 ```
 
 ## License
