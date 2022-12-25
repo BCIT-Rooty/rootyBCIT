@@ -23,3 +23,7 @@ and finally,
 ```
     yarn dev
 ```
+
+## License
+
+Rooty is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
