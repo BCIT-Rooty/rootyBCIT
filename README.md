@@ -4,8 +4,23 @@ Rooty is a freelance marketplace app designed and developed by students at BCIT 
 
 Rooty was developed by a team of students from the Full-Stack Web Development and Design and Development programs, and took from early September until mid December to complete.
 
-Check out the app at [http://localhost:3000](http://localhost:3000).
+## Getting started
 
-## License
+1. Clone the repository:
 
-Rooty is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
+<code>
+  git clone https://github.com/[YOUR_USERNAME]/Rooty.git
+</code>
+
+2. Install the dependencies:
+
+<code>
+ yarn
+</code>
+
+and finally, 
+
+<code>
+    yarn dev
+</code>
+
