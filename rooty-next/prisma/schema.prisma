@@ -149,8 +149,8 @@ model Photo {
 
 model Category {
   categoryId   Int    @id @default(autoincrement())
-  categoryName String @unique
-  image        String @default("")
+  categoryName String? @unique
+  image        String? @default("")
   posts        Post[]
 }
 

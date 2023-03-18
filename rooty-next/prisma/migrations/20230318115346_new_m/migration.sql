@@ -3,122 +3,122 @@ CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 
 -- CreateTable
 CREATE TABLE "User" (
-    "userId" SERIAL NOT NULL,
+    "userId" INT4 NOT NULL DEFAULT unique_rowid(),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "name" TEXT,
-    "lastName" TEXT,
-    "password" TEXT NOT NULL,
-    "image" TEXT DEFAULT '/icon.png',
-    "status" TEXT DEFAULT 'available',
-    "email" TEXT NOT NULL,
-    "aboutMe" TEXT,
+    "name" STRING,
+    "lastName" STRING,
+    "password" STRING NOT NULL,
+    "image" STRING DEFAULT '/icon.png',
+    "status" STRING DEFAULT 'available',
+    "email" STRING NOT NULL,
+    "aboutMe" STRING,
     "role" "Role" NOT NULL DEFAULT 'USER',
-    "program" TEXT,
+    "program" STRING,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("userId")
 );
 
 -- CreateTable
 CREATE TABLE "Post" (
-    "postId" SERIAL NOT NULL,
+    "postId" INT4 NOT NULL DEFAULT unique_rowid(),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "title" VARCHAR(255) NOT NULL,
-    "description" TEXT NOT NULL DEFAULT '',
-    "barterInformation" TEXT DEFAULT '',
-    "isNegotiableActive" BOOLEAN DEFAULT false,
-    "authorId" INTEGER NOT NULL,
-    "categoryId" INTEGER NOT NULL,
-    "price" INTEGER DEFAULT 0,
-    "rating" INTEGER DEFAULT 0,
-    "count" INTEGER DEFAULT 0,
-    "image" TEXT DEFAULT '',
+    "title" STRING NOT NULL,
+    "description" STRING NOT NULL DEFAULT '',
+    "barterInformation" STRING DEFAULT '',
+    "isNegotiableActive" BOOL DEFAULT false,
+    "authorId" INT4 NOT NULL,
+    "categoryId" INT4 NOT NULL,
+    "price" INT4 DEFAULT 0,
+    "rating" INT4 DEFAULT 0,
+    "count" INT4 DEFAULT 0,
+    "image" STRING DEFAULT '',
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("postId")
 );
 
 -- CreateTable
 CREATE TABLE "Favorite" (
-    "favoriteId" SERIAL NOT NULL,
+    "favoriteId" INT4 NOT NULL DEFAULT unique_rowid(),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "postId" INTEGER NOT NULL,
+    "userId" INT4 NOT NULL,
+    "postId" INT4 NOT NULL,
 
     CONSTRAINT "Favorite_pkey" PRIMARY KEY ("favoriteId")
 );
 
 -- CreateTable
 CREATE TABLE "Skill" (
-    "skillId" SERIAL NOT NULL,
-    "skillName" VARCHAR(30) NOT NULL,
+    "skillId" INT4 NOT NULL DEFAULT unique_rowid(),
+    "skillName" STRING NOT NULL,
 
     CONSTRAINT "Skill_pkey" PRIMARY KEY ("skillId")
 );
 
 -- CreateTable
 CREATE TABLE "SkillOnUser" (
-    "skillOnUserId" SERIAL NOT NULL,
-    "sKillId" INTEGER NOT NULL,
-    "userid" INTEGER NOT NULL,
+    "skillOnUserId" INT4 NOT NULL DEFAULT unique_rowid(),
+    "sKillId" INT4 NOT NULL,
+    "userid" INT4 NOT NULL,
 
     CONSTRAINT "SkillOnUser_pkey" PRIMARY KEY ("skillOnUserId")
 );
 
 -- CreateTable
 CREATE TABLE "Photo" (
-    "photoId" SERIAL NOT NULL,
-    "postPhotoUrl" TEXT NOT NULL,
-    "postId" INTEGER,
+    "photoId" INT4 NOT NULL DEFAULT unique_rowid(),
+    "postPhotoUrl" STRING NOT NULL,
+    "postId" INT4,
 
     CONSTRAINT "Photo_pkey" PRIMARY KEY ("photoId")
 );
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "categoryId" SERIAL NOT NULL,
-    "categoryName" TEXT NOT NULL,
-    "image" TEXT NOT NULL DEFAULT '',
+    "categoryId" INT4 NOT NULL DEFAULT unique_rowid(),
+    "categoryName" STRING NOT NULL,
+    "image" STRING NOT NULL DEFAULT '',
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("categoryId")
 );
 
 -- CreateTable
 CREATE TABLE "Keywords" (
-    "keywordId" SERIAL NOT NULL,
-    "keyword" TEXT NOT NULL,
+    "keywordId" INT4 NOT NULL DEFAULT unique_rowid(),
+    "keyword" STRING NOT NULL,
 
     CONSTRAINT "Keywords_pkey" PRIMARY KEY ("keywordId")
 );
 
 -- CreateTable
 CREATE TABLE "PostOnKeywords" (
-    "postOnKeywordId" SERIAL NOT NULL,
-    "postId" INTEGER NOT NULL,
-    "keywordId" INTEGER NOT NULL,
+    "postOnKeywordId" INT4 NOT NULL DEFAULT unique_rowid(),
+    "postId" INT4 NOT NULL,
+    "keywordId" INT4 NOT NULL,
 
     CONSTRAINT "PostOnKeywords_pkey" PRIMARY KEY ("postOnKeywordId")
 );
 
 -- CreateTable
 CREATE TABLE "ChatRoom" (
-    "chatRoomId" SERIAL NOT NULL,
-    "userOneId" INTEGER NOT NULL,
-    "userTwoId" INTEGER NOT NULL,
+    "chatRoomId" INT4 NOT NULL DEFAULT unique_rowid(),
+    "userOneId" INT4 NOT NULL,
+    "userTwoId" INT4 NOT NULL,
     "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
-    "postId" INTEGER NOT NULL,
+    "postId" INT4 NOT NULL,
 
     CONSTRAINT "ChatRoom_pkey" PRIMARY KEY ("chatRoomId")
 );
 
 -- CreateTable
 CREATE TABLE "Message" (
-    "messageId" SERIAL NOT NULL,
-    "content" TEXT NOT NULL,
+    "messageId" INT4 NOT NULL DEFAULT unique_rowid(),
+    "content" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "isItText" BOOLEAN DEFAULT true,
-    "userId" INTEGER NOT NULL,
-    "chatRoomId" INTEGER NOT NULL,
+    "isItText" BOOL DEFAULT true,
+    "userId" INT4 NOT NULL,
+    "chatRoomId" INT4 NOT NULL,
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("messageId")
 );
