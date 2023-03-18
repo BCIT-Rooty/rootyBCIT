@@ -7,7 +7,6 @@ import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function Home(props) {
   // const router = useRouter();
-  const [count, setCount] = useState(0)
   const [showPost, setShowPost] = useState(true)
   const [posts, setPosts] = useState([{
     id: 1,

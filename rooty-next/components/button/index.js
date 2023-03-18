@@ -53,7 +53,7 @@ export default function Button({
       bgColor = "#4F4DB0";
       color = "white";
       border = "2px solid white";
-      axios.post("/api/setSellerStatus", { value });
+      // axios.post("/api/setSellerStatus", { value });
     }
   }
 
@@ -62,7 +62,7 @@ export default function Button({
       bgColor = "white";
       color = "#4F4DB0";
       border = "2px solid #4F4DB0";
-      axios.post("/api/setSellerStatus", { value });
+      // axios.post("/api/setSellerStatus", { value });
     }
   }
 

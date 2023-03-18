@@ -104,7 +104,7 @@ export async function getServerSideProps(context) {
   // we need to use getServerSideProps because we need to fetch data from the database, and we can't do that on the client side, only on the server side, so we need to use getServerSideProps, which is a next.js function that runs on the server side. (IS THIS ALL TRUE?!?!?!)
   const categoryItems = await prisma.post.findMany({
     where: {
-      categoryId: +context.params.catId,
+      categoryId: context.params.catId,
     },
     include: {
       category: true,
@@ -113,7 +113,7 @@ export async function getServerSideProps(context) {
   });
   const categoryName = await prisma.category.findMany({
     where: {
-      categoryId: +context.params.catId,
+      categoryId: context.params.catId,
     },
   });
   const session = await unstable_getServerSession(

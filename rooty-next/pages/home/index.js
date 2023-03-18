@@ -61,7 +61,7 @@ export default function Home({ sessionUserObj }) {
         </FlexBox>
       </HorizontalScrollContainer>
 
-      <Text
+      {/* <Text
         txt="Popular Searches"
         padding="30px 0px 10px 20px"
         size="21px"
@@ -88,7 +88,7 @@ export default function Home({ sessionUserObj }) {
             onClick={() => HandleNavBarIcons(o[1])}
           ></Button>
         ))}
-      </FlexBox>
+      </FlexBox> */}
 
       <Text
         txt="Contest For The Week"
